@@ -2,7 +2,7 @@
 
 ## Ejecución local
 
-Primero, es necesario clonar el repositorio con en siguiente comando
+Primero, es necesario clonar el repositorio con el siguiente comando.
 
 ```bash
 git clone https://github.com/msosav/Botellas-de-Amor.git
@@ -11,8 +11,8 @@ cd Botellas-de-Amor
 
 ### Backend
 
-Para ejecutar el backend, es necesario tener instalado pipenv (python y pip también),
-a continuación se mostrará el proceso de instalación para Windows, Linux (Fedora)
+Para ejecutar el backend, es necesario tener instalado pipenv (python y pip también).
+A continuación se mostrará el proceso de instalación para Windows, Linux (Fedora)
 y MacOS.
 
 #### Instalar pipenv en Windows
@@ -35,7 +35,7 @@ brew install pipenv
 
 #### Ejecutar el backend
 
-Para iniciarlo es necesario ejecutar los siguientes comandos:
+Para iniciarlo es necesario ejecutar los siguientes comandos.
 
 ```bash
 cd backend
@@ -45,13 +45,13 @@ pipenv run python manage.py runserver
 
 ### Admin
 
-Para ejecutar el admin es necesario tener instalado node.js, a continuación
+Para ejecutar el admin es necesario tener instalado node.js. A continuación
 se mostrará el proceso de instalación para Windows, Linux (Fedora)
 y MacOS.
 
 #### Instalar node en Windows y MacOS
 
-Ir y seguir las instrucciones de la [página oficial de node.js.](https://nodejs.org/en/download)
+Ir y seguir las instrucciones de la [página oficial de node.js.](https://nodejs.org/en/download).
 
 #### Instalar node en Linux (Fedora)
 
@@ -89,4 +89,4 @@ npx expo start
 ```
 
 Y luego, con la cámara del celular se debe escanear el código QR que se muestra
-en la pantalla (es necesario tener instalada la app Expo Go)
+en la pantalla (es necesario tener instalada la app Expo Go).
