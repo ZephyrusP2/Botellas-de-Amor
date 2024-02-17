@@ -42,3 +42,31 @@ cd backend
 pipenv install
 pipenv run python manage.py runserver
 ```
+
+### Admin
+
+Para ejecutar el admin es necesario tener instalado node.js, a continuación
+se mostrará el proceso de instalación para Windows, Linux (Fedora)
+y MacOS.
+
+#### Instalar node en Windows y MacOS
+
+Ir y seguir las instrucciones de la [página oficial de node.js.](https://nodejs.org/en/download)
+
+#### Instalar node en Linux (Fedora)
+
+Ejecutar el siguiente comando.
+
+```bash
+sudo dnf install nodejs
+```
+
+#### Ejecutar la vista de admin
+
+Para conectarse a la vista de admin es necesario ejecutar los siguientes comandos.
+
+```bash
+cd admin
+npm install
+npm run dev
+```
