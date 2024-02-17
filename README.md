@@ -70,3 +70,23 @@ cd admin
 npm install
 npm run dev
 ```
+
+### App
+
+Para la app es necesario tener node instalado, por ende seguir los pasos de la
+vista de admin. Además es necesario tener la aplicación Expo Go, disponible para
+[Android](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=es_CO&gl=US)
+y [IOS](https://apps.apple.com/co/app/expo-go/id982107779)
+
+#### Ejecutar la app
+
+Para ejecutar la app es necesario ejecutar el siguiente comando.
+
+```bash
+cd app
+npm install
+npx expo start
+```
+
+Y luego, con la cámara del celular se debe escanear el código QR que se muestra
+en la pantalla (es necesario tener instalada la app Expo Go)
