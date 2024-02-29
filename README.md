@@ -5,7 +5,7 @@
 Primero, es necesario clonar el repositorio con el siguiente comando.
 
 ```bash
-git clone https://github.com/msosav/Botellas-de-Amor.git
+git clone https://github.com/ZephyrusP2/Botellas-de-Amor.git
 cd Botellas-de-Amor
 ```
 
