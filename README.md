@@ -9,6 +9,8 @@ git clone https://github.com/ZephyrusP2/Botellas-de-Amor.git
 cd Botellas-de-Amor
 ```
 
+
+
 ### Backend
 
 Para ejecutar el backend, es necesario tener instalado pipenv (python y pip también).
