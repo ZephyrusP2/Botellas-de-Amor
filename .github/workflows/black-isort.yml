@@ -20,25 +20,24 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Install pipenv
+      - name: Install dependencies
         run: |
           pip install pipenv
-          pipenv install
-
-      - name: Start pipenv shell
-        run: |
-          pipenv shell
+          pipenv install --dev
+        working-directory: backend
 
       - name: Black formatter
         run: |
-          black .
+          pipenv run black .
+        working-directory: backend
 
       - name: Isort formatter
         run: |
-          isort .
+          pipenv run isort .
+        working-directory: backend
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Fix formatting"
+          commit_message: Fix formatting
           skip_fetch: true
