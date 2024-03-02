@@ -1,7 +1,7 @@
 name: Black and Isort formatters
 
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths:
