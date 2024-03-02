@@ -1,13 +1,9 @@
 name: Prettier formatter
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "app/**/*"
-      - "admin/**/*"
-      - ".github/workflows/prettier.yml"
+  workflow_run:
+    workflows: ["Black and Isort formatters"]
+    types: [completed]
 jobs:
   prettier:
     runs-on: ubuntu-latest
