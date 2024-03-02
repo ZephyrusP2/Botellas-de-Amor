@@ -38,3 +38,4 @@ jobs:
         with:
           commit_message: Fix formatting
           skip_fetch: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
