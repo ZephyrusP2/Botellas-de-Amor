@@ -1,0 +1,29 @@
+name: Prettier formatter
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "app/**/*"
+      - "admin/**/*"
+      - ".github/workflows/prettier.yml"
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prettier
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: npm install
+      - run: npm run format
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Fix formatting"
+          skip_fetch: true
