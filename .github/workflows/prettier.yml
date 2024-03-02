@@ -36,5 +36,5 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Fix formatting"
+          commit_message: Fix formatting
           skip_fetch: true
