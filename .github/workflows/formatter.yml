@@ -1,4 +1,4 @@
-name: Black and Isort formatters
+name: Formatter
 
 on:
   pull_request:
@@ -35,9 +35,27 @@ jobs:
           pipenv run isort .
         working-directory: backend
 
+      - name: Prettier React Native
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: npm install
+        working-directory: app
+      - run: npm run format
+        working-directory: app
+
+      - name: Prettier React
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: npm install
+        working-directory: admin
+      - run: npm run format
+        working-directory: admin
+
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix formatting
-          skip_fetch: false
+          skip_fetch: true
           branch: ${{ github.head_ref }}
