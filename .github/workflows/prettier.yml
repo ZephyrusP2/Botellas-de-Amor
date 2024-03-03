@@ -1,9 +1,10 @@
 name: Prettier formatter
 
 on:
-  workflow_run:
-    workflows: ["Black and Isort formatters"]
-    types: [completed]
+  pull_request:
+    branches:
+      - main
+
 jobs:
   prettier:
     runs-on: ubuntu-latest
@@ -35,5 +36,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix formatting
-          skip_fetch: true
+          skip_fetch: false
           branch: ${{ github.head_ref }}
