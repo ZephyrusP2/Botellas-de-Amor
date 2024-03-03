@@ -1,19 +1,39 @@
-name: Prettier formatter
+name: Formatter
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-    paths:
-      - "app/**/*"
-      - "admin/**/*"
-      - ".github/workflows/prettier.yml"
+
 jobs:
-  prettier:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          pip install pipenv
+          pipenv install --dev
+        working-directory: backend
+
+      - name: Black formatter
+        run: |
+          pipenv run black .
+        working-directory: backend
+
+      - name: Isort formatter
+        run: |
+          pipenv run isort .
+        working-directory: backend
 
       - name: Prettier React Native
         uses: actions/setup-node@v2
@@ -38,3 +58,4 @@ jobs:
         with:
           commit_message: Fix formatting
           skip_fetch: true
+          branch: ${{ github.head_ref }}
