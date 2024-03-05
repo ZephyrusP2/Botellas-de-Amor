@@ -8,6 +8,7 @@ from rest_framework.parsers import JSONParser
 
 from .models import User
 from .serializers import UserSerializer
+from backend.permissions import IsAdminOrSelf, IsAdmin
 
 # Create your views here.
 
@@ -17,7 +18,7 @@ class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     User retrieve, update and destroy
     """
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
 
     http_method_names = ['get', 'put', 'delete', 'patch']
 
@@ -39,7 +40,36 @@ class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
         :return: QuerySet
         """
         user = self.request.user
+        if user.role == 'admin':
+            return User.objects.all()
         return User.objects.filter(id=user.id)
+
+
+class UserList(generics.ListCreateAPIView):
+    """
+    Admin user list
+    """
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
+
+    def perform_create(self, serializer):
+        """
+        Perform create
+        :param serializer: serializer
+        :return: None
+        """
+        password = serializer.validated_data.get('password', None)
+        instance = serializer.save()
+        if password:
+            instance.set_password(password)
+        instance.save()
 
 
 class UserView():
