@@ -2,12 +2,44 @@ from django.contrib.auth import authenticate
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.parsers import JSONParser
 
 from .models import User
+from .serializers import UserSerializer
 
 # Create your views here.
+
+
+class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    """
+    User retrieve, update and destroy
+    """
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    http_method_names = ['get', 'put', 'delete', 'patch']
+
+    def perform_update(self, serializer):
+        """
+        Perform update
+        :param serializer: serializer
+        :return: None
+        """
+        password = serializer.validated_data.get('password', None)
+        instance = serializer.save()
+        if password:
+            instance.set_password(password)
+        instance.save()
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        user = self.request.user
+        return User.objects.filter(id=user.id)
 
 
 class UserView():
@@ -19,6 +51,8 @@ class UserView():
     def signup(request):
         """
         User signup
+        :param request: request
+        :return: JsonResponse
         """
         if request.method == 'POST':
             try:
@@ -42,6 +76,8 @@ class UserView():
     def login(request):
         """
         User login
+        :param request: request
+        :return: JsonResponse
         """
         if request.method == 'POST':
             data = JSONParser().parse(request)
