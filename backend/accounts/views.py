@@ -13,69 +13,67 @@ from backend.permissions import IsAdminOrSelf, IsAdmin
 # Create your views here.
 
 
-class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    """
-    User retrieve, update and destroy
-    """
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
-
-    http_method_names = ['get', 'put', 'delete', 'patch']
-
-    def perform_update(self, serializer):
-        """
-        Perform update
-        :param serializer: serializer
-        :return: None
-        """
-        password = serializer.validated_data.get('password', None)
-        instance = serializer.save()
-        if password:
-            instance.set_password(password)
-        instance.save()
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        user = self.request.user
-        if user.role == 'admin':
-            return User.objects.all()
-        return User.objects.filter(id=user.id)
-
-
-class UserList(generics.ListCreateAPIView):
-    """
-    Admin user list
-    """
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return User.objects.all()
-
-    def perform_create(self, serializer):
-        """
-        Perform create
-        :param serializer: serializer
-        :return: None
-        """
-        password = serializer.validated_data.get('password', None)
-        instance = serializer.save()
-        if password:
-            instance.set_password(password)
-        instance.save()
-
-
 class UserView():
     """
     User view
     """
+
+    class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+        """
+        User retrieve, update and destroy
+        """
+        serializer_class = UserSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+
+        http_method_names = ['get', 'put', 'delete', 'patch']
+
+        def perform_update(self, serializer):
+            """
+            Perform update
+            :param serializer: serializer
+            :return: None
+            """
+            password = serializer.validated_data.get('password', None)
+            instance = serializer.save()
+            if password:
+                instance.set_password(password)
+            instance.save()
+
+        def get_queryset(self):
+            """
+            Get queryset
+            :return: QuerySet
+            """
+            user = self.request.user
+            if user.role == 'admin':
+                return User.objects.all()
+            return User.objects.filter(id=user.id)
+
+    class UserList(generics.ListCreateAPIView):
+        """
+        Admin user list
+        """
+        serializer_class = UserSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+        def get_queryset(self):
+            """
+            Get queryset
+            :return: QuerySet
+            """
+            return User.objects.all()
+
+        def perform_create(self, serializer):
+            """
+            Perform create
+            :param serializer: serializer
+            :return: None
+            """
+            password = serializer.validated_data.get('password', None)
+            instance = serializer.save()
+            if password:
+                instance.set_password(password)
+            instance.save()
 
     @csrf_exempt
     def signup(request):
