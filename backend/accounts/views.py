@@ -37,3 +37,25 @@ class UserView():
                 return JsonResponse({'token': token.key}, status=201)
             except IntegrityError:
                 return JsonResponse({'error': 'Email already exists'}, status=400)
+
+    @csrf_exempt
+    def login(request):
+        """
+        User login
+        """
+        if request.method == 'POST':
+            data = JSONParser().parse(request)
+            user = authenticate(
+                request,
+                email=data['email'],
+                password=data['password'])
+            if user is None:
+                return JsonResponse(
+                    {'error': 'could not login. please check username and/or password'},
+                    status=400)
+            else:
+                try:
+                    token = Token.objects.get(user=user)
+                except Token.DoesNotExist:
+                    token = Token.objects.create(user=user)
+                return JsonResponse({'token': str(token)}, status=200)
