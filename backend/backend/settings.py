@@ -66,7 +66,6 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     f"exp://{SERVER_IP}:8081",
-    f"http://{SERVER_IP}:5000",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

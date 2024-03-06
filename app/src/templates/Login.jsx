@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import StyledBackground from "../styles/StyledBackgroud";
 import StyledText from "../styles/StyledText";
@@ -52,8 +53,7 @@ const Login = () => {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         keyboardVerticalOffset={120}
-        behavior="padding"
-        // behavior={Platform.OS === 'ios' ? "padding" : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <StyledBackground bg="primary" style={styles.logoContainer}>
           <Image source={require("../images/logo.png")} />
@@ -82,6 +82,7 @@ const Login = () => {
             <StyledInput
               placeholder="Correo"
               onChangeText={(email) => setEmail(email)}
+              secureTextEntry={false}
             />
             <StyledText
               color="primary"
