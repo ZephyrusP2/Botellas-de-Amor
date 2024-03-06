@@ -52,11 +52,9 @@ const Login = () => {
                     secureTextEntry={true}
                 />
 
-
                 <StyledButton  onPress={() => onSubmit(username, password)} >
                    Comenzar
                 </StyledButton>
-
 
                 <TouchableOpacity onPress={() => onRegister()} style={styles.bottom}>
                     <StyledText size='medium' color='primary' align='center'>Registrarme</StyledText>
