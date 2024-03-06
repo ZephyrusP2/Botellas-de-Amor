@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv("../.env")
+SERVER_IP = os.getenv("SERVER_IP")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +30,9 @@ SECRET_KEY = "django-insecure-yv3+vn8d4hq789n3l(o1x!^&1!8vob$r15oj*=&+=vpfi59ur8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    SERVER_IP,
+]
 
 
 # Application definition
@@ -41,6 +48,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "accounts",
     "api",
+    "corsheaders",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -53,7 +61,14 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
+
+CORS_ORIGIN_WHITELIST = [
+    f"exp://{SERVER_IP}:8081",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "backend.urls"
 

@@ -9,6 +9,7 @@ isort = "*"
 black = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
