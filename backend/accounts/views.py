@@ -111,7 +111,7 @@ class UserView():
             data = JSONParser().parse(request)
             user = authenticate(
                 request,
-                email=data['email'],
+                email=data['email'].lower(),
                 password=data['password'])
             if user is None:
                 return JsonResponse(
