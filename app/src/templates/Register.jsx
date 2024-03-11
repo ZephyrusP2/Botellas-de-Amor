@@ -1,113 +1,252 @@
 import React from 'react';
-import { View, ScrollView, Image, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, ScrollView, Image, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Pressable } from 'react-native';
 import StyledBackground from '../styles/StyledBackgroud';
 import StyledText from '../styles/StyledText';
 import StyledInput from '../styles/StyledInput';
 import StyledButton from '../styles/StyledButton';
 import { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Picker } from '@react-native-picker/picker';
+
 
 
 const Register = () => {
+
+
+    const currentDate = new Date();
+
     const [name, setName] = useState('');
+    const [nameError, setNameError] = useState('');
     const [lastname, setLastname] = useState('');
+    const [lastNameError, setLastNameError] = useState('');
     const [borndate, setBorndate] = useState(new Date());
-
-    const [genre, setGenre] = useState('');
+    const [genre, setGenre] = useState('Hombre');;
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
-    const [showPicker, setShowPicker] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
+    const [showPickerDate, setShowPickerDate] = useState(false);
+    const [showPickerGenre, setShowPickerGenre] = useState(false);
 
-    function onRegister() {
-        // Función vacía
+
+    const toggleDataPicker = () => {
+        setShowPickerDate(!showPickerDate)
     }
 
-    function onSubmit(){
-        // funcion vacia
+    const toggleGenrePicker = () => {
+        setShowPickerGenre(!showPickerGenre)
+    }
+
+    const onChangeDate = ({ type }, selectedDate) => {
+        if (type == 'set') {
+            const currentDate = selectedDate || borndate;
+            setBorndate(currentDate)
+            if (Platform.OS === 'android') {
+                toggleDataPicker()
+            }
+        }
+        else {
+            toggleDataPicker()
+        }
+
+    }
+
+    const confirmDateIos = (event, selectedDate) => {
+        if (event.type === 'set') {
+            const currentDate = selectedDate || borndate;
+            setBorndate(currentDate);
+        }
+        toggleDataPicker();
+    };
+
+    const confirmGenreIos = () => {
+        toggleGenrePicker();
+    }
+
+
+    function onLogin() {
+
+    }
+
+    function onSubmit() {
+        let isValid = true;
+
+        // Validar nombre
+        if (name.trim() === '') {
+            setNameError('El nombre es requerido');
+            isValid = false;
+        } else if (name.length > 50){
+            setNameError('El nombre debe ser menor a 50 caracteres');
+            isValid = false;
+        } else {
+            setNameError('');
+        }
+    
+        // Validar apellido
+        if (lastname.trim() === '') {
+            setLastNameError('El apellido es requerido');
+            isValid = false;
+        } else if (name.length > 50){
+            setNameError('El apellido debe ser menor a 50 caracteres');
+            isValid = false;
+        } else {
+            setLastNameError('');
+        }
+    
+        // Validar email
+        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            setEmailError('El email no es válido');
+            isValid = false;
+        } else {
+            setEmailError('');
+        }
+        console.log("Nombre:", name);
+        console.log("Apellido:", lastname);
+        console.log("Fecha de nacimiento:", borndate);
+        console.log("Género:", genre);
+        console.log("Email:", email);
+        console.log("Contraseña:", password);
     }
 
     return (
         <StyledBackground bg='secondary' style={styles.background} >
-            <KeyboardAvoidingView style={{ flex: 1 }}
-                keyboardVerticalOffset={120}
-                behavior='padding'>
+            <StyledBackground bg='primary' style={styles.borderUp}>
+            </StyledBackground>
 
-                <StyledBackground bg='primary' style={styles.logoContainer}>
-                </StyledBackground>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={styles.background}>
 
                 <StyledBackground bg='primary'>
                     <View style={styles.contentContainer}>
                         <StyledText color='secondary' size='large' fontWeight='bold' align='center' style={styles.title}>Registro</StyledText>
 
-                        <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Nombre</StyledText>
-                        <StyledInput
-                            placeholder="Nombre"
-                            onChangeText={(name) => setName(name)}
+                        <ScrollView >
 
-                        />
+                            <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Nombre</StyledText>
+                            <StyledInput
+                                placeholder="Nombre"
+                                onChangeText={(name) => setName(name)}
+                            />
+                            {nameError !== '' && <StyledText style={styles.errorText}>{nameError}</StyledText>}
 
-                        <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Apellido</StyledText>
-                        <StyledInput
-                            placeholder="Apellido"
-                            onChangeText={(password) => setPassword(password)}
-                            secureTextEntry={true}
-                        />
+                            <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Apellido</StyledText>
+                            <StyledInput
+                                placeholder="Apellido"
+                                onChangeText={(lastname) => setLastname(lastname)}
+                            />
+                             {lastNameError !== '' && <StyledText style={styles.errorText}>{lastNameError}</StyledText>}
 
-                        <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Fecha De Nacimiento</StyledText>
-                        <StyledInput
-                            placeholder="Fecha De Nacimiento"
-                            onChangeText={(password) => setPassword(password)}
-                            secureTextEntry={true}
-                        />
+                            <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Fecha De Nacimiento</StyledText>
 
-                        <DateTimePicker
-                            mode='date'
-                            display='spinner'
-                            value={borndate}
-                            onChange={(event, selectedDate) => {
-                                const currentDate = selectedDate || borndate;
-                                setBorndate(currentDate);
-                                setShowPicker(false);
-                            }}
-                        />
-
-                        <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Genero</StyledText>
-                        <StyledInput
-                            placeholder="Genero"
-                            onChangeText={(password) => setPassword(password)}
-                            secureTextEntry={true}
-                        />
+                            {!showPickerDate && (
+                                <Pressable onPress={toggleDataPicker}>
+                                    <StyledInput
+                                        placeholder="Fecha De Nacimiento"
+                                        value={borndate.toLocaleDateString('es-ES')}
+                                        editable={false}
+                                        onPressIn={toggleDataPicker}
+                                    />
+                                </Pressable>
+                            )}
 
 
-                        <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Email</StyledText>
-                        <StyledInput
-                            placeholder="Email"
-                            onChangeText={(password) => setPassword(password)}
-                            secureTextEntry={true}
-                        />
+                            {showPickerDate && (
+                                <View>
+                                    <DateTimePicker
+                                        mode='date'
+                                        display='spinner'
+                                        value={borndate}
+                                        onChange={onChangeDate}
+                                        maximumDate={currentDate}
+                                        style={styles.dataPicker}
+                                    />
 
-                        <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Contraseña</StyledText>
-                        <StyledInput
-                            placeholder="Contraseña"
-                            onChangeText={(password) => setPassword(password)}
-                            secureTextEntry={true}
-                        />
+                                    {Platform.OS === "ios" && (
+                                        <StyledButton onPress={confirmDateIos}>
+                                            Aceptar
+                                        </StyledButton>
+                                    )}
+                                </View>
+                            )}
 
-                        <StyledButton onPress={() => onSubmit(username, password)} >
-                            Registrarme
-                        </StyledButton>
+                            <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Género</StyledText>
 
-                        <TouchableOpacity onPress={() => onRegister()} style={styles.bottom}>
-                            <StyledText size='medium' color='primary' align='center'>Iniciar sesión</StyledText>
-                        </TouchableOpacity>
+                            {/* Android */}
 
+                            {Platform.OS === 'android' && (
+                                <View style={styles.borderGenre}>
+                                    <Picker
+                                        selectedValue={genre}
+                                        onValueChange={(itemValue) => setGenre(itemValue)}
+                                        style={styles.picker}
+                                    >
+                                        <Picker.Item label="Hombre" value="Hombre" />
+                                        <Picker.Item label="Mujer" value="Mujer" />
+                                        <Picker.Item label="Otro" value="Otro" />
+                                    </Picker>
+                                </View>
+                            )}
+
+
+                            {/* ios */}
+                            {!showPickerGenre && Platform.OS === 'ios' && (
+                                <Pressable onPress={toggleGenrePicker}>
+                                    <StyledInput
+                                        // placeholder="Género"
+                                        value={genre}
+                                        editable={false}
+                                        onPressIn={toggleGenrePicker}
+                                    />
+                                </Pressable>
+                            )}
+
+                            {showPickerGenre && (
+                                <View>
+                                    <Picker
+                                        selectedValue={genre}
+                                        onValueChange={(itemValue) => setGenre(itemValue)}
+                                        style={styles.genrePicker}
+                                    >
+                                        <Picker.Item label="Hombre" value="Hombre" />
+                                        <Picker.Item label="Mujer" value="Mujer" />
+                                        <Picker.Item label="Otro" value="Otro" />
+                                    </Picker>
+                                    <StyledButton onPress={confirmGenreIos}>
+                                        Aceptar
+                                    </StyledButton>
+                                </View>
+
+                            )}
+
+
+                            <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Email</StyledText>
+                            <StyledInput
+                                placeholder="Email"
+                                onChangeText={(email) => setEmail(email)}
+                            />
+                             {emailError !== '' && <StyledText style={styles.errorText}>{emailError}</StyledText>}
+
+                            <StyledText color='primary' size='medium' fontWeight='normal' style={styles.labelText}>Contraseña</StyledText>
+                            <StyledInput
+                                placeholder="Contraseña"
+                                onChangeText={(password) => setPassword(password)}
+                                secureTextEntry={true}
+                            />
+
+                            <StyledButton onPress={() => onSubmit()} >
+                                Registrarme
+                            </StyledButton>
+
+                            <TouchableOpacity onPress={() => onLogin()} style={styles.bottom}>
+                                <StyledText size='medium' color='primary' align='center'>Iniciar sesión</StyledText>
+                            </TouchableOpacity>
+                        </ScrollView>
                     </View>
                 </StyledBackground>
-
-
             </KeyboardAvoidingView>
-
         </StyledBackground>
+
     );
 };
 
@@ -124,7 +263,13 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 1,
     },
-    logoContainer: {
+    errorText : {
+        marginBottom: 10,
+        marginLeft: 25,
+        color: '#FF5733'
+
+    },
+    borderUp: {
         width: '100%',
         height: '7%',
         justifyContent: 'center',
@@ -143,5 +288,27 @@ const styles = StyleSheet.create({
     bottom: {
         marginBottom: 10,
     },
-
+    dataPicker: {
+        height: 120,
+        marginTop: -20,
+        width: '90%',
+        alignSelf: 'center',
+    },
+    borderGenre: {
+        height: 60,
+        width: '90%',
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: '#00C8EA',
+        borderRadius: 15,
+        marginBottom: 10,
+    },
+    picker: {
+        fontFamily: 'League-Spartan',
+    },
+    genrePicker: {
+        height: 160,
+        marginTop: -60,
+        marginBottom: 30,
+    }
 });

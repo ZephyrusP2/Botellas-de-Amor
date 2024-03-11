@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./src/templates/Login";
+
 import Register from "./src/templates/Register"
 import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
@@ -25,7 +26,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Login />
+      <Register/>
     </View>
   );
 }
