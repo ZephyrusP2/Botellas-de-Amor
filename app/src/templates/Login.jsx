@@ -40,13 +40,11 @@ const Login = ({ navigation }) => {
       });
   };
 
-  function onRegister() {
+  onRegister = () => {
     navigation.navigate("Register");
-  }
+  };
 
-  function onForgotPassword() {
-    // Función vacía
-  }
+  onForgotPassword = () => {};
 
   return (
     <StyledBackground bg="secondary" style={styles.background}>
