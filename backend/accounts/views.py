@@ -76,9 +76,9 @@ class UserView():
             instance.save()
 
     @csrf_exempt
-    def signup(request):
+    def register(request):
         """
-        User signup
+        User register
         :param request: request
         :return: JsonResponse
         """
@@ -90,7 +90,7 @@ class UserView():
                     last_name=data['last_name'],
                     birth_date=data['birth_date'],
                     gender=data['gender'],
-                    email=data['email'],
+                    email=data['email'].lower(),
                     password=data['password']
                 )
                 user.set_password(data['password'])

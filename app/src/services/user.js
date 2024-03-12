@@ -15,6 +15,21 @@ class UserService {
       throw error;
     }
   };
+
+  register = async (userData) => {
+    console.log("register", userData);
+    console.log("server", this.server);
+    try {
+      const response = await axios.post(
+        `${this.server}/api/accounts/user/register`,
+        userData
+      );
+      return response;
+    } catch (error) {
+      console.error("register error", error);
+      throw error;
+    }
+  };
 }
 
 export default new UserService();

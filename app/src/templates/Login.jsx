@@ -15,7 +15,7 @@ import { useState } from "react";
 import UserService from "../services/user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
@@ -41,7 +41,7 @@ const Login = () => {
   };
 
   function onRegister() {
-    // Función vacía
+    navigation.navigate("Register");
   }
 
   function onForgotPassword() {
