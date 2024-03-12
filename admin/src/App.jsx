@@ -3,33 +3,47 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() { 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+    <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center text-center" href="#">
+          <span>Miguel Sosa</span>
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navcol-5"
+        >
+          <span class="visually-hidden">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <div id="navcol-5" class="collapse navbar-collapse text-center">
+          <ul class="navbar-nav ms-auto">
+            <li class="navbar-item">
+              <a class="nav-link active" href="#about">
+                About
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a class="nav-link active" href="#projects">
+                Projects
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a class="nav-link active" href="#skills">
+                Skills
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a class="nav-link active" href="#contact">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </nav>
   );
 }
 
-export default App;
