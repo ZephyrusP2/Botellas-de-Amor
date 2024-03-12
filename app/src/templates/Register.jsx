@@ -25,16 +25,16 @@ const Register = ({ navigation }) => {
 
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [lastName, setLastName] = useState("");
   const [lastNameError, setLastNameError] = useState("");
-  const [borndate, setBorndate] = useState(new Date());
-  const [genre, setGenre] = useState("Hombre");
+  const [birthDate, setbirthDate] = useState(new Date());
+  const [gender, setGender] = useState("Hombre");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPickerDate, setShowPickerDate] = useState(false);
-  const [showPickerGenre, setShowPickerGenre] = useState(false);
+  const [showPickerGender, setShowPickerGender] = useState(false);
   const [error, setError] = useState("");
 
   const toggleDataPicker = () => {
@@ -42,13 +42,13 @@ const Register = ({ navigation }) => {
   };
 
   const toggleGenrePicker = () => {
-    setShowPickerGenre(!showPickerGenre);
+    setShowPickerGender(!showPickerGender);
   };
 
   const onChangeDate = ({ type }, selectedDate) => {
     if (type == "set") {
-      const currentDate = selectedDate || borndate;
-      setBorndate(currentDate);
+      const currentDate = selectedDate || birthDate;
+      setbirthDate(currentDate);
       if (Platform.OS === "android") {
         toggleDataPicker();
       }
@@ -59,24 +59,23 @@ const Register = ({ navigation }) => {
 
   const confirmDateIos = (event, selectedDate) => {
     if (event.type === "set") {
-      const currentDate = selectedDate || borndate;
-      setBorndate(currentDate);
+      const currentDate = selectedDate || birthDate;
+      setbirthDate(currentDate);
     }
     toggleDataPicker();
   };
 
-  const confirmGenreIos = () => {
+  const confirmGenderiOS = () => {
     toggleGenrePicker();
   };
 
-  function onLogin() {
+  const onLogin = () => {
     navigation.navigate("Login");
-  }
+  };
 
-  function onSubmit() {
+  const onSubmit = () => {
     let isValid = true;
 
-    // Validar nombre
     if (name.trim() === "") {
       setNameError("El nombre es requerido");
       isValid = false;
@@ -87,8 +86,7 @@ const Register = ({ navigation }) => {
       setNameError("");
     }
 
-    // Validar apellido
-    if (lastname.trim() === "") {
+    if (lastName.trim() === "") {
       setLastNameError("El apellido es requerido");
       isValid = false;
     } else if (name.length > 50) {
@@ -98,14 +96,37 @@ const Register = ({ navigation }) => {
       setLastNameError("");
     }
 
-    // Validar email
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setEmailError("El email no es válido");
       isValid = false;
     } else {
       setEmailError("");
     }
-  }
+
+    if (isValid) {
+      userData = {
+        name: name,
+        last_name: lastName,
+        birth_date: birthDate.toISOString().split("T")[0],
+        gender: gender,
+        email: email,
+        password: password,
+      };
+
+      UserService.register(userData)
+        .then((response) => {
+          setToken(response.data.token);
+          setEmail(userData.email);
+          AsyncStorage.setItem("token", response.data.token);
+          AsyncStorage.setItem("email", userData.email);
+          setError("");
+        })
+        .catch((error) => {
+          console.log("register", error);
+          setError(error.toString());
+        });
+    }
+  };
 
   return (
     <StyledBackground bg="secondary" style={styles.background}>
@@ -154,7 +175,7 @@ const Register = ({ navigation }) => {
               </StyledText>
               <StyledInput
                 placeholder="Apellido"
-                onChangeText={(lastname) => setLastname(lastname)}
+                onChangeText={(lastName) => setLastName(lastName)}
               />
               {lastNameError !== "" && (
                 <StyledText style={styles.errorText}>
@@ -175,7 +196,7 @@ const Register = ({ navigation }) => {
                 <Pressable onPress={toggleDataPicker}>
                   <StyledInput
                     placeholder="Fecha De Nacimiento"
-                    value={borndate.toLocaleDateString("es-ES")}
+                    value={birthDate.toLocaleDateString("es-ES")}
                     editable={false}
                     onPressIn={toggleDataPicker}
                   />
@@ -187,7 +208,7 @@ const Register = ({ navigation }) => {
                   <DateTimePicker
                     mode="date"
                     display="spinner"
-                    value={borndate}
+                    value={birthDate}
                     onChange={onChangeDate}
                     maximumDate={currentDate}
                     style={styles.dataPicker}
@@ -211,12 +232,11 @@ const Register = ({ navigation }) => {
               </StyledText>
 
               {/* Android */}
-
               {Platform.OS === "android" && (
                 <View style={styles.borderGenre}>
                   <Picker
-                    selectedValue={genre}
-                    onValueChange={(itemValue) => setGenre(itemValue)}
+                    selectedValue={gender}
+                    onValueChange={(itemValue) => setGender(itemValue)}
                     style={styles.picker}
                   >
                     <Picker.Item label="Hombre" value="Hombre" />
@@ -226,30 +246,31 @@ const Register = ({ navigation }) => {
                 </View>
               )}
 
-              {/* ios */}
-              {!showPickerGenre && Platform.OS === "ios" && (
+              {/* iOS */}
+              {!showPickerGender && Platform.OS === "ios" && (
                 <Pressable onPress={toggleGenrePicker}>
                   <StyledInput
-                    // placeholder="Género"
-                    value={genre}
+                    value={gender}
                     editable={false}
                     onPressIn={toggleGenrePicker}
                   />
                 </Pressable>
               )}
 
-              {showPickerGenre && (
+              {showPickerGender && (
                 <View>
                   <Picker
-                    selectedValue={genre}
-                    onValueChange={(itemValue) => setGenre(itemValue)}
+                    selectedValue={gender}
+                    onValueChange={(itemValue) => setGender(itemValue)}
                     style={styles.genrePicker}
                   >
                     <Picker.Item label="Hombre" value="Hombre" />
                     <Picker.Item label="Mujer" value="Mujer" />
                     <Picker.Item label="Otro" value="Otro" />
                   </Picker>
-                  <StyledButton onPress={confirmGenreIos}>Aceptar</StyledButton>
+                  <StyledButton onPress={confirmGenderiOS}>
+                    Aceptar
+                  </StyledButton>
                 </View>
               )}
 
@@ -360,4 +381,3 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
-
