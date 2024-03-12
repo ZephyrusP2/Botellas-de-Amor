@@ -2,16 +2,18 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./src/templates/Login";
 
-import Register from "./src/templates/Register"
-import { useCallback } from 'react';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import Register from "./src/templates/Register";
+import { useCallback } from "react";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
-    'League-Spartan': require('./src/assets/fonts/LeagueSpartan.ttf'),
+    "League-Spartan": require("./src/assets/fonts/LeagueSpartan.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -24,20 +26,26 @@ export default function App() {
     return null;
   }
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <Register/>
-    </View>
+    <NavigationContainer onReady={onLayoutRootView} style={styles.container}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
-
-
-
