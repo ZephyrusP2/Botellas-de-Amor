@@ -126,3 +126,27 @@ class UserView:
                 except Token.DoesNotExist:
                     token = Token.objects.create(user=user)
                 return JsonResponse({"token": str(token)}, status=200)
+
+    @csrf_exempt
+    def admin_login(request):
+        """
+        Admin login
+        :param request: request
+        :return: JsonResponse
+        """
+        if request.method == "POST":
+            data = JSONParser().parse(request)
+            user = authenticate(
+                request, email=data["email"].lower(), password=data["password"]
+            )
+            if user is None or user.role != "admin":
+                return JsonResponse(
+                    {"error": "could not login. user is not an admin. please check username and/or password"},
+                    status=400,
+                )
+            else:
+                try:
+                    token = Token.objects.get(user=user)
+                except Token.DoesNotExist:
+                    token = Token.objects.create(user=user)
+                return JsonResponse({"token": str(token)}, status=200)

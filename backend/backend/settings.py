@@ -33,6 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     SERVER_IP,
+    "localhost",
 ]
 
 
