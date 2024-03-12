@@ -6,14 +6,15 @@ from rest_framework import generics, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.parsers import JSONParser
 
+from backend.permissions import IsAdmin, IsAdminOrSelf
+
 from .models import User
 from .serializers import UserSerializer
-from backend.permissions import IsAdminOrSelf, IsAdmin
 
 # Create your views here.
 
 
-class UserView():
+class UserView:
     """
     User view
     """
@@ -22,10 +23,11 @@ class UserView():
         """
         User retrieve, update and destroy
         """
+
         serializer_class = UserSerializer
         permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
 
-        http_method_names = ['get', 'put', 'delete', 'patch']
+        http_method_names = ["get", "put", "delete", "patch"]
 
         def perform_update(self, serializer):
             """
@@ -33,7 +35,7 @@ class UserView():
             :param serializer: serializer
             :return: None
             """
-            password = serializer.validated_data.get('password', None)
+            password = serializer.validated_data.get("password", None)
             instance = serializer.save()
             if password:
                 instance.set_password(password)
@@ -45,7 +47,7 @@ class UserView():
             :return: QuerySet
             """
             user = self.request.user
-            if user.role == 'admin':
+            if user.role == "admin":
                 return User.objects.all()
             return User.objects.filter(id=user.id)
 
@@ -53,6 +55,7 @@ class UserView():
         """
         Admin user list
         """
+
         serializer_class = UserSerializer
         permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
@@ -69,7 +72,7 @@ class UserView():
             :param serializer: serializer
             :return: None
             """
-            password = serializer.validated_data.get('password', None)
+            password = serializer.validated_data.get("password", None)
             instance = serializer.save()
             if password:
                 instance.set_password(password)
@@ -82,23 +85,23 @@ class UserView():
         :param request: request
         :return: JsonResponse
         """
-        if request.method == 'POST':
+        if request.method == "POST":
             try:
                 data = JSONParser().parse(request)
                 user = User(
-                    name=data['name'],
-                    last_name=data['last_name'],
-                    birth_date=data['birth_date'],
-                    gender=data['gender'],
-                    email=data['email'].lower(),
-                    password=data['password']
+                    name=data["name"],
+                    last_name=data["last_name"],
+                    birth_date=data["birth_date"],
+                    gender=data["gender"],
+                    email=data["email"].lower(),
+                    password=data["password"],
                 )
-                user.set_password(data['password'])
+                user.set_password(data["password"])
                 user.save()
                 token = Token.objects.create(user=user)
-                return JsonResponse({'token': token.key}, status=201)
+                return JsonResponse({"token": token.key}, status=201)
             except IntegrityError:
-                return JsonResponse({'error': 'Email already exists'}, status=400)
+                return JsonResponse({"error": "Email already exists"}, status=400)
 
     @csrf_exempt
     def login(request):
@@ -107,19 +110,19 @@ class UserView():
         :param request: request
         :return: JsonResponse
         """
-        if request.method == 'POST':
+        if request.method == "POST":
             data = JSONParser().parse(request)
             user = authenticate(
-                request,
-                email=data['email'].lower(),
-                password=data['password'])
+                request, email=data["email"].lower(), password=data["password"]
+            )
             if user is None:
                 return JsonResponse(
-                    {'error': 'could not login. please check username and/or password'},
-                    status=400)
+                    {"error": "could not login. please check username and/or password"},
+                    status=400,
+                )
             else:
                 try:
                     token = Token.objects.get(user=user)
                 except Token.DoesNotExist:
                     token = Token.objects.create(user=user)
-                return JsonResponse({'token': str(token)}, status=200)
+                return JsonResponse({"token": str(token)}, status=200)
