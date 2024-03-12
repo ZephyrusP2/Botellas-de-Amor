@@ -9,6 +9,12 @@ git clone https://github.com/ZephyrusP2/Botellas-de-Amor.git
 cd Botellas-de-Amor
 ```
 
+Luego, es necesario crear un archivo `.env` en la carpeta raíz del proyecto, y agregar el siguiente contenido.
+
+```env
+SERVER_IP="[ip de la máquina]"
+```
+
 ### Backend
 
 Para ejecutar el backend, es necesario tener instalado pipenv (python y pip también).
@@ -40,7 +46,7 @@ Para iniciarlo es necesario ejecutar los siguientes comandos.
 ```bash
 cd backend
 pipenv install
-pipenv run python manage.py runserver
+pipenv run python manage.py runserver 0.0.0.0:8000
 ```
 
 ### Admin
@@ -85,7 +91,7 @@ Para ejecutar la app es necesario ejecutar el siguiente comando.
 ```bash
 cd app
 npm install
-npx expo start
+npx expo start --clear
 ```
 
 Y luego, con la cámara del celular se debe escanear el código QR que se muestra
