@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-
 FRONTEND_IP = os.getenv("FRONTEND_IP")
 APP_IP = os.getenv("APP_IP")
 
