@@ -30,7 +30,7 @@ jobs:
         run: cd admin
 
       - name: Build the Docker Image
-        run: docker build . --file Dockerfile --tag msosav/botellas-de-amor-admin:latest
+        run: docker build . --tag msosav/botellas-de-amor-admin:latest
 
       - name: Docker Push
         run: docker push msosav/botellas-de-amor-admin
