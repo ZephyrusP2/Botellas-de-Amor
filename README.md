@@ -96,3 +96,32 @@ npx expo start --clear
 
 Y luego, con la cámara del celular se debe escanear el código QR que se muestra
 en la pantalla (es necesario tener instalada la app Expo Go).
+
+## Ejecución en Docker
+
+### Backend
+
+Para ejecutar el backend en Docker, es necesario tener instalado Docker.
+A continuación se mostrará el proceso de instalación para Windows, Linux (Fedora)
+
+#### Instalar Docker en Windows
+
+Ir y seguir las instrucciones de la [página oficial de Docker.](https://docs.docker.com/desktop/windows/install/)
+
+#### Instalar Docker en Linux (Fedora)
+
+Ejecutar el siguiente comando.
+
+```bash
+sudo dnf install docker
+```
+
+#### Ejecutar el backend en Docker
+
+Para ejecutar el backend en Docker es necesario ejecutar los siguientes comandos.
+
+```bash
+cd backend
+docker pull msosav/botellas-de-amor-backend
+docker run -p 8000:8000 -e FRONTEND_IP="[ip del front]" APP_IP="[ip de la app]" botellas-de-amor-backend
+```
