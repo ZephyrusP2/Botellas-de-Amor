@@ -1,0 +1,15 @@
+:root {
+  --primary-color: #00c8ea;
+}
+
+.bg-myPrimary {
+  background-color: var(--primary-color);
+}
+
+.app-container-wrapper {
+  height: 100vh;
+}
+
+.app-container {
+  height: 100%;
+}
