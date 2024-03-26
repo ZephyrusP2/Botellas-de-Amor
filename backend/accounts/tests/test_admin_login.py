@@ -30,6 +30,7 @@ class AdminLoginTestCase(APITestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("token", response.json())
+        self.assertEqual("role", "admin")
 
     def test_admin_login_invalid_credentials(self):
         self.url = reverse("admin.login")
