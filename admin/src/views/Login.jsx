@@ -24,28 +24,29 @@ const Login = () => {
   const login = async (email, password) => {
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password);
-  
+
     if (!isEmailValid) {
       setEmailError("Correo no válido");
     } else {
       setEmailError("");
     }
-  
+
     if (!isPasswordValid) {
       setPasswordError("La contraseña debe tener al menos 8 caracteres");
     } else {
       setPasswordError("");
     }
-  
+
     if (!isEmailValid || !isPasswordValid) {
+      setError("");
       return;
     }
-  
+
     const userData = {
       email: email,
       password: password,
     };
-  
+
     AdminService.login(userData)
       .then((response) => {
         setToken(response.data.token);
