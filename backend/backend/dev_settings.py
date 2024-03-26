@@ -52,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    f"http://{SERVER_IP}:3000",
+    f"http://localhost:5173",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

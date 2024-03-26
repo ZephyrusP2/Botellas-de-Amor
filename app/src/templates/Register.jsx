@@ -28,7 +28,7 @@ const Register = ({ navigation }) => {
   const [lastName, setLastName] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [birthDate, setbirthDate] = useState(new Date());
-  const [gender, setGender] = useState("Hombre");
+  const [gender, setGender] = useState("Masculino");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
@@ -36,6 +36,7 @@ const Register = ({ navigation }) => {
   const [showPickerDate, setShowPickerDate] = useState(false);
   const [showPickerGender, setShowPickerGender] = useState(false);
   const [error, setError] = useState("");
+  const [token, setToken] = useState("");
 
   const toggleDataPicker = () => {
     setShowPickerDate(!showPickerDate);
@@ -239,8 +240,8 @@ const Register = ({ navigation }) => {
                     onValueChange={(itemValue) => setGender(itemValue)}
                     style={styles.picker}
                   >
-                    <Picker.Item label="Hombre" value="Hombre" />
-                    <Picker.Item label="Mujer" value="Mujer" />
+                    <Picker.Item label="Masculino" value="Masculino" />
+                    <Picker.Item label="Femenino" value="Femenino" />
                     <Picker.Item label="Otro" value="Otro" />
                   </Picker>
                 </View>
@@ -264,8 +265,8 @@ const Register = ({ navigation }) => {
                     onValueChange={(itemValue) => setGender(itemValue)}
                     style={styles.genrePicker}
                   >
-                    <Picker.Item label="Hombre" value="Hombre" />
-                    <Picker.Item label="Mujer" value="Mujer" />
+                    <Picker.Item label="Masculino" value="Masculino" />
+                    <Picker.Item label="Femenino" value="Femenino" />
                     <Picker.Item label="Otro" value="Otro" />
                   </Picker>
                   <StyledButton onPress={confirmGenderiOS}>

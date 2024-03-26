@@ -1,0 +1,41 @@
+body,
+html {
+  background-color: #00c8ea !important;
+}
+
+.my-logo {
+  height: 200px !important;
+}
+
+.custom-card-border {
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 80px !important;
+}
+
+.btn-primary {
+  background-color: #00c8ea !important;
+  border-color: #00c8ea !important;
+}
+
+.btn-primary:hover {
+  background-color: #80d4f5 !important;
+  border-color: #80d4f5 !important;
+}
+
+.form-label {
+  color: #00c8ea !important;
+}
+
+.form-control {
+  border: 1px solid #00c8ea !important;
+  border-radius: 80px !important;
+}
+
+.form-control:focus-within {
+  border: 1px solid #00c8ea !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 200, 234, 0.25) !important;
+}
+
+.custom-min-width {
+  min-width: 350px !important;
+}

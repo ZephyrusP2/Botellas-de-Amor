@@ -17,8 +17,6 @@ class UserService {
   };
 
   register = async (userData) => {
-    console.log("register", userData);
-    console.log("server", this.server);
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/register`,
