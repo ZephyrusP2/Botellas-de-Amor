@@ -1,0 +1,36 @@
+name: Docker Image CI Backend
+
+on:
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/**"
+      - "app/**"
+      - "admin/**"
+      - .gitignore
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copy Project Code
+        uses: actions/checkout@v3
+
+      - name: Docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKERHUB_USER}}
+          DOCKER_PASS: ${{secrets.DOCKERHUB_PASS}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      - name: Build the Docker Image
+        run: |
+          cd backend
+          docker build . --tag msosav/botellas-de-amor-backend:latest
+
+      - name: Docker Push
+        run: docker push msosav/botellas-de-amor-backend
