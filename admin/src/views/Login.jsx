@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from "react";
 import "../styles/Login.css";
 import "../App.css";
+import logo from "../assets/images/logo-botella.png";
 import AdminService from "../services/admin";
 
 const Login = () => {
@@ -66,6 +67,9 @@ const Login = () => {
       <div className="container-fluid app-container bg-myPrimary">
         <div className="row justify-content-center align-items-center h-100">
           <div className="col-md-3 custom-min-width col-sm-4">
+            <div className="d-flex justify-content-center mb-3 my-logo">
+              <img src={logo} alt="Login Image" />
+            </div>
             <div className="card border-white rounded-3">
               <div className="card-body mx-3">
                 {error && <div className="error-message mt-3">{error}</div>}

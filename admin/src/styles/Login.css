@@ -1,3 +1,12 @@
+body,
+html {
+  background-color: #00c8ea !important;
+}
+
+.my-logo {
+  height: 200px !important;
+}
+
 .custom-card-border {
   border: 1px solid #d9d9d9 !important;
   border-radius: 80px !important;
