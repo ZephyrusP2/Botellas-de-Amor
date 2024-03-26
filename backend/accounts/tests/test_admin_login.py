@@ -30,9 +30,9 @@ class AdminLoginTestCase(APITestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("token", response.json())
+        self.assertEqual(response.json()["role"], "admin")
 
     def test_admin_login_invalid_credentials(self):
-        self.url = reverse("admin.login")
         data = {"email": "admin@example.com", "password": "wrongpassword"}
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
@@ -51,7 +51,6 @@ class AdminLoginTestCase(APITestCase):
         non_admin_user.set_password("userpassword")
         non_admin_user.save()
         self.token = Token.objects.create(user=non_admin_user)
-        self.url = reverse("admin.login")
         data = {"email": "user@example.com", "password": "userpassword"}
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)

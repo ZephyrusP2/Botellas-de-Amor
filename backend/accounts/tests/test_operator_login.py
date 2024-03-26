@@ -21,7 +21,7 @@ class OperatorLoginTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.token = Token.objects.create(user=self.operator_user)
-        self.url = reverse("operator.login")
+        self.url = reverse("admin.login")
 
         return super().setUp()
 
@@ -30,9 +30,9 @@ class OperatorLoginTestCase(APITestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("token", response.json())
+        self.assertEqual(response.json()["role"], "operator")
 
     def test_operator_login_invalid_credentials(self):
-        self.url = reverse("operator.login")
         data = {"email": "operator@gmail.com", "password": "wrongpassword"}
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
@@ -51,7 +51,6 @@ class OperatorLoginTestCase(APITestCase):
         non_operator_user.set_password("userpassword")
         non_operator_user.save()
         self.token = Token.objects.create(user=non_operator_user)
-        self.url = reverse("operator.login")
         data = {"email": "user@example.com", "password": "userpassword"}
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
