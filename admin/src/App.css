@@ -13,3 +13,7 @@
 .app-container {
   height: 100%;
 }
+
+.error-message {
+  color: red;
+}
