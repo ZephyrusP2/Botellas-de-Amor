@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
-from .models import User
+from accounts.models import User
 
 # Create your tests here.
 
@@ -48,6 +48,8 @@ class AdminLoginTestCase(APITestCase):
             password="userpassword",
             role="user",
         )
+        non_admin_user.set_password("userpassword")
+        non_admin_user.save()
         self.token = Token.objects.create(user=non_admin_user)
         self.url = reverse("admin.login")
         data = {"email": "user@example.com", "password": "userpassword"}

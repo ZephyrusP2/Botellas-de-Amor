@@ -39,10 +39,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    f"http://{FRONTEND_IP}:3000",
-    f"exp://{APP_IP}:8081",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 

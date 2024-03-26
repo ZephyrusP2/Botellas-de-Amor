@@ -17,10 +17,6 @@ RUN pipenv install --deploy --ignore-pipfile
 
 # Set the environment variable
 ENV DJANGO_ENV "production"
-ARG frontend_ip
-ENV FRONTEND_IP $frontend_ip
-ARG app_ip
-ENV APP_IP $app_ip
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000

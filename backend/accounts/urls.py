@@ -12,4 +12,5 @@ urlpatterns = [
     ),
     path("user/all", UserView.UserList.as_view(), name="user.list"),
     path("admin/login", UserView.admin_login, name="admin.login"),
+    path("operator/login", UserView.operator_login, name="operator.login"),
 ]
