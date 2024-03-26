@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 
+
 if os.environ.get("DJANGO_ENV") == "production":
     from .prod_settings import *
 else:

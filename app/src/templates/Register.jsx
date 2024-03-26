@@ -36,6 +36,7 @@ const Register = ({ navigation }) => {
   const [showPickerDate, setShowPickerDate] = useState(false);
   const [showPickerGender, setShowPickerGender] = useState(false);
   const [error, setError] = useState("");
+  const [token, setToken] = useState("");
 
   const toggleDataPicker = () => {
     setShowPickerDate(!showPickerDate);
