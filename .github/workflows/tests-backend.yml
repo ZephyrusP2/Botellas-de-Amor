@@ -1,0 +1,41 @@
+name: Tests Backend
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/**"
+      - "app/**"
+      - "admin/**"
+      - .gitignore
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m pip install pipenv
+
+      - name: Install dependencies
+        run: |
+          cd backend  
+          pipenv install
+
+      - name: Run tests
+        run: |
+          cd backend
+          pipenv run python manage.py test
