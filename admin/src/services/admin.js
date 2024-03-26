@@ -15,7 +15,7 @@ class AdminService {
       console.error("login error", error);
       throw error;
     }
-  }; 
+  };
 }
 
 export default new AdminService();

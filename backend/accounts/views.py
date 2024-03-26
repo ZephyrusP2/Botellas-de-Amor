@@ -141,7 +141,9 @@ class UserView:
             )
             if user is None or user.role != "admin":
                 return JsonResponse(
-                    {"error": "could not login. user is not an admin. please check username and/or password"},
+                    {
+                        "error": "could not login. user is not an admin. please check username and/or password"
+                    },
                     status=400,
                 )
             else:
