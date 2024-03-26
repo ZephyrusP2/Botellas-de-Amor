@@ -7,7 +7,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/login`,
-        userData
+        userData,
       );
       return response;
     } catch (error) {
@@ -20,7 +20,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/register`,
-        userData
+        userData,
       );
       return response;
     } catch (error) {
