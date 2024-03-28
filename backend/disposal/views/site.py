@@ -29,3 +29,21 @@ class Create(generics.CreateAPIView):
         :return: None
         """
         serializer.save()
+
+
+class RetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Site retrieve, update and destroy
+    """
+
+    serializer_class = SiteSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+    http_method_names = ["get", "put", "delete", "patch"]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return Site.objects.all()
