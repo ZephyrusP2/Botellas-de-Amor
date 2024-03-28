@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./src/templates/Login";
-
 import Register from "./src/templates/Register";
+import Content  from "./src/templates/Content";
 import { useCallback } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -35,6 +35,7 @@ export default function App() {
           headerShown: false,
         }}
       >
+        <Stack.Screen name="Content" component={Content} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
