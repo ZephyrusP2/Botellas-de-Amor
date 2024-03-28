@@ -12,6 +12,10 @@ const Login = () => {
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [role, setRole] = useState("");
+
+  document.title = "Inicio de sesión";
+  window.history.pushState(null, null, "/inicio-de-sesion");
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -51,6 +55,7 @@ const Login = () => {
     AdminService.login(userData)
       .then((response) => {
         setToken(response.data.token);
+        setRole(response.data.role);
         setEmail(userData.email);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("email", userData.email);
