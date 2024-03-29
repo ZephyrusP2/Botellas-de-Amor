@@ -63,6 +63,7 @@ const Login = () => {
   };
 
   return (
+    <div className="login-container">
     <div className="app-container-wrapper">
       <div className="container-fluid app-container bg-myPrimary">
         <div className="row justify-content-center align-items-center h-100">
@@ -118,6 +119,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -17,3 +17,68 @@
 .error-message {
   color: red;
 }
+
+.container{
+  flex: 1;
+}
+
+.principal-container {
+  width: 100%; /* Ancho total del contenedor */
+  display: flex; /* Utilizamos flexbox para organizar los elementos */
+}
+
+
+.login-container{
+  flex: 1;
+}
+
+.sidebar-container{
+  width: 800px;
+}
+
+.show-container{
+  flex: 1;
+}
+
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px 15px 40px; /* top, right, bottom, left */
+  font-size: 30px !important;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center; /* Cambiado a centrar los botones */
+  gap: 20px; /* Espacio entre los botones */
+  margin-left: 20%;
+}
+
+.button-navbar{
+  background-color: #FEFAF9;
+  border-radius: 5px;
+  border-color: #FEFAF9;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1); /* Sombras */
+  color: black;
+  text-decoration: none;
+  padding: 0 6px 0 6px; /* top, right, bottom, left */
+}
+
+.navbar-bottom-line {
+  width: 95%;
+  margin-left: 3%;
+  height: 3px; /* Grosor de la línea */
+  background-color: #00c8ea; /* Color de la línea */
+  transform: translateY(-50%);
+}
+
+.button-navbar.active {
+  background-color: #00c8ea; /* Cambia el color de fondo a azul */
+  color: white; /* Cambia el color del texto a blanco */
+}
