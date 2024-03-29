@@ -31,15 +31,15 @@ class Create(generics.CreateAPIView):
         serializer.save()
 
 
-class RetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+class Retreive(generics.RetrieveAPIView):
     """
-    Site retrieve, update and destroy
+    Site retrieve
     """
 
     serializer_class = SiteSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
-    http_method_names = ["get", "put", "delete", "patch"]
+    http_method_names = ["get"]
 
     def get_queryset(self):
         """
