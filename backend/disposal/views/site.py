@@ -47,3 +47,29 @@ class Retreive(generics.RetrieveAPIView):
         :return: QuerySet
         """
         return Site.objects.all()
+
+
+class Update(generics.UpdateAPIView):
+    """
+    Site update
+    """
+
+    serializer_class = SiteSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+    http_method_names = ["put"]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return Site.objects.all()
+
+    def perform_update(self, serializer):
+        """
+        Perform update
+        :param serializer: serializer
+        :return: None
+        """
+        serializer.save()
