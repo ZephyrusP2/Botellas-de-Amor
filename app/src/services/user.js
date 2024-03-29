@@ -7,7 +7,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/login`,
-        userData,
+        userData
       );
       return response;
     } catch (error) {
@@ -20,11 +20,24 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/register`,
-        userData,
+        userData
       );
       return response;
     } catch (error) {
       console.error("register error", error);
+      throw error;
+    }
+  };
+
+  getCarbonFootprint = async (token) => {
+    try {
+      const response = await axios.post(
+        `${this.server}/api/user/carbon-footprint`,
+        token
+      );
+      return response;
+    } catch (error) {
+      console.error("getCarbonFootprint error", error);
       throw error;
     }
   };

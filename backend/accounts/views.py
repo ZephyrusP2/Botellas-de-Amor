@@ -92,6 +92,7 @@ class UserView:
                     name=data["name"],
                     last_name=data["last_name"],
                     birth_date=data["birth_date"],
+                    location=data["location"],
                     gender=data["gender"],
                     email=data["email"].lower(),
                     password=data["password"],
@@ -152,3 +153,15 @@ class UserView:
                 except Token.DoesNotExist:
                     token = Token.objects.create(user=user)
                 return JsonResponse({"token": str(token)}, status=200)
+
+    def get_carbon_footprint(request):
+        """
+        Get carbon footprint
+        :param request: request
+        :return: JsonResponse
+        """
+        if request.method == "GET":
+            data = JSONParser().parse(request)
+            user = Token.objects.get(key=data["token"]).user
+            carbon_footprint = user.carbon_footprint
+            return JsonResponse({"carbon_footprint": carbon_footprint}, status=200)
