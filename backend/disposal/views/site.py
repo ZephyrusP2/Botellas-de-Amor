@@ -73,3 +73,21 @@ class Update(generics.UpdateAPIView):
         :return: None
         """
         serializer.save()
+
+
+class Delete(generics.DestroyAPIView):
+    """
+    Site delete
+    """
+
+    serializer_class = SiteSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+    http_method_names = ["delete"]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return Site.objects.all()
