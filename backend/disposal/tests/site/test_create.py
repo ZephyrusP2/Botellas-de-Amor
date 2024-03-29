@@ -2,7 +2,6 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 
 from accounts.models import User
-from disposal.models import Site
 
 
 class SiteCreateTestCase(APITestCase):
