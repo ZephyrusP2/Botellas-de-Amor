@@ -1,10 +1,2 @@
-backend/__pycache__
-api/__pycache__
-accounts/__pycache__
-disposal/__pycache__
-
-api/migrations/__pycache__
-accounts/migrations/__pycache__
-disposal/migrations/__pycache__
-
-disposal/views/__pycache__
+__pycache__/
+*.pyc
