@@ -18,3 +18,14 @@ class Site(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Challenge(models.Model):
+    id = models.AutoField(primary_key=True)
+    challenge = models.CharField(max_length=50)
+    experience = models.IntegerField()
+
+    class Meta:
+        db_table = "challenges"
+
+    def __str__(self):
+        return self.challenge
