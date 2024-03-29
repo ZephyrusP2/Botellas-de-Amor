@@ -152,7 +152,7 @@ class UserView:
                     token = Token.objects.get(user=user)
                 except Token.DoesNotExist:
                     token = Token.objects.create(user=user)
-                return JsonResponse({"token": str(token)}, status=200)
+                return JsonResponse({"token": str(token), "role": user.role}, status=200)
 
     def get_carbon_footprint(request):
         """
