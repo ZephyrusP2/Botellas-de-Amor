@@ -12,4 +12,6 @@ urlpatterns = [
     ),
     path("user/all", UserView.UserList.as_view(), name="user.list"),
     path("admin/login", UserView.admin_login, name="admin.login"),
+    path("user/carbon-footprint", UserView.get_carbon_footprint,
+         name="user.carbon-footprint"),
 ]
