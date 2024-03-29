@@ -140,10 +140,10 @@ class UserView:
             user = authenticate(
                 request, email=data["email"].lower(), password=data["password"]
             )
-            if user is None or user.role != "admin":
+            if user is None or user.role != "admin" and user.role != "operator":
                 return JsonResponse(
                     {
-                        "error": "could not login. user is not an admin. please check username and/or password"
+                        "error": "could not login. user is not an admin or operator. please check username and/or password"
                     },
                     status=400,
                 )
