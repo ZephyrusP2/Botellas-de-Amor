@@ -7,4 +7,5 @@ urlpatterns = [
     path("site/show/<int:pk>", SiteView.Retreive.as_view(), name="site.show"),
     path("site/update/<int:pk>", SiteView.Update.as_view(), name="site.update"),
     path("site/delete/<int:pk>", SiteView.Delete.as_view(), name="site.delete"),
+    path("site/list", SiteView.List.as_view(), name="site.list"),
 ]

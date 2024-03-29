@@ -91,3 +91,21 @@ class Delete(generics.DestroyAPIView):
         :return: QuerySet
         """
         return Site.objects.all()
+
+
+class List(generics.ListAPIView):
+    """
+    Site list
+    """
+
+    serializer_class = SiteSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+    http_method_names = ["get"]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return Site.objects.all()
