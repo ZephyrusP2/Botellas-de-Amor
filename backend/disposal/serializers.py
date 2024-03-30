@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from disposal.models import Challenge
 from disposal.models import Site
+from disposal.models import Fact
 
 
 class SiteSerializer(serializers.ModelSerializer):
@@ -30,5 +31,17 @@ class ChallengesSerializer(serializers.ModelSerializer):
             "id",
             "challenge",
             "experience",
+        )
+
+class FactsSerializer(serializers.ModelSerializer):
+    """
+    Fact serializer
+    """
+    
+    class Meta:
+        model = Fact
+        fields = (
+            "id",
+            "message",
         )
 

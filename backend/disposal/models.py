@@ -20,6 +20,9 @@ class Site(models.Model):
         return self.name
     
 class Challenge(models.Model):
+    """
+    Challenge model
+    """
     id = models.AutoField(primary_key=True)
     challenge = models.CharField(max_length=50)
     experience = models.IntegerField()
@@ -29,3 +32,10 @@ class Challenge(models.Model):
 
     def __str__(self):
         return self.challenge
+    
+class Fact(models.Model):
+    """
+    Fact model
+    """
+    id = models.AutoField(primary_key=True)
+    message = models.CharField(max_length=50)
