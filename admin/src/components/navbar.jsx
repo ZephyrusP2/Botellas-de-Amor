@@ -1,32 +1,77 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import "../App.css";
-import colombia from "../assets/images/colombia.png";
+import "../styles/Navbar.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from "react";
+
 
 const Navbar = () => {
     const location = useLocation();
+
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen)
+    }
 
     return (
         <div className="show-container">
             <div className="navbar-container">
                 <div className="buttons-container">
-                    <Link to="/Proyectos" className={`button-navbar ${location.pathname === '/Proyectos' ? 'active' : ''}`}>
+                    <Link to="/Proyectos" className={`button-navbar ocultar ${location.pathname === '/Proyectos' ? 'active' : ''}`}>
                         Proyectos
                     </Link>
-                    <Link to="/Puntos-Acopio" className={`button-navbar ${location.pathname === '/Puntos-Acopio' ? 'active' : ''}`}>
+                    <Link to="/Puntos-Acopio" className={`button-navbar ocultar ${location.pathname === '/Puntos-Acopio' ? 'active' : ''}`}>
                         Puntos de Acopio
                     </Link>
-                    <Link to="/Administradores" className={`button-navbar ${location.pathname === '/Administradores' ? 'active' : ''}`}>
+                    <Link to="/Administradores" className={`button-navbar ocultar ${location.pathname === '/Administradores' ? 'active' : ''}`}>
                         Administradores
                     </Link>
-                    <Link to="/Operadores" className={`button-navbar ${location.pathname === '/Operadores' ? 'active' : ''}`}>
+                    <Link to="/Operadores" className={`button-navbar ocultar ${location.pathname === '/Operadores' ? 'active' : ''}`}>
                         Operadores
                     </Link>
+                    <div className="burguer">
+                        <FontAwesomeIcon onClick={toggleSidebar} icon={faBars} className="burger-icon" />
+                    </div>
                 </div>
-                <img className="colombia-image" src={colombia} alt="Colombia Flag"/>
+
             </div>
-            <div className="navbar-bottom-line"></div> {/* Línea debajo del navbar */}
+            <div className="navbar-bottom-line"></div>
+
+            <div className={`side-bar2 ${sidebarOpen ? 'active' : ''}`}>
+                <div className="side-bar2-container">
+
+                    <div className='X'>
+                        <FontAwesomeIcon onClick={toggleSidebar} icon={faTimes} className="close-sidebar" />
+                    </div>
+                    <h1 className="">Menu</h1>
+
+                    <div className="navbar-bottom-line2"></div>
+                    <div className='items-navbar-container'>
+                        <Link to="/Proyectos" className={`navbar-item-sidebar ${location.pathname === '/Proyectos' ? 'active' : ''}`}>
+                            Proyectos
+                        </Link>
+                        <Link to="/Puntos-Acopio" className={`navbar-item-sidebar ${location.pathname === '/Puntos-Acopio' ? 'active' : ''}`}>
+                            Puntos de Acopio
+                        </Link>
+                        <Link to="/Administradores" className={`navbar-item-sidebar ${location.pathname === '/Administradores' ? 'active' : ''}`}>
+                            Administradores
+                        </Link>
+                        <Link to="/Operadores" className={`navbar-item-sidebar ${location.pathname === '/Operadores' ? 'active' : ''}`}>
+                            Operadores
+                        </Link>
+                    </div>
+                    
+
+
+                </div>
+
+
+            </div>
+
         </div>
+
     );
 };
 

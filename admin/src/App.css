@@ -32,9 +32,6 @@
   flex: 1;
 }
 
-.sidebar-container{
-  width: 800px;
-}
 
 .show-container{
   flex: 1;
@@ -43,7 +40,7 @@
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 60px 40px 15px 40px; /* top, right, bottom, left */
   font-size: 30px !important;
@@ -57,7 +54,7 @@
   display: flex;
   justify-content: center; /* Cambiado a centrar los botones */
   gap: 20px; /* Espacio entre los botones */
-  margin-left: 20%;
+  /* margin-left: 20%; */
 }
 
 .button-navbar{
@@ -67,7 +64,7 @@
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1); /* Sombras */
   color: black;
   text-decoration: none;
-  padding: 0 6px 0 6px; /* top, right, bottom, left */
+  padding: 0 15px 0 15px; /* top, right, bottom, left */
 }
 
 .navbar-bottom-line {

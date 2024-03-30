@@ -1,0 +1,33 @@
+.show-content{
+    height: 85%;
+    padding-left:8%;
+    padding-top: 5%;
+    padding-bottom: 3%;
+    padding-right: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.acopios-container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px ;
+
+}
+
+.acopio-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border: 2px solid #00c8ea;
+    border-radius: 15px;
+    min-width: 45vw;
+    width: 100%;
+    height: 75px;
+    margin-bottom: 20px;
+}
+
+.icon-acopio{
+    margin-left: 20px ;
+}

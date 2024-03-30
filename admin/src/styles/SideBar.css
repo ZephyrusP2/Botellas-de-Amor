@@ -2,7 +2,7 @@
 
 .side-bar{
     background-color: #00c8ea;
-
+    max-width: 400px !important;
 }
 
 .col-xl-2{
@@ -20,4 +20,9 @@
 
 .text-container{
     margin-bottom: 40px !important;
+}
+
+.sidebar-container{
+    align-items: center;
+    text-align: center;
 }

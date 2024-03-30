@@ -1,24 +1,31 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Login from './views/Login';
-import SideBar from './views/SideBar';
-import Show from './components/PuntosAcopio/show';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Login from './views/LoginView';
+import SideBar from './components/SideBar';
 import './styles/SideBar.css';
 import './App.css';
+import AdminView from "./views/AdminView"
+import OperatorView from "./views/OperatorView"
 
 export default function App() {
-  const location = useLocation();
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
 
-  // Verifica si la ruta actual es "/"
-  const isRootPath = location.pathname === '/';
+function AppContent() {
+  const location = useLocation();
+  const isRootPath = location.pathname === '/' || location.pathname.startsWith('/Operador');
 
   return (
     <div className='principal-container'>
-      {/* Renderiza SideBar solo si la ruta no es "/" */}
       {!isRootPath && <SideBar />}
       <Routes>
-        <Route path="/" element={<Login/>} />
-        <Route path="/Puntos-Acopio" element={<Show/>} />
+        <Route path="/" element={<Login />} />
+        <Route path="/Administrador" element={<AdminView />} />
+        <Route path="/Operador" element={<OperatorView />} />
       </Routes>
     </div>
   );
