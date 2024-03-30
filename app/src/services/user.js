@@ -31,9 +31,9 @@ class UserService {
 
   getCarbonFootprint = async (token) => {
     try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.post(
-        `${this.server}/api/user/carbon-footprint`,
-        token
+        `${this.server}/api/user/carbon-footprint`
       );
       return response;
     } catch (error) {
