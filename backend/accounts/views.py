@@ -5,11 +5,13 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view, permission_classes
 
 from backend.permissions import IsAdmin, IsAdminOrSelf
 
 from .models import User
 from .serializers import UserSerializer
+from rest_framework.views import APIView
 
 # Create your views here.
 
@@ -154,14 +156,14 @@ class UserView:
                     token = Token.objects.create(user=user)
                 return JsonResponse({"token": str(token), "role": user.role}, status=200)
 
+    @api_view(["GET"])
     def get_carbon_footprint(request):
         """
         Get carbon footprint
         :param request: request
         :return: JsonResponse
         """
+
         if request.method == "GET":
-            data = JSONParser().parse(request)
-            user = Token.objects.get(key=data["token"]).user
-            carbon_footprint = user.carbon_footprint
-            return JsonResponse({"carbon_footprint": carbon_footprint}, status=200)
+            user = request.user
+            return JsonResponse({"carbon_footprint": user.carbon_footprint}, status=200)
