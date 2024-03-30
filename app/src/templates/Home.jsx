@@ -7,16 +7,16 @@ import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Home() {
-  const [carbonFootprint, setCarbonFootprint] = useState(0);
+  const [userData, setUserData] = useState();
 
-  getCarbonFootprint = async () => {
+  getUserData = async () => {
     const token = AsyncStorage.getItem("token");
-    UserService.getCarbonFootprint(token)
+    UserService.getUserData(token)
       .then((response) => {
-        setCarbonFootprint(response.data.carbonFootprint);
+        setUserData(response.data);
       })
       .catch((error) => {
-        console.log("getCarbonFootprint", error);
+        console.error("getUserData error", error);
       });
   };
 
@@ -24,9 +24,9 @@ export default function Home() {
     <ScrollView>
       <Header />
       <StyledBackground display="center">
-        <StyledText size="large">Mstermigol</StyledText>
+        <StyledText size="large">Hola! {userData?.name}</StyledText>
         <StyledBackground display="center" style={styles.row}>
-          <StyledText size="large">Nivel 7</StyledText>
+          <StyledText size="large">Nivel </StyledText>
           <Image style={styles.image1} source={require("../images/king.png")} />
         </StyledBackground>
       </StyledBackground>
@@ -47,8 +47,9 @@ export default function Home() {
             </StyledText>
           </StyledBackground>
           <StyledBackground>
-            // Add the carbonFootprint state to the StyledText component
-            <StyledText style={styles.number} align="center"></StyledText>
+            <StyledText style={styles.number} align="center">
+              {userData?.carbon_footprint}
+            </StyledText>
             <StyledText style={styles.label} color="primary" align="center">
               Huella de carbono
             </StyledText>

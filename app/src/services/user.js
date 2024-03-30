@@ -29,15 +29,13 @@ class UserService {
     }
   };
 
-  getCarbonFootprint = async (token) => {
+  getUserData = async (token) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
-      const response = await axios.post(
-        `${this.server}/api/user/carbon-footprint`
-      );
+      const response = await axios.get(`${this.server}/api/user/data`);
       return response;
     } catch (error) {
-      console.error("getCarbonFootprint error", error);
+      console.error("getUserData error", error);
       throw error;
     }
   };
