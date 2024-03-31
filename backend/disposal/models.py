@@ -36,7 +36,6 @@ class Challenge(models.Model):
 class Disposition(models.Model):
     id = models.AutoField(primary_key=True)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     bottles = models.IntegerField()
     weight = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
