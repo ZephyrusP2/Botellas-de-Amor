@@ -71,7 +71,7 @@ const MyTable = () => {
         {currentItems.map((data) => (
           <TableItem
             key={data.id}
-            leading={data.name}
+            leading={data.challenge}
             onEdit={() => console.log("Edit", data.id)}
             onDelete={() => console.log("Delete", data.id)}
           />
