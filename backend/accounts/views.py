@@ -88,6 +88,22 @@ class UserCreate(generics.CreateAPIView):
         return User.objects.all()
 
 
+class UserRetrieve(generics.RetrieveAPIView):
+    """
+    User retrieve
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
+
+
 class UserUpdate(generics.UpdateAPIView):
     """
     User update
