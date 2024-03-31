@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
-from .models import User
+from accounts.models import User
 
 # Create your tests here.
 
@@ -13,6 +13,7 @@ class AdminLoginTestCase(APITestCase):
             name="admin",
             last_name="admin",
             birth_date="1990-01-01",
+            location="location",
             gender="Masculino",
             email="admin@example.com",
             password="adminpassword",
@@ -30,9 +31,9 @@ class AdminLoginTestCase(APITestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("token", response.json())
+        self.assertEqual(response.json()["role"], "admin")
 
     def test_admin_login_invalid_credentials(self):
-        self.url = reverse("admin.login")
         data = {"email": "admin@example.com", "password": "wrongpassword"}
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
@@ -43,13 +44,15 @@ class AdminLoginTestCase(APITestCase):
             name="user",
             last_name="user",
             birth_date="1990-01-01",
+            location="location",
             gender="Masculino",
             email="user@example.com",
             password="userpassword",
             role="user",
         )
+        non_admin_user.set_password("userpassword")
+        non_admin_user.save()
         self.token = Token.objects.create(user=non_admin_user)
-        self.url = reverse("admin.login")
         data = {"email": "user@example.com", "password": "userpassword"}
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
