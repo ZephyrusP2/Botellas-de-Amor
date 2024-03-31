@@ -32,13 +32,13 @@ class UserData(generics.RetrieveAPIView):
         return self.request.user
 
 
-class UserList(generics.ListCreateAPIView):
+class UserList(generics.ListAPIView):
     """
     Admin user list
     """
 
     serializer_class = UserSerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     def get_queryset(self):
         """
@@ -46,18 +46,6 @@ class UserList(generics.ListCreateAPIView):
         :return: QuerySet
         """
         return User.objects.all()
-
-    def perform_create(self, serializer):
-        """
-        Perform create
-        :param serializer: serializer
-        :return: None
-        """
-        password = serializer.validated_data.get("password", None)
-        instance = serializer.save()
-        if password:
-            instance.set_password(password)
-        instance.save()
 
 
 class UserCreate(generics.CreateAPIView):
