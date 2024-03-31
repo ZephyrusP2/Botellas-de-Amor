@@ -118,6 +118,24 @@ class UserUpdate(generics.UpdateAPIView):
         return User.objects.all()
 
 
+class UserDelete(generics.DestroyAPIView):
+    """
+    User delete
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+
+    http_method_names = ["delete"]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
+
+
 @csrf_exempt
 def register(request):
     """
