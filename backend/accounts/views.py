@@ -88,6 +88,36 @@ class UserCreate(generics.CreateAPIView):
         return User.objects.all()
 
 
+class UserUpdate(generics.UpdateAPIView):
+    """
+    User update
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+
+    http_method_names = ["put"]
+
+    def perform_update(self, serializer):
+        """
+        Perform update
+        :param serializer: serializer
+        :return: None
+        """
+        password = serializer.validated_data.get("password", None)
+        instance = serializer.save()
+        if password:
+            instance.set_password(password)
+        instance.save()
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
+
+
 @csrf_exempt
 def register(request):
     """
