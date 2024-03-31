@@ -1,6 +1,7 @@
 from django.urls import reverse
 from accounts.models import User
 from rest_framework.test import APITestCase
+from rest_framework.authtoken.models import Token
 from disposal.models import Site
 
 
@@ -17,6 +18,8 @@ class SiteListTestCase(APITestCase):
         )
         self.admin_user.set_password("adminpassword")
         self.admin_user.save()
+        self.token = Token.objects.create(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         self.site_1 = Site.objects.create(
             image="path/to/image",
             opens="10:00:00",
@@ -42,7 +45,6 @@ class SiteListTestCase(APITestCase):
         return super().setUp()
 
     def test_site_list_success(self):
-        self.client.force_authenticate(user=self.admin_user)
         response = self.client.get(reverse("site.list"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 3)
@@ -54,12 +56,12 @@ class SiteListTestCase(APITestCase):
         self.assertIn("image", response.json()[0])
 
     def test_site_list_unauthorized(self):
+        self.client.credentials()
         response = self.client.get(reverse("site.list"))
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 
     def test_site_list_empty(self):
-        self.client.force_authenticate(user=self.admin_user)
         Site.objects.all().delete()
         response = self.client.get(reverse("site.list"))
         self.assertEqual(response.status_code, 200)
