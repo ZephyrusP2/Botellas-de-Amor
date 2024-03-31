@@ -38,7 +38,7 @@ class UserList(generics.ListCreateAPIView):
     """
 
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    permission_classes = [IsAdmin]
 
     def get_queryset(self):
         """
@@ -58,6 +58,34 @@ class UserList(generics.ListCreateAPIView):
         if password:
             instance.set_password(password)
         instance.save()
+
+
+class UserCreate(generics.CreateAPIView):
+    """
+    User create
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+    def perform_create(self, serializer):
+        """
+        Perform create
+        :param serializer: serializer
+        :return: None
+        """
+        password = serializer.validated_data.get("password", None)
+        instance = serializer.save()
+        if password:
+            instance.set_password(password)
+        instance.save()
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
 
 
 @csrf_exempt
