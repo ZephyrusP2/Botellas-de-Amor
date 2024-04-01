@@ -55,8 +55,9 @@ class Update(generics.UpdateAPIView):
         """
         Update a disposition
         """
+        operator = self.request.user
         user = User.objects.get(id=self.request.data["user"])
         user.carbon_footprint -= 30 * self.get_object().bottles
         user.carbon_footprint += 30 * self.request.data["bottles"]
         user.save()
-        serializer.save()
+        serializer.save(operator=operator)
