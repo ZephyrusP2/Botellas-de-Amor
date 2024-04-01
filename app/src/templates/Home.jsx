@@ -3,15 +3,20 @@ import Header from "./Header";
 import StyledBackground from "../styles/StyledBackgroud";
 import StyledText from "../styles/StyledText";
 import UserService from "../services/user";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Home() {
   const [userData, setUserData] = useState();
 
-  getUserData = async () => {
-    const token = AsyncStorage.getItem("token");
-    UserService.getUserData(token)
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  const getUserData = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const id = await AsyncStorage.getItem("id");
+    UserService.getUserData(token, id)
       .then((response) => {
         setUserData(response.data);
       })
