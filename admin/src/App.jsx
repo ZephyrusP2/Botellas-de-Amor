@@ -4,8 +4,11 @@ import Login from './views/LoginView';
 import SideBar from './components/SideBar';
 import './styles/SideBar.css';
 import './App.css';
-import AdminView from "./views/AdminView"
 import OperatorView from "./views/OperatorView"
+import ShowPuntosAcopio from "./views/Administradores/PuntosAcopio/Show"
+import ShowProyectos from "./views/Administradores/Proyectos/Show"
+
+
 
 export default function App() {
   return (
@@ -24,8 +27,16 @@ function AppContent() {
       {!isRootPath && <SideBar />}
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/Administrador" element={<AdminView />} />
+
+        {/* RUTAS DE ADMINISTRADORES */}
+        <Route path="/Administrar/Proyectos" element={<ShowProyectos />} />
+        <Route path="/Administrar/Puntos-Acopio" element={<ShowPuntosAcopio />} />
+
+        {/* RUTAS DE OPERADORES */}
         <Route path="/Operador" element={<OperatorView />} />
+        <Route path="/Operador" element={<OperatorView />} />
+
+
       </Routes>
     </div>
   );

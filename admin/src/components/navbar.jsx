@@ -19,16 +19,16 @@ const Navbar = () => {
         <div className="show-container">
             <div className="navbar-container">
                 <div className="buttons-container">
-                    <Link to="/Proyectos" className={`button-navbar ocultar ${location.pathname === '/Proyectos' ? 'active' : ''}`}>
+                    <Link to="/Administrar/Proyectos" className={`button-navbar ocultar ${location.pathname === '/Administrar/Proyectos' ? 'active' : ''}`}>
                         Proyectos
                     </Link>
-                    <Link to="/Puntos-Acopio" className={`button-navbar ocultar ${location.pathname === '/Puntos-Acopio' ? 'active' : ''}`}>
+                    <Link to="/Administrar/Puntos-Acopio" className={`button-navbar ocultar ${location.pathname === '/Administrar/Puntos-Acopio' ? 'active' : ''}`}>
                         Puntos de Acopio
                     </Link>
-                    <Link to="/Administradores" className={`button-navbar ocultar ${location.pathname === '/Administradores' ? 'active' : ''}`}>
+                    <Link to="/Administrar/Administradores" className={`button-navbar ocultar ${location.pathname === '/Administrar/Administradores' ? 'active' : ''}`}>
                         Administradores
                     </Link>
-                    <Link to="/Operadores" className={`button-navbar ocultar ${location.pathname === '/Operadores' ? 'active' : ''}`}>
+                    <Link to="/Administrar/Operadores" className={`button-navbar ocultar ${location.pathname === '/Administrar/Operadores' ? 'active' : ''}`}>
                         Operadores
                     </Link>
                     <div className="burguer">
