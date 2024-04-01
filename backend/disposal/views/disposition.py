@@ -61,3 +61,22 @@ class Update(generics.UpdateAPIView):
         user.carbon_footprint += 30 * int(self.request.data["bottles"])
         user.save()
         serializer.save(operator=operator)
+
+
+class Delete(generics.DestroyAPIView):
+    """
+    Delete a disposition
+    """
+    queryset = Disposition.objects.all()
+    serializer_class = DispositionSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrOperator]
+
+    def perform_destroy(self, instance):
+        """
+        Delete a disposition
+        """
+        user = User.objects.get(id=instance.user.id)
+        bottles = instance.bottles
+        user.carbon_footprint -= 30 * bottles
+        user.save()
+        instance.delete()

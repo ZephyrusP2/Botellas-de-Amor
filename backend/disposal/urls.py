@@ -29,4 +29,6 @@ urlpatterns = [
          DispositionView.Retreive.as_view(), name="disposition.show"),
     path("disposition/update/<int:pk>", DispositionView.Update.as_view(),
          name="disposition.update"),
+    path("disposition/delete/<int:pk>", DispositionView.Delete.as_view(),
+         name="disposition.delete"),
 ]
