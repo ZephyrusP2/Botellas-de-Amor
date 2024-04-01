@@ -10,6 +10,7 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarStyle: {
@@ -17,14 +18,14 @@ function MyTabs() {
           paddingHorizontal: 5,
           paddingTop: 0,
           paddingBottom: 10,
-          backgroundColor: '#FD595A',
-          position: 'absolute',
+          backgroundColor: "#FD595A",
+          position: "absolute",
           borderTopWidth: 0,
         },
         tabBarLabelStyle: {
-          color: 'white',
+          color: "white",
           fontSize: 18,
-        }
+        },
       })}
     >
       <Tab.Screen
@@ -33,7 +34,11 @@ function MyTabs() {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Image
-              source={focused ? require("../images/info_selected.png") : require("../images/info.png")}
+              source={
+                focused
+                  ? require("../images/info_selected.png")
+                  : require("../images/info.png")
+              }
               style={{ width: size, height: size }}
             />
           ),
@@ -45,7 +50,11 @@ function MyTabs() {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Image
-              source={focused ? require("../images/home_selected.png") : require("../images/home.png")}
+              source={
+                focused
+                  ? require("../images/home_selected.png")
+                  : require("../images/home.png")
+              }
               style={{ width: size, height: size }}
             />
           ),
@@ -57,18 +66,20 @@ function MyTabs() {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Image
-              source={focused ? require("../images/mapa_selected.png") : require("../images/mapa.png")}
+              source={
+                focused
+                  ? require("../images/mapa_selected.png")
+                  : require("../images/mapa.png")
+              }
               style={{ width: size, height: size }}
             />
           ),
         }}
       />
-    </Tab.Navigator >
+    </Tab.Navigator>
   );
 }
 
 export default function Navigation() {
-  return (
-    <MyTabs />
-  );
+  return <MyTabs />;
 }
