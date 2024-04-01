@@ -1,13 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./src/templates/Login";
-
 import Register from "./src/templates/Register";
+import Content from "./src/templates/Content";
 import { useCallback } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./src/templates/Home";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -35,8 +37,15 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
+        {AsyncStorage.getItem("token") === null ||
+        AsyncStorage.getItem("id") === null ? (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
+          </>
+        ) : (
+          <Stack.Screen name="Content" component={Content} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

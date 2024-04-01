@@ -7,7 +7,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/login`,
-        userData,
+        userData
       );
       return response;
     } catch (error) {
@@ -20,11 +20,24 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/register`,
-        userData,
+        userData
       );
       return response;
     } catch (error) {
       console.error("register error", error);
+      throw error;
+    }
+  };
+
+  getUserData = async (token, id) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.get(
+        `${this.server}/api/accounts/user/data/${id}`
+      );
+      return response;
+    } catch (error) {
+      console.error("getUserData error", error);
       throw error;
     }
   };
