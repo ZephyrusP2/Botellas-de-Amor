@@ -1,16 +1,15 @@
 from rest_framework import generics, permissions
 from backend.permissions import IsAdmin
 
-from disposal.models import Site
-from disposal.serializers import SiteSerializer
-
+from disposal.models import Challenge
+from disposal.serializers import ChallengesSerializer
 
 class Create(generics.CreateAPIView):
     """
-    Site list and create
+    Challenge list and create
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = ChallengesSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["post"]
@@ -20,7 +19,7 @@ class Create(generics.CreateAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
+        return Challenge.objects.all()
 
     def perform_create(self, serializer):
         """
@@ -30,13 +29,12 @@ class Create(generics.CreateAPIView):
         """
         serializer.save()
 
-
 class Retreive(generics.RetrieveAPIView):
     """
-    Site retrieve
+    Challenge retrieve
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = ChallengesSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["get"]
@@ -46,15 +44,14 @@ class Retreive(generics.RetrieveAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
-
-
+        return Challenge.objects.all()
+    
 class Update(generics.UpdateAPIView):
     """
-    Site update
+    Challenge update
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = ChallengesSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["put"]
@@ -64,8 +61,8 @@ class Update(generics.UpdateAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
-
+        return Challenge.objects.all()
+    
     def perform_update(self, serializer):
         """
         Perform update
@@ -74,13 +71,12 @@ class Update(generics.UpdateAPIView):
         """
         serializer.save()
 
-
 class Delete(generics.DestroyAPIView):
     """
-    Site delete
+    Challenge delete
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = ChallengesSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["delete"]
@@ -90,15 +86,22 @@ class Delete(generics.DestroyAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
-
+        return Challenge.objects.all()
+    
+    def perform_destroy(self, instance):
+        """
+        Perform destroy
+        :param instance: instance
+        :return: None
+        """
+        instance.delete()
 
 class List(generics.ListAPIView):
     """
-    Site list
+    Challenge list
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = ChallengesSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["get"]
@@ -108,4 +111,4 @@ class List(generics.ListAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
+        return Challenge.objects.all()
