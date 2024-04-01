@@ -82,7 +82,7 @@ def register(request):
             user.set_password(data["password"])
             user.save()
             token = Token.objects.create(user=user)
-            return JsonResponse({"token": token.key}, status=201)
+            return JsonResponse({"token": token.key, "id": user.id}, status=201)
         except IntegrityError:
             return JsonResponse({"error": "Email already exists"}, status=400)
 
@@ -109,7 +109,7 @@ def login(request):
                 token = Token.objects.get(user=user)
             except Token.DoesNotExist:
                 token = Token.objects.create(user=user)
-            return JsonResponse({"token": str(token)}, status=200)
+            return JsonResponse({"token": str(token), "id": user.id}, status=200)
 
 
 @csrf_exempt
