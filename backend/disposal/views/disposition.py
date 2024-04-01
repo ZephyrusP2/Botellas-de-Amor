@@ -30,7 +30,7 @@ class Create(generics.CreateAPIView):
         operator = self.request.user
         user = User.objects.get(id=self.request.data["user"])
         serializer.save(operator=operator)
-        user.carbon_footprint += 30  # grams of CO2 per bottle
+        user.carbon_footprint += 30 * self.request.data["bottles"]
         user.save()
 
 
