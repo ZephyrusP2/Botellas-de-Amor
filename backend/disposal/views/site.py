@@ -13,7 +13,7 @@ class Create(generics.CreateAPIView):
     serializer_class = SiteSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
-    http_method_names = ["get", "post"]
+    http_method_names = ["post"]
 
     def get_queryset(self):
         """
