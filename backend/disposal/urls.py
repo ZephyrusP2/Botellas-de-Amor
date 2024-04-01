@@ -23,4 +23,6 @@ urlpatterns = [
 
     path("disposition/list", DispositionView.List.as_view(),
          name="disposition.list"),
+    path("disposition/create", DispositionView.Create.as_view(),
+         name="disposition.create"),
 ]
