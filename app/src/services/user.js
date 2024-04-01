@@ -29,10 +29,12 @@ class UserService {
     }
   };
 
-  getUserData = async (token) => {
+  getUserData = async (token, id) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
-      const response = await axios.get(`${this.server}/api/user/data`);
+      const response = await axios.get(
+        `${this.server}/api/accounts/user/show/${id}`
+      );
       return response;
     } catch (error) {
       console.error("getUserData error", error);
