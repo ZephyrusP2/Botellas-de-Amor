@@ -14,12 +14,6 @@ class List(generics.ListAPIView):
     serializer_class = DispositionSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminOrOperator]
 
-    def get_queryset(self):
-        """
-        This view should return a list of all the dispositions.
-        """
-        return Disposition.objects.all()
-
 
 class Create(generics.CreateAPIView):
     """
