@@ -4,6 +4,7 @@ from backend.permissions import IsAdmin
 from disposal.models import Challenge
 from disposal.serializers import ChallengesSerializer
 
+
 class Create(generics.CreateAPIView):
     """
     Challenge list and create
@@ -29,13 +30,14 @@ class Create(generics.CreateAPIView):
         """
         serializer.save()
 
+
 class Retreive(generics.RetrieveAPIView):
     """
     Challenge retrieve
     """
 
     serializer_class = ChallengesSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    permission_classes = [permissions.IsAuthenticated]
 
     http_method_names = ["get"]
 
@@ -45,7 +47,8 @@ class Retreive(generics.RetrieveAPIView):
         :return: QuerySet
         """
         return Challenge.objects.all()
-    
+
+
 class Update(generics.UpdateAPIView):
     """
     Challenge update
@@ -62,7 +65,7 @@ class Update(generics.UpdateAPIView):
         :return: QuerySet
         """
         return Challenge.objects.all()
-    
+
     def perform_update(self, serializer):
         """
         Perform update
@@ -70,6 +73,7 @@ class Update(generics.UpdateAPIView):
         :return: None
         """
         serializer.save()
+
 
 class Delete(generics.DestroyAPIView):
     """
@@ -87,7 +91,7 @@ class Delete(generics.DestroyAPIView):
         :return: QuerySet
         """
         return Challenge.objects.all()
-    
+
     def perform_destroy(self, instance):
         """
         Perform destroy
@@ -95,6 +99,7 @@ class Delete(generics.DestroyAPIView):
         :return: None
         """
         instance.delete()
+
 
 class List(generics.ListAPIView):
     """
