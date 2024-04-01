@@ -24,12 +24,12 @@ class UserData(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
 
-    def get_object(self):
+    def get_queryset(self):
         """
-        Get object
-        :return: User
+        Get queryset
+        :return: QuerySet
         """
-        return self.request.user
+        return User.objects.all()
 
 
 class UserList(generics.ListCreateAPIView):
