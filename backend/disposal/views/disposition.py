@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions
-from backend.permissions import IsAdminOrOperator
+from backend.permissions import IsAdminOrOperator, IsAdminOrOperatorOrSelf
 
 from disposal.models import Disposition, Site
 from accounts.models import User
@@ -32,3 +32,12 @@ class Create(generics.CreateAPIView):
         serializer.save(operator=operator)
         user.carbon_footprint += 30  # grams of CO2 per bottle
         user.save()
+
+
+class Retreive(generics.RetrieveAPIView):
+    """
+    Retrieve a disposition
+    """
+    queryset = Disposition.objects.all()
+    serializer_class = DispositionSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrOperatorOrSelf]
