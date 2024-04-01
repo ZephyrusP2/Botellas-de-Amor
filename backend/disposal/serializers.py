@@ -48,4 +48,6 @@ class DispositionSerializer(serializers.ModelSerializer):
             "bottles",
             "weight",
             "user",
+            "operator",
         )
+        read_only_fields = ("operator",)

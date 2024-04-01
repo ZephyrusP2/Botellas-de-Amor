@@ -53,7 +53,6 @@ class DispositionCreateTestCase(APITestCase):
             "bottles": 1,
             "weight": 1.0,
             "user": self.user.id,
-            "operator": self.operator_user.id,
         }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 201)
