@@ -32,6 +32,7 @@ const Login = ({ navigation }) => {
         setEmail(userData.email);
         AsyncStorage.setItem("token", response.data.token);
         AsyncStorage.setItem("email", userData.email);
+        AsyncStorage.setItem("id", response.data.id);
         setError("");
         navigation.navigate("Content");
       })
