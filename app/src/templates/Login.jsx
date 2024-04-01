@@ -33,6 +33,7 @@ const Login = ({ navigation }) => {
         AsyncStorage.setItem("token", response.data.token);
         AsyncStorage.setItem("email", userData.email);
         setError("");
+        navigation.navigate("Content");
       })
       .catch((error) => {
         console.log("login", error);
