@@ -4,6 +4,7 @@ from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
 
 from disposal.models import Disposition, Site
+from disposal.views.disposition import carbon_footprint
 
 
 class DispositionUpdateTestCase(APITestCase):
@@ -16,7 +17,7 @@ class DispositionUpdateTestCase(APITestCase):
             email="user@example.com",
             password="userpassword",
             role="user",
-            carbon_footprint=30.0
+            carbon_footprint=carbon_footprint
         )
         self.user.set_password("userpassword")
         self.user.save()
@@ -72,7 +73,7 @@ class DispositionUpdateTestCase(APITestCase):
         self.assertEqual(response.data["operator"], self.operator_user.id)
         self.assertEqual(response.data["site"], self.site.id)
         self.user.refresh_from_db()
-        self.assertEqual(self.user.carbon_footprint, 60)
+        self.assertEqual(self.user.carbon_footprint, carbon_footprint * 2)
 
     def test_update_disposition_without_operator(self):
         self.client.credentials()
@@ -100,4 +101,4 @@ class DispositionUpdateTestCase(APITestCase):
         response = self.client.put(self.url, data)
         self.assertEqual(response.status_code, 403)
         self.user.refresh_from_db()
-        self.assertEqual(self.user.carbon_footprint, 30)
+        self.assertEqual(self.user.carbon_footprint, carbon_footprint)

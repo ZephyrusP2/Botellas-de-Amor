@@ -4,6 +4,7 @@ from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
 
 from disposal.models import Disposition, Site
+from disposal.views.disposition import carbon_footprint
 
 
 class DispositionDeleteTestCase(APITestCase):
@@ -16,7 +17,7 @@ class DispositionDeleteTestCase(APITestCase):
             email="user@example.com",
             password="userpassword",
             role="user",
-            carbon_footprint=30.0
+            carbon_footprint=carbon_footprint
         )
         self.user.set_password("userpassword")
         self.user.save()
@@ -70,4 +71,4 @@ class DispositionDeleteTestCase(APITestCase):
         self.assertEqual(response.status_code, 404)
         self.assertTrue(Disposition.objects.filter(
             id=self.disposition.id).exists())
-        self.assertEqual(self.user.carbon_footprint, 30.0)
+        self.assertEqual(self.user.carbon_footprint, carbon_footprint)

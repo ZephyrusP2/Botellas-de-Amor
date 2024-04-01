@@ -4,6 +4,7 @@ from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
 
 from disposal.models import Disposition, Site
+from disposal.views.disposition import carbon_footprint
 
 
 class DispositionCreateTestCase(APITestCase):
@@ -58,7 +59,7 @@ class DispositionCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(Disposition.objects.count(), 1)
         self.user.refresh_from_db()
-        self.assertEqual(self.user.carbon_footprint, 30)
+        self.assertEqual(self.user.carbon_footprint, carbon_footprint)
 
     def test_disposition_create_unauthorized(self):
         self.client.credentials()
