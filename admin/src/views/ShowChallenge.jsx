@@ -5,6 +5,7 @@ import "../styles/Forms.css";
 import BackButton from "../components/BackButton";
 
 const ShowChallenge = () => {
+  document.title = "Ver reto";
   const { id } = useParams();
   const [challengeData, setChallengeData] = useState({});
 

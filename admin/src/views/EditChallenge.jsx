@@ -5,6 +5,7 @@ import "../styles/Forms.css";
 import BackButton from "../components/BackButton";
 
 const EditChallenge = () => {
+  document.title = "Editar reto";
   const { id } = useParams();
   const navigate = useNavigate();
 

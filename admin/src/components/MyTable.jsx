@@ -1,41 +1,45 @@
 import React from "react";
 import TableItem from "./TableItem";
 import { useState, useEffect } from "react";
-import ChallengeService from "../services/challenge";
 import "../styles/TableItem.css";
 import { useNavigate } from "react-router-dom";
 
-const MyTable = ({ createPath }) => {
+const MyTable = ({
+  createPath,
+  fetchFunction,
+  deleteFunction,
+  showPath,
+  editPath,
+  leadingAttribute,
+}) => {
   const navigate = useNavigate();
-  const [challenges, setChallenges] = useState([]);
-  const challengeService = ChallengeService;
+  const [items, setItems] = useState([]);
 
-  const fetchChallenges = async () => {
-    const token = localStorage.getItem("token");
+  const fetchItems = async () => {
     try {
-      const response = await challengeService.listChallenge(token);
-      setChallenges(response.data);
+      const response = await fetchFunction();
+      setItems(response.data);
       setCurrentPage(1);
     } catch (error) {
-      console.error("Error fetching challenges:", error);
+      console.error("Error fetching items:", error);
     }
   };
 
   useEffect(() => {
-    fetchChallenges();
+    fetchItems();
   }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = challenges.slice(indexOfFirstItem, indexOfLastItem);
-  const numberPages = Math.max(1, Math.ceil(challenges.length / itemsPerPage));
+  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+  const numberPages = Math.max(1, Math.ceil(items.length / itemsPerPage));
 
   const handleDelete = async (id) => {
     try {
-      await challengeService.deleteChallenge(id, localStorage.getItem("token"));
-      await fetchChallenges();
+      await deleteFunction(id);
+      await fetchItems();
     } catch (error) {
       console.error("Error deleting challenge:", error);
     }
@@ -76,10 +80,10 @@ const MyTable = ({ createPath }) => {
         {currentItems.map((data) => (
           <TableItem
             key={data.id}
-            leading={data.challenge}
-            onEdit={() => navigate(`/admin/challenges/edit/${data.id}`)}
+            leading={data[leadingAttribute]}
+            onEdit={() => navigate(`${editPath}${data.id}`)}
             onDelete={() => handleDelete(data.id)}
-            onShow={() => navigate(`/admin/challenges/${data.id}`)}
+            onShow={() => navigate(`${showPath}${data.id}`)}
           />
         ))}
       </div>
