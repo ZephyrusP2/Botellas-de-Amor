@@ -34,7 +34,7 @@ const Login = ({ navigation }) => {
         AsyncStorage.setItem("email", userData.email);
         AsyncStorage.setItem("id", response.data.id);
         setError("");
-        navigation.navigate("Content");
+        navigation.navigate("Home");
       })
       .catch((error) => {
         console.log("login", error);

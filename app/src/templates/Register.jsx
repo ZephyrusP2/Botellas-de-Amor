@@ -121,6 +121,7 @@ const Register = ({ navigation }) => {
           AsyncStorage.setItem("token", response.data.token);
           AsyncStorage.setItem("email", userData.email);
           AsyncStorage.setItem("id", response.data.id);
+          navigation.navigate("Home");
           setError("");
         })
         .catch((error) => {
