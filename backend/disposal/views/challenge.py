@@ -107,7 +107,7 @@ class List(generics.ListAPIView):
     """
 
     serializer_class = ChallengesSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    permission_classes = [permissions.IsAuthenticated]
 
     http_method_names = ["get"]
 
