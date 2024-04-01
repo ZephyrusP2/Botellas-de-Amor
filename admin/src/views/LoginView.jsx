@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import "../styles/Login.css";
+import "../styles/Forms.css";
 import "../App.css";
 import logo from "../assets/images/logo-botella.png";
 import AdminService from "../services/admin";

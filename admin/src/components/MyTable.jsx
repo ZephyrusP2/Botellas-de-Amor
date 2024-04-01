@@ -5,7 +5,7 @@ import ChallengeService from "../services/challenge";
 import "../styles/TableItem.css";
 import { useNavigate } from "react-router-dom";
 
-const MyTable = ({createPath}) => {
+const MyTable = ({ createPath }) => {
   const navigate = useNavigate();
   const [challenges, setChallenges] = useState([]);
   const challengeService = ChallengeService;
@@ -54,7 +54,7 @@ const MyTable = ({createPath}) => {
   };
 
   return (
-    <div className="align-items-center flex-column">
+    <div className="align-items-center flex-column p-2">
       <div className="d-flex justify-content-center align-content-center mt-2">
         <svg
           className="hover-cursor"
@@ -77,9 +77,9 @@ const MyTable = ({createPath}) => {
           <TableItem
             key={data.id}
             leading={data.challenge}
-            onEdit={() => console.log("Edit", data.id)}
+            onEdit={() => navigate(`/admin/challenges/edit/${data.id}`)}
             onDelete={() => handleDelete(data.id)}
-            onShow={() => console.log("Show", data.id)}
+            onShow={() => navigate(`/admin/challenges/${data.id}`)}
           />
         ))}
       </div>

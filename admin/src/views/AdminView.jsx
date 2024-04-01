@@ -6,7 +6,9 @@ const AdminView = () => {
   return (
     <>
       <h1>Admin View</h1>
-      <MyTable createPath={"challenges/create"} />
+      <button>
+        <a href="/admin/challenges">Challenges</a>
+      </button>
     </>
   );
 };
