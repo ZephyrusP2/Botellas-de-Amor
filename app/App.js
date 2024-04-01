@@ -37,7 +37,8 @@ export default function App() {
           headerShown: false,
         }}
       >
-        {AsyncStorage.getItem("token") === null ? (
+        {AsyncStorage.getItem("token") === null ||
+        AsyncStorage.getItem("id") === null ? (
           <>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
