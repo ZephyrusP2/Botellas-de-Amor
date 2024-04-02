@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import challengeService from "../services/challenge";
+import challengeService from "../../../services/challenge";
 import { useNavigate } from "react-router-dom";
-import "../styles/Forms.css";
-import BackButton from "../components/BackButton";
+import "../../../styles/Forms.css";
+import BackButton from "../../../components/BackButton";
 
 const CreateChallenge = () => {
   document.title = "Crear reto";
@@ -41,21 +41,21 @@ const CreateChallenge = () => {
       console.log("Challenge created:", response);
       setChallenge("");
       setExperience("");
-      navigate(`/admin/challenges`);
+      navigate(`/Administrar/Retos`);
     } catch (error) {
       console.error("Error creating challenge:", error);
     }
   };
 
   return (
-    <div className="d-flex flex-column align-items-start p-4">
-      <BackButton route="/admin/challenges" />
+    <div className="d-flex flex-column align-items-start p-4 container-fluid">
+      <BackButton route="/Administrar/Retos" />
       <h1>Crear reto</h1>
       <form
         onSubmit={handleSubmit}
         className="d-flex flex-column container m-0 p-0"
       >
-        <label className="d-flex flex-column form-label ">
+        <label className="d-flex flex-column form-label w-50">
           Reto
           <input
             type="text"
@@ -67,7 +67,7 @@ const CreateChallenge = () => {
             <span className="error-message">{validationErrors.challenge}</span>
           )}
         </label>
-        <label className="d-flex flex-column form-label">
+        <label className="d-flex flex-column form-label w-50">
           Experiencia
           <input
             type="number"
@@ -80,7 +80,7 @@ const CreateChallenge = () => {
           )}
         </label>
         <br />
-        <button type="submit" className="btn btn-primary btn-md">
+        <button type="submit" className="btn btn-primary btn-md w-50">
           Crear
         </button>
       </form>

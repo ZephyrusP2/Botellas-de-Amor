@@ -2,6 +2,8 @@ import React from "react";
 import "../styles/TableItem.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "../App.css";
+import "../styles/Show.css";
 
 const TableItem = ({ leading, onEdit, onDelete, onShow }) => {
   const handleEditClick = (event) => {
