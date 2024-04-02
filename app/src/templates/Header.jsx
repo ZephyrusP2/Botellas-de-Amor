@@ -4,7 +4,7 @@ import StyledBackground from "../styles/StyledBackgroud";
 
 export default function Header() {
     return (
-        <StyledBackground style={styles.bg}>
+        <StyledBackground style={styles.bg} >
             <View style={styles.imageContainer}>
                 <Image style={styles.image1} source={require("../images/user.png")} />
                 <Image style={styles.image2} source={require("../images/logofull.png")} />
@@ -16,7 +16,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     bg: {
-        marginTop: 20,
+        marginTop: 35,
         width: '90%',
         borderRadius: 10,
         alignSelf: 'center',
