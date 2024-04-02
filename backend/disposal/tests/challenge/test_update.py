@@ -1,8 +1,10 @@
 from django.urls import reverse
 from rest_framework.test import APITestCase
+from rest_framework.authtoken.models import Token
 
 from accounts.models import User
 from disposal.models import Challenge
+
 
 class ChallengeUpdateTestCase(APITestCase):
     def setUp(self):
@@ -17,15 +19,16 @@ class ChallengeUpdateTestCase(APITestCase):
         )
         self.admin_user.set_password("adminpassword")
         self.admin_user.save()
+        self.token = Token.objects.create(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         self.challenge = Challenge.objects.create(
             challenge="challenge",
             experience=10,
         )
 
         return super().setUp()
-    
+
     def test_challenge_update_success(self):
-        self.client.force_authenticate(user=self.admin_user)
         response = self.client.put(reverse("challenge.update", args=[self.challenge.id]), {
             "challenge": "challenge",
             "experience": 10,
@@ -36,15 +39,15 @@ class ChallengeUpdateTestCase(APITestCase):
         self.assertIn("experience", response.json())
 
     def test_challenge_update_unauthorized(self):
+        self.client.credentials()
         response = self.client.put(reverse("challenge.update", args=[self.challenge.id]), {
             "challenge": "challenge",
             "experience": 10,
         })
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 
     def test_challenge_update_not_found(self):
-        self.client.force_authenticate(user=self.admin_user)
         response = self.client.put(reverse("challenge.update", args=[self.challenge.id + 1]), {
             "challenge": "challenge",
             "experience": 10,
@@ -53,7 +56,6 @@ class ChallengeUpdateTestCase(APITestCase):
         self.assertIn("detail", response.json())
 
     def test_challenge_update_invalid_data(self):
-        self.client.force_authenticate(user=self.admin_user)
         response = self.client.put(reverse("challenge.update", args=[self.challenge.id]), {
             "challenge": "challenge",
         })
