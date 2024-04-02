@@ -19,11 +19,11 @@ export default function App() {
 
 function AppContent() {
   const location = useLocation();
-  const isRootPath = location.pathname === '/' || location.pathname.startsWith('/Registro-Botellas');
+  const isRootPath = location.pathname === '/';
 
   return (
     <div className='principal-container'>
-      {isRootPath ? <SideBarOperadores /> : <SideBarAdministradores />} {/* Condición para renderizar SideBar o SideBar2 */}
+      {isRootPath ? null : (location.pathname.startsWith('/Registro-Botellas') ? <SideBarOperadores /> : <SideBarAdministradores />)}
       <Routes>
         <Route path="/" element={<Login />} />
 
