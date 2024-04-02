@@ -25,3 +25,22 @@ class UserSerializer(serializers.ModelSerializer):
             "carbon_footprint",
         )
         read_only_fields = ("id", "carbon_footprint")
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    """
+    User update serializer
+    """
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "role",
+            "name",
+            "last_name",
+            "birth_date",
+            "location",
+            "gender",
+            "email",
+        )
