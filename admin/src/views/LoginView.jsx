@@ -6,6 +6,7 @@ import logo from "../assets/images/logo-botella.png";
 import AdminService from "../services/admin";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +32,7 @@ const Login = () => {
   useEffect(() => {
     if (role) {
       const path =
-        role === "admin" ? "/admin" : role === "operator" ? "/operator" : "/";
+        role === "admin" ? "/Administrar/Proyectos" : role === "operator" ? "/Registro-Botellas" : "/";
       navigate(path);
     }
   }, [role, navigate]);
@@ -79,6 +80,7 @@ const Login = () => {
   };
 
   return (
+    <div className="login-container">
     <div className="app-container-wrapper">
       <div className="container-fluid app-container bg-myPrimary">
         <div className="row justify-content-center align-items-center h-100">
@@ -135,6 +137,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
