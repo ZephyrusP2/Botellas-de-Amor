@@ -6,6 +6,7 @@
   import { useState, useEffect } from "react";
   import AsyncStorage from "@react-native-async-storage/async-storage";
   import Checkbox from 'expo-checkbox';
+  import ChallengeService from "../services/challenge";
 
 
   export default function Home() {
@@ -13,6 +14,7 @@
 
     useEffect(() => {
       getUserData();
+      getChallengeData();
     }, []);
 
     const getUserData = async () => {
@@ -26,19 +28,30 @@
           console.error("getUserData error", error);
         });
     };
+    
+    const [challenges, setChallenges] = useState([]);
 
+    const getChallengeData = async () => {
+        try {
+          const token = await AsyncStorage.getItem("token");
+          console.log(token)
+          const response = await ChallengeService.getChallengeList(token);
+          setChallenges(response);
+          console.log(response)
+        } catch (error) {
+          console.error("Error fetching challenges", error);
+        }
+      };
+  
 
-    const challenges = ['Reciclar 5 botellas', 'Plantar un árbol', 'Usar transporte público'];
 
     const [isChecked, setChecked] = useState(new Array(challenges.length).fill(false));
 
-    const handleCheckChange = (index) => {
-      const newChecked = [...isChecked];
-      newChecked[index] = !newChecked[index];
-      setChecked(newChecked);
-    };
-
-
+    // const handleCheckChange = (index) => {
+    //   const newChecked = [...isChecked];
+    //   newChecked[index] = !newChecked[index];
+    //   setChecked(newChecked);
+    // };
 
     return (
       <ScrollView>
@@ -83,7 +96,7 @@
         {challenges.map((challenge, index) => (
           <StyledBackground key={index} style={{marginBottom: 20}}display="content">
             <StyledBackground bg="secondary" display='row' style={{ padding: 10, borderRadius: 10, width: '90%' }}>
-              <StyledText size="medium" fontWeight="bold" color="tertiary">{challenge}</StyledText>
+              <StyledText size="medium" fontWeight="bold" color="tertiary">{challenge.challenge}</StyledText>
               <View style={styles.section}>
                 <Checkbox
                   style={styles.checkbox}

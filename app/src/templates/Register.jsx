@@ -124,6 +124,7 @@ const Register = ({ navigation }) => {
         gender: gender,
         email: email,
         password: password,
+        location: location,
       };
 
       UserService.register(userData)
