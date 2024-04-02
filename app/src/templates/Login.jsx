@@ -32,7 +32,10 @@ const Login = ({ navigation }) => {
         setEmail(userData.email);
         AsyncStorage.setItem("token", response.data.token);
         AsyncStorage.setItem("email", userData.email);
+        const id = response.data.id.toString();
+        AsyncStorage.setItem("id", id);
         setError("");
+        navigation.navigate("Content");
       })
       .catch((error) => {
         console.log("login", error);
