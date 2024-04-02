@@ -18,7 +18,10 @@ class UserSerializer(serializers.ModelSerializer):
             "name",
             "last_name",
             "birth_date",
+            "location",
             "gender",
             "email",
             "password",
+            "carbon_footprint",
         )
+        read_only_fields = ("id", "carbon_footprint")
