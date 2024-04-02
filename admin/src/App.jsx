@@ -19,6 +19,9 @@ import ShowChallenge from "./views/Administradores/Retos/ShowChallenge";
 import EditChallenge from "./views/Administradores/Retos/EditChallenge";
 import IndexChallenge from "./views/Administradores/Retos/IndexChallenge";
 
+import IndexUser from "./views/Administradores/Usuarios/IndexUser";
+import ShowUser from "./views/Administradores/Usuarios/ShowUser";
+
 export default function App() {
   return (
     <Router>
@@ -57,6 +60,9 @@ function AppContent() {
           element={<EditChallenge />}
         />
         <Route path="/Administrar/Retos/:id" element={<ShowChallenge />} />
+
+        <Route path="/Administrar/Usuarios" element={<IndexUser />} />
+        <Route path="/Administrar/Usuarios/:id" element={<ShowUser />} />
 
         {/* RUTAS DE OPERADORES */}
         <Route path="/Registro-Botellas" element={<OperatorView />} />
