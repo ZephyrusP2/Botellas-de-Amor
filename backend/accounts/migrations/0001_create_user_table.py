@@ -24,9 +24,13 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=50)),
                 ("last_name", models.CharField(max_length=50)),
                 ("birth_date", models.DateField()),
+                ("location", models.CharField(max_length=50)),
                 ("gender", models.CharField(max_length=50)),
                 ("email", models.EmailField(max_length=254, unique=True)),
                 ("password", models.CharField(max_length=50)),
+                ("carbon_footprint", models.FloatField(default=0)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
                 "db_table": "users",

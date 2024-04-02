@@ -1,5 +1,6 @@
 from django.urls import reverse
 from rest_framework.test import APITestCase
+from rest_framework.authtoken.models import Token
 
 from accounts.models import User
 from disposal.models import Site
@@ -18,6 +19,8 @@ class SiteRetrieveTestCase(APITestCase):
         )
         self.admin_user.set_password("adminpassword")
         self.admin_user.save()
+        self.token = Token.objects.create(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         self.site = Site.objects.create(
             image="path/to/image",
             opens="10:00:00",
@@ -29,7 +32,6 @@ class SiteRetrieveTestCase(APITestCase):
         return super().setUp()
 
     def test_site_retrieve_success(self):
-        self.client.force_authenticate(user=self.admin_user)
         response = self.client.get(reverse("site.show", args=[self.site.id]))
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
@@ -40,12 +42,12 @@ class SiteRetrieveTestCase(APITestCase):
         self.assertIn("image", response.json())
 
     def test_site_retrieve_unauthorized(self):
+        self.client.credentials()
         response = self.client.get(reverse("site.show", args=[self.site.id]))
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 
     def test_site_retrieve_not_found(self):
-        self.client.force_authenticate(user=self.admin_user)
         response = self.client.get(reverse("site.show", args=[1000]))
         self.assertEqual(response.status_code, 404)
         self.assertIn("detail", response.json())
