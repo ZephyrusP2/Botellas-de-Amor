@@ -3,6 +3,7 @@ from django.urls import path
 from .views import site as SiteView
 from .views import challenge as ChallengeView
 from .views import disposition as DispositionView
+from .views import bottle as BottleView
 
 urlpatterns = [
     path("site/create", SiteView.Create.as_view(), name="site.create"),
@@ -31,4 +32,9 @@ urlpatterns = [
          name="disposition.update"),
     path("disposition/delete/<int:pk>", DispositionView.Delete.as_view(),
          name="disposition.delete"),
+
+     path("bottle/create", BottleView.Create.as_view(), name="bottle.create"),
+     path("bottle/show/<int:pk>", BottleView.Retreive.as_view(), name="bottle.show"),
+     path("bottle/update/<int:pk>", BottleView.Update.as_view(), name="bottle.update"),
+     path("bottle/delete/<int:pk>", BottleView.Delete.as_view(), name="bottle.delete"),
 ]

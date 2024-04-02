@@ -1,17 +1,15 @@
 from rest_framework import generics, permissions
 from backend.permissions import IsAdmin
 
-from disposal.models import Challenge, Bottle
-from disposal.serializers import ChallengesSerializer
-from rest_framework.decorators import api_view
-
+from disposal.models import Bottle
+from disposal.serializers import BottleSerializer
 
 class Create(generics.CreateAPIView):
     """
-    Challenge list and create
+    Bottle list and create
     """
 
-    serializer_class = ChallengesSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["post"]
@@ -21,7 +19,7 @@ class Create(generics.CreateAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Challenge.objects.all()
+        return Bottle.objects.all()
 
     def perform_create(self, serializer):
         """
@@ -31,13 +29,12 @@ class Create(generics.CreateAPIView):
         """
         serializer.save()
 
-
 class Retreive(generics.RetrieveAPIView):
     """
-    Challenge retrieve
+    Bottle retrieve
     """
 
-    serializer_class = ChallengesSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     http_method_names = ["get"]
@@ -47,15 +44,14 @@ class Retreive(generics.RetrieveAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Challenge.objects.all()
-
-
+        return Bottle.objects.all()
+    
 class Update(generics.UpdateAPIView):
     """
-    Challenge update
+    Bottle update
     """
 
-    serializer_class = ChallengesSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["put"]
@@ -65,8 +61,8 @@ class Update(generics.UpdateAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Challenge.objects.all()
-
+        return Bottle.objects.all()
+    
     def perform_update(self, serializer):
         """
         Perform update
@@ -75,13 +71,12 @@ class Update(generics.UpdateAPIView):
         """
         serializer.save()
 
-
 class Delete(generics.DestroyAPIView):
     """
-    Challenge delete
+    Bottle delete
     """
 
-    serializer_class = ChallengesSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["delete"]
@@ -91,8 +86,8 @@ class Delete(generics.DestroyAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Challenge.objects.all()
-
+        return Bottle.objects.all()
+    
     def perform_destroy(self, instance):
         """
         Perform destroy
@@ -101,13 +96,12 @@ class Delete(generics.DestroyAPIView):
         """
         instance.delete()
 
-
 class List(generics.ListAPIView):
     """
-    Challenge list
+    Bottle list
     """
 
-    serializer_class = ChallengesSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     http_method_names = ["get"]
@@ -117,26 +111,4 @@ class List(generics.ListAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Challenge.objects.all()
-
-@api_view(["POST"])  
-def is_checked(self, request):
-    """
-    Check if the challenge is checked
-    :return: bool
-    """
-    challenge = Challenge.objects.get(pk=request.data["challenge_id"])
-    user = request.user
-    bottle = Bottle.objects.get(user=user)
-    status = request.data["status"]
-    if status == "checked":
-        bottle.experience += challenge.experience
-        if bottle.experience >= 100:
-            bottle.experience = 0
-            bottle.level += 1
-        bottle.save()
-    else:
-        bottle.experience -= challenge.experience
-        if bottle.experience < 0:
-            bottle.experience = 0
-        bottle.save()
+        return Bottle.objects.all()
