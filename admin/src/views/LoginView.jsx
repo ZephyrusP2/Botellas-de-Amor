@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
-import "../styles/Login.css";
+import "../styles/Forms.css";
 import "../App.css";
 import logo from "../assets/images/logo-botella.png";
 import AdminService from "../services/admin";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [role, setRole] = useState("");
+
+  document.title = "Inicio de sesión";
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,6 +25,16 @@ const Login = () => {
   const validatePassword = (password) => {
     return password.length >= 8;
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (role) {
+      const path =
+        role === "admin" ? "/admin" : role === "operator" ? "/operator" : "/";
+      navigate(path);
+    }
+  }, [role, navigate]);
 
   const login = async (email, password) => {
     const isEmailValid = validateEmail(email);
@@ -51,14 +65,16 @@ const Login = () => {
     AdminService.login(userData)
       .then((response) => {
         setToken(response.data.token);
+        setRole(response.data.role);
         setEmail(userData.email);
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("email", userData.email);
+        localStorage.setItem("email", email);
+        localStorage.setItem("role", response.data.role);
+        localStorage.setItem("isAuthenticated", true);
         setError("");
       })
       .catch((error) => {
         setError("Credenciales incorrectas");
-        console.log("login", error);
       });
   };
 
@@ -75,14 +91,15 @@ const Login = () => {
                 {error && <div className="error-message mt-3">{error}</div>}
                 <form>
                   <div className="mb-3">
-                    <label htmlFor="username" className="form-label">
+                    <label htmlFor="email" className="form-label">
                       Correo
                     </label>
                     <input
                       type="text"
                       className="form-control rounded-3"
-                      id="username"
+                      id="email"
                       onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="on"
                     />
                     {emailError && (
                       <div className="error-message">{emailError}</div>

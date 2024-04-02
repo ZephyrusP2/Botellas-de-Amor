@@ -26,6 +26,10 @@ html {
   color: #00c8ea !important;
 }
 
+.blue-text {
+  color: #00c8ea !important;
+}
+
 .form-control {
   border: 1px solid #00c8ea !important;
   border-radius: 80px !important;
@@ -38,4 +42,8 @@ html {
 
 .custom-min-width {
   min-width: 350px !important;
+}
+
+.hover-cursor {
+  cursor: pointer;
 }
