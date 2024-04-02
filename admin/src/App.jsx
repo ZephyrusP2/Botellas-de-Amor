@@ -11,13 +11,19 @@ import SideBarOperadores from "./components/Operadores/SideBar"; // Importar Sid
 import "./styles/SideBar.css";
 import "./App.css";
 import OperatorView from "./views/OperatorView";
-import ShowPuntosAcopio from "./views/Administradores/PuntosAcopio/Show";
 import ShowProyectos from "./views/Administradores/Proyectos/Show";
 
 import CreateChallenge from "./views/Administradores/Retos/CreateChallenge";
 import ShowChallenge from "./views/Administradores/Retos/ShowChallenge";
 import EditChallenge from "./views/Administradores/Retos/EditChallenge";
 import IndexChallenge from "./views/Administradores/Retos/IndexChallenge";
+
+import CreateSite from "./views/Administradores/PuntosAcopio/CreateAcopio";
+import ShowSite from "./views/Administradores/PuntosAcopio/ShowAcopio";
+import EditSite from "./views/Administradores/PuntosAcopio/EditAcopio";
+import IndexSite from "./views/Administradores/PuntosAcopio/IndexAcopio";
+
+
 
 export default function App() {
   return (
@@ -45,18 +51,17 @@ function AppContent() {
 
         {/* RUTAS DE ADMINISTRADORES */}
         <Route path="/Administrar/Proyectos" element={<ShowProyectos />} />
-        <Route
-          path="/Administrar/Puntos-Acopio"
-          element={<ShowPuntosAcopio />}
-        />
+        
 
         <Route path="/Administrar/Retos" element={<IndexChallenge />} />
         <Route path="/Administrar/Retos/Crear" element={<CreateChallenge />} />
-        <Route
-          path="/Administrar/Retos/Editar/:id"
-          element={<EditChallenge />}
-        />
+        <Route path="/Administrar/Retos/Editar/:id" element={<EditChallenge />}/>
         <Route path="/Administrar/Retos/:id" element={<ShowChallenge />} />
+
+        <Route path="/Administrar/Puntos-Acopio" element={<IndexSite />} />
+        <Route path="/Administrar/Puntos-Acopio/Crear" element={<CreateSite  />} />
+        <Route path="/Administrar/Puntos-Acopio/Editar/:id" element={<EditSite  />}/>
+        <Route path="/Administrar/Puntos-Acopio/:id" element={<ShowSite  />} />
 
         {/* RUTAS DE OPERADORES */}
         <Route path="/Registro-Botellas" element={<OperatorView />} />

@@ -10,6 +10,7 @@ black = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 python-dotenv = "*"
+tzdata = "*"
 
 [dev-packages]
 

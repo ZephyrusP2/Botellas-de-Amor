@@ -79,16 +79,16 @@ const NavbarAdministradores = () => {
               Puntos de Acopio
             </Link>
             <Link
-              to="/Administrar/Administradores"
-              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Administradores" ? "active" : ""}`}
+              to="/Administrar/Usuarios"
+              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Usuarios" ? "active" : ""}`}
             >
-              Administradores
+              Usuarios
             </Link>
             <Link
-              to="/Administrar/Operadores"
-              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Operadores" ? "active" : ""}`}
+              to="/Administrar/Retos"
+              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Retos" ? "active" : ""}`}
             >
-              Operadores
+              Retos
             </Link>
           </div>
         </div>

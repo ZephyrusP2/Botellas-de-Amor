@@ -3,16 +3,9 @@ html {
   background-color: #ffffff !important;
 }
 
-#leading {
-  width: 50%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
-#my-container {
-  border: 1px solid #00c8ea;
-}
+
+
 
 .hover-cursor {
   cursor: pointer;
