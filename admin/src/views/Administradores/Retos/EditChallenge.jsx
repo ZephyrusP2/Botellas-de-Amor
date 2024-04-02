@@ -69,10 +69,10 @@ const EditChallenge = () => {
   return (
     <div className="d-flex flex-column align-items-start p-4 container-fluid">
       <BackButton route="/Administrar/Retos" />
-      <h2>Editar reto</h2>
+      <h2 className="container-fluid text-center">Editar reto</h2>
       <form
         onSubmit={handleSubmit}
-        className="d-flex flex-column container m-0 p-0"
+        className="d-flex flex-column align-items-center container m-0 p-0"
       >
         <label
           htmlFor="challenge"

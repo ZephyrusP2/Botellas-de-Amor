@@ -50,10 +50,10 @@ const CreateChallenge = () => {
   return (
     <div className="d-flex flex-column align-items-start p-4 container-fluid">
       <BackButton route="/Administrar/Retos" />
-      <h1>Crear reto</h1>
+      <h1 className="container-fluid text-center">Crear reto</h1>
       <form
         onSubmit={handleSubmit}
-        className="d-flex flex-column container m-0 p-0"
+        className="d-flex flex-column align-items-center container m-0 p-0"
       >
         <label className="d-flex flex-column form-label w-50">
           Reto
