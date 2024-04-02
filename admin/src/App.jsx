@@ -5,6 +5,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+
 import Login from "./views/LoginView";
 import SideBarAdministradores from "./components/Administradores/SideBar";
 import SideBarOperadores from "./components/Operadores/SideBar"; // Importar Sidebar2
@@ -12,6 +13,9 @@ import "./styles/SideBar.css";
 import "./App.css";
 import OperatorView from "./views/OperatorView";
 import ShowProyectos from "./views/Administradores/Proyectos/Show";
+import ShowUsuarios from "./views/Administradores/Usuarios/Show";
+
+
 
 import CreateChallenge from "./views/Administradores/Retos/CreateChallenge";
 import ShowChallenge from "./views/Administradores/Retos/ShowChallenge";
@@ -51,7 +55,8 @@ function AppContent() {
 
         {/* RUTAS DE ADMINISTRADORES */}
         <Route path="/Administrar/Proyectos" element={<ShowProyectos />} />
-        
+        <Route path="/Administrar/Usuarios" element={<ShowUsuarios />} />
+
 
         <Route path="/Administrar/Retos" element={<IndexChallenge />} />
         <Route path="/Administrar/Retos/Crear" element={<CreateChallenge />} />

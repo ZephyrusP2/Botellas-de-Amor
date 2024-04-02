@@ -37,7 +37,7 @@ const SideBarAdministradores = () => {
 
                         <h1 className="d-none d-xl-inline text">Administrar</h1>
                     </a>
-                    <a href="/Administrar/Puntos-Acopio" className={`text-container d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none ${currentPath.includes('/Administrar/Puntos-Acopio') ? 'active' : ''}`}>
+                    <a href="/Administrar/Analisis" className={`text-container d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none ${currentPath.includes('/Administrar/Puntos-Acopio') ? 'active' : ''}`}>
                         <svg width="52" height="39" viewBox="0 0 52 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M40.3 29.25H42.575C43.225 29.25 43.875 28.6 43.875 27.95V4.55C43.875 3.9 43.225 3.25 42.575 3.25H40.3C39.65 3.25 39 3.9 39 4.55V27.95C39 28.6 39.65 29.25 40.3 29.25ZM20.8 29.25H23.075C23.725 29.25 24.375 28.6 24.375 27.95V7.8C24.375 7.15 23.725 6.5 23.075 6.5H20.8C20.15 6.5 19.5 7.15 19.5 7.8V27.95C19.5 28.6 20.15 29.25 20.8 29.25ZM30.55 29.25H32.825C33.475 29.25 34.125 28.6 34.125 27.95V14.3C34.125 13.65 33.475 13 32.825 13H30.55C29.9 13 29.25 13.65 29.25 14.3V27.95C29.25 28.6 29.9 29.25 30.55 29.25ZM50.375 34.125H4.875V1.625C4.875 0.727188 4.14781 0 3.25 0H1.625C0.727187 0 0 0.727188 0 1.625V35.75C0 37.5446 1.45539 39 3.25 39H50.375C51.2728 39 52 38.2728 52 37.375V35.75C52 34.8522 51.2728 34.125 50.375 34.125ZM11.05 29.25H13.325C13.975 29.25 14.625 28.6 14.625 27.95V20.8C14.625 20.15 13.975 19.5 13.325 19.5H11.05C10.4 19.5 9.75 20.15 9.75 20.8V27.95C9.75 28.6 10.4 29.25 11.05 29.25Z" fill="white" />
                         </svg>
