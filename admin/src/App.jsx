@@ -1,14 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Login from './views/LoginView';
-import SideBar from './components/SideBar';
+import SideBarAdministradores from './components/Administradores/SideBar';
+import SideBarOperadores from './components/Operadores/SideBar'; // Importar Sidebar2
 import './styles/SideBar.css';
 import './App.css';
-import OperatorView from "./views/OperatorView"
-import ShowPuntosAcopio from "./views/Administradores/PuntosAcopio/Show"
-import ShowProyectos from "./views/Administradores/Proyectos/Show"
-
-
+import OperatorView from "./views/OperatorView";
+import ShowPuntosAcopio from "./views/Administradores/PuntosAcopio/Show";
+import ShowProyectos from "./views/Administradores/Proyectos/Show";
 
 export default function App() {
   return (
@@ -20,11 +19,11 @@ export default function App() {
 
 function AppContent() {
   const location = useLocation();
-  const isRootPath = location.pathname === '/' || location.pathname.startsWith('/Operador');
+  const isRootPath = location.pathname === '/' || location.pathname.startsWith('/Registro-Botellas');
 
   return (
     <div className='principal-container'>
-      {!isRootPath && <SideBar />}
+      {isRootPath ? <SideBarOperadores /> : <SideBarAdministradores />} {/* Condición para renderizar SideBar o SideBar2 */}
       <Routes>
         <Route path="/" element={<Login />} />
 
@@ -33,10 +32,8 @@ function AppContent() {
         <Route path="/Administrar/Puntos-Acopio" element={<ShowPuntosAcopio />} />
 
         {/* RUTAS DE OPERADORES */}
-        <Route path="/Operador" element={<OperatorView />} />
-        <Route path="/Operador" element={<OperatorView />} />
-
-
+        <Route path="/Registro-Botellas" element={<OperatorView />} />
+        <Route path="/Registro-Botellas" element={<OperatorView />} />
       </Routes>
     </div>
   );

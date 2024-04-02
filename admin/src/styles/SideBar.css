@@ -6,12 +6,12 @@
 }
 
 .col-xl-2{
-    width: 24% !important;
+    width: 19.5% !important;
 }
 .text{
-    font-size: 35px !important;
-    margin-left: 2vw;
-    margin-bottom: 0px;
+    font-size: 30px !important;
+    margin-left: 1.5vw;
+    margin-bottom: -10px;
     font-family: "League Spartan", sans-serif;
     font-optical-sizing: auto;
     font-weight: 200;
@@ -19,10 +19,33 @@
 }
 
 .text-container{
-    margin-bottom: 40px !important;
+    margin-bottom: 30px !important;
+    padding-right: 8px;
+    height: 50px;
+    padding-bottom: 0px !important;
 }
+
+.text-container.active {
+    border-right: 3px solid rgb(255, 255, 255); /* Cambia el color y el grosor según tus preferencias */ 
+}
+
 
 .sidebar-container{
     align-items: center;
     text-align: center;
+}
+
+
+
+@media(max-width: 1200px) {
+    .text-container.active {
+    border-right: none;
+    border-bottom: 3px solid rgb(255, 255, 255); /* Cambia el color y el grosor según tus preferencias */ 
+    
+}
+
+    .text-container{
+        padding-right: 0px;
+        
+    }
 }

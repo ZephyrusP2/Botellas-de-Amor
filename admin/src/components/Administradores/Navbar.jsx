@@ -1,12 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
-import "../App.css";
-import "../styles/Navbar.css"
+import "../../App.css";
+import "../../styles/Navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from "react";
 
 
-const Navbar = () => {
+const NavbarAdministradores = () => {
     const location = useLocation();
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -49,16 +49,16 @@ const Navbar = () => {
 
                     <div className="navbar-bottom-line2"></div>
                     <div className='items-navbar-container'>
-                        <Link to="/Proyectos" className={`navbar-item-sidebar ${location.pathname === '/Proyectos' ? 'active' : ''}`}>
+                        <Link to="/Administrar/Proyectos" className={`navbar-item-sidebar ${location.pathname === '/Administrar/Proyectos' ? 'active' : ''}`}>
                             Proyectos
                         </Link>
-                        <Link to="/Puntos-Acopio" className={`navbar-item-sidebar ${location.pathname === '/Puntos-Acopio' ? 'active' : ''}`}>
+                        <Link to="/Administrar/Puntos-Acopio" className={`navbar-item-sidebar ${location.pathname === '/Administrar/Puntos-Acopio' ? 'active' : ''}`}>
                             Puntos de Acopio
                         </Link>
-                        <Link to="/Administradores" className={`navbar-item-sidebar ${location.pathname === '/Administradores' ? 'active' : ''}`}>
+                        <Link to="/Administrar/Administradores" className={`navbar-item-sidebar ${location.pathname === '/Administrar/Administradores' ? 'active' : ''}`}>
                             Administradores
                         </Link>
-                        <Link to="/Operadores" className={`navbar-item-sidebar ${location.pathname === '/Operadores' ? 'active' : ''}`}>
+                        <Link to="/Administrar/Operadores" className={`navbar-item-sidebar ${location.pathname === '/Administrar/Operadores' ? 'active' : ''}`}>
                             Operadores
                         </Link>
                     </div>
@@ -75,4 +75,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default NavbarAdministradores;

@@ -23,8 +23,8 @@
 }
 
 .principal-container {
-  width: 100%; /* Ancho total del contenedor */
-  display: flex; /* Utilizamos flexbox para organizar los elementos */
+  width: 100%;
+  display: flex;
 }
 
 
@@ -35,6 +35,7 @@
 
 .show-container{
   flex: 1;
+  height: 100%;
 }
 
 
@@ -43,7 +44,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 60px 40px 15px 40px; /* top, right, bottom, left */
-  font-size: 30px !important;
+  font-size: 25px !important;
   font-family: "League Spartan", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400 !important;
@@ -78,4 +79,12 @@
 .button-navbar.active {
   background-color: #00c8ea; /* Cambia el color de fondo a azul */
   color: white; /* Cambia el color del texto a blanco */
+}
+
+.navbar-item-sidebar.active {
+  background-color: #ffffff; /* Cambia el color de fondo a azul */
+  color: #00c8ea;
+  width: 91%;
+  margin-left: 4%;
+  border-radius: 5px; /* Puedes ajustar el valor según tus preferencias */
 }
