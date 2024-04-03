@@ -3,6 +3,7 @@ import siteService from "../../../services/site";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const EditSite = () => {
   document.title = "Editar punto de acopio";
@@ -75,92 +76,101 @@ const EditSite = () => {
   }, [id]);
 
   return (
-    <div className="d-flex flex-column align-items-start p-4 container-fluid">
-      <BackButton route="/Administrar/Retos" />
-      <h2>Editar punto de acopio</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="d-flex flex-column container m-0 p-0"
-      >
-        <label htmlFor="image" className="d-flex flex-column form-label w-50">
-          Imagen
-          <input
-            type="text"
-            name="image"
-            id="image"
-            value={siteData.image}
-            onChange={handleInputChange}
-            className="form-control rounded-3"
-          />
-          {validationErrors.image && (
-            <span className="error-message">{validationErrors.image}</span>
-          )}
-        </label>
+    <>
+      <SideBarAdministradores />
+      <div className="d-flex flex-column align-items-start p-4 container-fluid">
+        <BackButton route="/Administrar/Retos" />
+        <h2>Editar punto de acopio</h2>
+        <form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column container m-0 p-0"
+        >
+          <label htmlFor="image" className="d-flex flex-column form-label w-50">
+            Imagen
+            <input
+              type="text"
+              name="image"
+              id="image"
+              value={siteData.image}
+              onChange={handleInputChange}
+              className="form-control rounded-3"
+            />
+            {validationErrors.image && (
+              <span className="error-message">{validationErrors.image}</span>
+            )}
+          </label>
 
-        <label htmlFor="opens" className="d-flex flex-column form-label w-50">
-          Hora de apertura
-          <input
-            type="time"
-            name="opens"
-            id="opens"
-            value={siteData.opens}
-            onChange={handleInputChange}
-            className="form-control rounded-3"
-          />
-          {validationErrors.opens && (
-            <span className="error-message">{validationErrors.opens}</span>
-          )}
-        </label>
-        <label htmlFor="closes" className="d-flex flex-column form-label w-50">
-          Hora de cierre
-          <input
-            type="time"
-            name="closes"
-            id="closes"
-            value={siteData.closes}
-            onChange={handleInputChange}
-            className="form-control rounded-3"
-          />
-          {validationErrors.closes && (
-            <span className="error-message">{validationErrors.closes}</span>
-          )}
-        </label>
+          <label htmlFor="opens" className="d-flex flex-column form-label w-50">
+            Hora de apertura
+            <input
+              type="time"
+              name="opens"
+              id="opens"
+              value={siteData.opens}
+              onChange={handleInputChange}
+              className="form-control rounded-3"
+            />
+            {validationErrors.opens && (
+              <span className="error-message">{validationErrors.opens}</span>
+            )}
+          </label>
+          <label
+            htmlFor="closes"
+            className="d-flex flex-column form-label w-50"
+          >
+            Hora de cierre
+            <input
+              type="time"
+              name="closes"
+              id="closes"
+              value={siteData.closes}
+              onChange={handleInputChange}
+              className="form-control rounded-3"
+            />
+            {validationErrors.closes && (
+              <span className="error-message">{validationErrors.closes}</span>
+            )}
+          </label>
 
-        <label htmlFor="name" className="d-flex flex-column form-label w-50">
-          Nombre
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={siteData.name}
-            onChange={handleInputChange}
-            className="form-control rounded-3"
-          />
-          {validationErrors.name && (
-            <span className="error-message">{validationErrors.name}</span>
-          )}
-        </label>
+          <label htmlFor="name" className="d-flex flex-column form-label w-50">
+            Nombre
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={siteData.name}
+              onChange={handleInputChange}
+              className="form-control rounded-3"
+            />
+            {validationErrors.name && (
+              <span className="error-message">{validationErrors.name}</span>
+            )}
+          </label>
 
-        <label htmlFor="address" className="d-flex flex-column form-label w-50">
-          Nombre
-          <input
-            type="text"
-            name="address"
-            id="address"
-            value={siteData.address}
-            onChange={handleInputChange}
-            className="form-control rounded-3"
-          />
-          {validationErrors.address && (
-            <span className="error-message">{validationErrors.address}</span>
-          )}
-        </label>
+          <label
+            htmlFor="address"
+            className="d-flex flex-column form-label w-50"
+          >
+            Nombre
+            <input
+              type="text"
+              name="address"
+              id="address"
+              value={siteData.address}
+              onChange={handleInputChange}
+              className="form-control rounded-3"
+            />
+            {validationErrors.address && (
+              <span className="error-message">{validationErrors.address}</span>
+            )}
+          </label>
 
-        <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
-          Save Changes
-        </button>
-      </form>
-    </div>
+          <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

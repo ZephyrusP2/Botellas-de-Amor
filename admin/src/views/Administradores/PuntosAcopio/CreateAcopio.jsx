@@ -3,6 +3,7 @@ import siteService from "../../../services/site";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const CreateSite = () => {
   document.title = "Crear reto";
@@ -67,82 +68,85 @@ const CreateSite = () => {
   };
 
   return (
-    <div className="d-flex flex-column align-items-start p-4 container-fluid">
-      <BackButton route="/Administrar/Puntos-Acopio" />
-      <h1>Crear punto de acopio</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="d-flex flex-column container m-0 p-0"
-      >
-        <label className="d-flex flex-column form-label w-50">
-          Imagen
-          <input
-            type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            className="form-control rounded-3"
-          />
-          {validationErrors.image && (
-            <span className="error-message">{validationErrors.image}</span>
-          )}
-        </label>
-        <label className="d-flex flex-column form-label w-50">
-          Hora de apertura
-          <input
-            type="time"
-            value={opens}
-            onChange={(e) => setOpens(e.target.value)}
-            className="form-control rounded-3"
-          />
-          {validationErrors.opens && (
-            <span className="error-message">{validationErrors.opens}</span>
-          )}
-        </label>
+    <>
+      <SideBarAdministradores />
+      <div className="d-flex flex-column align-items-start p-4 container-fluid">
+        <BackButton route="/Administrar/Puntos-Acopio" />
+        <h1>Crear punto de acopio</h1>
+        <form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column container m-0 p-0"
+        >
+          <label className="d-flex flex-column form-label w-50">
+            Imagen
+            <input
+              type="text"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.image && (
+              <span className="error-message">{validationErrors.image}</span>
+            )}
+          </label>
+          <label className="d-flex flex-column form-label w-50">
+            Hora de apertura
+            <input
+              type="time"
+              value={opens}
+              onChange={(e) => setOpens(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.opens && (
+              <span className="error-message">{validationErrors.opens}</span>
+            )}
+          </label>
 
-        <label className="d-flex flex-column form-label w-50">
-          Hora de cierre
-          <input
-            type="time"
-            value={closes}
-            onChange={(e) => setCloses(e.target.value)}
-            className="form-control rounded-3"
-          />
-          {validationErrors.closes && (
-            <span className="error-message">{validationErrors.closes}</span>
-          )}
-        </label>
+          <label className="d-flex flex-column form-label w-50">
+            Hora de cierre
+            <input
+              type="time"
+              value={closes}
+              onChange={(e) => setCloses(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.closes && (
+              <span className="error-message">{validationErrors.closes}</span>
+            )}
+          </label>
 
-        <label className="d-flex flex-column form-label w-50">
-          Nombre
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="form-control rounded-3"
-          />
-          {validationErrors.name && (
-            <span className="error-message">{validationErrors.name}</span>
-          )}
-        </label>
-        <label className="d-flex flex-column form-label w-50">
-          Dirección
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="form-control rounded-3"
-          />
-          {validationErrors.address && (
-            <span className="error-message">{validationErrors.address}</span>
-          )}
-        </label>
+          <label className="d-flex flex-column form-label w-50">
+            Nombre
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.name && (
+              <span className="error-message">{validationErrors.name}</span>
+            )}
+          </label>
+          <label className="d-flex flex-column form-label w-50">
+            Dirección
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.address && (
+              <span className="error-message">{validationErrors.address}</span>
+            )}
+          </label>
 
-        <br />
-        <button type="submit" className="btn btn-primary btn-md w-50">
-          Crear
-        </button>
-      </form>
-    </div>
+          <br />
+          <button type="submit" className="btn btn-primary btn-md w-50">
+            Crear
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

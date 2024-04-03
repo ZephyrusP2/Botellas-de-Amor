@@ -3,6 +3,7 @@ import siteService from "../../../services/site";
 import { useParams } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const ShowSite = () => {
   document.title = "Ver reto";
@@ -20,19 +21,22 @@ const ShowSite = () => {
   }, [id]);
 
   return (
-    <div className="d-flex flex-column container-fluid p-2">
-      <BackButton route="/Administrar/Puntos-Acopio" />
-      <div className="d-flex align-items-center flex-column">
-        <h2 className="blue-text">
-          <strong>Reto</strong>
-        </h2>
-        <p>{siteData.site}</p>
-        <h2 className="blue-text">
-          <strong>Experiencia</strong>
-        </h2>
-        <p>{siteData.experience}</p>
+    <>
+      <SideBarAdministradores />
+      <div className="d-flex flex-column container-fluid p-2">
+        <BackButton route="/Administrar/Puntos-Acopio" />
+        <div className="d-flex align-items-center flex-column">
+          <h2 className="blue-text">
+            <strong>Reto</strong>
+          </h2>
+          <p>{siteData.site}</p>
+          <h2 className="blue-text">
+            <strong>Experiencia</strong>
+          </h2>
+          <p>{siteData.experience}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
