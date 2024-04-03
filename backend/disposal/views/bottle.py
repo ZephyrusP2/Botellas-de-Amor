@@ -31,7 +31,7 @@ class Create(generics.CreateAPIView):
         serializer.save()
 
 
-class Retreive(generics.RetrieveAPIView):
+class Retrieve(generics.RetrieveAPIView):
     """
     Bottle retrieve
     """

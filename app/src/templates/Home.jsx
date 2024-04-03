@@ -18,20 +18,20 @@ export default function Home() {
   const [bottleData, setBottleData] = useState();
 
   useEffect(() => {
-    retreiveUser();
+    retrieveUser();
     listChallenges();
     retrieveBottle();
   }, []);
 
-  const retreiveUser = async () => {
+  const retrieveUser = async () => {
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("id");
-    UserService.retreive(token, id)
+    UserService.retrieve(token, id)
       .then((response) => {
         setUserData(response.data);
       })
       .catch((error) => {
-        console.error("retreiveUser error", error);
+        console.error("retrieveUser error", error);
       });
   };
 
