@@ -8,11 +8,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Header2() {
   const navigation = useNavigation();
 
-  const handleClick = () => {
-    navigation.navigate("Home");
+  const goToPreviousScreen = () => {
+    navigation.goBack();
   };
 
-  const handleLogout = () => {
+  const logout = () => {
     AsyncStorage.clear();
     navigation.navigate("Login");
   };
@@ -20,7 +20,7 @@ export default function Header2() {
   return (
     <StyledBackground style={styles.bg}>
       <View style={styles.imageContainer}>
-        <TouchableOpacity onPress={handleClick}>
+        <TouchableOpacity onPress={goToPreviousScreen}>
           <Image
             style={styles.image1}
             source={require("../images/return.png")}
@@ -30,7 +30,7 @@ export default function Header2() {
           style={styles.image2}
           source={require("../images/logofull.png")}
         />
-        <TouchableOpacity onPress={handleLogout}>
+        <TouchableOpacity onPress={logout}>
           <Image
             style={styles.image3}
             source={require("../images/logout.png")}

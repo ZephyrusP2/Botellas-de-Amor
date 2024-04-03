@@ -19,21 +19,21 @@ const EditProfile = ({ navigation }) => {
   });
 
   useEffect(() => {
-    getUserData();
+    retrieveUser();
   }, []);
 
-  const getUserData = async () => {
+  const retrieveUser = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
       const id = await AsyncStorage.getItem("id");
-      const response = await UserService.getUserData(token, id);
+      const response = await UserService.retreive(token, id);
       setUserData(response.data);
     } catch (error) {
-      console.error("getUserData error", error);
+      console.error("retrieveUser error", error);
     }
   };
 
-  const handleEditProfile = () => {
+  const goToEditProfile = () => {
     navigation.navigate("EditProfile");
     Alert.alert(
       "Botellas de amor",
@@ -41,11 +41,11 @@ const EditProfile = ({ navigation }) => {
     );
   };
 
-  const handleProfile = () => {
+  const goToProfile = () => {
     navigation.navigate("Profile");
   };
 
-  const handleUpdateProfile = async () => {
+  const updateProfile = async () => {
     try {
       const id = await AsyncStorage.getItem("id");
       const token = await AsyncStorage.getItem("token");
@@ -56,7 +56,7 @@ const EditProfile = ({ navigation }) => {
         `¡Hola ${userData?.name || ""} se actualizó la información correctamente!`
       );
     } catch (error) {
-      console.error("getUserData error", error);
+      console.error("update profile error", error);
     }
   };
 
@@ -67,14 +67,14 @@ const EditProfile = ({ navigation }) => {
         <View style={styles.buttonContainer}>
           <StyledButton
             title="Perfil"
-            onPress={handleProfile}
+            onPress={goToProfile}
             style={styles.notselectedPageButton}
           >
             Perfil
           </StyledButton>
           <StyledButton
             title="EditProfile"
-            onPress={handleEditProfile}
+            onPress={goToEditProfile}
             style={styles.selectedPageButton}
           >
             Editar Perfil
@@ -171,7 +171,7 @@ const EditProfile = ({ navigation }) => {
           />
         </View>
 
-        <StyledButton onPress={handleUpdateProfile}>
+        <StyledButton onPress={updateProfile}>
           Actualizar Información
         </StyledButton>
       </ScrollView>

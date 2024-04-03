@@ -11,22 +11,22 @@ const Analisis = ({ navigation }) => {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    getUserData();
+    retreiveUser();
   }, []);
 
-  const getUserData = async () => {
+  const retreiveUser = async () => {
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("id");
-    UserService.getUserData(token, id)
+    UserService.retreive(token, id)
       .then((response) => {
         setUserData(response.data);
       })
       .catch((error) => {
-        console.error("getUserData error", error);
+        console.error("retreive user error", error);
       });
   };
 
-  const handleAnalisis = () => {
+  const goToAnalisis = () => {
     navigation.navigate("Analisis");
     Alert.alert(
       "Botellas de amor",
@@ -34,7 +34,7 @@ const Analisis = ({ navigation }) => {
     );
   };
 
-  const handleProfile = () => {
+  const goToProfile = () => {
     navigation.navigate("Profile");
   };
 
@@ -45,14 +45,14 @@ const Analisis = ({ navigation }) => {
         <View style={styles.buttonContainer}>
           <StyledButton
             title="Perfil"
-            onPress={handleProfile}
+            onPress={goToProfile}
             style={styles.notSelectedPageButton}
           >
             Perfil
           </StyledButton>
           <StyledButton
             title="Análisis"
-            onPress={handleAnalisis}
+            onPress={goToAnalisis}
             style={styles.selectedPageButton}
           >
             Análisis

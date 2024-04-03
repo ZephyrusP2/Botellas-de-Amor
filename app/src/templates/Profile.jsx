@@ -11,26 +11,38 @@ const Profile = ({ navigation }) => {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    getUserData();
+    retreiveUser();
   }, []);
 
-  const getUserData = async () => {
+  const retreiveUser = async () => {
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("id");
-    UserService.getUserData(token, id)
+    UserService.retreive(token, id)
       .then((response) => {
         setUserData(response.data);
       })
       .catch((error) => {
-        console.error("getUserData error", error);
+        console.error("retreive user error", error);
       });
   };
 
-  const handleEditProfile = () => {
+  const goToEditProfile = () => {
     navigation.navigate("EditProfile");
   };
 
-  const handleDeleteProfile = async () => {
+  const goToAnalisis = () => {
+    navigation.navigate("Analisis");
+  };
+
+  const goToProfile = () => {
+    navigation.navigate("Profile");
+    Alert.alert(
+      "Botellas de amor",
+      `¡Hola ${userData?.name || ""} estas viendo tu perfil!`
+    );
+  };
+
+  const deleteUser = async () => {
     const id = userData?.id;
     const token = await AsyncStorage.getItem("token");
     UserService.deleteUser(token, id)
@@ -45,19 +57,6 @@ const Profile = ({ navigation }) => {
       });
   };
 
-  const handleAnalisis = () => {
-    navigation.navigate("Analisis");
-  };
-
-  const handleProfile = () => {
-    // Lógica para manejar perfil
-    navigation.navigate("Profile");
-    Alert.alert(
-      "Botellas de amor",
-      `¡Hola ${userData?.name || ""} estas viendo tu perfil!`
-    );
-  };
-
   return (
     <>
       <Header2 />
@@ -65,14 +64,14 @@ const Profile = ({ navigation }) => {
         <View style={styles.buttonContainer}>
           <StyledButton
             title="Perfil"
-            onPress={handleProfile}
+            onPress={goToProfile}
             style={styles.selectedPageButton}
           >
             Perfil
           </StyledButton>
           <StyledButton
             title="Análisis"
-            onPress={handleAnalisis}
+            onPress={goToAnalisis}
             style={styles.notSelectedPageButton}
           >
             Análisis
@@ -172,14 +171,14 @@ const Profile = ({ navigation }) => {
         <View style={styles.buttonContainer2}>
           <StyledButton
             title="Editar Perfil"
-            onPress={handleEditProfile}
+            onPress={goToEditProfile}
             style={styles.updateButton}
           >
             Editar Perfil
           </StyledButton>
           <StyledButton
             title="Eliminar Perfil"
-            onPress={handleDeleteProfile}
+            onPress={deleteUser}
             style={styles.deleteButton}
           >
             Eliminar Perfil
