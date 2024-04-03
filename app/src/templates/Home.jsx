@@ -10,10 +10,10 @@ import ChallengeService from "../services/challenge";
 
 export default function Home() {
   const [userData, setUserData] = useState();
+  const [challenges, setChallenges] = useState([]);
   const [isChecked, setChecked] = useState(
     new Array(challenges.length).fill(false)
   );
-  const [challenges, setChallenges] = useState([]);
 
   useEffect(() => {
     retreiveUser();
@@ -44,11 +44,11 @@ export default function Home() {
     }
   };
 
-    const handleCheckChange = (index) => {
-      const newChecked = [...isChecked];
-      newChecked[index] = !newChecked[index];
-      setChecked(newChecked);
-    };
+  const handleCheckChange = (index) => {
+    const newChecked = [...isChecked];
+    newChecked[index] = !newChecked[index];
+    setChecked(newChecked);
+  };
 
   return (
     <ScrollView>
