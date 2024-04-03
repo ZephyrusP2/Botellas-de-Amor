@@ -3,7 +3,7 @@ import "../../App.css";
 import "../../styles/Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 const NavbarAdministradores = () => {
   const location = useLocation();

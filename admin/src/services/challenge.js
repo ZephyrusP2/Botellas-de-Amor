@@ -14,10 +14,13 @@ class challengeService {
     return axios.post(`${this.server}/api/disposal/challenge/create`, data);
   }
 
-  updateChallenge(id, data, token) {
+  updateChallenge = async (id, data, token) => {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    return axios.put(`${this.server}/api/disposal/challenge/update/${id}`, data);
-  }
+    return axios.put(
+      `${this.server}/api/disposal/challenge/update/${id}`,
+      data
+    );
+  };
 
   deleteChallenge(id, token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
@@ -28,7 +31,6 @@ class challengeService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(`${this.server}/api/disposal/challenge/show/${id}`);
   }
-
 }
 
 export default new challengeService();

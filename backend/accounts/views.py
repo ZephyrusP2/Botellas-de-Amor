@@ -12,6 +12,7 @@ from backend.permissions import IsAdmin, IsAdminOrSelf
 from .models import User
 from .serializers import UserSerializer, UserUpdateSerializer
 from rest_framework.views import APIView
+from disposal.models import Bottle
 
 # Create your views here.
 
@@ -67,6 +68,7 @@ class UserCreate(generics.CreateAPIView):
         if password:
             instance.set_password(password)
         instance.save()
+        Bottle.objects.create(user=instance)
 
     def get_queryset(self):
         """
@@ -158,6 +160,7 @@ def register(request):
             user.set_password(data["password"])
             user.save()
             token = Token.objects.create(user=user)
+            Bottle.objects.create(user=user)
             return JsonResponse({"token": token.key, "id": user.id}, status=201)
         except IntegrityError:
             return JsonResponse({"error": "Email already exists"}, status=400)

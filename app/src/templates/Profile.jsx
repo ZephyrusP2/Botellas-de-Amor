@@ -11,18 +11,18 @@ const Profile = ({ navigation }) => {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    retreiveUser();
+    retrieveUser();
   }, []);
 
-  const retreiveUser = async () => {
+  const retrieveUser = async () => {
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("id");
-    UserService.retreive(token, id)
+    UserService.retrieve(token, id)
       .then((response) => {
         setUserData(response.data);
       })
       .catch((error) => {
-        console.error("retreive user error", error);
+        console.error("retrieve user error", error);
       });
   };
 
@@ -45,10 +45,9 @@ const Profile = ({ navigation }) => {
   const deleteUser = async () => {
     const id = userData?.id;
     const token = await AsyncStorage.getItem("token");
-    UserService.deleteUser(token, id)
+    UserService.delete(token, id)
       .then(() => {
-        AsyncStorage.setItem("token", null);
-        AsyncStorage.setItem("id", null);
+        AsyncStorage.clear();
         navigation.navigate("Login");
       })
       .catch((error) => {

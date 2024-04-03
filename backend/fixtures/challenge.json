@@ -1,0 +1,50 @@
+[
+  {
+    "model": "disposal.challenge",
+    "pk": 1,
+    "fields": {
+      "challenge": "Meter 3 papelitos a la botella",
+      "experience": 20
+    }
+  },
+  {
+    "model": "disposal.challenge",
+    "pk": 2,
+    "fields": {
+      "challenge": "Recoger 3 basuras de la calle",
+      "experience": 20
+    }
+  },
+  {
+    "model": "disposal.challenge",
+    "pk": 3,
+    "fields": {
+      "challenge": "Meter 5 papelitos a la botella",
+      "experience": 30
+    }
+  },
+  {
+    "model": "disposal.challenge",
+    "pk": 4,
+    "fields": {
+      "challenge": "Recoger 5 basuras de la calle",
+      "experience": 30
+    }
+  },
+  {
+    "model": "disposal.challenge",
+    "pk": 5,
+    "fields": {
+      "challenge": "Meter 10 papelitos a la botella",
+      "experience": 50
+    }
+  },
+  {
+    "model": "disposal.challenge",
+    "pk": 6,
+    "fields": {
+      "challenge": "Recoger 10 basuras de la calle",
+      "experience": 50
+    }
+  }
+]

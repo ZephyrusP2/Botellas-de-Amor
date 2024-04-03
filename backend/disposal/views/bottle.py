@@ -1,17 +1,16 @@
-
 from rest_framework import generics, permissions
 from backend.permissions import IsAdmin
 
-from disposal.models import Site
-from disposal.serializers import SiteSerializer
+from disposal.models import Bottle
+from disposal.serializers import BottleSerializer
 
 
 class Create(generics.CreateAPIView):
     """
-    Site list and create
+    Bottle list and create
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["post"]
@@ -21,7 +20,7 @@ class Create(generics.CreateAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
+        return Bottle.objects.all()
 
     def perform_create(self, serializer):
         """
@@ -34,28 +33,24 @@ class Create(generics.CreateAPIView):
 
 class Retrieve(generics.RetrieveAPIView):
     """
-    Site retrieve
+    Bottle retrieve
     """
+    serializer_class = BottleSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-    serializer_class = SiteSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
-
-    http_method_names = ["get"]
-
-    def get_queryset(self):
+    def get_object(self):
         """
-        Get queryset
-        :return: QuerySet
+        Get the bottle object associated with the current user.
         """
-        return Site.objects.all()
+        return Bottle.objects.get_or_create(user=self.request.user)[0]
 
 
 class Update(generics.UpdateAPIView):
     """
-    Site update
+    Bottle update
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["put"]
@@ -65,7 +60,7 @@ class Update(generics.UpdateAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
+        return Bottle.objects.all()
 
     def perform_update(self, serializer):
         """
@@ -78,10 +73,10 @@ class Update(generics.UpdateAPIView):
 
 class Delete(generics.DestroyAPIView):
     """
-    Site delete
+    Bottle delete
     """
 
-    serializer_class = SiteSerializer
+    serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
     http_method_names = ["delete"]
@@ -91,16 +86,24 @@ class Delete(generics.DestroyAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
+        return Bottle.objects.all()
+
+    def perform_destroy(self, instance):
+        """
+        Perform destroy
+        :param instance: instance
+        :return: None
+        """
+        instance.delete()
 
 
 class List(generics.ListAPIView):
     """
-    Site list
+    Bottle list
     """
 
-    serializer_class = SiteSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    serializer_class = BottleSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     http_method_names = ["get"]
 
@@ -109,4 +112,4 @@ class List(generics.ListAPIView):
         Get queryset
         :return: QuerySet
         """
-        return Site.objects.all()
+        return Bottle.objects.all()

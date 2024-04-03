@@ -29,7 +29,7 @@ class UserService {
     }
   };
 
-  retreive = async (token, id) => {
+  retrieve = async (token, id) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
@@ -37,10 +37,11 @@ class UserService {
       );
       return response;
     } catch (error) {
-      console.error("retreive error", error);
+      console.error("retrieve error", error);
       throw error;
     }
   };
+
   delete = async (token, id) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
@@ -53,6 +54,7 @@ class UserService {
       throw error;
     }
   };
+
   update = async (token, id, userData) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
