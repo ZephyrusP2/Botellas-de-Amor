@@ -29,7 +29,7 @@ class UserUpdateTestCase(APITestCase):
 
     def test_user_update_success(self):
         data = {"name": "admin", "last_name": "admin", "birth_date": "1990-01-01",
-                "location": "location", "gender": "Masculino", "email": "admin1@example.com", "password": "newadminpassword"}
+                "location": "location", "gender": "Masculino", "email": "admin1@example.com"}
         response = self.client.put(self.url, data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
@@ -37,7 +37,7 @@ class UserUpdateTestCase(APITestCase):
 
     def test_user_update_invalid_data(self):
         data = {"name": "admin", "last_name": "admin", "birth_date": "1990-01-01",
-                "location": "location", "gender": "Masculino", "password": "newadminpassword"}
+                "location": "location", "gender": "Masculino"}
         response = self.client.put(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
         self.assertIn("email", response.json())
@@ -47,14 +47,14 @@ class UserUpdateTestCase(APITestCase):
     def test_user_update_unauthorized(self):
         self.client.credentials()
         data = {"name": "admin", "last_name": "admin", "birth_date": "1990-01-01",
-                "location": "location", "gender": "Masculino", "email": "admin1@example.com", "password": "newadminpassword"}
+                "location": "location", "gender": "Masculino", "email": "admin1@example.com"}
         response = self.client.put(self.url, data, format="json")
         self.assertEqual(response.status_code, 401)
 
     def test_user_update_not_found(self):
         url = reverse("user.update", args=[1000])
         data = {"name": "admin", "last_name": "admin", "birth_date": "1990-01-01",
-                "location": "location", "gender": "Masculino", "email": "admin1@example.com", "password": "newadminpassword"}
+                "location": "location", "gender": "Masculino", "email": "admin1@example.com"}
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, 404)
         self.assertIn("detail", response.json())
