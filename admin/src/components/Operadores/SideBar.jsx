@@ -19,6 +19,11 @@ const SideBarOperadores = () => {
         };
     }, []);
 
+    const logout = () => {
+        localStorage.clear();
+        navigate("/");
+      };
+
     return (
         <div className="col col-auto col-md-3 col-xl-2 px-sm-2 px-0 side-bar">
             <div className="sidebar-container d-flex flex-column align-items-center justify-content-center px-3 pt-2 text-white min-vh-100 position-relative">
@@ -33,8 +38,11 @@ const SideBarOperadores = () => {
                     
                 </div>
                 {/* Mensaje que se mostrará debajo */}
-                <div className="position-absolute bottom-0 mb-3">
-                    <a href="/Análisis" className="d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none">
+                <div
+          className="position-absolute bottom-0 mb-3 hover-cursor"
+          onClick={logout}
+        >
+                    <a href="/" className="d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19.75 23.5V27.25C19.75 28.2446 19.4208 29.1984 18.8347 29.9017C18.2487 30.6049 17.4538 31 16.625 31H4.125C3.2962 31 2.50134 30.6049 1.91529 29.9017C1.32924 29.1984 1 28.2446 1 27.25V4.75C1 3.75544 1.32924 2.80161 1.91529 2.09835C2.50134 1.39509 3.2962 1 4.125 1H16C17.7258 1 19.75 2.67906 19.75 4.75V8.5M24.75 23.5L31 16L24.75 8.5M9.75 16H29.75" stroke="white" />
                         </svg>

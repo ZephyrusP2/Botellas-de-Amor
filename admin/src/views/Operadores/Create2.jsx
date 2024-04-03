@@ -22,20 +22,20 @@ const CreateRegister = () => {
     const [puntosAcopio, setPuntosAcopio] = useState([]);
     const [loading, setLoading] = useState(true);
 
-        useEffect(() => {
-            // Llamar a la API para obtener los puntos de acopio
-            async function fetchPuntosAcopio() {
-                try {
-                    const token = localStorage.getItem("token");
-                    const response = await siteService.listSite(token); // Supongo que tienes definido el token
-                    setPuntosAcopio(response.data);
-                    setLoading(false);
-                } catch (error) {
-                    console.error("Error fetching puntos de acopio:", error);
-                }
+    useEffect(() => {
+        // Llamar a la API para obtener los puntos de acopio
+        async function fetchPuntosAcopio() {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await siteService.listSite(token); // Supongo que tienes definido el token
+                setPuntosAcopio(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching puntos de acopio:", error);
             }
-            fetchPuntosAcopio();
-        }, []);
+        }
+        fetchPuntosAcopio();
+    }, []);
 
     const validateSite = () => {
         const errors = {};
@@ -60,11 +60,11 @@ const CreateRegister = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         if (!validateSite()) {
             return;
         }
-    
+
         const token = localStorage.getItem("token");
         const data = {
             site,
@@ -73,7 +73,7 @@ const CreateRegister = () => {
             user,
             operator
         };
-    
+
         try {
             const response = await dispositionService.createDisposition(data, token);
             console.log("site created:", response);
@@ -82,7 +82,7 @@ const CreateRegister = () => {
             setWeight("");
             setUser("");
             setOperator("");
-    
+
             navigate(`/Registro-Botellas`);
         } catch (error) {
             if (error.response && error.response.status === 400) {
@@ -95,8 +95,8 @@ const CreateRegister = () => {
             }
         }
     };
-    
-    
+
+
 
     return (
         <>
@@ -108,95 +108,95 @@ const CreateRegister = () => {
                         onSubmit={handleSubmit}
                         className="d-flex flex-column align-items-center container m-0 p-0 mx-auto"
                     >
-                        <div className="contianer-register-p">
-                        <label className="container-register d-flex flex-column form-label">
-                            Punto de acopio
-                            <select
-                                id="puntoAcopio"
-                                onChange={(e) => setSite(parseInt(e.target.value))}
-                                className="form-select form-control rounded-3 text-muted"
-                                aria-label="Punto de acopio"
-                                disabled={loading}
-                            >
-                                <option value="" disabled>
-                                    {loading ? "Cargando..." : "Selecciona un punto de acopio"}
-                                </option>
-                                {puntosAcopio.map(punto => (
-                                    <option key={punto.id} value={punto.id}>
-                                        {punto.name}
+                        <div className="container-register-p">
+                            <label className="container-register d-flex flex-column form-label">
+                                Punto de acopio
+                                <select
+                                    id="puntoAcopio"
+                                    onChange={(e) => setSite(parseInt(e.target.value))}
+                                    className="form-select form-control rounded-3 text-muted"
+                                    aria-label="Punto de acopio"
+                                    disabled={loading}
+                                >
+                                    <option value="" disabled>
+                                        {loading ? "Cargando..." : "Selecciona un punto de acopio"}
                                     </option>
-                                ))}
-                            </select>
+                                    {puntosAcopio.map(punto => (
+                                        <option key={punto.id} value={punto.id}>
+                                            {punto.name}
+                                        </option>
+                                    ))}
+                                </select>
 
-                            {validationErrors.site && (
-                                <span className="error-message">{validationErrors.site}</span>
-                            )}
-                        </label>
+                                {validationErrors.site && (
+                                    <span className="error-message">{validationErrors.site}</span>
+                                )}
+                            </label>
 
-                       
 
-                        
 
-                        <label className=" container-register d-flex flex-column form-label">
-                            Id del usuario
-                            <input
-                                type="number"
-                                value={user}
-                                onChange={(e) => setUser(e.target.value)}
-                                className="form-control rounded-3"
-                            />
-                            {validationErrors.name && (
-                                <span className="error-message">{validationErrors.name}</span>
-                            )}
-                        </label>
-                        <label className="container-register d-flex flex-column form-label">
-                            Id del operador
-                            <input
-                                type="text"
-                                value={operator}
-                                onChange={(e) => setOperator(e.target.value)}
-                                className="form-control rounded-3"
-                            />
-                            {validationErrors.operator && (
-                                <span className="error-message">{validationErrors.operator}</span>
-                            )}
-                        </label>
 
-                        <label className="container-register2 d-flex flex-column form-label">
-                            Numero de botellas
-                            <input
-                                type="number"
-                                value={bottles}
-                                onChange={(e) => setBottles(e.target.value)}
-                                className="form-control rounded-3"
-                            />
-                            {validationErrors.bottles && (
-                                <span className="error-message">{validationErrors.bottles}</span>
-                            )}
-                        </label>
 
-                        <label className="container-register3 d-flex flex-column form-label">
-                            Peso de las botellas
-                            <div className="kg-container">
-                            <input
-                                type="number"
-                                value={weight}
-                                onChange={(e) => setWeight(e.target.value)}
-                                className="form-control rounded-3"
-                            />
-                            {validationErrors.weight && (
-                                <span className="error-message">{validationErrors.weight}</span>
-                            )}
-                                                                <h6 className="kg">Kg</h6>
+                            <label className=" container-register d-flex flex-column form-label">
+                                Id del usuario
+                                <input
+                                    type="number"
+                                    value={user}
+                                    onChange={(e) => setUser(e.target.value)}
+                                    className="form-control rounded-3"
+                                />
+                                {validationErrors.name && (
+                                    <span className="error-message">{validationErrors.name}</span>
+                                )}
+                            </label>
+                            <label className="container-register d-flex flex-column form-label">
+                                Id del operador
+                                <input
+                                    type="number"
+                                    value={operator}
+                                    onChange={(e) => setOperator(e.target.value)}
+                                    className="form-control rounded-3"
+                                />
+                                {validationErrors.operator && (
+                                    <span className="error-message">{validationErrors.operator}</span>
+                                )}
+                            </label>
 
-                            </div>
-                            
-                        </label>
+                            <label className="container-register2 d-flex flex-column form-label">
+                                Numero de botellas
+                                <input
+                                    type="number"
+                                    value={bottles}
+                                    onChange={(e) => setBottles(e.target.value)}
+                                    className="form-control rounded-3"
+                                />
+                                {validationErrors.bottles && (
+                                    <span className="error-message">{validationErrors.bottles}</span>
+                                )}
+                            </label>
 
-                        <br />
-                        <button type="submit" className="btn btn-primary btn-md">
-                            Crear
-                        </button>
+                            <label className="container-register3 d-flex flex-column form-label">
+                                Peso de las botellas
+                                <div className="kg-container">
+                                    <input
+                                        type="number"
+                                        value={weight}
+                                        onChange={(e) => setWeight(e.target.value)}
+                                        className="form-control rounded-3"
+                                    />
+                                    {validationErrors.weight && (
+                                        <span className="error-message">{validationErrors.weight}</span>
+                                    )}
+                                    <h6 className="kg">Kg</h6>
+
+                                </div>
+
+                            </label>
+
+                            <br />
+                            <button type="submit" className="btn btn-primary btn-md">
+                                Crear
+                            </button>
                         </div>
                     </form>
                 </div >
