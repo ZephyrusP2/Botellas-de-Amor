@@ -26,33 +26,32 @@ const Profile = ({ navigation }) => {
   };
 
   const handleEditProfile = () => {
-    // Lógica para editar perfil
+    navigation.navigate('EditProfile');
   };
 
-  const handleDeleteProfile = () => {
-    const id =  userData?.id;
-    const token = AsyncStorage.getItem("token")
+  const handleDeleteProfile = async () => {
+    const id = userData?.id;
+    const token = await AsyncStorage.getItem("token");
     UserService.deleteUser(token, id)
       .then(() => {
-        AsyncStorage.setItem("token", null)
-        AsyncStorage.setItem("id", null )
-        navigation.navigate('Login')
-        })
-        .catch((error) => {
-          console.log("login", error);
-          setError(error.toString());
-        });
-          
+        AsyncStorage.setItem("token", null);
+        AsyncStorage.setItem("id", null);
+        navigation.navigate("Login");
+      })
+      .catch((error) => {
+        console.log("login", error);
+        setError(error.toString());
+      });
   };
 
   const handleAnalisis = () => {
-    navigation.navigate('Analisis'); 
+    navigation.navigate('Analisis');
   };
 
   const handleProfile = () => {
     // Lógica para manejar perfil
-    navigation.navigate('Profile'); 
-    Alert.alert('Perfil de usuario', `¡Hola ${userData?.name || ''} estas viendo tu perfil!`);
+    navigation.navigate('Profile');
+    Alert.alert('Botellas de amor', `¡Hola ${userData?.name || ''} estas viendo tu perfil!`);
   };
 
   return (

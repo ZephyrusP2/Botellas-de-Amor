@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import Login from "./src/templates/Login";
 import Register from "./src/templates/Register";
 import Content from "./src/templates/Content";
@@ -8,15 +8,34 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./src/templates/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Profile from "./src/templates/Profile";
-import Header from "./src/templates/Header";
 import Analisis from "./src/templates/Analisis";
+import { useState } from "react";
+import { useEffect } from "react";
+import EditProfile from "./src/templates/EditProfile";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const id = await AsyncStorage.getItem("id");
+      const token = await AsyncStorage.getItem("token");
+
+      if (id !== null && token !== null) {
+        setIsLoggedIn(true);
+      }
+
+      setIsLoading(false);
+    };
+
+    checkLoginStatus();
+  }, []);
+
   const [fontsLoaded, fontError] = useFonts({
     "League-Spartan": require("./src/assets/fonts/LeagueSpartan.ttf"),
   });
@@ -36,24 +55,17 @@ export default function App() {
   return (
     <NavigationContainer onReady={onLayoutRootView} style={styles.container}>
       <Stack.Navigator
+        initialRouteName={isLoggedIn ? "Content" : "Login"}
         screenOptions={{
           headerShown: false,
         }}
       >
-        {AsyncStorage.getItem("token") === null ||
-        AsyncStorage.getItem("id") === null ? (
-          <>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
-          </>
-        ) : (
-          <>
-          <Stack.Screen name="Content" component={Content} />
-          <Stack.Screen name="Header" component={Header} />
-          <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="Analisis" component={Analisis} />
-          </>
-        )}
+        <Stack.Screen name="Content" component={Content} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Analisis" component={Analisis} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

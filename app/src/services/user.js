@@ -52,6 +52,18 @@ class UserService {
         throw error;
       }
     };
+    update = async (token, id, userData) => {
+      try {
+        axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+        const response = await axios.put( 
+          `${this.server}/api/accounts/user/update/${id}`,
+          userData);
+          return response;
+        } catch (error) {
+          console.error("update error", error);
+          throw error;
+        }
+      };
 }
 
 export default new UserService();

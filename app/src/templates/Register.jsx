@@ -13,7 +13,7 @@ import {
 import StyledBackground from "../styles/StyledBackgroud";
 import StyledText from "../styles/StyledText";
 import StyledInput from "../styles/StyledInput";
-import StyledButton from "../styles/StyledButton";
+import {StyledButton} from "../styles/StyledButton";
 import { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";

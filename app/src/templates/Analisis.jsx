@@ -28,7 +28,7 @@ const Analisis = ({ navigation }) => {
   const handleAnalisis = () => {
 
         navigation.navigate('Analisis'); 
-        Alert.alert('Análisis', `¡Hola ${userData?.name || ''} estas viendo tus estadísticas!`);
+        Alert.alert('Botellas de amor', `¡Hola ${userData?.name || ''} estas viendo tus estadísticas!`);
   };
 
   const handleProfile = () => {

@@ -10,7 +10,7 @@ import {
 import StyledBackground from "../styles/StyledBackgroud";
 import StyledText from "../styles/StyledText";
 import StyledInput from "../styles/StyledInput";
-import StyledButton from "../styles/StyledButton";
+import {StyledButton} from "../styles/StyledButton";
 import { useState } from "react";
 import UserService from "../services/user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
