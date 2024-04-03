@@ -4,12 +4,15 @@ import UserService from "../../../services/user";
 import NavbarAdministradores from "../../../components/Administradores/Navbar";
 import "../../../App.css";
 import "../../../styles/Show.css";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const IndexUser = () => {
   document.title = "Usuarios";
   const token = localStorage.getItem("token");
 
   return (
+    <>
+    <SideBarAdministradores />
     <div className="show-container">
       <NavbarAdministradores />
       <MyTable
@@ -23,6 +26,7 @@ const IndexUser = () => {
         leadingAttribute={"email"}
       />
     </div>
+    </>
   );
 };
 

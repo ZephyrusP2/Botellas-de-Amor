@@ -32,7 +32,7 @@ const SideBarAdministradores = () => {
         <div>
           <a
             href="/Administrar/Proyectos"
-            className={`text-container d-flex  pb-3 align-items-center me-xl-auto text-white text-decoration-none ${currentPath.includes("/Administrar/Proyectos") ? "active" : ""}`}
+            className={`text-container d-flex  pb-3 align-items-center me-xl-auto text-white text-decoration-none ${currentPath.includes("/Administrar/") ? "active" : ""}`}
           >
             <svg
               className="sidebar-icon"
@@ -52,7 +52,7 @@ const SideBarAdministradores = () => {
           </a>
           <a
             href="/Administrar/Puntos-Acopio"
-            className={`text-container d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none ${currentPath.includes("/Administrar/Puntos-Acopio") ? "active" : ""}`}
+            className={`text-container d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none ${currentPath.includes("/Analisis/") ? "active" : ""}`}
           >
             <svg
               width="52"

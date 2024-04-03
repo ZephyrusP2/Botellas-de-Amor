@@ -1,22 +1,44 @@
-import React, { useState } from "react";
-import userService from "../../../services/user";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import UserService from "../../../services/user";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
-const CreateUser = () => {
-  document.title = "Crear usuario";
+const EditUser = ({ userId }) => {
+  document.title = "Editar usuario";
+  const { id } = useParams();
   const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [location, setLocation] = useState("");
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
+
+  const fetchUserData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await UserService.showUser(id, token);
+      setName(response.data.name);
+      setLastName(response.data.last_name);
+      setBirthDate(response.data.birth_date);
+      setLocation(response.data.location);
+      setGender(response.data.gender);
+      setEmail(response.data.email);
+      setRole(response.data.role);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setValidationErrors({ general: "Error al cargar los datos del usuario" });
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const validateUser = () => {
     const errors = {};
@@ -40,9 +62,6 @@ const CreateUser = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       errors.email = "Correo electrónico inválido";
     }
-    if (!password) {
-      errors.password = "Se requiere la contraseña";
-    }
     if (!role) {
       errors.role = "Se requiere seleccionar el rol";
     }
@@ -63,30 +82,26 @@ const CreateUser = () => {
       location: location,
       gender: gender,
       email: email,
-      password: password,
       role: role,
     };
 
     try {
-      console.log(gender, email, password);
       const token = localStorage.getItem("token");
-
-      const response = await userService.createUser(userData, token);
-      console.log("User created:", response);
+      const response = await UserService.updateUser(id, userData, token);
+      console.log("User updated:", response);
       setName("");
       setLastName("");
       setBirthDate("");
       setLocation("");
       setGender("");
       setEmail("");
-      setPassword("");
       setRole("");
       navigate("/Administrar/Usuarios");
     } catch (error) {
-      console.error("Error creating user:", error);
+      console.error("Error updating user:", error);
       setValidationErrors({
         ...validationErrors,
-        general: "Ocurrió un error al crear el usuario",
+        general: "Ocurrió un error al editar el usuario",
       });
     }
   };
@@ -96,11 +111,8 @@ const CreateUser = () => {
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/Administrar/Usuarios" />
-        <h1 className="container-fluid text-center">Crear usuario</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="d-flex flex-column align-items-center container m-0 p-0"
-        >
+        <h1 className="container-fluid text-center">Editar usuario</h1>
+        <form onSubmit={handleSubmit} className="d-flex flex-column align-items-center container m-0 p-0">
           {/* Name */}
           <label className="d-flex flex-column form-label w-50">
             Nombre
@@ -158,6 +170,7 @@ const CreateUser = () => {
               <span className="error-message">{validationErrors.location}</span>
             )}
           </label>
+
           {/* Gender */}
           <label className="d-flex flex-column form-label w-50">
             Género
@@ -190,20 +203,6 @@ const CreateUser = () => {
             )}
           </label>
 
-          {/* Password */}
-          <label className="d-flex flex-column form-label w-50">
-            Contraseña
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="form-control rounded-3"
-            />
-            {validationErrors.password && (
-              <span className="error-message">{validationErrors.password}</span>
-            )}
-          </label>
-
           {/* Role */}
           <label className="d-flex flex-column form-label w-50">
             Rol
@@ -221,13 +220,15 @@ const CreateUser = () => {
               <span className="error-message">{validationErrors.role}</span>
             )}
           </label>
+
           <button type="submit" className="btn btn-primary mt-3 w-50">
-            Crear usuario
+            Editar usuario
           </button>
         </form>
       </div>
     </>
-  );
-};
+    );
+}
 
-export default CreateUser;
+export default EditUser;
+    

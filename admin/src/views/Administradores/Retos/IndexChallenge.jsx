@@ -4,12 +4,15 @@ import ChallengeService from "../../../services/challenge";
 import NavbarAdministradores from "../../../components/Administradores/Navbar";
 import "../../../App.css";
 import "../../../styles/Show.css";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const IndexChallenge = () => {
   document.title = "Retos";
   const token = localStorage.getItem("token");
 
   return (
+    <>
+    <SideBarAdministradores />
     <div className="show-container">
       <NavbarAdministradores />
       <MyTable
@@ -23,6 +26,7 @@ const IndexChallenge = () => {
         leadingAttribute={"challenge"}
       />
     </div>
+    </>
   );
 };
 

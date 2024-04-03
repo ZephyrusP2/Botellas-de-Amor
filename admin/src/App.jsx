@@ -22,6 +22,7 @@ import IndexChallenge from "./views/Administradores/Retos/IndexChallenge";
 import IndexUser from "./views/Administradores/Usuarios/IndexUser";
 import CreateUser from "./views/Administradores/Usuarios/CreateUser";
 import ShowUser from "./views/Administradores/Usuarios/ShowUser";
+import EditUser from "./views/Administradores/Usuarios/EditUser";
 
 export default function App() {
   return (
@@ -32,22 +33,11 @@ export default function App() {
 }
 
 function AppContent() {
-  const xd = async () => {
-    console.log(localStorage.getItem("token"));
-  };
-  xd();
   const location = useLocation();
   const isRootPath = location.pathname === "/";
 
   return (
     <div className="principal-container">
-      {isRootPath ? null : location.pathname.startsWith(
-          "/Registro-Botellas"
-        ) ? (
-        <SideBarOperadores />
-      ) : (
-        <SideBarAdministradores />
-      )}
       <Routes>
         {localStorage.getItem("token") === null ? (
           <>
@@ -57,6 +47,8 @@ function AppContent() {
           <>
             {localStorage.getItem("role") === "admin" ? (
               <>
+                {/*<SideBarAdministradores >  */}
+
                 {/* RUTAS DE ADMINISTRADORES */}
                 <Route
                   path="/Administrar/Proyectos"
@@ -87,12 +79,18 @@ function AppContent() {
                   element={<CreateUser />}
                 />
                 <Route
+                  path="/Administrar/Usuarios/Editar/:id"
+                  element={<EditUser />}
+                />
+                <Route
                   path="/Administrar/Usuarios/:id"
                   element={<ShowUser />}
                 />
               </>
             ) : (
               <>
+                <SideBarOperadores />
+
                 {/* RUTAS DE OPERADORES */}
                 <Route path="/Registro-Botellas" element={<OperatorView />} />
                 <Route path="/Registro-Botellas" element={<OperatorView />} />

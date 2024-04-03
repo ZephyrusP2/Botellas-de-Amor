@@ -3,6 +3,7 @@ import UserService from "../../../services/user";
 import { useParams } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const ShowUser = () => {
   document.title = "Ver usuario";
@@ -20,6 +21,8 @@ const ShowUser = () => {
   }, [id]);
 
   return (
+    <>
+    <SideBarAdministradores/>
     <div className="d-flex flex-column container-fluid p-2">
       <BackButton route="/Administrar/Usuarios" />
       <div className="d-flex align-items-center flex-column">
@@ -55,6 +58,7 @@ const ShowUser = () => {
         <p className="">{userData.carbon_footprint}</p>
       </div>
     </div>
+    </>
   );
 };
 
