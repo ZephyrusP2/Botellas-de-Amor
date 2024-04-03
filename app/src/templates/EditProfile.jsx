@@ -53,7 +53,7 @@ const EditProfile = ({ navigation }) => {
       setUserData(response.data);
       Alert.alert(
         "Botellas de amor",
-        "Se actualizó la información correctamente."
+        `¡Hola ${userData?.name || ""} se actualizó la información correctamente!`
       );
     } catch (error) {
       console.error("getUserData error", error);
