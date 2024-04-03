@@ -1,13 +1,13 @@
 import React from "react";
 import MyTable from "../../../components/MyTable";
-import ChallengeService from "../../../services/challenge";
+import UserService from "../../../services/user";
 import NavbarAdministradores from "../../../components/Administradores/Navbar";
 import "../../../App.css";
 import "../../../styles/Show.css";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
-const IndexChallenge = () => {
-  document.title = "Retos";
+const IndexUser = () => {
+  document.title = "Usuarios";
   const token = localStorage.getItem("token");
 
   return (
@@ -17,17 +17,17 @@ const IndexChallenge = () => {
       <NavbarAdministradores />
       <MyTable
         createPath={"Crear"}
-        editPath={"/Administrar/Retos/Editar/"}
-        showPath={"/Administrar/Retos/"}
+        editPath={"/Administrar/Usuarios/Editar/"}
+        showPath={"/Administrar/Usuarios/"}
         deleteFunction={async (id) =>
-          await ChallengeService.deleteChallenge(id, token)
+          await UserService.deleteUser(id, token)
         }
-        fetchFunction={async () => await ChallengeService.listChallenge(token)}
-        leadingAttribute={"challenge"}
+        fetchFunction={async () => await UserService.listUser(token)}
+        leadingAttribute={"email"}
       />
     </div>
     </>
   );
 };
 
-export default IndexChallenge;
+export default IndexUser;

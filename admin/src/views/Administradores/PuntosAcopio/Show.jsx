@@ -1,10 +1,13 @@
 import React from 'react';
 import NavbarAdministradores from "../../../components/Administradores/Navbar"
 import "../../../App.css"
+import SideBarAdministradores from '../../../components/Administradores/SideBar';
 import "../../../styles/Show.css"
 
 const ShowPuntosAcopio = () => {
     return (
+        <>
+        <SideBarAdministradores/>
         <div className="show-container">
             <NavbarAdministradores/>
             <div className="show-content">
@@ -43,6 +46,7 @@ const ShowPuntosAcopio = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 };
 

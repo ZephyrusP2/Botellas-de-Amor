@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 from backend.permissions import IsAdmin, IsAdminOrSelf
 
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserUpdateSerializer
 from rest_framework.views import APIView
 
 # Create your views here.
@@ -32,7 +32,7 @@ class UserData(generics.RetrieveAPIView):
         return User.objects.all()
 
 
-class UserList(generics.ListCreateAPIView):
+class UserList(generics.ListAPIView):
     """
     Admin user list
     """
@@ -47,6 +47,15 @@ class UserList(generics.ListCreateAPIView):
         """
         return User.objects.all()
 
+
+class UserCreate(generics.CreateAPIView):
+    """
+    User create
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
     def perform_create(self, serializer):
         """
         Perform create
@@ -58,6 +67,73 @@ class UserList(generics.ListCreateAPIView):
         if password:
             instance.set_password(password)
         instance.save()
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
+
+
+class UserRetrieve(generics.RetrieveAPIView):
+    """
+    User retrieve
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
+
+
+class UserUpdate(generics.UpdateAPIView):
+    """
+    User update
+    """
+
+    serializer_class = UserUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+
+    http_method_names = ["put"]
+
+    def perform_update(self, serializer):
+        """
+        Perform update
+        :param serializer: serializer
+        :return: None
+        """
+        serializer.save()
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
+
+
+class UserDelete(generics.DestroyAPIView):
+    """
+    User delete
+    """
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+
+    http_method_names = ["delete"]
+
+    def get_queryset(self):
+        """
+        Get queryset
+        :return: QuerySet
+        """
+        return User.objects.all()
 
 
 @csrf_exempt

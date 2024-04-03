@@ -3,6 +3,7 @@ import challengeService from "../../../services/challenge";
 import { useParams } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
+import SideBarAdministradores from '../../../components/Administradores/SideBar';
 
 const ShowChallenge = () => {
   document.title = "Ver reto";
@@ -20,19 +21,22 @@ const ShowChallenge = () => {
   }, [id]);
 
   return (
+    <>
+    <SideBarAdministradores/>
     <div className="d-flex flex-column container-fluid p-2">
       <BackButton route="/Administrar/Retos" />
       <div className="d-flex align-items-center flex-column">
-        <h2 className="blue-text">
+        <h2 className="blue-text display-5">
           <strong>Reto</strong>
         </h2>
-        <p>{challengeData.challenge}</p>
-        <h2 className="blue-text">
+        <p className="display-6">{challengeData.challenge}</p>
+        <h2 className="blue-text display-5">
           <strong>Experiencia</strong>
         </h2>
-        <p>{challengeData.experience}</p>
+        <p className="display-6">{challengeData.experience}</p>
       </div>
     </div>
+    </>
   );
 };
 

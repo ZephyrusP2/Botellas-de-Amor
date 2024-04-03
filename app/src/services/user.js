@@ -33,7 +33,7 @@ class UserService {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
-        `${this.server}/api/accounts/user/data/${id}`
+        `${this.server}/api/accounts/user/show/${id}`
       );
       return response;
     } catch (error) {
