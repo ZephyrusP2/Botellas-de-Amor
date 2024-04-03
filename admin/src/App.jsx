@@ -1,18 +1,104 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Login from "./views/LoginView";
-import AdminView from "./views/AdminView";
-import OperatorView from "./views/OperatorView";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SideBarAdministradores from "./components/Administradores/SideBar";
+import SideBarOperadores from "./components/Operadores/SideBar"; // Importar Sidebar2
+import "./styles/SideBar.css";
 import "./App.css";
+import OperatorView from "./views/OperatorView";
+import ShowPuntosAcopio from "./views/Administradores/PuntosAcopio/Show";
+import ShowProyectos from "./views/Administradores/Proyectos/Show";
+
+import CreateChallenge from "./views/Administradores/Retos/CreateChallenge";
+import ShowChallenge from "./views/Administradores/Retos/ShowChallenge";
+import EditChallenge from "./views/Administradores/Retos/EditChallenge";
+import IndexChallenge from "./views/Administradores/Retos/IndexChallenge";
+
+import IndexUser from "./views/Administradores/Usuarios/IndexUser";
+import CreateUser from "./views/Administradores/Usuarios/CreateUser";
+import ShowUser from "./views/Administradores/Usuarios/ShowUser";
+import EditUser from "./views/Administradores/Usuarios/EditUser";
 
 export default function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/admin" element={<AdminView />} />
-        <Route path="/operator" element={<OperatorView />} />
-      </Routes>
+      <AppContent />
     </Router>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isRootPath = location.pathname === "/";
+
+  return (
+    <div className="principal-container">
+      <Routes>
+        {localStorage.getItem("token") === null ? (
+          <>
+            <Route path="/" element={<Login />} />
+          </>
+        ) : (
+          <>
+            {localStorage.getItem("role") === "admin" ? (
+              <>
+                {/*<SideBarAdministradores >  */}
+
+                {/* RUTAS DE ADMINISTRADORES */}
+                <Route
+                  path="/Administrar/Proyectos"
+                  element={<ShowProyectos />}
+                />
+                <Route
+                  path="/Administrar/Puntos-Acopio"
+                  element={<ShowPuntosAcopio />}
+                />
+
+                <Route path="/Administrar/Retos" element={<IndexChallenge />} />
+                <Route
+                  path="/Administrar/Retos/Crear"
+                  element={<CreateChallenge />}
+                />
+                <Route
+                  path="/Administrar/Retos/Editar/:id"
+                  element={<EditChallenge />}
+                />
+                <Route
+                  path="/Administrar/Retos/:id"
+                  element={<ShowChallenge />}
+                />
+
+                <Route path="/Administrar/Usuarios" element={<IndexUser />} />
+                <Route
+                  path="/Administrar/Usuarios/Crear"
+                  element={<CreateUser />}
+                />
+                <Route
+                  path="/Administrar/Usuarios/Editar/:id"
+                  element={<EditUser />}
+                />
+                <Route
+                  path="/Administrar/Usuarios/:id"
+                  element={<ShowUser />}
+                />
+              </>
+            ) : (
+              <>
+                <SideBarOperadores />
+
+                {/* RUTAS DE OPERADORES */}
+                <Route path="/Registro-Botellas" element={<OperatorView />} />
+                <Route path="/Registro-Botellas" element={<OperatorView />} />
+              </>
+            )}
+          </>
+        )}
+      </Routes>
+    </div>
   );
 }
