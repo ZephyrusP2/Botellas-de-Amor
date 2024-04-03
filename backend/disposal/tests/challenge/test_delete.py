@@ -1,6 +1,6 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 from accounts.models import User
 from disposal.models import Challenge
@@ -30,13 +30,15 @@ class ChallengeDeleteTestCase(APITestCase):
 
     def test_challenge_delete_success(self):
         response = self.client.delete(
-            reverse("challenge.delete", args=[self.challenge.id]))
+            reverse("challenge.delete", args=[self.challenge.id])
+        )
         self.assertEqual(response.status_code, 204)
 
     def test_challenge_delete_unauthorized(self):
         self.client.credentials()
         response = self.client.delete(
-            reverse("challenge.delete", args=[self.challenge.id]))
+            reverse("challenge.delete", args=[self.challenge.id])
+        )
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 

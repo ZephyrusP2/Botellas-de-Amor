@@ -1,8 +1,8 @@
 from django.urls import reverse
-from accounts.models import User
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
+from accounts.models import User
 from disposal.models import Disposition, Site
 from disposal.views.disposition import carbon_footprint
 
@@ -17,7 +17,7 @@ class DispositionUpdateTestCase(APITestCase):
             email="user@example.com",
             password="userpassword",
             role="user",
-            carbon_footprint=carbon_footprint
+            carbon_footprint=carbon_footprint,
         )
         self.user.set_password("userpassword")
         self.user.save()
@@ -34,8 +34,7 @@ class DispositionUpdateTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.operator_token = Token.objects.create(user=self.operator_user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
 
         self.site = Site.objects.create(
             image="path/to/image",
@@ -63,7 +62,7 @@ class DispositionUpdateTestCase(APITestCase):
             "weight": 2.0,
             "user": self.user.id,
             "operator": self.operator_user.id,
-            "site": self.site.id
+            "site": self.site.id,
         }
         response = self.client.put(self.url, data)
         self.assertEqual(response.status_code, 200)
@@ -82,21 +81,20 @@ class DispositionUpdateTestCase(APITestCase):
             "weight": 2.0,
             "user": self.user.id,
             "operator": self.operator_user.id,
-            "site": self.site.id
+            "site": self.site.id,
         }
         response = self.client.put(self.url, data)
         self.assertEqual(response.status_code, 401)
 
     def test_update_disposition_with_user(self):
         user_token = Token.objects.create(user=self.user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + user_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + user_token.key)
         data = {
             "bottles": 2,
             "weight": 2.0,
             "user": self.user.id,
             "operator": self.operator_user.id,
-            "site": self.site.id
+            "site": self.site.id,
         }
         response = self.client.put(self.url, data)
         self.assertEqual(response.status_code, 403)

@@ -20,19 +20,19 @@ const StyledBackground = ({ bg, display, children, style, ...restOfProps }) => {
       alignItems: "center",
     },
     displayContent: {
-      
       justifyContent: "center",
       alignItems: "center",
-    }
-    
+    },
   });
 
   const backgroundStyles = [
-    bg === "primary" && styles.bgPrimary, 
-    bg === "secondary" && styles.bgSecondary, 
-    display === "center" && styles.displayCenter ,
-    display === "row" && styles.displayRow ,
-    display === "content" && styles.displayContent , style];
+    bg === "primary" && styles.bgPrimary,
+    bg === "secondary" && styles.bgSecondary,
+    display === "center" && styles.displayCenter,
+    display === "row" && styles.displayRow,
+    display === "content" && styles.displayContent,
+    style,
+  ];
 
   return (
     <View style={backgroundStyles} {...restOfProps}>

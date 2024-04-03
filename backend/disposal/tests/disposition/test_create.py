@@ -1,8 +1,8 @@
 from django.urls import reverse
-from accounts.models import User
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
+from accounts.models import User
 from disposal.models import Disposition, Site
 from disposal.views.disposition import carbon_footprint
 
@@ -33,8 +33,7 @@ class DispositionCreateTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.operator_token = Token.objects.create(user=self.operator_user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
 
         self.site = Site.objects.create(
             image="path/to/image",

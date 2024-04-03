@@ -21,7 +21,6 @@ const SideBarAdministradores = () => {
     };
   }, []);
 
-
   const logout = () => {
     localStorage.clear();
     navigate("/");

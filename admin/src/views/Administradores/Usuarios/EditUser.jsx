@@ -112,7 +112,10 @@ const EditUser = ({ userId }) => {
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/Administrar/Usuarios" />
         <h1 className="container-fluid text-center">Editar usuario</h1>
-        <form onSubmit={handleSubmit} className="d-flex flex-column align-items-center container m-0 p-0">
+        <form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column align-items-center container m-0 p-0"
+        >
           {/* Name */}
           <label className="d-flex flex-column form-label w-50">
             Nombre
@@ -227,8 +230,7 @@ const EditUser = ({ userId }) => {
         </form>
       </div>
     </>
-    );
-}
+  );
+};
 
 export default EditUser;
-    

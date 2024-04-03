@@ -1,7 +1,6 @@
-
 from rest_framework import generics, permissions
-from backend.permissions import IsAdmin
 
+from backend.permissions import IsAdmin
 from disposal.models import Site
 from disposal.serializers import SiteSerializer
 

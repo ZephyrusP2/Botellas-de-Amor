@@ -48,7 +48,7 @@ const CreateSite = () => {
       opens,
       closes,
       name,
-      address
+      address,
     };
 
     try {
@@ -59,7 +59,6 @@ const CreateSite = () => {
       setCloses("");
       setAddress("");
       setName("");
-
 
       navigate(`/Administrar/Puntos-Acopio`);
     } catch (error) {
@@ -113,39 +112,37 @@ const CreateSite = () => {
           )}
         </label>
 
-      <label className="d-flex flex-column form-label w-50">
-        Nombre
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="form-control rounded-3"
-        />
-        {validationErrors.name && (
-          <span className="error-message">{validationErrors.name}</span>
-        )}
-      </label>
-      <label className="d-flex flex-column form-label w-50">
-        Dirección
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          className="form-control rounded-3"
-        />
-        {validationErrors.address && (
-          <span className="error-message">{validationErrors.address}</span>
-        )}
-      </label>
+        <label className="d-flex flex-column form-label w-50">
+          Nombre
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="form-control rounded-3"
+          />
+          {validationErrors.name && (
+            <span className="error-message">{validationErrors.name}</span>
+          )}
+        </label>
+        <label className="d-flex flex-column form-label w-50">
+          Dirección
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className="form-control rounded-3"
+          />
+          {validationErrors.address && (
+            <span className="error-message">{validationErrors.address}</span>
+          )}
+        </label>
 
-
-
-      <br />
-      <button type="submit" className="btn btn-primary btn-md w-50">
-        Crear
-      </button>
-    </form>
-    </div >
+        <br />
+        <button type="submit" className="btn btn-primary btn-md w-50">
+          Crear
+        </button>
+      </form>
+    </div>
   );
 };
 

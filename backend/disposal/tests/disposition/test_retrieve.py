@@ -1,8 +1,8 @@
 from django.urls import reverse
-from accounts.models import User
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
+from accounts.models import User
 from disposal.models import Disposition, Site
 
 
@@ -32,8 +32,7 @@ class DispositionRetrieveTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.operator_token = Token.objects.create(user=self.operator_user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
 
         self.site = Site.objects.create(
             image="path/to/image",
@@ -48,7 +47,7 @@ class DispositionRetrieveTestCase(APITestCase):
             weight=1.0,
             user=self.user,
             operator=self.operator_user,
-            site=self.site
+            site=self.site,
         )
 
         self.url = reverse("disposition.show", args=[self.disposition.id])
@@ -69,12 +68,12 @@ class DispositionRetrieveTestCase(APITestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 401)
         self.assertEqual(
-            response.data["detail"], "Authentication credentials were not provided.")
+            response.data["detail"], "Authentication credentials were not provided."
+        )
 
     def test_retrieve_disposition_as_user(self):
         user_token = Token.objects.create(user=self.user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + user_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + user_token.key)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["bottles"], 1)
@@ -97,9 +96,10 @@ class DispositionRetrieveTestCase(APITestCase):
         another_user.set_password("anotherpassword")
         another_user.save()
         another_user_token = Token.objects.create(user=another_user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + another_user_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + another_user_token.key)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 403)
         self.assertEqual(
-            response.data["detail"], "You do not have permission to perform this action.")
+            response.data["detail"],
+            "You do not have permission to perform this action.",
+        )

@@ -3,7 +3,7 @@ import challengeService from "../../../services/challenge";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
-import SideBarAdministradores from '../../../components/Administradores/SideBar';
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const EditChallenge = () => {
   document.title = "Editar reto";
@@ -48,7 +48,7 @@ const EditChallenge = () => {
       const response = await challengeService.updateChallenge(
         id,
         challengeData,
-        token
+        token,
       );
       console.log("Challenge updated successfully:", response.data);
       navigate(`/Administrar/Retos`);
@@ -69,55 +69,59 @@ const EditChallenge = () => {
 
   return (
     <>
-    <SideBarAdministradores/>
-    <div className="d-flex flex-column align-items-start p-4 container-fluid">
-      <BackButton route="/Administrar/Retos" />
-      <h2 className="container-fluid text-center">Editar reto</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="d-flex flex-column align-items-center container m-0 p-0"
-      >
-        <label
-          htmlFor="challenge"
-          className="d-flex flex-column form-label w-50"
+      <SideBarAdministradores />
+      <div className="d-flex flex-column align-items-start p-4 container-fluid">
+        <BackButton route="/Administrar/Retos" />
+        <h2 className="container-fluid text-center">Editar reto</h2>
+        <form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column align-items-center container m-0 p-0"
         >
-          Reto
-          <input
-            type="text"
-            name="challenge"
-            id="challenge"
-            value={challengeData.challenge}
-            onChange={handleInputChange}
-            className="form-control rounded-3"
-          />
-          {validationErrors.challenge && (
-            <span className="error-message">{validationErrors.challenge}</span>
-          )}
-        </label>
+          <label
+            htmlFor="challenge"
+            className="d-flex flex-column form-label w-50"
+          >
+            Reto
+            <input
+              type="text"
+              name="challenge"
+              id="challenge"
+              value={challengeData.challenge}
+              onChange={handleInputChange}
+              className="form-control rounded-3"
+            />
+            {validationErrors.challenge && (
+              <span className="error-message">
+                {validationErrors.challenge}
+              </span>
+            )}
+          </label>
 
-        <label
-          htmlFor="experience"
-          className="d-flex flex-column form-label w-50"
-        >
-          Experiencia
-          <input
-            type="number"
-            name="experience"
-            id="experience"
-            value={challengeData.experience}
-            onChange={handleInputChange}
-            className="form-control rounded-3"
-          />
-          {validationErrors.experience && (
-            <span className="error-message">{validationErrors.experience}</span>
-          )}
-        </label>
+          <label
+            htmlFor="experience"
+            className="d-flex flex-column form-label w-50"
+          >
+            Experiencia
+            <input
+              type="number"
+              name="experience"
+              id="experience"
+              value={challengeData.experience}
+              onChange={handleInputChange}
+              className="form-control rounded-3"
+            />
+            {validationErrors.experience && (
+              <span className="error-message">
+                {validationErrors.experience}
+              </span>
+            )}
+          </label>
 
-        <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
-          Save Changes
-        </button>
-      </form>
-    </div>
+          <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
+            Save Changes
+          </button>
+        </form>
+      </div>
     </>
   );
 };

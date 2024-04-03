@@ -16,7 +16,10 @@ class dispositionService {
 
   updateDisposition(id, data, token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    return axios.put(`${this.server}/api/disposal/disposition/update/${id}`, data);
+    return axios.put(
+      `${this.server}/api/disposal/disposition/update/${id}`,
+      data,
+    );
   }
 
   deleteDisposition(id, token) {
@@ -28,7 +31,6 @@ class dispositionService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(`${this.server}/api/disposal/disposition/show/${id}`);
   }
-
 }
 
 export default new dispositionService();

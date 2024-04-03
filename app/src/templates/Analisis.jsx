@@ -30,7 +30,7 @@ const Analisis = ({ navigation }) => {
     navigation.navigate("Analisis");
     Alert.alert(
       "Botellas de amor",
-      `¡Hola ${userData?.name || ""} estas viendo tus estadísticas!`
+      `¡Hola ${userData?.name || ""} estas viendo tus estadísticas!`,
     );
   };
 

@@ -28,7 +28,6 @@ class siteService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(`${this.server}/api/disposal/site/show/${id}`);
   }
-
 }
 
 export default new siteService();

@@ -1,11 +1,12 @@
-from rest_framework import generics, permissions
-from backend.permissions import IsAdmin
-
-from disposal.models import Challenge, Bottle
-from disposal.serializers import ChallengesSerializer
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.authentication import TokenAuthentication
 from django.http import JsonResponse
+from rest_framework import generics, permissions
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import (api_view, authentication_classes,
+                                       permission_classes)
+
+from backend.permissions import IsAdmin
+from disposal.models import Bottle, Challenge
+from disposal.serializers import ChallengesSerializer
 
 
 class Create(generics.CreateAPIView):

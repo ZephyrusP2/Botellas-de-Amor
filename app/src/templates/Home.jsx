@@ -13,7 +13,7 @@ export default function Home() {
   const [userData, setUserData] = useState();
   const [challenges, setChallenges] = useState([]);
   const [isChecked, setChecked] = useState(
-    new Array(challenges.length).fill(false)
+    new Array(challenges.length).fill(false),
   );
   const [bottleData, setBottleData] = useState();
 

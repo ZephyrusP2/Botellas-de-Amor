@@ -28,7 +28,6 @@ class UserService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(`${this.server}/api/accounts/user/show/${id}`);
   }
-
 }
 
 export default new UserService();

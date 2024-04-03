@@ -1,10 +1,8 @@
-import Navigation from './Navigation'
-import { Text } from 'react-native'
+import Navigation from "./Navigation";
+import { Text } from "react-native";
 
 const Content = () => {
-    return(
-        <Navigation />
-    )
-}
+  return <Navigation />;
+};
 
-export default Content 
+export default Content;

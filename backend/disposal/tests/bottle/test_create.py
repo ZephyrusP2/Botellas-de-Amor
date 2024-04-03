@@ -1,8 +1,9 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 from accounts.models import User
+
 
 class BottleCreateTestCase(APITestCase):
     def setUp(self):
@@ -22,7 +23,7 @@ class BottleCreateTestCase(APITestCase):
         self.url = reverse("bottle.create")
 
         return super().setUp()
-    
+
     def test_bottle_create_success(self):
         data = {"experience": 100, "level": 1, "user": 1}
         response = self.client.post(self.url, data, format="json")
@@ -34,9 +35,7 @@ class BottleCreateTestCase(APITestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
         self.assertIn("level", response.json())
-        self.assertEqual(response.json()["level"], [
-            "This field is required."
-        ])
+        self.assertEqual(response.json()["level"], ["This field is required."])
 
     def test_bottle_create_unauthorized(self):
         self.client.credentials()
