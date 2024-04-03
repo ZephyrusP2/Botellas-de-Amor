@@ -19,7 +19,7 @@ class ChallengeService {
   toggle = async (token, challengeData) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
-      const response = await axios.get(
+      const response = await axios.post(
         `${this.server}/api/disposal/challenge/toggle`,
         challengeData
       );
