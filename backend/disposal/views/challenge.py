@@ -3,7 +3,9 @@ from backend.permissions import IsAdmin
 
 from disposal.models import Challenge, Bottle
 from disposal.serializers import ChallengesSerializer
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.authentication import TokenAuthentication
+from django.http import JsonResponse
 
 
 class Create(generics.CreateAPIView):
@@ -119,8 +121,11 @@ class List(generics.ListAPIView):
         """
         return Challenge.objects.all()
 
-@api_view(["POST"])  
-def is_checked(self, request):
+
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def toggle(request):
     """
     Check if the challenge is checked
     :return: bool
@@ -140,3 +145,4 @@ def is_checked(self, request):
         if bottle.experience < 0:
             bottle.experience = 0
         bottle.save()
+    return JsonResponse({"level": bottle.level})

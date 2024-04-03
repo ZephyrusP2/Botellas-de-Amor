@@ -21,7 +21,7 @@ urlpatterns = [
     path("challenge/delete/<int:pk>",
          ChallengeView.Delete.as_view(), name="challenge.delete"),
     path("challenge/list", ChallengeView.List.as_view(), name="challenge.list"),
-    path("challenge/is_checked", ChallengeView.is_checked, name="challenge.is_checked"),
+    path("challenge/toggle", ChallengeView.toggle, name="challenge.toggle"),
 
     path("disposition/list", DispositionView.List.as_view(),
          name="disposition.list"),
@@ -34,10 +34,12 @@ urlpatterns = [
     path("disposition/delete/<int:pk>", DispositionView.Delete.as_view(),
          name="disposition.delete"),
 
-     path("bottle/create", BottleView.Create.as_view(), name="bottle.create"),
-     path("bottle/show/<int:pk>", BottleView.Retreive.as_view(), name="bottle.show"),
-     path("bottle/update/<int:pk>", BottleView.Update.as_view(), name="bottle.update"),
-     path("bottle/delete/<int:pk>", BottleView.Delete.as_view(), name="bottle.delete"),
-     path("bottle/list", BottleView.List.as_view(), name="bottle.list"),
+    path("bottle/create", BottleView.Create.as_view(), name="bottle.create"),
+    path("bottle/show/<int:pk>", BottleView.Retreive.as_view(), name="bottle.show"),
+    path("bottle/update/<int:pk>",
+         BottleView.Update.as_view(), name="bottle.update"),
+    path("bottle/delete/<int:pk>",
+         BottleView.Delete.as_view(), name="bottle.delete"),
+    path("bottle/list", BottleView.List.as_view(), name="bottle.list"),
 
 ]
