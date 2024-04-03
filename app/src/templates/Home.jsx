@@ -15,6 +15,7 @@ export default function Home() {
   const [isChecked, setChecked] = useState(
     new Array(challenges.length).fill(false)
   );
+  const [bottleData, setBottleData] = useState();
 
   useEffect(() => {
     retreiveUser();
@@ -51,12 +52,16 @@ export default function Home() {
     const status = newChecked[index] ? "checked" : "unchecked";
     const challengeData = {
       challenge_id: challenges[index].id,
-      status: userData.id,
+      status: status,
     };
     const token = await AsyncStorage.getItem("token");
-    ChallengeService.toggle(challengeData, token).catch((error) => {
-      console.error("toggle error", error);
-    });
+    ChallengeService.toggle(token, challengeData)
+      .then((response) => {
+        setBottleData(response.data);
+      })
+      .catch((error) => {
+        console.error("toggle error", error);
+      });
   };
 
   return (
