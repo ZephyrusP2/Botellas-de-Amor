@@ -3,35 +3,31 @@ import axios from "axios";
 class ChallengeService {
   server = `http://${process.env.SERVER_IP}:8000`;
 
-  getChallengeList = async (token) => {
+  list = async (token) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
         `${this.server}/api/disposal/challenge/list`
       );
-      return response.data; 
+      return response.data;
     } catch (error) {
-      console.error("getChallengeList error", error);
+      console.error("list error", error);
       throw error;
     }
   };
-}
 
-class ChallengeIsCheckService {
-  server = `http://${process.env.SERVER_IP}:8000`;
-
-  getChallengeIsCheck = async (token) => {
+  toggle = async (token) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
         `${this.server}/api/disposal/challenge/ischeck`
       );
-      return response.data; 
+      return response.data;
     } catch (error) {
-      console.error("getChallengeIsCheck error", error);
+      console.error("toggle error", error);
       throw error;
     }
   };
 }
 
-export default new ChallengeService() || new ChallengeIsCheckService();
+export default new ChallengeService();
