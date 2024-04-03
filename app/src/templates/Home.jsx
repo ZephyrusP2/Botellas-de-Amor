@@ -10,18 +10,18 @@ export default function Home() {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
-    getUserData();
+    retreiveUser();
   }, []);
 
-  const getUserData = async () => {
+  const retreiveUser = async () => {
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("id");
-    UserService.getUserData(token, id)
+    UserService.retreive(token, id)
       .then((response) => {
         setUserData(response.data);
       })
       .catch((error) => {
-        console.error("getUserData error", error);
+        console.error("retreiveUser error", error);
       });
   };
 
