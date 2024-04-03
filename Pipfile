@@ -4,13 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-isort = "*"
-black = "*"
-djangorestframework = "*"
-django-cors-headers = "*"
-python-dotenv = "*"
-tzdata = "*"
 
 [dev-packages]
 

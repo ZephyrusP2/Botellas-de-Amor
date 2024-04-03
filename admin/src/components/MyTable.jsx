@@ -30,7 +30,7 @@ const MyTable = ({
   }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
@@ -58,7 +58,7 @@ const MyTable = ({
   };
 
   return (
-    <div className="align-items-center flex-column p-2">
+    <div className="show-content ">
       <div className="d-flex justify-content-center align-content-center mt-2">
         <svg
           className="hover-cursor"
@@ -76,7 +76,7 @@ const MyTable = ({
         </svg>
       </div>
 
-      <div className="p-2">
+      <div className="acopios-container">
         {currentItems.map((data) => (
           <TableItem
             key={data.id}
@@ -95,7 +95,7 @@ const MyTable = ({
         >
           Anterior
         </button>
-        <span className="col-auto">
+        <span className="col-auto mt-2">
           {currentPage}..{numberPages}
         </span>
         <button

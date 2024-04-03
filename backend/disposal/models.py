@@ -1,4 +1,5 @@
 from django.db import models
+
 from accounts.models import User
 
 
@@ -25,6 +26,7 @@ class Challenge(models.Model):
     """
     Challenge model
     """
+
     id = models.AutoField(primary_key=True)
     challenge = models.CharField(max_length=50)
     experience = models.IntegerField()
@@ -40,13 +42,15 @@ class Disposition(models.Model):
     """
     Disposition model
     """
+
     id = models.AutoField(primary_key=True)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     bottles = models.IntegerField()
     weight = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     operator = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="operator")
+        User, on_delete=models.CASCADE, related_name="operator"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -61,6 +65,7 @@ class Bottle(models.Model):
     """
     Bottle model
     """
+
     id = models.AutoField(primary_key=True)
     experience = models.IntegerField(default=0)
     level = models.IntegerField(default=1)

@@ -3,8 +3,7 @@ import challengeService from "../../../services/challenge";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
-import SideBarAdministradores from '../../../components/Administradores/SideBar';
-
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const CreateChallenge = () => {
   document.title = "Crear reto";
@@ -51,44 +50,48 @@ const CreateChallenge = () => {
 
   return (
     <>
-    <SideBarAdministradores/>
-    <div className="d-flex flex-column align-items-start p-4 container-fluid">
-      <BackButton route="/Administrar/Retos" />
-      <h1 className="container-fluid text-center">Crear reto</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="d-flex flex-column align-items-center container m-0 p-0"
-      >
-        <label className="d-flex flex-column form-label w-50">
-          Reto
-          <input
-            type="text"
-            value={challenge}
-            onChange={(e) => setChallenge(e.target.value)}
-            className="form-control rounded-3"
-          />
-          {validationErrors.challenge && (
-            <span className="error-message">{validationErrors.challenge}</span>
-          )}
-        </label>
-        <label className="d-flex flex-column form-label w-50">
-          Experiencia
-          <input
-            type="number"
-            value={experience}
-            onChange={(e) => setExperience(e.target.value)}
-            className="form-control rounded-3"
-          />
-          {validationErrors.experience && (
-            <span className="error-message">{validationErrors.experience}</span>
-          )}
-        </label>
-        <br />
-        <button type="submit" className="btn btn-primary btn-md w-50">
-          Crear
-        </button>
-      </form>
-    </div>
+      <SideBarAdministradores />
+      <div className="d-flex flex-column align-items-start p-4 container-fluid">
+        <BackButton route="/Administrar/Retos" />
+        <h1 className="container-fluid text-center">Crear reto</h1>
+        <form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column align-items-center container m-0 p-0"
+        >
+          <label className="d-flex flex-column form-label w-50">
+            Reto
+            <input
+              type="text"
+              value={challenge}
+              onChange={(e) => setChallenge(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.challenge && (
+              <span className="error-message">
+                {validationErrors.challenge}
+              </span>
+            )}
+          </label>
+          <label className="d-flex flex-column form-label w-50">
+            Experiencia
+            <input
+              type="number"
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.experience && (
+              <span className="error-message">
+                {validationErrors.experience}
+              </span>
+            )}
+          </label>
+          <br />
+          <button type="submit" className="btn btn-primary btn-md w-50">
+            Crear
+          </button>
+        </form>
+      </div>
     </>
   );
 };

@@ -1,8 +1,8 @@
 from django.urls import reverse
-from accounts.models import User
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
+from accounts.models import User
 from disposal.models import Disposition, Site
 
 
@@ -48,7 +48,7 @@ class DispositionListTestCase(APITestCase):
             weight=1.0,
             user=self.admin_user,
             operator=self.operator_user,
-            site=self.site
+            site=self.site,
         )
 
         self.disposition2 = Disposition.objects.create(
@@ -56,7 +56,7 @@ class DispositionListTestCase(APITestCase):
             weight=2.0,
             user=self.operator_user,
             operator=self.admin_user,
-            site=self.site
+            site=self.site,
         )
 
         self.url = reverse("disposition.list")
@@ -74,8 +74,7 @@ class DispositionListTestCase(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_list_dispositions_operator(self):
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 2)

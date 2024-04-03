@@ -1,10 +1,10 @@
 import React from "react";
 import NavbarAdministradores from "../../../components/Administradores/Navbar";
 import "../../../App.css";
-import "../../../styles/Show.css";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import "../../../styles/Show.css";
 
-const ShowProyectos = () => {
+const ShowUsuarios = () => {
   return (
     <>
       <SideBarAdministradores />
@@ -29,7 +29,7 @@ const ShowProyectos = () => {
           </div>
           <div className="acopios-container">
             <div className="acopio-container">
-              <h2 className="acopio-text">Casa en el Carmen</h2>
+              <h2 className="acopio-text">tomas23@gmail.com</h2>
               <div>
                 <svg
                   className=""
@@ -61,7 +61,7 @@ const ShowProyectos = () => {
             </div>
 
             <div className="acopio-container">
-              <h2 className="acopio-text">Parque Infantil Bello</h2>
+              <h2 className="acopio-text">samuel45</h2>
               <div>
                 <svg
                   className=""
@@ -98,4 +98,4 @@ const ShowProyectos = () => {
   );
 };
 
-export default ShowProyectos;
+export default ShowUsuarios;

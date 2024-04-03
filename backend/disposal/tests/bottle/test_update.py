@@ -1,9 +1,10 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 from accounts.models import User
 from disposal.models import Bottle
+
 
 class BottleUpdateTestCase(APITestCase):
     def setUp(self):
@@ -27,13 +28,16 @@ class BottleUpdateTestCase(APITestCase):
         )
 
         return super().setUp()
-    
+
     def test_bottle_update_success(self):
-        response = self.client.put(reverse("bottle.update", args=[self.bottle.id]), {
-            "experience": 10,
-            "level": 1,
-            "user": 1,
-        })
+        response = self.client.put(
+            reverse("bottle.update", args=[self.bottle.id]),
+            {
+                "experience": 10,
+                "level": 1,
+                "user": 1,
+            },
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
         self.assertIn("experience", response.json())
@@ -42,29 +46,36 @@ class BottleUpdateTestCase(APITestCase):
 
     def test_bottle_update_unauthorized(self):
         self.client.credentials()
-        response = self.client.put(reverse("bottle.update", args=[self.bottle.id]), {
-            "experience": 10,
-            "level": 1,
-            "user": 1,
-        })
+        response = self.client.put(
+            reverse("bottle.update", args=[self.bottle.id]),
+            {
+                "experience": 10,
+                "level": 1,
+                "user": 1,
+            },
+        )
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 
     def test_bottle_update_not_found(self):
-        response = self.client.put(reverse("bottle.update", args=[self.bottle.id + 1]), {
-            "experience": 10,
-            "level": 1,
-            "user": 1,
-        })
+        response = self.client.put(
+            reverse("bottle.update", args=[self.bottle.id + 1]),
+            {
+                "experience": 10,
+                "level": 1,
+                "user": 1,
+            },
+        )
         self.assertEqual(response.status_code, 404)
         self.assertIn("detail", response.json())
 
     def test_bottle_update_invalid_data(self):
-        response = self.client.put(reverse("bottle.update", args=[self.bottle.id]), {
-            "experience": 10,
-        })
+        response = self.client.put(
+            reverse("bottle.update", args=[self.bottle.id]),
+            {
+                "experience": 10,
+            },
+        )
         self.assertEqual(response.status_code, 400)
         self.assertIn("level", response.json())
-        self.assertEqual(response.json()["level"], [
-            "This field is required."
-        ])
+        self.assertEqual(response.json()["level"], ["This field is required."])

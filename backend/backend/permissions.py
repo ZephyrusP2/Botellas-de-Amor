@@ -43,4 +43,8 @@ class IsAdminOrOperatorOrSelf(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        return request.user.role == "admin" or request.user.role == "operator" or request.user == view.get_object()
+        return (
+            request.user.role == "admin"
+            or request.user.role == "operator"
+            or request.user == view.get_object()
+        )

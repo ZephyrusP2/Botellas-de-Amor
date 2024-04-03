@@ -1,6 +1,6 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 from accounts.models import User
 from disposal.models import Challenge
@@ -29,8 +29,7 @@ class ChallengeRetrieveTestCase(APITestCase):
         return super().setUp()
 
     def test_challenge_retrieve_success(self):
-        response = self.client.get(
-            reverse("challenge.show", args=[self.challenge.id]))
+        response = self.client.get(reverse("challenge.show", args=[self.challenge.id]))
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
         self.assertIn("challenge", response.json())
@@ -38,8 +37,7 @@ class ChallengeRetrieveTestCase(APITestCase):
 
     def test_challenge_retrieve_unauthorized(self):
         self.client.credentials()
-        response = self.client.get(
-            reverse("challenge.show", args=[self.challenge.id]))
+        response = self.client.get(reverse("challenge.show", args=[self.challenge.id]))
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 

@@ -12,20 +12,18 @@ const IndexUser = () => {
 
   return (
     <>
-    <SideBarAdministradores />
-    <div className="show-container">
-      <NavbarAdministradores />
-      <MyTable
-        createPath={"Crear"}
-        editPath={"/Administrar/Usuarios/Editar/"}
-        showPath={"/Administrar/Usuarios/"}
-        deleteFunction={async (id) =>
-          await UserService.deleteUser(id, token)
-        }
-        fetchFunction={async () => await UserService.listUser(token)}
-        leadingAttribute={"email"}
-      />
-    </div>
+      <SideBarAdministradores />
+      <div className="show-container">
+        <NavbarAdministradores />
+        <MyTable
+          createPath={"Crear"}
+          editPath={"/Administrar/Usuarios/Editar/"}
+          showPath={"/Administrar/Usuarios/"}
+          deleteFunction={async (id) => await UserService.deleteUser(id, token)}
+          fetchFunction={async () => await UserService.listUser(token)}
+          leadingAttribute={"email"}
+        />
+      </div>
     </>
   );
 };

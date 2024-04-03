@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from backend.permissions import IsAdmin
 
+from backend.permissions import IsAdmin
 from disposal.models import Bottle
 from disposal.serializers import BottleSerializer
 
@@ -35,6 +35,7 @@ class Retrieve(generics.RetrieveAPIView):
     """
     Bottle retrieve
     """
+
     serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated]
 

@@ -18,7 +18,7 @@ class challengeService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.put(
       `${this.server}/api/disposal/challenge/update/${id}`,
-      data
+      data,
     );
   };
 
