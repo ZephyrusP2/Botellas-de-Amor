@@ -4,6 +4,7 @@ from backend.permissions import IsAdmin
 from disposal.models import Bottle
 from disposal.serializers import BottleSerializer
 
+
 class Create(generics.CreateAPIView):
     """
     Bottle list and create
@@ -29,23 +30,21 @@ class Create(generics.CreateAPIView):
         """
         serializer.save()
 
+
 class Retreive(generics.RetrieveAPIView):
     """
     Bottle retrieve
     """
-
     serializer_class = BottleSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    http_method_names = ["get"]
+    def get_object(self):
+        """
+        Get the bottle object associated with the current user.
+        """
+        return Bottle.objects.get_or_create(user=self.request.user)[0]
 
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return Bottle.objects.all()
-    
+
 class Update(generics.UpdateAPIView):
     """
     Bottle update
@@ -62,7 +61,7 @@ class Update(generics.UpdateAPIView):
         :return: QuerySet
         """
         return Bottle.objects.all()
-    
+
     def perform_update(self, serializer):
         """
         Perform update
@@ -70,6 +69,7 @@ class Update(generics.UpdateAPIView):
         :return: None
         """
         serializer.save()
+
 
 class Delete(generics.DestroyAPIView):
     """
@@ -87,7 +87,7 @@ class Delete(generics.DestroyAPIView):
         :return: QuerySet
         """
         return Bottle.objects.all()
-    
+
     def perform_destroy(self, instance):
         """
         Perform destroy
@@ -95,6 +95,7 @@ class Delete(generics.DestroyAPIView):
         :return: None
         """
         instance.delete()
+
 
 class List(generics.ListAPIView):
     """

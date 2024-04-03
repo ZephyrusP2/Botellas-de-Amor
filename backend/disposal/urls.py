@@ -35,7 +35,7 @@ urlpatterns = [
          name="disposition.delete"),
 
     path("bottle/create", BottleView.Create.as_view(), name="bottle.create"),
-    path("bottle/show/<int:pk>", BottleView.Retreive.as_view(), name="bottle.show"),
+    path("bottle/retrieve", BottleView.Retreive.as_view(), name="bottle.show"),
     path("bottle/update/<int:pk>",
          BottleView.Update.as_view(), name="bottle.update"),
     path("bottle/delete/<int:pk>",

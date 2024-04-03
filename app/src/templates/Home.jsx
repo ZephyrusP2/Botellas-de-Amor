@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Checkbox from "expo-checkbox";
 import ChallengeService from "../services/challenge";
-import challenge from "../services/challenge";
+import BottleService from "../services/bottle";
 
 export default function Home() {
   const [userData, setUserData] = useState();
@@ -20,6 +20,7 @@ export default function Home() {
   useEffect(() => {
     retreiveUser();
     listChallenges();
+    retrieveBottle();
   }, []);
 
   const retreiveUser = async () => {
@@ -38,8 +39,8 @@ export default function Home() {
     try {
       const token = await AsyncStorage.getItem("token");
       const response = await ChallengeService.list(token);
-      setChallenges(response);
-      setChecked(new Array(response.length).fill(false));
+      setChallenges(response.data);
+      setChecked(new Array(response.data.length).fill(false));
     } catch (error) {
       console.error("Error fetching challenges", error);
     }
@@ -64,13 +65,24 @@ export default function Home() {
       });
   };
 
+  const retrieveBottle = async () => {
+    const token = await AsyncStorage.getItem("token");
+    BottleService.retrieve(token)
+      .then((response) => {
+        setBottleData(response.data);
+      })
+      .catch((error) => {
+        console.error("retrieveBottle error", error);
+      });
+  };
+
   return (
     <ScrollView>
       <Header />
       <StyledBackground display="center">
         <StyledText size="large">Hola! {userData?.name}</StyledText>
         <StyledBackground display="center" style={styles.row}>
-          <StyledText size="large">Nivel </StyledText>
+          <StyledText size="large">Nivel {bottleData?.level}</StyledText>
           <Image style={styles.image1} source={require("../images/king.png")} />
         </StyledBackground>
       </StyledBackground>

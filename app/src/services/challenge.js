@@ -9,7 +9,7 @@ class ChallengeService {
       const response = await axios.get(
         `${this.server}/api/disposal/challenge/list`
       );
-      return response.data;
+      return response;
     } catch (error) {
       console.error("list error", error);
       throw error;
@@ -23,7 +23,7 @@ class ChallengeService {
         `${this.server}/api/disposal/challenge/toggle`,
         challengeData
       );
-      return response.data;
+      return response;
     } catch (error) {
       console.error("toggle error", error);
       throw error;
