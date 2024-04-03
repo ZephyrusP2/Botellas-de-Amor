@@ -4,7 +4,6 @@ class AdminService {
   server = `http://${import.meta.env.VITE_SERVER_IP}:8000`;
 
   login = async (userData) => {
-    console.log(this.server);
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/admin/login`,
@@ -12,7 +11,6 @@ class AdminService {
       );
       return response;
     } catch (error) {
-      console.error("login error", error);
       throw error;
     }
   };

@@ -44,3 +44,4 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             "gender",
             "email",
         )
+        read_only_fields = ("id",)
