@@ -11,5 +11,6 @@ urlpatterns = [
     path("user/show/<int:pk>", UserView.UserRetrieve.as_view(), name="user.show"),
     path("user/update/<int:pk>", UserView.UserUpdate.as_view(), name="user.update"),
     path("user/delete/<int:pk>", UserView.UserDelete.as_view(), name="user.delete"),
+    path("user/bottles", UserView.bottles, name="user.bottles"),
     path("admin/login", UserView.admin_login, name="admin.login"),
 ]

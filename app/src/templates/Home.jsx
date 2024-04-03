@@ -13,14 +13,16 @@ export default function Home() {
   const [userData, setUserData] = useState();
   const [challenges, setChallenges] = useState([]);
   const [isChecked, setChecked] = useState(
-    new Array(challenges.length).fill(false),
+    new Array(challenges.length).fill(false)
   );
   const [bottleData, setBottleData] = useState();
+  const [userBottles, setUserBottles] = useState();
 
   useEffect(() => {
     retrieveUser();
     listChallenges();
     retrieveBottle();
+    retrieveUserBottles();
   }, []);
 
   const retrieveUser = async () => {
@@ -76,6 +78,18 @@ export default function Home() {
       });
   };
 
+  const retrieveUserBottles = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const id = await AsyncStorage.getItem("id");
+    UserService.bottles(token, id)
+      .then((response) => {
+        setUserBottles(response.data);
+      })
+      .catch((error) => {
+        console.error("retrieveUserBottles error", error);
+      });
+  };
+
   return (
     <ScrollView>
       <Header />
@@ -96,7 +110,7 @@ export default function Home() {
         <StyledBackground style={styles.info}>
           <StyledBackground>
             <StyledText style={styles.number} align="center">
-              17
+              {userBottles?.bottles}
             </StyledText>
             <StyledText style={styles.label} color="primary" align="center">
               Botellas

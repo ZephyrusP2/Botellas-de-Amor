@@ -4,7 +4,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, permissions
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 
@@ -13,6 +14,7 @@ from disposal.models import Bottle
 
 from .models import User
 from .serializers import UserSerializer, UserUpdateSerializer
+from disposal.models import Disposition
 
 # Create your views here.
 
@@ -216,3 +218,21 @@ def admin_login(request):
             except Token.DoesNotExist:
                 token = Token.objects.create(user=user)
             return JsonResponse({"token": str(token), "role": user.role}, status=200)
+
+
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def bottles(request):
+    """
+    User bottles
+    :param request: request
+    :return: JsonResponse
+    """
+    if request.method == "GET":
+        user = request.user
+        dispositions = Disposition.objects.filter(user=user)
+        userBottles = 0
+        for disposition in dispositions:
+            userBottles += disposition.bottles
+        return JsonResponse({"bottles": userBottles}, status=200)
