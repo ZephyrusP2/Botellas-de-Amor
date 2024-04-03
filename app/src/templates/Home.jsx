@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Checkbox from "expo-checkbox";
 import ChallengeService from "../services/challenge";
+import challenge from "../services/challenge";
 
 export default function Home() {
   const [userData, setUserData] = useState();
@@ -17,7 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     retreiveUser();
-    getChallengeData();
+    listChallenges();
   }, []);
 
   const retreiveUser = async () => {
@@ -32,22 +33,30 @@ export default function Home() {
       });
   };
 
-  const getChallengeData = async () => {
+  const listChallenges = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
-      console.log(token);
-      const response = await ChallengeService.getChallengeList(token);
+      const response = await ChallengeService.list(token);
       setChallenges(response);
-      console.log(response);
+      setChecked(new Array(response.length).fill(false));
     } catch (error) {
       console.error("Error fetching challenges", error);
     }
   };
 
-  const handleCheckChange = (index) => {
+  const toggleCheck = async (index) => {
     const newChecked = [...isChecked];
     newChecked[index] = !newChecked[index];
     setChecked(newChecked);
+    const status = newChecked[index] ? "checked" : "unchecked";
+    const challengeData = {
+      challenge_id: challenges[index].id,
+      status: userData.id,
+    };
+    const token = await AsyncStorage.getItem("token");
+    ChallengeService.toggle(challengeData, token).catch((error) => {
+      console.error("toggle error", error);
+    });
   };
 
   return (
@@ -113,7 +122,7 @@ export default function Home() {
                 <Checkbox
                   style={styles.checkbox}
                   value={isChecked[index]}
-                  onValueChange={() => handleCheckChange(index)}
+                  onValueChange={() => toggleCheck(index)}
                   color={isChecked[index] ? "#C6D1D2" : undefined}
                 />
               </View>

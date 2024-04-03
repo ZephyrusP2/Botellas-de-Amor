@@ -16,11 +16,12 @@ class ChallengeService {
     }
   };
 
-  toggle = async (token) => {
+  toggle = async (token, challengeData) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
-        `${this.server}/api/disposal/challenge/ischeck`
+        `${this.server}/api/disposal/challenge/toggle`,
+        challengeData
       );
       return response.data;
     } catch (error) {
