@@ -1,24 +1,41 @@
 import React from "react";
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from '@react-navigation/native'; 
+import { useNavigation } from "@react-navigation/native";
 import StyledBackground from "../styles/StyledBackgroud";
 import StyledText from "../styles/StyledText";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Header2() {
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleClick = () => {
-    navigation.navigate("Home"); 
+    navigation.navigate("Home");
+  };
+
+  const handleLogout = () => {
+    AsyncStorage.clear();
+    navigation.navigate("Login");
   };
 
   return (
     <StyledBackground style={styles.bg}>
       <View style={styles.imageContainer}>
         <TouchableOpacity onPress={handleClick}>
-          <Image style={styles.image1} source={require("../images/return.png")} />
+          <Image
+            style={styles.image1}
+            source={require("../images/return.png")}
+          />
         </TouchableOpacity>
-        <Image style={styles.image2} source={require("../images/logofull.png")} />
-        <Image style={styles.image3} source={require("../images/logout.png")} />
+        <Image
+          style={styles.image2}
+          source={require("../images/logofull.png")}
+        />
+        <TouchableOpacity onPress={handleLogout}>
+          <Image
+            style={styles.image3}
+            source={require("../images/logout.png")}
+          />
+        </TouchableOpacity>
       </View>
     </StyledBackground>
   );
@@ -27,14 +44,14 @@ export default function Header2() {
 const styles = StyleSheet.create({
   bg: {
     marginTop: 20,
-    width: '90%',
+    width: "90%",
     borderRadius: 10,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   imageContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   image1: {
     margin: 30,
