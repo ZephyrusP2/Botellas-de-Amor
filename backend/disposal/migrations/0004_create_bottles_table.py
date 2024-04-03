@@ -17,8 +17,8 @@ class Migration(migrations.Migration):
             name="Bottle",
             fields=[
                 ("id", models.AutoField(primary_key=True, serialize=False)),
-                ("experience", models.IntegerField()),
-                ("level", models.IntegerField()),
+                ("experience", models.IntegerField(default=0)),
+                ("level", models.IntegerField(default=1)),
                 (
                     "user",
                     models.ForeignKey(

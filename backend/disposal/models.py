@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import User 
+from accounts.models import User
 
 
 class Site(models.Model):
@@ -55,14 +55,15 @@ class Disposition(models.Model):
 
     def __str__(self):
         return self.user
-    
+
+
 class Bottle(models.Model):
     """
     Bottle model
     """
     id = models.AutoField(primary_key=True)
-    experience = models.IntegerField()
-    level = models.IntegerField()
+    experience = models.IntegerField(default=0)
+    level = models.IntegerField(default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
