@@ -41,6 +41,7 @@ class UserService {
       throw error;
     }
   };
+
   delete = async (token, id) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
@@ -53,6 +54,7 @@ class UserService {
       throw error;
     }
   };
+
   update = async (token, id, userData) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
