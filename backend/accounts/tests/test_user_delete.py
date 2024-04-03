@@ -62,5 +62,4 @@ class UserDeleteTestCase(APITestCase):
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 404)
         self.assertIn("detail", response.json())
-        self.assertEqual(
-            response.json()["detail"], "No User matches the given query.")
+        self.assertEqual(response.json()["detail"], "No User matches the given query.")

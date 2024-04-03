@@ -1,6 +1,6 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 from accounts.models import User
 from disposal.models import Challenge
@@ -29,10 +29,13 @@ class ChallengeUpdateTestCase(APITestCase):
         return super().setUp()
 
     def test_challenge_update_success(self):
-        response = self.client.put(reverse("challenge.update", args=[self.challenge.id]), {
-            "challenge": "challenge",
-            "experience": 10,
-        })
+        response = self.client.put(
+            reverse("challenge.update", args=[self.challenge.id]),
+            {
+                "challenge": "challenge",
+                "experience": 10,
+            },
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
         self.assertIn("challenge", response.json())
@@ -40,27 +43,34 @@ class ChallengeUpdateTestCase(APITestCase):
 
     def test_challenge_update_unauthorized(self):
         self.client.credentials()
-        response = self.client.put(reverse("challenge.update", args=[self.challenge.id]), {
-            "challenge": "challenge",
-            "experience": 10,
-        })
+        response = self.client.put(
+            reverse("challenge.update", args=[self.challenge.id]),
+            {
+                "challenge": "challenge",
+                "experience": 10,
+            },
+        )
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 
     def test_challenge_update_not_found(self):
-        response = self.client.put(reverse("challenge.update", args=[self.challenge.id + 1]), {
-            "challenge": "challenge",
-            "experience": 10,
-        })
+        response = self.client.put(
+            reverse("challenge.update", args=[self.challenge.id + 1]),
+            {
+                "challenge": "challenge",
+                "experience": 10,
+            },
+        )
         self.assertEqual(response.status_code, 404)
         self.assertIn("detail", response.json())
 
     def test_challenge_update_invalid_data(self):
-        response = self.client.put(reverse("challenge.update", args=[self.challenge.id]), {
-            "challenge": "challenge",
-        })
+        response = self.client.put(
+            reverse("challenge.update", args=[self.challenge.id]),
+            {
+                "challenge": "challenge",
+            },
+        )
         self.assertEqual(response.status_code, 400)
         self.assertIn("experience", response.json())
-        self.assertEqual(response.json()["experience"], [
-            "This field is required."
-        ])
+        self.assertEqual(response.json()["experience"], ["This field is required."])

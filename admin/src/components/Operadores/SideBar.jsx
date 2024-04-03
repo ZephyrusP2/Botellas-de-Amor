@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/SideBar.css";
 
 const SideBarOperadores = () => {
-    const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
-    useEffect(() => {
-        const handleRouteChange = () => {
-            setCurrentPath(window.location.pathname);
-        };
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
 
-        // Agrega un event listener para detectar cambios en la ruta
-        window.addEventListener('popstate', handleRouteChange);
+    // Agrega un event listener para detectar cambios en la ruta
+    window.addEventListener("popstate", handleRouteChange);
 
-        // Limpia el event listener cuando el componente se desmonta
-        return () => {
-            window.removeEventListener('popstate', handleRouteChange);
-        };
-    }, []);
+    // Limpia el event listener cuando el componente se desmonta
+    return () => {
+      window.removeEventListener("popstate", handleRouteChange);
+    };
+  }, []);
 
     const logout = () => {
         localStorage.clear();
@@ -55,4 +55,3 @@ const SideBarOperadores = () => {
 }
 
 export default SideBarOperadores;
-

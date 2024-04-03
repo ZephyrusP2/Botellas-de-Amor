@@ -1,9 +1,10 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 from accounts.models import User
 from disposal.models import Bottle
+
 
 class BottleDeleteTestCase(APITestCase):
     def setUp(self):
@@ -27,16 +28,14 @@ class BottleDeleteTestCase(APITestCase):
         )
 
         return super().setUp()
-    
+
     def test_bottle_delete_success(self):
-        response = self.client.delete(
-            reverse("bottle.delete", args=[self.bottle.id]))
+        response = self.client.delete(reverse("bottle.delete", args=[self.bottle.id]))
         self.assertEqual(response.status_code, 204)
 
     def test_bottle_delete_unauthorized(self):
         self.client.credentials()
-        response = self.client.delete(
-            reverse("bottle.delete", args=[self.bottle.id]))
+        response = self.client.delete(reverse("bottle.delete", args=[self.bottle.id]))
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 

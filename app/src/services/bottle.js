@@ -7,7 +7,7 @@ class BottleService {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
-        `${this.server}/api/disposal/bottle/retrieve`
+        `${this.server}/api/disposal/bottle/retrieve`,
       );
       return response;
     } catch (error) {

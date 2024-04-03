@@ -1,19 +1,18 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import "../../App.css";
-import "../../styles/Navbar.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import "../../styles/Navbar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 
-
 const NavbarOperadores = () => {
-    const location = useLocation();
+  const location = useLocation();
 
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    const toggleSidebar = () => {
-        setSidebarOpen(!sidebarOpen)
-    }
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
     return (
         <div className="show-container">
@@ -34,13 +33,16 @@ const NavbarOperadores = () => {
             </div>
             <div className="navbar-bottom-line"></div>
 
-            <div className={`side-bar2 ${sidebarOpen ? 'active' : ''}`}>
-                <div className="side-bar2-container">
-
-                    <div className='X'>
-                        <FontAwesomeIcon onClick={toggleSidebar} icon={faTimes} className="close-sidebar" />
-                    </div>
-                    <h1 className="">Menu</h1>
+      <div className={`side-bar2 ${sidebarOpen ? "active" : ""}`}>
+        <div className="side-bar2-container">
+          <div className="X">
+            <FontAwesomeIcon
+              onClick={toggleSidebar}
+              icon={faTimes}
+              className="close-sidebar"
+            />
+          </div>
+          <h1 className="">Menu</h1>
 
                     <div className="navbar-bottom-line2"></div>
                     <div className='items-navbar-container'>
@@ -61,8 +63,9 @@ const NavbarOperadores = () => {
             </div>
 
         </div>
-
-    );
+      </div>
+    </div>
+  );
 };
 
 export default NavbarOperadores;

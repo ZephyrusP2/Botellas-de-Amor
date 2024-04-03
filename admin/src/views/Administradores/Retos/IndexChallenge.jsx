@@ -12,20 +12,22 @@ const IndexChallenge = () => {
 
   return (
     <>
-    <SideBarAdministradores />
-    <div className="show-container">
-      <NavbarAdministradores />
-      <MyTable
-        createPath={"Crear"}
-        editPath={"/Administrar/Retos/Editar/"}
-        showPath={"/Administrar/Retos/"}
-        deleteFunction={async (id) =>
-          await ChallengeService.deleteChallenge(id, token)
-        }
-        fetchFunction={async () => await ChallengeService.listChallenge(token)}
-        leadingAttribute={"challenge"}
-      />
-    </div>
+      <SideBarAdministradores />
+      <div className="show-container">
+        <NavbarAdministradores />
+        <MyTable
+          createPath={"Crear"}
+          editPath={"/Administrar/Retos/Editar/"}
+          showPath={"/Administrar/Retos/"}
+          deleteFunction={async (id) =>
+            await ChallengeService.deleteChallenge(id, token)
+          }
+          fetchFunction={async () =>
+            await ChallengeService.listChallenge(token)
+          }
+          leadingAttribute={"challenge"}
+        />
+      </div>
     </>
   );
 };

@@ -1,8 +1,10 @@
 from django.urls import reverse
-from accounts.models import User
-from rest_framework.test import APITestCase
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
+
+from accounts.models import User
 from disposal.models import Bottle
+
 
 class BottleListTestCase(APITestCase):
     def setUp(self):
@@ -37,7 +39,7 @@ class BottleListTestCase(APITestCase):
         )
 
         return super().setUp()
-    
+
     def test_bottle_list_success(self):
         response = self.client.get(reverse("bottle.list"))
         self.assertEqual(response.status_code, 200)

@@ -7,7 +7,7 @@ class ChallengeService {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
-        `${this.server}/api/disposal/challenge/list`
+        `${this.server}/api/disposal/challenge/list`,
       );
       return response;
     } catch (error) {
@@ -21,7 +21,7 @@ class ChallengeService {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.post(
         `${this.server}/api/disposal/challenge/toggle`,
-        challengeData
+        challengeData,
       );
       return response;
     } catch (error) {

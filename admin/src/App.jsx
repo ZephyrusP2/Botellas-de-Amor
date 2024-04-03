@@ -57,50 +57,25 @@ function AppContent() {
               <>
                 {/*<SideBarAdministradores >  */}
 
-                {/* RUTAS DE ADMINISTRADORES */}
-                <Route
-                  path="/Administrar/Proyectos"
-                  element={<ShowProyectos />}
-                />
-                <Route
-                  path="/Administrar/Usuarios"
-                  element={<ShowUsuarios />}
-                />
 
-                <Route path="/Administrar/Retos" element={<IndexChallenge />} />
-                <Route
-                  path="/Administrar/Retos/Crear"
-                  element={<CreateChallenge />}
-                />
-                <Route
-                  path="/Administrar/Retos/Editar/:id"
-                  element={<EditChallenge />}
-                />
-                <Route
-                  path="/Administrar/Retos/:id"
-                  element={<ShowChallenge />}
-                />
+        {/* RUTAS DE ADMINISTRADORES */}
+        <Route path="/Administrar/Proyectos" element={<ShowProyectos />} />
+        <Route path="/Administrar/Usuarios" element={<ShowUsuarios />} />
 
-                <Route
-                  path="/Administrar/Puntos-Acopio"
-                  element={<IndexSite />}
-                />
-                <Route
-                  path="/Administrar/Puntos-Acopio/Crear"
-                  element={<CreateSite />}
-                />
-                <Route
-                  path="/Administrar/Puntos-Acopio/Editar/:id"
-                  element={<EditSite />}
-                />
-                <Route
-                  path="/Administrar/Puntos-Acopio/:id"
-                  element={<ShowSite />}
-                />
 
-                {/* RUTAS DE OPERADORES */}
-                <Route path="/Registro-Botellas" element={<OperatorView />} />
-                <Route path="/Registro-Botellas" element={<OperatorView />} />
+        <Route path="/Administrar/Retos" element={<IndexChallenge />} />
+        <Route path="/Administrar/Retos/Crear" element={<CreateChallenge />} />
+        <Route path="/Administrar/Retos/Editar/:id" element={<EditChallenge />}/>
+        <Route path="/Administrar/Retos/:id" element={<ShowChallenge />} />
+
+        <Route path="/Administrar/Puntos-Acopio" element={<IndexSite />} />
+        <Route path="/Administrar/Puntos-Acopio/Crear" element={<CreateSite  />} />
+        <Route path="/Administrar/Puntos-Acopio/Editar/:id" element={<EditSite  />}/>
+        <Route path="/Administrar/Puntos-Acopio/:id" element={<ShowSite  />} />
+
+        {/* RUTAS DE OPERADORES */}
+        <Route path="/Registro-Botellas" element={<OperatorView />} />
+        <Route path="/Registro-Botellas" element={<OperatorView />} />
 
                 {/* RUTAS DE ADMINISTRADORES */}
                 <Route

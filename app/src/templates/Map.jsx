@@ -1,12 +1,9 @@
-
-import { View, Text } from "react-native"
-
+import { View, Text } from "react-native";
 
 export default function Map() {
-    return(
-        <View>
-            <Text>Map</Text>
-        </View>
-    )
-
+  return (
+    <View>
+      <Text>Map</Text>
+    </View>
+  );
 }

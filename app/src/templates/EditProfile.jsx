@@ -37,7 +37,7 @@ const EditProfile = ({ navigation }) => {
     navigation.navigate("EditProfile");
     Alert.alert(
       "Botellas de amor",
-      `¡Hola ${userData?.name || ""} estás editando tu perfil!`
+      `¡Hola ${userData?.name || ""} estás editando tu perfil!`,
     );
   };
 
@@ -53,7 +53,7 @@ const EditProfile = ({ navigation }) => {
       setUserData(response.data);
       Alert.alert(
         "Botellas de amor",
-        `¡Hola ${userData?.name || ""} se actualizó la información correctamente!`
+        `¡Hola ${userData?.name || ""} se actualizó la información correctamente!`,
       );
     } catch (error) {
       console.error("update profile error", error);

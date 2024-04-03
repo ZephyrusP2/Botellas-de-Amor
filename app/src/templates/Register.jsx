@@ -304,7 +304,9 @@ const Register = ({ navigation }) => {
                 onChangeText={(location) => setLocation(location)}
               />
               {locationError !== "" && (
-                <StyledText style={styles.errorText}>{locationError}</StyledText>
+                <StyledText style={styles.errorText}>
+                  {locationError}
+                </StyledText>
               )}
 
               <StyledText

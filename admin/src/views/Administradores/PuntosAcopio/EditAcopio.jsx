@@ -56,11 +56,7 @@ const EditSite = () => {
 
     const token = localStorage.getItem("token");
     try {
-      const response = await siteService.updateSite(
-        id,
-        siteData,
-        token
-      );
+      const response = await siteService.updateSite(id, siteData, token);
       console.log("Site updated successfully:", response.data);
       navigate(`/Administrar/Puntos-Acopio`);
     } catch (error) {
@@ -86,10 +82,7 @@ const EditSite = () => {
         onSubmit={handleSubmit}
         className="d-flex flex-column container m-0 p-0"
       >
-        <label
-          htmlFor="image"
-          className="d-flex flex-column form-label w-50"
-        >
+        <label htmlFor="image" className="d-flex flex-column form-label w-50">
           Imagen
           <input
             type="text"
@@ -104,10 +97,7 @@ const EditSite = () => {
           )}
         </label>
 
-        <label
-          htmlFor="opens"
-          className="d-flex flex-column form-label w-50"
-        >
+        <label htmlFor="opens" className="d-flex flex-column form-label w-50">
           Hora de apertura
           <input
             type="time"
@@ -121,10 +111,7 @@ const EditSite = () => {
             <span className="error-message">{validationErrors.opens}</span>
           )}
         </label>
-        <label
-          htmlFor="closes"
-          className="d-flex flex-column form-label w-50"
-        >
+        <label htmlFor="closes" className="d-flex flex-column form-label w-50">
           Hora de cierre
           <input
             type="time"
@@ -139,10 +126,7 @@ const EditSite = () => {
           )}
         </label>
 
-        <label
-          htmlFor="name"
-          className="d-flex flex-column form-label w-50"
-        >
+        <label htmlFor="name" className="d-flex flex-column form-label w-50">
           Nombre
           <input
             type="text"
@@ -157,11 +141,7 @@ const EditSite = () => {
           )}
         </label>
 
-
-        <label
-          htmlFor="address"
-          className="d-flex flex-column form-label w-50"
-        >
+        <label htmlFor="address" className="d-flex flex-column form-label w-50">
           Nombre
           <input
             type="text"
@@ -175,7 +155,6 @@ const EditSite = () => {
             <span className="error-message">{validationErrors.address}</span>
           )}
         </label>
-
 
         <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
           Save Changes

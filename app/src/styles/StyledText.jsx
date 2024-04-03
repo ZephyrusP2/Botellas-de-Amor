@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
   },
   colorTertiary: {
-    color: 'white',
+    color: "white",
   },
   bold: {
     fontWeight: theme.fontWeights.bold,

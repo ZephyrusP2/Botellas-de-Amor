@@ -28,25 +28,43 @@ class UserCreateTestCase(APITestCase):
         return super().setUp()
 
     def test_user_create_success(self):
-        data = {"name": "user", "last_name": "user", "birth_date": "1990-01-01",
-                "location": "location", "gender": "Masculino", "email": "user@gmail.com", "password": "userpassword"}
+        data = {
+            "name": "user",
+            "last_name": "user",
+            "birth_date": "1990-01-01",
+            "location": "location",
+            "gender": "Masculino",
+            "email": "user@gmail.com",
+            "password": "userpassword",
+        }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 201)
         self.assertIn("id", response.json())
 
     def test_user_create_invalid_data(self):
-        data = {"name": "user", "last_name": "user", "birth_date": "1990-01-01",
-                "location": "location", "password": "userpassword"}
+        data = {
+            "name": "user",
+            "last_name": "user",
+            "birth_date": "1990-01-01",
+            "location": "location",
+            "password": "userpassword",
+        }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
         self.assertIn("email", response.json())
-        self.assertEqual(response.json()["email"], [
-                         "This field is required."])
+        self.assertEqual(response.json()["email"], ["This field is required."])
 
     def test_user_create_unauthorized(self):
         self.client.credentials()
-        data = {"name": "user", "last_name": "user", "birth_date": "1990-01-01",
-                "location": "location", "gender": "Masculino", "email": "user@gmail.com", "password": "userpassword"}
+        data = {
+            "name": "user",
+            "last_name": "user",
+            "birth_date": "1990-01-01",
+            "location": "location",
+            "gender": "Masculino",
+            "email": "user@gmail.com",
+            "password": "userpassword",
+        }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())

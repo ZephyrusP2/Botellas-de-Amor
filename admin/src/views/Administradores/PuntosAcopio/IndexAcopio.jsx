@@ -16,9 +16,7 @@ const IndexSite = () => {
         createPath={"Crear"}
         editPath={"/Administrar/Puntos-Acopio/Editar/"}
         showPath={"/Administrar/Puntos-Acopio/"}
-        deleteFunction={async (id) =>
-          await SiteService.deleteSite(id, token)
-        }
+        deleteFunction={async (id) => await SiteService.deleteSite(id, token)}
         fetchFunction={async () => await SiteService.listSite(token)}
         leadingAttribute={"name"}
       />
