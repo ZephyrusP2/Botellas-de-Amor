@@ -45,10 +45,9 @@ const Profile = ({ navigation }) => {
   const deleteUser = async () => {
     const id = userData?.id;
     const token = await AsyncStorage.getItem("token");
-    UserService.deleteUser(token, id)
+    UserService.delete(token, id)
       .then(() => {
-        AsyncStorage.setItem("token", null);
-        AsyncStorage.setItem("id", null);
+        AsyncStorage.clear();
         navigation.navigate("Login");
       })
       .catch((error) => {
