@@ -41,6 +41,17 @@ class UserService {
       throw error;
     }
   };
+  deleteUser = async (token, id) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.delete( 
+        `${this.server}/api/accounts/user/delete/${id}`);
+        return response;
+      } catch (error) {
+        console.error("deleteUser error", error);
+        throw error;
+      }
+    };
 }
 
 export default new UserService();

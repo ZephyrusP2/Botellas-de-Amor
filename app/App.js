@@ -10,6 +10,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/templates/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Profile from "./src/templates/Profile";
+import Header from "./src/templates/Header";
+import Analisis from "./src/templates/Analisis";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -44,7 +47,12 @@ export default function App() {
             <Stack.Screen name="Register" component={Register} />
           </>
         ) : (
+          <>
           <Stack.Screen name="Content" component={Content} />
+          <Stack.Screen name="Header" component={Header} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Analisis" component={Analisis} />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
