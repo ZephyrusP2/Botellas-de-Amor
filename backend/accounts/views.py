@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 from backend.permissions import IsAdmin, IsAdminOrSelf
 
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserUpdateSerializer
 from rest_framework.views import APIView
 
 # Create your views here.
@@ -97,7 +97,7 @@ class UserUpdate(generics.UpdateAPIView):
     User update
     """
 
-    serializer_class = UserSerializer
+    serializer_class = UserUpdateSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
 
     http_method_names = ["put"]
@@ -108,11 +108,7 @@ class UserUpdate(generics.UpdateAPIView):
         :param serializer: serializer
         :return: None
         """
-        password = serializer.validated_data.get("password", None)
-        instance = serializer.save()
-        if password:
-            instance.set_password(password)
-        instance.save()
+        serializer.save()
 
     def get_queryset(self):
         """

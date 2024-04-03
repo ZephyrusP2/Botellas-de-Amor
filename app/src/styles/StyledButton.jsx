@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const StyledButton = ({ onPress, children }) => {
+const StyledButton = ({ onPress, children, style }) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <StyledText size="medium" align="center" style={styles.button}>
+      <StyledText size="medium" align="center" style={[styles.button, style]}>
         {children}
       </StyledText>
     </TouchableOpacity>
