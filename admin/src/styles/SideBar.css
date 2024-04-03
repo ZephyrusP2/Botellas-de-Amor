@@ -1,51 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
 
-.side-bar{
-    background-color: #00c8ea;
-    max-width: 400px !important;
+.side-bar {
+  background-color: #00c8ea;
+  max-width: 400px !important;
 }
 
-.col-xl-2{
-    width: 19.5% !important;
+.col-xl-2 {
+  width: 19.5% !important;
 }
-.text{
-    font-size: 30px !important;
-    margin-left: 1.5vw;
-    margin-bottom: -10px;
-    font-family: "League Spartan", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
+.text {
+  font-size: 30px !important;
+  margin-left: 1.5vw;
+  margin-bottom: -10px;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
 }
 
-.text-container{
-    margin-bottom: 30px !important;
-    padding-right: 8px;
-    height: 50px;
-    padding-bottom: 0px !important;
+.text-container {
+  margin-bottom: 30px !important;
+  padding-right: 8px;
+  height: 50px;
+  padding-bottom: 0px !important;
 }
 
 .text-container.active {
-    border-right: 3px solid rgb(255, 255, 255); /* Cambia el color y el grosor según tus preferencias */ 
+  border-right: 3px solid rgb(255, 255, 255); /* Cambia el color y el grosor según tus preferencias */
 }
 
-
-.sidebar-container{
-    align-items: center;
-    text-align: center;
+.sidebar-container {
+  align-items: center;
+  text-align: center;
 }
 
+.hover-cursor {
+  cursor: pointer;
+}
 
-
-@media(max-width: 1200px) {
-    .text-container.active {
+@media (max-width: 1200px) {
+  .text-container.active {
     border-right: none;
-    border-bottom: 3px solid rgb(255, 255, 255); /* Cambia el color y el grosor según tus preferencias */ 
-    
-}
+    border-bottom: 3px solid rgb(255, 255, 255); /* Cambia el color y el grosor según tus preferencias */
+  }
 
-    .text-container{
-        padding-right: 0px;
-        
-    }
+  .text-container {
+    padding-right: 0px;
+  }
 }
