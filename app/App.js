@@ -18,7 +18,6 @@ import EditProfile from "./src/templates/EditProfile";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -29,8 +28,6 @@ export default function App() {
       if (id !== null && token !== null) {
         setIsLoggedIn(true);
       }
-
-      setIsLoading(false);
     };
 
     checkLoginStatus();
