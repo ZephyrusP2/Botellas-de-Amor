@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
+from backend.permissions import IsAdmin, IsAdminOrOperator
 
-from backend.permissions import IsAdmin
 from disposal.models import Site
 from disposal.serializers import SiteSerializer
 
@@ -99,7 +99,7 @@ class List(generics.ListAPIView):
     """
 
     serializer_class = SiteSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrOperator]
 
     http_method_names = ["get"]
 

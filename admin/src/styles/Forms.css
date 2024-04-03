@@ -42,3 +42,23 @@
 .hover-cursor {
   cursor: pointer;
 }
+
+.container-register-p{
+  width: 35%;
+} 
+
+.container-register2{
+  width: 50%;
+} 
+
+.container-register3{
+  width: 58%;
+} 
+
+.kg-container{
+  display: flex;
+}
+.kg{
+  margin-top: 10px;
+  margin-left: 10px;
+}
