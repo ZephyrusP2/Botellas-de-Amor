@@ -1,8 +1,11 @@
 from rest_framework import generics, permissions
 from backend.permissions import IsAdmin
 
-from disposal.models import Challenge
+from disposal.models import Challenge, Bottle
 from disposal.serializers import ChallengesSerializer
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.authentication import TokenAuthentication
+from django.http import JsonResponse
 
 
 class Create(generics.CreateAPIView):
@@ -31,7 +34,7 @@ class Create(generics.CreateAPIView):
         serializer.save()
 
 
-class Retreive(generics.RetrieveAPIView):
+class Retrieve(generics.RetrieveAPIView):
     """
     Challenge retrieve
     """
@@ -117,3 +120,29 @@ class List(generics.ListAPIView):
         :return: QuerySet
         """
         return Challenge.objects.all()
+
+
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def toggle(request):
+    """
+    Check if the challenge is checked
+    :return: bool
+    """
+    challenge = Challenge.objects.get(pk=request.data["challenge_id"])
+    user = request.user
+    bottle = Bottle.objects.get(user=user)
+    status = request.data["status"]
+    if status == "checked":
+        bottle.experience += challenge.experience
+        if bottle.experience >= 100:
+            bottle.experience = 0
+            bottle.level += 1
+        bottle.save()
+    else:
+        bottle.experience -= challenge.experience
+        if bottle.experience < 0:
+            bottle.experience = 0
+        bottle.save()
+    return JsonResponse({"level": bottle.level})

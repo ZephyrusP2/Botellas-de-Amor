@@ -7,7 +7,20 @@ const StyledBackground = ({ bg, display, children, style, ...restOfProps }) => {
     bgPrimary: {
       backgroundColor: theme.bgColors.primary,
     },
+    bgSecondary: {
+      backgroundColor: theme.bgColors.secondary,
+    },
     displayCenter: {
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    displayRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    displayContent: {
+      
       justifyContent: "center",
       alignItems: "center",
     }
@@ -16,7 +29,10 @@ const StyledBackground = ({ bg, display, children, style, ...restOfProps }) => {
 
   const backgroundStyles = [
     bg === "primary" && styles.bgPrimary, 
-    display === "center" && styles.displayCenter , style];
+    bg === "secondary" && styles.bgSecondary, 
+    display === "center" && styles.displayCenter ,
+    display === "row" && styles.displayRow ,
+    display === "content" && styles.displayContent , style];
 
   return (
     <View style={backgroundStyles} {...restOfProps}>

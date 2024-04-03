@@ -37,7 +37,7 @@ class Create(generics.CreateAPIView):
         user.save()
 
 
-class Retreive(generics.RetrieveAPIView):
+class Retrieve(generics.RetrieveAPIView):
     """
     Retrieve a disposition
     """

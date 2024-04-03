@@ -2,6 +2,7 @@ from rest_framework import serializers
 from disposal.models import Challenge
 from disposal.models import Site
 from disposal.models import Disposition
+from disposal.models import Bottle
 
 
 class SiteSerializer(serializers.ModelSerializer):
@@ -51,3 +52,17 @@ class DispositionSerializer(serializers.ModelSerializer):
             "operator",
         )
         read_only_fields = ("operator",)
+
+class BottleSerializer(serializers.ModelSerializer):
+    """
+    Bottle serializer
+    """
+
+    class Meta:
+        model = Bottle
+        fields = (
+            "id",
+            "experience",
+            "level",
+            "user",
+        )

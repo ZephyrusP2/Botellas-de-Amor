@@ -26,7 +26,7 @@ const EditProfile = ({ navigation }) => {
     try {
       const token = await AsyncStorage.getItem("token");
       const id = await AsyncStorage.getItem("id");
-      const response = await UserService.retreive(token, id);
+      const response = await UserService.retrieve(token, id);
       setUserData(response.data);
     } catch (error) {
       console.error("retrieveUser error", error);
