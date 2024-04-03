@@ -2,9 +2,12 @@ import React from 'react';
 import NavbarAdministradores from "../../../components/Administradores/Navbar"
 import "../../../App.css"
 import "../../../styles/Show.css"
+import SideBarAdministradores from '../../../components/Administradores/SideBar';
 
 const ShowProyectos = () => {
     return (
+        <>
+        <SideBarAdministradores/>
         <div className="show-container">
             <NavbarAdministradores/>
             <div className="show-content">
@@ -43,6 +46,7 @@ const ShowProyectos = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 };
 

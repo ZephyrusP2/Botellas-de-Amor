@@ -29,15 +29,40 @@ class UserService {
     }
   };
 
-  getUserData = async (token, id) => {
+  retreive = async (token, id) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
-        `${this.server}/api/accounts/user/data/${id}`
+        `${this.server}/api/accounts/user/show/${id}`
       );
       return response;
     } catch (error) {
-      console.error("getUserData error", error);
+      console.error("retreive error", error);
+      throw error;
+    }
+  };
+  delete = async (token, id) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.delete(
+        `${this.server}/api/accounts/user/delete/${id}`
+      );
+      return response;
+    } catch (error) {
+      console.error("delete error", error);
+      throw error;
+    }
+  };
+  update = async (token, id, userData) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.put(
+        `${this.server}/api/accounts/user/update/${id}`,
+        userData
+      );
+      return response;
+    } catch (error) {
+      console.error("update error", error);
       throw error;
     }
   };

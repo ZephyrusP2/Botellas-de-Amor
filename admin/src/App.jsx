@@ -27,7 +27,10 @@ import ShowSite from "./views/Administradores/PuntosAcopio/ShowAcopio";
 import EditSite from "./views/Administradores/PuntosAcopio/EditAcopio";
 import IndexSite from "./views/Administradores/PuntosAcopio/IndexAcopio";
 
-
+import IndexUser from "./views/Administradores/Usuarios/IndexUser";
+import CreateUser from "./views/Administradores/Usuarios/CreateUser";
+import ShowUser from "./views/Administradores/Usuarios/ShowUser";
+import EditUser from "./views/Administradores/Usuarios/EditUser";
 
 export default function App() {
   return (
@@ -43,15 +46,17 @@ function AppContent() {
 
   return (
     <div className="principal-container">
-      {isRootPath ? null : location.pathname.startsWith(
-          "/Registro-Botellas"
-        ) ? (
-        <SideBarOperadores />
-      ) : (
-        <SideBarAdministradores />
-      )}
       <Routes>
-        <Route path="/" element={<Login />} />
+        {localStorage.getItem("token") === null ? (
+          <>
+            <Route path="/" element={<Login />} />
+          </>
+        ) : (
+          <>
+            {localStorage.getItem("role") === "admin" ? (
+              <>
+                {/*<SideBarAdministradores >  */}
+
 
         {/* RUTAS DE ADMINISTRADORES */}
         <Route path="/Administrar/Proyectos" element={<ShowProyectos />} />
@@ -71,6 +76,56 @@ function AppContent() {
         {/* RUTAS DE OPERADORES */}
         <Route path="/Registro-Botellas" element={<OperatorView />} />
         <Route path="/Registro-Botellas" element={<OperatorView />} />
+
+                {/* RUTAS DE ADMINISTRADORES */}
+                <Route
+                  path="/Administrar/Proyectos"
+                  element={<ShowProyectos />}
+                />
+                <Route
+                  path="/Administrar/Puntos-Acopio"
+                  element={<ShowPuntosAcopio />}
+                />
+
+                <Route path="/Administrar/Retos" element={<IndexChallenge />} />
+                <Route
+                  path="/Administrar/Retos/Crear"
+                  element={<CreateChallenge />}
+                />
+                <Route
+                  path="/Administrar/Retos/Editar/:id"
+                  element={<EditChallenge />}
+                />
+                <Route
+                  path="/Administrar/Retos/:id"
+                  element={<ShowChallenge />}
+                />
+
+                <Route path="/Administrar/Usuarios" element={<IndexUser />} />
+                <Route
+                  path="/Administrar/Usuarios/Crear"
+                  element={<CreateUser />}
+                />
+                <Route
+                  path="/Administrar/Usuarios/Editar/:id"
+                  element={<EditUser />}
+                />
+                <Route
+                  path="/Administrar/Usuarios/:id"
+                  element={<ShowUser />}
+                />
+              </>
+            ) : (
+              <>
+                <SideBarOperadores />
+
+                {/* RUTAS DE OPERADORES */}
+                <Route path="/Registro-Botellas" element={<OperatorView />} />
+                <Route path="/Registro-Botellas" element={<OperatorView />} />
+              </>
+            )}
+          </>
+        )}
       </Routes>
     </div>
   );
