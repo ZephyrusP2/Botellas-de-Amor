@@ -10,6 +10,10 @@ import ChallengeService from "../services/challenge";
 
 export default function Home() {
   const [userData, setUserData] = useState();
+  const [isChecked, setChecked] = useState(
+    new Array(challenges.length).fill(false)
+  );
+  const [challenges, setChallenges] = useState([]);
 
   useEffect(() => {
     retreiveUser();
@@ -28,8 +32,6 @@ export default function Home() {
       });
   };
 
-  const [challenges, setChallenges] = useState([]);
-
   const getChallengeData = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
@@ -41,10 +43,6 @@ export default function Home() {
       console.error("Error fetching challenges", error);
     }
   };
-
-  const [isChecked, setChecked] = useState(
-    new Array(challenges.length).fill(false)
-  );
 
   // const handleCheckChange = (index) => {
   //   const newChecked = [...isChecked];
