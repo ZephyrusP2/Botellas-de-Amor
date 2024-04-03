@@ -47,11 +47,11 @@
 
     const [isChecked, setChecked] = useState(new Array(challenges.length).fill(false));
 
-    // const handleCheckChange = (index) => {
-    //   const newChecked = [...isChecked];
-    //   newChecked[index] = !newChecked[index];
-    //   setChecked(newChecked);
-    // };
+    const handleCheckChange = (index) => {
+      const newChecked = [...isChecked];
+      newChecked[index] = !newChecked[index];
+      setChecked(newChecked);
+    };
 
     return (
       <ScrollView>
