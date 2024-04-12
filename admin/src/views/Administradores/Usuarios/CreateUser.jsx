@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import userService from "../../../services/user";
 import { useNavigate } from "react-router-dom";
-import "../../../styles/Forms.css";
-import BackButton from "../../../components/BackButton";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import BackButton from "../../../components/BackButton";
+import userService from "../../../services/user";
+import "../../../styles/Forms.css";
 
 const CreateUser = () => {
-  document.title = "Crear usuario";
+  document.title = "crear usuario";
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -81,7 +81,7 @@ const CreateUser = () => {
       setEmail("");
       setPassword("");
       setRole("");
-      navigate("/Administrar/Usuarios");
+      navigate("/administrar/usuarios");
     } catch (error) {
       console.error("Error creating user:", error);
       setValidationErrors({
@@ -95,8 +95,8 @@ const CreateUser = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
-        <BackButton route="/Administrar/Usuarios" />
-        <h1 className="container-fluid text-center">Crear usuario</h1>
+        <BackButton route="/administrar/usuarios" />
+        <h1 className="container-fluid text-center">crear usuario</h1>
         <form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-center container m-0 p-0"
@@ -222,7 +222,7 @@ const CreateUser = () => {
             )}
           </label>
           <button type="submit" className="btn btn-primary mt-3 w-50">
-            Crear usuario
+            crear usuario
           </button>
         </form>
       </div>

@@ -9,7 +9,6 @@ import {
 import "./App.css";
 import "./styles/SideBar.css";
 import ShowProyectos from "./views/Administradores/Proyectos/Show";
-import ShowUsuarios from "./views/Administradores/Usuarios/Show";
 import Login from "./views/LoginView";
 import OperatorView from "./views/OperatorView";
 
@@ -28,6 +27,7 @@ import EditUser from "./views/Administradores/Usuarios/EditUser";
 import IndexUser from "./views/Administradores/Usuarios/IndexUser";
 import ShowUser from "./views/Administradores/Usuarios/ShowUser";
 
+
 import CreateRegister from "./views/Operadores/Create2";
 
 export default function App() {
@@ -42,6 +42,7 @@ function AppContent() {
   const location = useLocation();
   const isRootPath = location.pathname === "/";
 
+
   return (
     <div className="principal-container">
       <Routes>
@@ -55,80 +56,64 @@ function AppContent() {
               <>
                 {/*<SideBarAdministradores >  */}
 
-                {/* RUTAS DE ADMINISTRADORES */}
-                <Route
-                  path="/Administrar/Proyectos"
-                  element={<ShowProyectos />}
-                />
 
-                <Route path="/Administrar/Retos" element={<IndexChallenge />} />
-                <Route
-                  path="/Administrar/Retos/Crear"
-                  element={<CreateChallenge />}
-                />
-                <Route
-                  path="/Administrar/Retos/Editar/:id"
-                  element={<EditChallenge />}
-                />
-                <Route
-                  path="/Administrar/Retos/:id"
-                  element={<ShowChallenge />}
-                />
+        {/* RUTAS DE ADMINISTRADORES */}
+        <Route path="/administrar/proyectos" element={<ShowProyectos />} />
 
-                <Route
-                  path="/Administrar/Puntos-Acopio"
-                  element={<IndexSite />}
-                />
-                <Route
-                  path="/Administrar/Puntos-Acopio/Crear"
-                  element={<CreateSite />}
-                />
-                <Route
-                  path="/Administrar/Puntos-Acopio/Editar/:id"
-                  element={<EditSite />}
-                />
-                <Route
-                  path="/Administrar/Puntos-Acopio/:id"
-                  element={<ShowSite />}
-                />
+        <Route path="/" element={<Login />} />
 
-                {/* RUTAS DE OPERADORES */}
-                <Route path="/Registro-Botellas" element={<OperatorView />} />
-                <Route path="/Registro-Botellas" element={<OperatorView />} />
+        <Route path="/administrar/retos" element={<IndexChallenge />} />
+        <Route path="/administrar/retos/crear" element={<CreateChallenge />} />
+        <Route path="/administrar/retos/Editar/:id" element={<EditChallenge />}/>
+        <Route path="/administrar/retos/:id" element={<ShowChallenge />} />
+
+        <Route path="/administrar/puntos-acopio" element={<IndexSite />} />
+        <Route path="/administrar/puntos-acopio/crear" element={<CreateSite  />} />
+        <Route path="/administrar/puntos-acopio/Editar/:id" element={<EditSite  />}/>
+        <Route path="/administrar/puntos-acopio/:id" element={<ShowSite  />} />
+
+        {/* RUTAS DE OPERADORES */}
+        <Route path="/Registro-Botellas" element={<OperatorView />} />
+        <Route path="/Registro-Botellas" element={<OperatorView />} />
 
                 {/* RUTAS DE ADMINISTRADORES */}
                 <Route
-                  path="/Administrar/Proyectos"
+                  path="/administrar/proyectos"
                   element={<ShowProyectos />}
                 />
+              
 
-                <Route path="/Administrar/Retos" element={<IndexChallenge />} />
+                <Route path="/administrar/retos" element={<IndexChallenge />} />
                 <Route
-                  path="/Administrar/Retos/Crear"
+                  path="/administrar/retos/crear"
                   element={<CreateChallenge />}
                 />
                 <Route
-                  path="/Administrar/Retos/Editar/:id"
+                  path="/administrar/retos/Editar/:id"
                   element={<EditChallenge />}
                 />
                 <Route
-                  path="/Administrar/Retos/:id"
+                  path="/administrar/retos/:id"
                   element={<ShowChallenge />}
                 />
 
-                <Route path="/Administrar/Usuarios" element={<IndexUser />} />
+                <Route path="/administrar/usuarios" element={<IndexUser />} />
                 <Route
-                  path="/Administrar/Usuarios/Crear"
+                  path="/administrar/usuarios/crear"
                   element={<CreateUser />}
                 />
                 <Route
-                  path="/Administrar/Usuarios/Editar/:id"
+                  path="/administrar/usuarios/Editar/:id"
                   element={<EditUser />}
                 />
                 <Route
-                  path="/Administrar/Usuarios/:id"
+                  path="/administrar/usuarios/:id"
                   element={<ShowUser />}
                 />
+
+                
+
+
               </>
             ) : (
               <>

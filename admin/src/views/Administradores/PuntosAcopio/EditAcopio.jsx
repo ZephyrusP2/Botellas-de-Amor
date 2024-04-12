@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import siteService from "../../../services/site";
-import { useParams, useNavigate } from "react-router-dom";
-import "../../../styles/Forms.css";
-import BackButton from "../../../components/BackButton";
+import { useNavigate, useParams } from "react-router-dom";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import BackButton from "../../../components/BackButton";
+import siteService from "../../../services/site";
+import "../../../styles/Forms.css";
 
 const EditSite = () => {
   document.title = "Editar punto de acopio";
@@ -59,7 +59,7 @@ const EditSite = () => {
     try {
       const response = await siteService.updateSite(id, siteData, token);
       console.log("Site updated successfully:", response.data);
-      navigate(`/Administrar/Puntos-Acopio`);
+      navigate(`/administrar/puntos-acopio`);
     } catch (error) {
       console.error("Error updating site:", error);
     }
@@ -79,11 +79,11 @@ const EditSite = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
-        <BackButton route="/Administrar/Retos" />
-        <h2>Editar punto de acopio</h2>
+        <BackButton route="/administrar/puntos-acopio" />
+        <h2 className="container-fluid text-center">Editar punto de acopio</h2>
         <form
           onSubmit={handleSubmit}
-          className="d-flex flex-column container m-0 p-0"
+          className="d-flex flex-column align-items-center container m-0 p-0"
         >
           <label htmlFor="image" className="d-flex flex-column form-label w-50">
             Imagen

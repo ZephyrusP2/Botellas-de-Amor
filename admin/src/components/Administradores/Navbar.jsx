@@ -1,9 +1,9 @@
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../App.css";
 import "../../styles/Navbar.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
 
 const NavbarAdministradores = () => {
   const location = useLocation();
@@ -19,26 +19,26 @@ const NavbarAdministradores = () => {
       <div className="navbar-container">
         <div className="buttons-container">
           <Link
-            to="/Administrar/Proyectos"
-            className={`button-navbar ocultar ${location.pathname === "/Administrar/Proyectos" ? "active" : ""}`}
+            to="/administrar/proyectos"
+            className={`button-navbar ocultar ${location.pathname === "/administrar/proyectos" ? "active" : ""}`}
           >
             Proyectos
           </Link>
           <Link
-            to="/Administrar/Puntos-Acopio"
-            className={`button-navbar ocultar ${location.pathname === "/Administrar/Puntos-Acopio" ? "active" : ""}`}
+            to="/administrar/puntos-acopio"
+            className={`button-navbar ocultar ${location.pathname === "/administrar/puntos-acopio" ? "active" : ""}`}
           >
             Puntos de Acopio
           </Link>
           <Link
-            to="/Administrar/Usuarios"
-            className={`button-navbar ocultar ${location.pathname === "/Administrar/Usuarios" ? "active" : ""}`}
+            to="/administrar/usuarios"
+            className={`button-navbar ocultar ${location.pathname === "/administrar/usuarios" ? "active" : ""}`}
           >
             Usuarios
           </Link>
           <Link
-            to="/Administrar/Retos"
-            className={`button-navbar ocultar ${location.pathname === "/Administrar/Retos" ? "active" : ""}`}
+            to="/administrar/retos"
+            className={`button-navbar ocultar ${location.pathname === "/administrar/retos" ? "active" : ""}`}
           >
             Retos
           </Link>
@@ -67,26 +67,26 @@ const NavbarAdministradores = () => {
           <div className="navbar-bottom-line2"></div>
           <div className="items-navbar-container">
             <Link
-              to="/Administrar/Proyectos"
-              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Proyectos" ? "active" : ""}`}
+              to="/administrar/proyectos"
+              className={`navbar-item-sidebar ${location.pathname === "/administrar/proyectos" ? "active" : ""}`}
             >
               Proyectos
             </Link>
             <Link
-              to="/Administrar/Puntos-Acopio"
-              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Puntos-Acopio" ? "active" : ""}`}
+              to="/administrar/puntos-acopio"
+              className={`navbar-item-sidebar ${location.pathname === "/administrar/puntos-acopio" ? "active" : ""}`}
             >
               Puntos de Acopio
             </Link>
             <Link
-              to="/Administrar/Usuarios"
-              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Usuarios" ? "active" : ""}`}
+              to="/administrar/usuarios"
+              className={`navbar-item-sidebar ${location.pathname === "/administrar/usuarios" ? "active" : ""}`}
             >
               Usuarios
             </Link>
             <Link
-              to="/Administrar/Retos"
-              className={`navbar-item-sidebar ${location.pathname === "/Administrar/Retos" ? "active" : ""}`}
+              to="/administrar/retos"
+              className={`navbar-item-sidebar ${location.pathname === "/administrar/retos" ? "active" : ""}`}
             >
               Retos
             </Link>

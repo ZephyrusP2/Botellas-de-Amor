@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import challengeService from "../../../services/challenge";
-import { useParams, useNavigate } from "react-router-dom";
-import "../../../styles/Forms.css";
-import BackButton from "../../../components/BackButton";
+import { useNavigate, useParams } from "react-router-dom";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import BackButton from "../../../components/BackButton";
+import challengeService from "../../../services/challenge";
+import "../../../styles/Forms.css";
 
 const EditChallenge = () => {
   document.title = "Editar reto";
@@ -51,7 +51,7 @@ const EditChallenge = () => {
         token,
       );
       console.log("Challenge updated successfully:", response.data);
-      navigate(`/Administrar/Retos`);
+      navigate(`/administrar/retos`);
     } catch (error) {
       console.error("Error updating challenge:", error);
     }
@@ -71,7 +71,7 @@ const EditChallenge = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
-        <BackButton route="/Administrar/Retos" />
+        <BackButton route="/administrar/retos" />
         <h2 className="container-fluid text-center">Editar reto</h2>
         <form
           onSubmit={handleSubmit}

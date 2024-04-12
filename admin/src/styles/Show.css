@@ -38,12 +38,19 @@
 
 .acopio-text {
   align-items: center;
-  text-align: center;
   font-size: 20px;
   margin-bottom: 0px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 9em; /* Longitud máxima en "em" */
+  max-width: 20em; /* Longitud máxima en "em" */
+}
+
+
+@media (max-width: 1000px) {
+  .acopio-text {
+    max-width: 9em; /* Longitud máxima en "em" */
+  }
+  
 }
 
 @media (max-width: 650px) {
@@ -58,5 +65,8 @@
     height: 80px;
     gap: 8px;
     padding: 8px;
+  }
+  .acopio-text {
+    text-align: center;
   }
 }

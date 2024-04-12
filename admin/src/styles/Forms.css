@@ -62,3 +62,7 @@
   margin-top: 10px;
   margin-left: 10px;
 }
+
+.small-text {
+  font-size: 1.8rem !important;  /* Puedes ajustar este valor según lo necesites */
+}

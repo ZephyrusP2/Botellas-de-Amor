@@ -1,10 +1,10 @@
 import React from "react";
+import "../../../App.css";
+import NavbarAdministradores from "../../../components/Administradores/Navbar";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 import MyTable from "../../../components/MyTable";
 import SiteService from "../../../services/site";
-import NavbarAdministradores from "../../../components/Administradores/Navbar";
-import "../../../App.css";
 import "../../../styles/Show.css";
-import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const IndexSite = () => {
   document.title = "Acopios";
@@ -16,9 +16,9 @@ const IndexSite = () => {
       <div className="show-container">
         <NavbarAdministradores />
         <MyTable
-          createPath={"Crear"}
-          editPath={"/Administrar/Puntos-Acopio/Editar/"}
-          showPath={"/Administrar/Puntos-Acopio/"}
+          createPath={"crear"}
+          editPath={"/administrar/puntos-acopio/Editar/"}
+          showPath={"/administrar/puntos-acopio/"}
           deleteFunction={async (id) => await SiteService.deleteSite(id, token)}
           fetchFunction={async () => await SiteService.listSite(token)}
           leadingAttribute={"name"}

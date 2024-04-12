@@ -1,10 +1,10 @@
 import React from "react";
+import "../../../App.css";
+import NavbarAdministradores from "../../../components/Administradores/Navbar";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 import MyTable from "../../../components/MyTable";
 import ChallengeService from "../../../services/challenge";
-import NavbarAdministradores from "../../../components/Administradores/Navbar";
-import "../../../App.css";
 import "../../../styles/Show.css";
-import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
 const IndexChallenge = () => {
   document.title = "Retos";
@@ -16,9 +16,9 @@ const IndexChallenge = () => {
       <div className="show-container">
         <NavbarAdministradores />
         <MyTable
-          createPath={"Crear"}
-          editPath={"/Administrar/Retos/Editar/"}
-          showPath={"/Administrar/Retos/"}
+          createPath={"crear"}
+          editPath={"/administrar/retos/Editar/"}
+          showPath={"/administrar/retos/"}
           deleteFunction={async (id) =>
             await ChallengeService.deleteChallenge(id, token)
           }

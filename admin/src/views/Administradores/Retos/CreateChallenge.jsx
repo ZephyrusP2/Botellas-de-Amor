@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import challengeService from "../../../services/challenge";
 import { useNavigate } from "react-router-dom";
-import "../../../styles/Forms.css";
-import BackButton from "../../../components/BackButton";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import BackButton from "../../../components/BackButton";
+import challengeService from "../../../services/challenge";
+import "../../../styles/Forms.css";
 
 const CreateChallenge = () => {
-  document.title = "Crear reto";
+  document.title = "crear reto";
   const navigate = useNavigate();
   const [challenge, setChallenge] = useState("");
   const [experience, setExperience] = useState("");
@@ -42,7 +42,7 @@ const CreateChallenge = () => {
       console.log("Challenge created:", response);
       setChallenge("");
       setExperience("");
-      navigate(`/Administrar/Retos`);
+      navigate(`/administrar/retos`);
     } catch (error) {
       console.error("Error creating challenge:", error);
     }
@@ -52,8 +52,8 @@ const CreateChallenge = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
-        <BackButton route="/Administrar/Retos" />
-        <h1 className="container-fluid text-center">Crear reto</h1>
+        <BackButton route="/administrar/retos" />
+        <h1 className="container-fluid text-center">crear reto</h1>
         <form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-center container m-0 p-0"
@@ -88,7 +88,7 @@ const CreateChallenge = () => {
           </label>
           <br />
           <button type="submit" className="btn btn-primary btn-md w-50">
-            Crear
+            crear
           </button>
         </form>
       </div>

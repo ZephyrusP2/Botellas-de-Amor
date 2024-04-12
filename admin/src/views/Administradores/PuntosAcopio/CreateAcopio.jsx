@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import siteService from "../../../services/site";
 import { useNavigate } from "react-router-dom";
-import "../../../styles/Forms.css";
-import BackButton from "../../../components/BackButton";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import BackButton from "../../../components/BackButton";
+import siteService from "../../../services/site";
+import "../../../styles/Forms.css";
 
 const CreateSite = () => {
-  document.title = "Crear reto";
+  document.title = "crear reto";
   const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [opens, setOpens] = useState("");
@@ -61,7 +61,7 @@ const CreateSite = () => {
       setAddress("");
       setName("");
 
-      navigate(`/Administrar/Puntos-Acopio`);
+      navigate(`/administrar/puntos-acopio`);
     } catch (error) {
       console.error("Error creating site:", error);
     }
@@ -71,11 +71,11 @@ const CreateSite = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
-        <BackButton route="/Administrar/Puntos-Acopio" />
-        <h1>Crear punto de acopio</h1>
+        <BackButton route="/administrar/puntos-acopio" />
+        <h1 className="container-fluid text-center">crear punto de acopio</h1>
         <form
           onSubmit={handleSubmit}
-          className="d-flex flex-column container m-0 p-0"
+          className="d-flex flex-column align-items-center container m-0 p-0"
         >
           <label className="d-flex flex-column form-label w-50">
             Imagen
@@ -142,7 +142,7 @@ const CreateSite = () => {
 
           <br />
           <button type="submit" className="btn btn-primary btn-md w-50">
-            Crear
+            crear
           </button>
         </form>
       </div>

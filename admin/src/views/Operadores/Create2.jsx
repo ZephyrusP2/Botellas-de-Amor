@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/Forms.css";
 import dispositionService from "../../services/disposition";
+import "../../styles/Forms.css";
 
 import siteService from "../../services/site";
 
-import SideBarOperadores from "../../components/Operadores/SideBar";
 import NavbarOperadores from "../../components/Operadores/Navbar";
+import SideBarOperadores from "../../components/Operadores/SideBar";
 
 const CreateRegister = () => {
-  document.title = "Crear reto";
+  document.title = "crear reto";
   const navigate = useNavigate();
   const [site, setSite] = useState("");
   const [bottles, setBottles] = useState("");
@@ -194,7 +194,7 @@ const CreateRegister = () => {
 
                             <br />
                             <button type="submit" className="btn btn-primary btn-md">
-                                Crear
+                                crear
                             </button>
                         </div>
                     </form>

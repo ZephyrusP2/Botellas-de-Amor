@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../styles/SideBar.css";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../../styles/SideBar.css";
 
 const SideBarAdministradores = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -31,8 +31,8 @@ const SideBarAdministradores = () => {
       <div className="sidebar-container d-flex flex-column align-items-center justify-content-center px-3 pt-2 text-white min-vh-100 position-relative">
         <div>
           <a
-            href="/Administrar/Proyectos"
-            className={`text-container d-flex  pb-3 align-items-center me-xl-auto text-white text-decoration-none ${currentPath.includes("/Administrar/") ? "active" : ""}`}
+            href="/administrar/proyectos"
+            className={`text-container d-flex  pb-3 align-items-center me-xl-auto text-white text-decoration-none ${currentPath.includes("/administrar/") ? "active" : ""}`}
           >
             <svg
               className="sidebar-icon"
@@ -51,7 +51,7 @@ const SideBarAdministradores = () => {
             <h1 className="d-none d-xl-inline text">Administrar</h1>
           </a>
           <a
-            href="/Administrar/Puntos-Acopio"
+            href="/administrar/puntos-acopio"
             className={`text-container d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none ${currentPath.includes("/Analisis/") ? "active" : ""}`}
           >
             <svg

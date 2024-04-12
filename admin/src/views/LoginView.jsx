@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-import React from "react";
-import "../styles/Forms.css";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 import logo from "../assets/images/logo-botella.png";
 import AdminService from "../services/admin";
-import { useNavigate } from "react-router-dom";
+import "../styles/Forms.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -32,7 +31,7 @@ const Login = () => {
     if (role) {
       const path =
         role === "admin"
-          ? "/Administrar/Proyectos"
+          ? "/administrar/proyectos"
           : role === "operator"
             ? "/Registro-Botellas"
             : "/";

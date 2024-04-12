@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import UserService from "../../../services/user";
 import { useParams } from "react-router-dom";
-import "../../../styles/Forms.css";
-import BackButton from "../../../components/BackButton";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import BackButton from "../../../components/BackButton";
+import UserService from "../../../services/user";
+import "../../../styles/Forms.css";
 
 const ShowUser = () => {
   document.title = "Ver usuario";
@@ -24,38 +24,39 @@ const ShowUser = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column container-fluid p-2">
-        <BackButton route="/Administrar/Usuarios" />
-        <div className="d-flex align-items-center flex-column">
-          <h2 className="blue-text ">
+        <BackButton route="/administrar/usuarios" />
+
+        <div className="d-flex align-items-center flex-column mt-1">
+          <h2 className="blue-text display-6 small-text">
             <strong>Nombre completo</strong>
           </h2>
-          <p className="">
+          <p className="display-6 small-text ">
             {userData.name} {userData.last_name}
           </p>
-          <h2 className="blue-text ">
+          <h2 className="blue-text display-6 small-text">
             <strong>Fecha de nacimiento</strong>
           </h2>
-          <p className="">{userData.birth_date}</p>
-          <h2 className="blue-text ">
+          <p className="display-6 small-text">{userData.birth_date}</p>
+          <h2 className="blue-text display-6 small-text">
             <strong>Genero</strong>
           </h2>
-          <p className="">{userData.gender}</p>
-          <h2 className="blue-text ">
+          <p className="display-6 small-text">{userData.gender}</p>
+          <h2 className="blue-text display-6 small-text">
             <strong>Email</strong>
           </h2>
-          <p className="">{userData.email}</p>
-          <h2 className="blue-text ">
+          <p className="display-6 small-text">{userData.email}</p>
+          <h2 className="blue-text display-6 small-text">
             <strong>Rol</strong>
           </h2>
-          <p className="">{userData.role}</p>
-          <h2 className="blue-text ">
+          <p className="display-6 small-text">{userData.role}</p>
+          <h2 className="blue-text display-6 small-text">
             <strong>Ubicación</strong>
           </h2>
-          <p className="">{userData.location}</p>
-          <h2 className="blue-text ">
+          <p className="display-6 small-text">{userData.location}</p>
+          <h2 className="blue-text display-6 small-text">
             <strong>Huella de carbono</strong>
           </h2>
-          <p className="">{userData.carbon_footprint}</p>
+          <p className="display-6 small-text">{userData.carbon_footprint}</p>
         </div>
       </div>
     </>

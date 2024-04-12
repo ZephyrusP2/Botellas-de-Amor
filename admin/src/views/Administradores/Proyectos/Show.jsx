@@ -1,8 +1,8 @@
 import React from "react";
-import NavbarAdministradores from "../../../components/Administradores/Navbar";
 import "../../../App.css";
-import "../../../styles/Show.css";
+import NavbarAdministradores from "../../../components/Administradores/Navbar";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import "../../../styles/Show.css";
 
 const ShowProyectos = () => {
   return (
@@ -12,7 +12,7 @@ const ShowProyectos = () => {
         <NavbarAdministradores />
         <div className="show-content">
           <div>
-            <a href="/Administrar/Proyectos/Crear">
+            <a href="/administrar/proyectos/crear">
               <svg
                 width="39"
                 height="39"

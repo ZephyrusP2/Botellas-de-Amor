@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import UserService from "../../../services/user";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../../../styles/Forms.css";
-import BackButton from "../../../components/BackButton";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
+import BackButton from "../../../components/BackButton";
+import UserService from "../../../services/user";
+import "../../../styles/Forms.css";
 
 const EditUser = ({ userId }) => {
   document.title = "Editar usuario";
@@ -96,7 +96,7 @@ const EditUser = ({ userId }) => {
       setGender("");
       setEmail("");
       setRole("");
-      navigate("/Administrar/Usuarios");
+      navigate("/administrar/usuarios");
     } catch (error) {
       console.error("Error updating user:", error);
       setValidationErrors({
@@ -110,7 +110,7 @@ const EditUser = ({ userId }) => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
-        <BackButton route="/Administrar/Usuarios" />
+        <BackButton route="/administrar/usuarios" />
         <h1 className="container-fluid text-center">Editar usuario</h1>
         <form
           onSubmit={handleSubmit}
