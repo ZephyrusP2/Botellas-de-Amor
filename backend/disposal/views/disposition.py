@@ -5,8 +5,6 @@ from backend.permissions import IsAdminOrOperator, IsAdminOrOperatorOrSelf
 from disposal.models import Disposition, Site
 from disposal.serializers import DispositionSerializer
 
-carbon_footprint = 30
-
 
 class List(generics.ListAPIView):
     """
@@ -34,7 +32,8 @@ class Create(generics.CreateAPIView):
         operator = self.request.user
         user = User.objects.get(id=self.request.data["user"])
         serializer.save(operator=operator)
-        user.carbon_footprint += carbon_footprint * int(self.request.data["bottles"])
+        user.plastic_footprint += int(self.request.data["weight"]) * \
+            int(self.request.data["bottles"])
         user.save()
 
 
@@ -63,8 +62,9 @@ class Update(generics.UpdateAPIView):
         """
         operator = self.request.user
         user = User.objects.get(id=self.request.data["user"])
-        user.carbon_footprint -= carbon_footprint * self.get_object().bottles
-        user.carbon_footprint += carbon_footprint * int(self.request.data["bottles"])
+        user.plastic_footprint -= self.get_object().weight * self.get_object().bottles
+        user.plastic_footprint += int(self.request.data["weight"]) * \
+            int(self.request.data["bottles"])
         user.save()
         serializer.save(operator=operator)
 
@@ -84,6 +84,7 @@ class Delete(generics.DestroyAPIView):
         """
         user = User.objects.get(id=instance.user.id)
         bottles = instance.bottles
-        user.carbon_footprint -= carbon_footprint * bottles
+        weight = instance.weight
+        user.plastic_footprint -= weight * bottles
         user.save()
         instance.delete()

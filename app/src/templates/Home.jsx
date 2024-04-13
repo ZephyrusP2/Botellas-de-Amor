@@ -118,10 +118,10 @@ export default function Home() {
           </StyledBackground>
           <StyledBackground>
             <StyledText style={styles.number} align="center">
-              {userData?.carbon_footprint}
+              {userData?.plastic_footprint}
             </StyledText>
             <StyledText style={styles.label} color="primary" align="center">
-              Huella de carbono
+              Huella de plástico
             </StyledText>
           </StyledBackground>
         </StyledBackground>

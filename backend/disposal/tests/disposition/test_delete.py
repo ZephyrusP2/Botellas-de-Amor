@@ -4,7 +4,6 @@ from rest_framework.test import APITestCase
 
 from accounts.models import User
 from disposal.models import Disposition, Site
-from disposal.views.disposition import carbon_footprint
 
 
 class DispositionDeleteTestCase(APITestCase):
@@ -17,7 +16,6 @@ class DispositionDeleteTestCase(APITestCase):
             email="user@example.com",
             password="userpassword",
             role="user",
-            carbon_footprint=carbon_footprint,
         )
         self.user.set_password("userpassword")
         self.user.save()
@@ -34,7 +32,8 @@ class DispositionDeleteTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.operator_token = Token.objects.create(user=self.operator_user)
-        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
 
         self.site = Site.objects.create(
             image="path/to/image",
@@ -59,13 +58,14 @@ class DispositionDeleteTestCase(APITestCase):
     def test_delete_disposition(self):
         response = self.client.delete(self.url)
         self.assertEqual(response.status_code, 204)
-        self.assertFalse(Disposition.objects.filter(id=self.disposition.id).exists())
+        self.assertFalse(Disposition.objects.filter(
+            id=self.disposition.id).exists())
         self.user.refresh_from_db()
-        self.assertEqual(self.user.carbon_footprint, 0.0)
+        self.assertEqual(self.user.plastic_footprint, 0.0)
 
     def test_delete_disposition_not_found(self):
         url = reverse("disposition.delete", args=[self.disposition.id + 1])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 404)
-        self.assertTrue(Disposition.objects.filter(id=self.disposition.id).exists())
-        self.assertEqual(self.user.carbon_footprint, carbon_footprint)
+        self.assertTrue(Disposition.objects.filter(
+            id=self.disposition.id).exists())

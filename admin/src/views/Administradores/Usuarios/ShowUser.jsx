@@ -56,7 +56,7 @@ const ShowUser = () => {
           <h2 className="blue-text display-6 small-text">
             <strong>Huella de carbono</strong>
           </h2>
-          <p className="display-6 small-text">{userData.carbon_footprint}</p>
+          <p className="display-6 small-text">{userData.plastic_footprint}</p>
         </div>
       </div>
     </>
