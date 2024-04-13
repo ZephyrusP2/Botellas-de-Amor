@@ -120,7 +120,10 @@ function AppContent() {
               </>
             ) : (
               <>
-                <Route path="/Registro-Botellas" element={<CreateRegister />} />
+                <Route
+                  path="/operador/registrar-botellas"
+                  element={<CreateRegister />}
+                />
               </>
             )}
           </>

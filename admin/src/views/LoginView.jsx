@@ -33,7 +33,7 @@ const Login = () => {
         role === "admin"
           ? "/administrar/proyectos"
           : role === "operator"
-            ? "/Registro-Botellas"
+            ? "/operador/registrar-botellas"
             : "/";
       navigate(path);
     }
