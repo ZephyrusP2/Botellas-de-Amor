@@ -17,7 +17,7 @@ const IndexSite = () => {
         <NavbarAdministradores />
         <MyTable
           createPath={"crear"}
-          editPath={"/administrar/puntos-acopio/Editar/"}
+          editPath={"/administrar/puntos-acopio/editar/"}
           showPath={"/administrar/puntos-acopio/"}
           deleteFunction={async (id) => await SiteService.deleteSite(id, token)}
           fetchFunction={async () => await SiteService.listSite(token)}
