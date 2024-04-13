@@ -10,7 +10,6 @@ import "./App.css";
 import "./styles/SideBar.css";
 import ShowProyectos from "./views/Administradores/Proyectos/Show";
 import Login from "./views/LoginView";
-import OperatorView from "./views/OperatorView";
 
 import CreateChallenge from "./views/Administradores/Retos/CreateChallenge";
 import EditChallenge from "./views/Administradores/Retos/EditChallenge";
