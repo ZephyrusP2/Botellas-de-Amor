@@ -76,3 +76,23 @@ class Bottle(models.Model):
 
     def __str__(self):
         return self.user
+    
+class Project(models.Model):
+    """
+    Project model
+    """
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    image = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    description = models.TextField()
+    goal_tons = models.CharField(max_length=50)
+    total_tons = models.CharField(max_length=50)
+    organizations = models.CharField(max_length=50)
+    status = models.CharField(max_length=50)
+    class Meta:
+        db_table = "projects"
+
+    def __str__(self):
+        return self.name

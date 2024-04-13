@@ -4,6 +4,7 @@ from .views import bottle as BottleView
 from .views import challenge as ChallengeView
 from .views import disposition as DispositionView
 from .views import site as SiteView
+from .views import project as ProjectView
 
 urlpatterns = [
     path("site/create", SiteView.Create.as_view(), name="site.create"),
@@ -55,4 +56,9 @@ urlpatterns = [
     path("bottle/update/<int:pk>", BottleView.Update.as_view(), name="bottle.update"),
     path("bottle/delete/<int:pk>", BottleView.Delete.as_view(), name="bottle.delete"),
     path("bottle/list", BottleView.List.as_view(), name="bottle.list"),
+    path("project/create", ProjectView.Create.as_view(), name="project.create"),
+    path("project/show/<int:pk>", ProjectView.Retrieve.as_view(), name="project.show"),
+    path("project/update/<int:pk>", ProjectView.Update.as_view(), name="project.update"),
+    path("project/delete/<int:pk>", ProjectView.Delete.as_view(), name="project.delete"),
+    path("project/list", ProjectView.List.as_view(), name="project.list"),
 ]
