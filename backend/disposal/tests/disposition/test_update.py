@@ -4,7 +4,6 @@ from rest_framework.test import APITestCase
 
 from accounts.models import User
 from disposal.models import Disposition, Site
-from disposal.views.disposition import carbon_footprint
 
 
 class DispositionUpdateTestCase(APITestCase):
@@ -17,7 +16,7 @@ class DispositionUpdateTestCase(APITestCase):
             email="user@example.com",
             password="userpassword",
             role="user",
-            carbon_footprint=carbon_footprint,
+            plastic_footprint=0.0,
         )
         self.user.set_password("userpassword")
         self.user.save()
@@ -34,7 +33,8 @@ class DispositionUpdateTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.operator_token = Token.objects.create(user=self.operator_user)
-        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
 
         self.site = Site.objects.create(
             image="path/to/image",
@@ -72,7 +72,8 @@ class DispositionUpdateTestCase(APITestCase):
         self.assertEqual(response.data["operator"], self.operator_user.id)
         self.assertEqual(response.data["site"], self.site.id)
         self.user.refresh_from_db()
-        self.assertEqual(self.user.carbon_footprint, carbon_footprint * 2)
+        self.assertEqual(self.user.plastic_footprint,
+                         data["bottles"] * data["weight"])
 
     def test_update_disposition_without_operator(self):
         self.client.credentials()
@@ -99,4 +100,5 @@ class DispositionUpdateTestCase(APITestCase):
         response = self.client.put(self.url, data)
         self.assertEqual(response.status_code, 403)
         self.user.refresh_from_db()
-        self.assertEqual(self.user.carbon_footprint, carbon_footprint)
+        self.assertEqual(self.user.plastic_footprint,
+                         data["bottles"] * data["weight"])

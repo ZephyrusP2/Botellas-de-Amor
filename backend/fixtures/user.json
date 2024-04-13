@@ -12,7 +12,7 @@
       "email": "admin@botellas-de-amor.com",
       "password": "pbkdf2_sha256$720000$5cc2hjKdwVpoJYfnjbn81j$OVYNdyef7GIzeWw8uRCcNnf1RWvYrBLU1LAj0rN9/wQ=",
       "location": "Medellín",
-      "carbon_footprint": 30.0,
+      "plastic_footprint": 30.0,
       "created_at": "2024-04-03T01:50:29.578Z",
       "updated_at": "2024-04-03T01:50:29.578Z"
     }
@@ -30,7 +30,7 @@
       "email": "operador@botellas-de-amor.com",
       "password": "pbkdf2_sha256$720000$FU76gslyNtQoIHQ8Dwanli$wAU6CTHeWQDwxwlxxsA6+V5KBqCcdiJ9y5UKFDJJ7Y0=",
       "location": "Medellín",
-      "carbon_footprint": 0.0,
+      "plastic_footprint": 0.0,
       "created_at": "2024-04-03T01:53:13.954Z",
       "updated_at": "2024-04-03T01:53:13.954Z"
     }

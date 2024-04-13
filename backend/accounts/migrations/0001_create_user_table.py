@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ("gender", models.CharField(max_length=50)),
                 ("email", models.EmailField(max_length=254, unique=True)),
                 ("password", models.CharField(max_length=50)),
-                ("carbon_footprint", models.FloatField(default=0)),
+                ("plastic_footprint", models.FloatField(default=0)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
             ],
