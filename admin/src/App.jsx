@@ -37,9 +37,6 @@ export default function App() {
 }
 
 function AppContent() {
-  const location = useLocation();
-  const isRootPath = location.pathname === "/";
-
   return (
     <div className="principal-container">
       <Routes>
