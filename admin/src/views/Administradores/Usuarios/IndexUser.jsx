@@ -17,7 +17,7 @@ const IndexUser = () => {
         <NavbarAdministradores />
         <MyTable
           createPath={"crear"}
-          editPath={"/administrar/usuarios/Editar/"}
+          editPath={"/administrar/usuarios/editar/"}
           showPath={"/administrar/usuarios/"}
           deleteFunction={async (id) => await UserService.deleteUser(id, token)}
           fetchFunction={async () => await UserService.listUser(token)}

@@ -19,14 +19,14 @@ const NavbarOperadores = () => {
       <div className="navbar-container">
         <div className="buttons-container">
           <Link
-            to="/Registro-Botellas"
-            className={`button-navbar ocultar ${location.pathname === "/Registro-Botellas" ? "active" : ""}`}
+            to="/operador/registrar-botellas"
+            className={`button-navbar ocultar ${location.pathname === "/operador/registrar-botellas" ? "active" : ""}`}
           >
             Registro
           </Link>
           <Link
-            to="/Registro-Botellas/Historial"
-            className={`button-navbar ocultar ${location.pathname === "/Registro-Botellas/Historial" ? "active" : ""}`}
+            to="/operador/registrar-botellas/Historial"
+            className={`button-navbar ocultar ${location.pathname === "/operador/registrar-botellas/Historial" ? "active" : ""}`}
           >
             Historial
           </Link>
@@ -56,14 +56,14 @@ const NavbarOperadores = () => {
           <div className="navbar-bottom-line2"></div>
           <div className="items-navbar-container">
             <Link
-              to="/Registro-Botellas"
-              className={`navbar-item-sidebar ${location.pathname === "/Registro-Botellas" ? "active" : ""}`}
+              to="/operador/registrar-botellas"
+              className={`navbar-item-sidebar ${location.pathname === "/operador/registrar-botellas" ? "active" : ""}`}
             >
               Proyectos
             </Link>
             <Link
-              to="/Registro-Botellas/Historial"
-              className={`navbar-item-sidebar ${location.pathname === "/Registro-Botellas/Historial" ? "active" : ""}`}
+              to="/operador/registrar-botellas/Historial"
+              className={`navbar-item-sidebar ${location.pathname === "/operador/registrar-botellas/Historial" ? "active" : ""}`}
             >
               Puntos de Acopio
             </Link>

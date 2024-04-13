@@ -17,7 +17,7 @@ const IndexChallenge = () => {
         <NavbarAdministradores />
         <MyTable
           createPath={"crear"}
-          editPath={"/administrar/retos/Editar/"}
+          editPath={"/administrar/retos/editar/"}
           showPath={"/administrar/retos/"}
           deleteFunction={async (id) =>
             await ChallengeService.deleteChallenge(id, token)
