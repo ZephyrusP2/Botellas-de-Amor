@@ -1,18 +1,30 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from backend.permissions import IsAdmin, IsAdminOrOperator
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from disposal.models import Site
 from disposal.serializers import SiteSerializer
 
 
-class Create(generics.CreateAPIView):
+class Create(APIView):
     """
-    Site list and create
+    Site create
     """
 
     serializer_class = SiteSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
-    queryset = Site.objects.all()
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, format=None):
+        serializer = SiteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 class Retrieve(generics.RetrieveAPIView):
