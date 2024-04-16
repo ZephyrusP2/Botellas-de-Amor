@@ -12,23 +12,7 @@ class Create(generics.CreateAPIView):
 
     serializer_class = SiteSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
-
-    http_method_names = ["post"]
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return Site.objects.all()
-
-    def perform_create(self, serializer):
-        """
-        Perform create
-        :param serializer: serializer
-        :return: None
-        """
-        serializer.save()
+    queryset = Site.objects.all()
 
 
 class Retrieve(generics.RetrieveAPIView):
