@@ -1,8 +1,3 @@
-body,
-html {
-  background-color: #00c8ea !important;
-}
-
 .my-logo {
   height: 200px !important;
 }
@@ -26,6 +21,10 @@ html {
   color: #00c8ea !important;
 }
 
+.blue-text {
+  color: #00c8ea !important;
+}
+
 .form-control {
   border: 1px solid #00c8ea !important;
   border-radius: 80px !important;
@@ -38,4 +37,32 @@ html {
 
 .custom-min-width {
   min-width: 350px !important;
+}
+
+.hover-cursor {
+  cursor: pointer;
+}
+
+.container-register-p{
+  width: 35%;
+} 
+
+.container-register2{
+  width: 50%;
+} 
+
+.container-register3{
+  width: 58%;
+} 
+
+.kg-container{
+  display: flex;
+}
+.kg{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.small-text {
+  font-size: 1.8rem !important;  /* Puedes ajustar este valor según lo necesites */
 }

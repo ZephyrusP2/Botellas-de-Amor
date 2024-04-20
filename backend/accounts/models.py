@@ -17,6 +17,10 @@ class User(AbstractBaseUser):
     gender = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    plastic_footprint = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     USERNAME_FIELD = "email"
 

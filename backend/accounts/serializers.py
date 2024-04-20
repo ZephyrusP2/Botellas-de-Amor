@@ -18,7 +18,30 @@ class UserSerializer(serializers.ModelSerializer):
             "name",
             "last_name",
             "birth_date",
+            "location",
             "gender",
             "email",
             "password",
+            "plastic_footprint",
         )
+        read_only_fields = ("id", "plastic_footprint")
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    """
+    User update serializer
+    """
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "role",
+            "name",
+            "last_name",
+            "birth_date",
+            "location",
+            "gender",
+            "email",
+        )
+        read_only_fields = ("id",)

@@ -29,6 +29,8 @@ const Register = ({ navigation }) => {
   const [lastNameError, setLastNameError] = useState("");
   const [birthDate, setbirthDate] = useState(new Date());
   const [gender, setGender] = useState("Masculino");
+  const [location, setLocation] = useState("");
+  const [locationError, setLocationError] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
@@ -104,6 +106,16 @@ const Register = ({ navigation }) => {
       setEmailError("");
     }
 
+    if (location.trim() === "") {
+      setLocationError("La ciudad es requerida");
+      isValid = false;
+    } else if (location.length > 50) {
+      setLocationError("La ciudad debe ser menor a 50 caracteres");
+      isValid = false;
+    } else {
+      setLocationError("");
+    }
+
     if (isValid) {
       userData = {
         name: name,
@@ -112,6 +124,7 @@ const Register = ({ navigation }) => {
         gender: gender,
         email: email,
         password: password,
+        location: location,
       };
 
       UserService.register(userData)
@@ -120,6 +133,9 @@ const Register = ({ navigation }) => {
           setEmail(userData.email);
           AsyncStorage.setItem("token", response.data.token);
           AsyncStorage.setItem("email", userData.email);
+          const id = response.data.id.toString();
+          AsyncStorage.setItem("id", id);
+          navigation.navigate("Content");
           setError("");
         })
         .catch((error) => {
@@ -273,6 +289,24 @@ const Register = ({ navigation }) => {
                     Aceptar
                   </StyledButton>
                 </View>
+              )}
+
+              <StyledText
+                color="primary"
+                size="medium"
+                fontWeight="normal"
+                style={styles.labelText}
+              >
+                Ciudad
+              </StyledText>
+              <StyledInput
+                placeholder="Ciudad"
+                onChangeText={(location) => setLocation(location)}
+              />
+              {locationError !== "" && (
+                <StyledText style={styles.errorText}>
+                  {locationError}
+                </StyledText>
               )}
 
               <StyledText

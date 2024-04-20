@@ -1,3 +1,7 @@
+
+__pycache__/
+*.pyc
+
 backend/__pycache__
 api/__pycache__
 accounts/__pycache__
