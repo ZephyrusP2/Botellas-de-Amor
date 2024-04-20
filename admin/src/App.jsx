@@ -26,7 +26,7 @@ import EditUser from "./views/Administradores/Usuarios/EditUser";
 import IndexUser from "./views/Administradores/Usuarios/IndexUser";
 import ShowUser from "./views/Administradores/Usuarios/ShowUser";
 
-import CreateRegister from "./views/Operadores/Create2";
+import CreateRegister from "./views/Operadores/Create";
 
 export default function App() {
   return (
@@ -39,7 +39,9 @@ export default function App() {
 function AppContent() {
   return (
     <div className="principal-container">
+      
       <Routes>
+      <Route path="/" element={<Login />} />
         {localStorage.getItem("token") === null ? (
           <>
             <Route path="/" element={<Login />} />

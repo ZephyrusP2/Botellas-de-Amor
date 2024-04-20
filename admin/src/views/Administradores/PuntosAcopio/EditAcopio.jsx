@@ -151,7 +151,7 @@ const EditSite = () => {
             htmlFor="address"
             className="d-flex flex-column form-label w-50"
           >
-            Nombre
+            Direccion
             <input
               type="text"
               name="address"
