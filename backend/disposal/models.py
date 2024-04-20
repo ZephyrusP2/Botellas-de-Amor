@@ -20,6 +20,7 @@ class Site(models.Model):
     closes = models.TimeField()
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
+    status = models.BooleanField(default=True)
 
     class Meta:
         db_table = "sites"

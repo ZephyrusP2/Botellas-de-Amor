@@ -25,6 +25,7 @@ class Migration(migrations.Migration):
                 ("closes", models.TimeField()),
                 ("name", models.CharField(max_length=50)),
                 ("address", models.CharField(max_length=50)),
+                ("status", models.BooleanField(default=True)),
             ],
             options={
                 "db_table": "sites",
