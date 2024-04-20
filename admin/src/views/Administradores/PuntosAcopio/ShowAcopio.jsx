@@ -25,11 +25,12 @@ const ShowSite = () => {
       <SideBarAdministradores />
       <div className="d-flex flex-column container-fluid p-2">
         <BackButton route="/administrar/puntos-acopio" />
-        <div className="d-flex align-items-center flex-column mt-5">
-          <h2 className="blue-text display-5 small-text">
-            <strong>Imagen</strong>
-          </h2>
-          <p className="display-6 small-text">{siteData.image}</p>
+        <div className="d-flex align-items-center flex-column mt-3">
+        <h2 className="blue-text display-5 small-text">
+          <strong>Imagen</strong>
+        </h2>
+        <img src={siteData.image} className="display-6 small-text image-acopio" alt="Imagen de la página" />
+
           <h2 className="blue-text display-5 small-text">
             <strong>Hora de apertura</strong>
           </h2>

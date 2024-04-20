@@ -12,7 +12,7 @@ const EditSite = () => {
 
   const [siteData, setSiteData] = useState({
     id: "",
-    image: "",
+    image: "", // Changed to null to represent a file
     opens: "",
     closes: "",
     name: "",
@@ -35,7 +35,7 @@ const EditSite = () => {
       errors.name = "Se requiere el nombre";
     }
     if (!data.address) {
-      errors.opens = "Se requiere la direccion";
+      errors.address = "Se requiere la direccion"; // Corrected typo in property name
     }
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
@@ -44,7 +44,7 @@ const EditSite = () => {
   const handleInputChange = (event) => {
     setSiteData({
       ...siteData,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.type === 'file' ? event.target.files[0] : event.target.value,
     });
   };
 
@@ -57,7 +57,14 @@ const EditSite = () => {
 
     const token = localStorage.getItem("token");
     try {
-      const response = await siteService.updateSite(id, siteData, token);
+      const formData = new FormData();
+      formData.append('image', siteData.image);
+      formData.append('opens', siteData.opens);
+      formData.append('closes', siteData.closes);
+      formData.append('name', siteData.name);
+      formData.append('address', siteData.address);
+
+      const response = await siteService.updateSite(id, formData, token);
       console.log("Site updated successfully:", response.data);
       navigate(`/administrar/puntos-acopio`);
     } catch (error) {
@@ -88,10 +95,10 @@ const EditSite = () => {
           <label htmlFor="image" className="d-flex flex-column form-label w-50">
             Imagen
             <input
-              type="text"
+              type="file" // Changed type to file
               name="image"
               id="image"
-              value={siteData.image}
+              accept="image/*"
               onChange={handleInputChange}
               className="form-control rounded-3"
             />
@@ -151,7 +158,7 @@ const EditSite = () => {
             htmlFor="address"
             className="d-flex flex-column form-label w-50"
           >
-            Nombre
+            Direccion
             <input
               type="text"
               name="address"
@@ -166,7 +173,7 @@ const EditSite = () => {
           </label>
 
           <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
-            Save Changes
+            Editar punto de acopio
           </button>
         </form>
       </div>
