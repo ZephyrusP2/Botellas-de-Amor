@@ -1,6 +1,10 @@
 from django.db import models
 
 from accounts.models import User
+from django.utils.translation import gettext_lazy as _
+
+def upload_to_projects(instance, filename):
+    return f"projects/{filename}".format(filename)
 
 
 class Site(models.Model):
@@ -84,7 +88,7 @@ class Project(models.Model):
 
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    image = models.CharField(max_length=50)
+    image = models.ImageField(_("Image"), upload_to=upload_to_projects, default="projects/default.jpg")
     location = models.CharField(max_length=50)
     description = models.TextField()
     goal_tons = models.CharField(max_length=50)
