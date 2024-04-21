@@ -9,13 +9,14 @@ import { useForm } from 'react-hook-form'
 const CreateSite = () => {
   document.title = "crear reto";
   const navigate = useNavigate();
-  const [image, setImage] = useState(null); // Cambiar a null
+  const [image, setImage] = useState(null);
   const [opens, setOpens] = useState("");
   const [closes, setCloses] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
   const { register, formState: { errors }, reset } = useForm();
+  const [imagePreview, setImagePreview] = useState(null);
 
   const validateSite = () => {
     const errors = {};
@@ -47,7 +48,7 @@ const CreateSite = () => {
   
     const token = localStorage.getItem("token");
     const formData = new FormData();
-    formData.append("image", image); // Cambiar a image, ya que image es un objeto File
+    formData.append("image", image);
     formData.append("opens", opens);
     formData.append("closes", closes);
     formData.append("name", name);
@@ -56,7 +57,7 @@ const CreateSite = () => {
     try {
       const response = await siteService.createSite(formData, token);
       console.log("site created:", response);
-      setImage(null); // Cambiar a null para reiniciar el estado de la imagen
+      setImage(null);
       setOpens("");
       setCloses("");
       setAddress("");
@@ -86,9 +87,13 @@ const CreateSite = () => {
               id="image"
               accept="image/*"
               {...register("image", { required: true })}
-              onChange={(e) => setImage(e.target.files[0])} // Cambiar a e.target.files[0]
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                setImagePreview(URL.createObjectURL(e.target.files[0])); // Mostrar vista previa
+              }}
               className="form-control rounded-3"
             />
+            {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: "20%" }} />} {/* Mostrar vista previa de la imagen */}
             {validationErrors.image && (
               <span className="error-message">{validationErrors.image}</span>
             )}
