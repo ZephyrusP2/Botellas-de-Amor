@@ -12,9 +12,12 @@ django-cors-headers = "*"
 python-dotenv = "*"
 tzdata = "*"
 pillow = "*"
+<<<<<<< HEAD
 scikit-learn = "*"
 numpy = "*"
 python-dateutil = "*"
+=======
+>>>>>>> 796f8ed (Add image field)
 
 [dev-packages]
 
