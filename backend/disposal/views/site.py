@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from disposal.models import Site, Schedule
 from disposal.serializers import SiteSerializer
 
+import json
+
 
 class Create(APIView):
     """
@@ -20,7 +22,7 @@ class Create(APIView):
         serializer = SiteSerializer(data=request.data)
         if serializer.is_valid():
             site = serializer.save()
-            save_schedule(self, site, request.data["schedules"])
+            save_schedule(self, site, request.data.getlist("schedules"))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -31,14 +33,14 @@ def save_schedule(self, site, schedules):
     :param site: Site
     :param schedules: List
     """
-    for schedule in schedules:
-        for item in schedule:
-            Schedule.objects.create(
-                site=site,
-                day=item["day"],
-                opens=item["opens"],
-                closes=item["closes"],
-            )
+    for schedule_str in schedules:
+        schedule_dict = eval(schedule_str)
+        Schedule.objects.create(
+            site=site,
+            day=schedule_dict["day"],
+            opens=schedule_dict["opens"],
+            closes=schedule_dict["closes"],
+        )
 
 
 class Retrieve(generics.RetrieveAPIView):
