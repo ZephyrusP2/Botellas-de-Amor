@@ -59,6 +59,7 @@ class SiteCreateTestCase(APITestCase):
         site = Site.objects.get(name="Universidad EAFIT")
         schedules_count = Schedule.objects.filter(site=site).count()
         self.assertEqual(schedules_count, 7)
+        site.image.delete()
 
     def test_site_create_invalid_data(self):
         self.data.pop("address")
