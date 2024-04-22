@@ -90,7 +90,7 @@ class Schedule(models.Model):
 
     id = models.AutoField(primary_key=True)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    days_range = models.CharField(max_length=50)
+    day = models.CharField(max_length=50)
     opens = models.TimeField()
     closes = models.TimeField()
 

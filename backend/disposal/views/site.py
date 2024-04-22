@@ -4,7 +4,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from disposal.models import Site
+from disposal.models import Site, Schedule
 from disposal.serializers import SiteSerializer
 
 
@@ -20,11 +20,28 @@ class Create(APIView):
     def post(self, request, format=None):
         serializer = SiteSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            site = serializer.save()
+            save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
+
+def save_schedule(self, site, schedules):
+    """
+    Save schedule
+    :param site: Site
+    :param schedules: List
+    """
+    for schedule in schedules:
+        for item in schedule:
+            Schedule.objects.create(
+                site=site,
+                day=item["day"],
+                opens=item["opens"],
+                closes=item["closes"],
+            )
 
 
 class Retrieve(generics.RetrieveAPIView):

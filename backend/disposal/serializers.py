@@ -3,12 +3,27 @@ from rest_framework import serializers
 from disposal.models import Bottle, Challenge, Disposition, Site, Schedule
 
 
+class ScheduleSerializer(serializers.ModelSerializer):
+    """
+    Schedule serializer
+    """
+
+    class Meta:
+        model = Schedule
+        fields = (
+            "id",
+            "site",
+            "opens",
+            "closes",
+            "day",
+        )
+        read_only_fields = ("site",)
+
+
 class SiteSerializer(serializers.ModelSerializer):
     """
     Site serializer
     """
-
-    from disposal.serializers import ScheduleSerializer
 
     schedule = ScheduleSerializer(many=True, read_only=True)
 
@@ -67,20 +82,4 @@ class BottleSerializer(serializers.ModelSerializer):
             "experience",
             "level",
             "user",
-        )
-
-
-class ScheduleSerializer(serializers.ModelSerializer):
-    """
-    Scheduel serializer
-    """
-
-    class Meta:
-        model = Schedule
-        fields = (
-            "id",
-            "site",
-            "opens",
-            "closes",
-            "day",
         )
