@@ -12,7 +12,7 @@ const EditSite = () => {
 
   const [siteData, setSiteData] = useState({
     id: "",
-    image: "", // Changed to null to represent a file
+    image: "",
     opens: "",
     closes: "",
     name: "",
@@ -22,9 +22,6 @@ const EditSite = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const validateSite = (data) => {
     const errors = {};
-    if (!data.image) {
-      errors.image = "Se requiere poner la imagen";
-    }
     if (!data.opens) {
       errors.opens = "Se requiere la hora de apertura";
     }
@@ -44,7 +41,10 @@ const EditSite = () => {
   const handleInputChange = (event) => {
     setSiteData({
       ...siteData,
-      [event.target.name]: event.target.type === 'file' ? event.target.files[0] : event.target.value,
+      [event.target.name]:
+        event.target.type === "file"
+          ? event.target.files[0]
+          : event.target.value,
     });
   };
 
@@ -58,14 +58,15 @@ const EditSite = () => {
     const token = localStorage.getItem("token");
     try {
       const formData = new FormData();
-      formData.append('image', siteData.image);
-      formData.append('opens', siteData.opens);
-      formData.append('closes', siteData.closes);
-      formData.append('name', siteData.name);
-      formData.append('address', siteData.address);
+      if (siteData.image) {
+        formData.append("image", siteData.image);
+      }
+      formData.append("opens", siteData.opens);
+      formData.append("closes", siteData.closes);
+      formData.append("name", siteData.name);
+      formData.append("address", siteData.address);
 
-      const response = await siteService.updateSite(id, formData, token);
-      console.log("Site updated successfully:", response.data);
+      await siteService.updateSite(id, formData, token);
       navigate(`/administrar/puntos-acopio`);
     } catch (error) {
       console.error("Error updating site:", error);
@@ -76,6 +77,7 @@ const EditSite = () => {
     const getSite = async () => {
       const token = localStorage.getItem("token");
       const response = await siteService.showSite(id, token);
+      response.data.image = null;
       setSiteData(response.data);
     };
 

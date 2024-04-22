@@ -8,6 +8,8 @@ class SiteSerializer(serializers.ModelSerializer):
     Site serializer
     """
 
+    image = serializers.ImageField(required=False)
+
     class Meta:
         model = Site
         fields = (
