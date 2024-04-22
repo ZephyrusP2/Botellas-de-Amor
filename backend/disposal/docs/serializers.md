@@ -14,34 +14,21 @@ The `SiteSerializer` class is responsible for serializing and deserializing `Sit
 
 ### Example
 
+#### Create and Update
+
 ```json
 {
-  "id": 1,
-  "image": "site_images/example.jpg",
-  "name": "Example Site",
-  "address": "123 Main St, City",
-  "schedule": [
-    {
-      "id": 1,
-      "site": 1,
-      "opens": "08:00:00",
-      "closes": "17:00:00",
-      "day": "Monday"
-    },
-    {
-      "id": 2,
-      "site": 1,
-      "opens": "09:00:00",
-      "closes": "18:00:00",
-      "day": "Saturday"
-    },
-    {
-      "id": 3,
-      "site": 1,
-      "opens": "10:00:00",
-      "closes": "19:00:00",
-      "day": "Sunday"
-    }
+  "image": "path/to/image.jpg",
+  "name": "Universidad EAFIT",
+  "address": "Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
+  "schedules": [
+    { "day": "Lunes", "opens": "10:00:00", "closes": "17:00:00" },
+    { "day": "Martes", "opens": "10:00:00", "closes": "17:00:00" },
+    { "day": "Miércoles", "opens": "10:00:00", "closes": "17:00:00" },
+    { "day": "Jueves", "opens": "10:00:00", "closes": "17:00:00" },
+    { "day": "Viernes", "opens": "10:00:00", "closes": "17:00:00" },
+    { "day": "Sábado", "opens": "10:00:00", "closes": "17:00:00" },
+    { "day": "Domingo", "opens": "10:00:00", "closes": "13:00:00" }
   ]
 }
 ```
