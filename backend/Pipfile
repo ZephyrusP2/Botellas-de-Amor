@@ -11,6 +11,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 python-dotenv = "*"
 tzdata = "*"
+pillow = "*"
 
 [dev-packages]
 
