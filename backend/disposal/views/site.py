@@ -6,8 +6,6 @@ from rest_framework.views import APIView
 from disposal.models import Site, Schedule
 from disposal.serializers import SiteSerializer
 
-import json
-
 
 class Create(APIView):
     """
@@ -35,12 +33,19 @@ def save_schedule(self, site, schedules):
     """
     for schedule_str in schedules:
         schedule_dict = eval(schedule_str)
-        Schedule.objects.create(
-            site=site,
-            day=schedule_dict["day"],
-            opens=schedule_dict["opens"],
-            closes=schedule_dict["closes"],
-        )
+        if "id" in schedule_dict:
+            Schedule.objects.filter(id=schedule_dict["id"]).update(
+                day=schedule_dict["day"],
+                opens=schedule_dict["opens"],
+                closes=schedule_dict["closes"],
+            )
+        else:
+            Schedule.objects.create(
+                site=site,
+                day=schedule_dict["day"],
+                opens=schedule_dict["opens"],
+                closes=schedule_dict["closes"],
+            )
 
 
 class Retrieve(generics.RetrieveAPIView):
@@ -72,12 +77,34 @@ class Update(APIView):
     queryset = Site.objects.all()
 
     def patch(self, request, pk, format=None):
-        site = Site.objects.get(pk=pk)
+        try:
+            site = Site.objects.get(pk=pk)
+        except Site.DoesNotExist:
+            return Response(
+                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
+            )
         serializer = SiteSerializer(site, data=request.data, partial=True)
         if serializer.is_valid():
             if "image" in request.data and site.image.name != "sites/default.jpg":
                 site.image.delete()
             serializer.save()
+            save_schedule(self, site, request.data.getlist("schedules"))
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    def put(self, request, pk, format=None):
+        try:
+            site = Site.objects.get(pk=pk)
+        except Site.DoesNotExist:
+            return Response(
+                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+        serializer = SiteSerializer(site, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            save_schedule(self, site, request.data.getlist("schedules"))
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

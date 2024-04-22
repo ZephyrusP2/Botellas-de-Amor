@@ -25,7 +25,7 @@ class SiteSerializer(serializers.ModelSerializer):
     Site serializer
     """
 
-    schedule = ScheduleSerializer(many=True, read_only=True)
+    schedules = ScheduleSerializer(many=True, read_only=True)
 
     class Meta:
         model = Site
@@ -34,7 +34,7 @@ class SiteSerializer(serializers.ModelSerializer):
             "image",
             "name",
             "address",
-            "schedule",
+            "schedules",
         )
 
 
