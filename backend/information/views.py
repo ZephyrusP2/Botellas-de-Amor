@@ -5,8 +5,9 @@ from rest_framework.decorators import (api_view, authentication_classes,
                                        permission_classes)
 
 from backend.permissions import IsAdmin
-from disposal.models import Project
-from disposal.serializers import ProjectSerializer
+from .models import Project
+from .serializers import ProjectSerializer
+
 
 class Create(generics.CreateAPIView):
     """
@@ -15,23 +16,8 @@ class Create(generics.CreateAPIView):
 
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    queryset = Project.objects.all()
 
-    http_method_names = ["post"]
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return Project.objects.all()
-
-    def perform_create(self, serializer):
-        """
-        Perform create
-        :param serializer: serializer
-        :return: None
-        """
-        serializer.save()
 
 class Retrieve(generics.RetrieveAPIView):
     """
@@ -49,7 +35,8 @@ class Retrieve(generics.RetrieveAPIView):
         :return: QuerySet
         """
         return Project.objects.all()
-    
+
+
 class Update(generics.UpdateAPIView):
     """
     Project update
@@ -75,6 +62,7 @@ class Update(generics.UpdateAPIView):
         """
         serializer.save()
 
+
 class Delete(generics.DestroyAPIView):
     """
     Project delete
@@ -99,6 +87,7 @@ class Delete(generics.DestroyAPIView):
         :return: None
         """
         instance.delete()
+
 
 class List(generics.ListAPIView):
     """
