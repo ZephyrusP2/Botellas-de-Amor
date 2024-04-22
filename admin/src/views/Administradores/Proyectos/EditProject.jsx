@@ -4,6 +4,7 @@ import SideBarAdministradores from "../../../components/Administradores/SideBar"
 import BackButton from "../../../components/BackButton";
 import projectService from "../../../services/project";
 import "../../../styles/Forms.css";
+import project from "../../../services/project";
 
 const EditProject = () => {
   document.title = "Editar proyecto";
@@ -12,7 +13,7 @@ const EditProject = () => {
 
   const [projectData, setProjectData] = useState({
     name: "",
-    image: "",
+    image: null, // Change image to null initially
     location: "",
     description: "",
     goal_tons: 0,
@@ -28,9 +29,6 @@ const EditProject = () => {
     if (!data.name) {
       errors.name = "Se requiere un nombre para el proyecto";
     }
-    if (!data.image) {
-      errors.image = "Se requiere una imagen para el proyecto";
-    }
     if (!data.status) {
       errors.status = "Selecciona un estado para el proyecto";
     }
@@ -39,9 +37,18 @@ const EditProject = () => {
   };
 
   const handleInputChange = (event) => {
+    const { name, value } = event.target;
     setProjectData({
       ...projectData,
-      [event.target.name]: event.target.value,
+      [name]: value,
+    });
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setProjectData({
+      ...projectData,
+      image: file,
     });
   };
 
@@ -54,11 +61,19 @@ const EditProject = () => {
 
     const token = localStorage.getItem("token");
     try {
-      const response = await projectService.updateProject(
-        id,
-        projectData,
-        token
-      );
+      const formData = new FormData();
+      if (projectData.image) {
+        formData.append("image", projectData.image);
+      }
+      formData.append("name", projectData.name);
+      formData.append("location", projectData.location);
+      formData.append("description", projectData.description);
+      formData.append("goal_tons", projectData.goal_tons.toString());
+      formData.append("total_tons", projectData.total_tons.toString());
+      formData.append("organizations", projectData.organizations);
+      formData.append("status", projectData.status);
+
+      const response = await projectService.updateProject(id, formData, token);
       console.log("Project updated successfully:", response.data);
       navigate(`/administrar/proyectos`);
     } catch (error) {
@@ -70,6 +85,7 @@ const EditProject = () => {
     const getProject = async () => {
       const token = localStorage.getItem("token");
       const response = await projectService.showProject(id, token);
+      response.data.image = null;
       setProjectData(response.data);
     };
 
@@ -78,10 +94,8 @@ const EditProject = () => {
 
   return (
     <>
-      <SideBarAdministradores /> {/* Import and render the sidebar */}
+      <SideBarAdministradores />
       <div className="container-fluid p-4">
-        {" "}
-        {/* Main content container */}
         <BackButton route="/administrar/proyectos" />
         <h2 className="container-fluid text-center">Editar proyecto</h2>
         <form
@@ -104,10 +118,9 @@ const EditProject = () => {
           <label className="d-flex flex-column form-label w-50">
             Imagen
             <input
-              type="text"
+              type="file"
               name="image"
-              value={projectData.image}
-              onChange={handleInputChange}
+              onChange={handleImageChange}
               className="form-control rounded-3"
             />
             {validationErrors.image && (

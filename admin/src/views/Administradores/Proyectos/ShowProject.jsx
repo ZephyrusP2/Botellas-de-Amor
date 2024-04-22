@@ -34,7 +34,12 @@ const ShowProject = () => {
           <h2 className="blue-text display-5 small-text">
             <strong>Imagen</strong>
           </h2>
-          <p className="display-6 small-text">{projectData.image}</p>
+          <img
+            src={projectData.image}
+            className="display-6 small-text image-acopio"
+            alt="Imagen de la página"
+            width={200}
+          />
 
           <h2 className="blue-text display-5 small-text">
             <strong>Ubicación</strong>
