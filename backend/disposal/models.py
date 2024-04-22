@@ -16,8 +16,6 @@ class Site(models.Model):
     id = models.AutoField(primary_key=True)
     image = models.ImageField(
         _("Image"), upload_to=upload_to, default="sites/default.jpg")
-    opens = models.TimeField()
-    closes = models.TimeField()
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     status = models.BooleanField(default=True)
@@ -83,3 +81,21 @@ class Bottle(models.Model):
 
     def __str__(self):
         return self.user
+
+
+class Schedule(models.Model):
+    """
+    Schedule model
+    """
+
+    id = models.AutoField(primary_key=True)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
+    days_range = models.CharField(max_length=50)
+    opens = models.TimeField()
+    closes = models.TimeField()
+
+    class Meta:
+        db_table = "schedules"
+
+    def __str__(self):
+        return self.site
