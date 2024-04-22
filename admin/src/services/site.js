@@ -16,7 +16,7 @@ class siteService {
 
   updateSite(id, data, token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    return axios.put(`${this.server}/api/disposal/site/update/${id}`, data);
+    return axios.patch(`${this.server}/api/disposal/site/update/${id}`, data);
   }
 
   deleteSite(id, token) {

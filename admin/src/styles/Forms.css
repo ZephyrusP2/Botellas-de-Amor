@@ -64,5 +64,12 @@
 }
 
 .small-text {
-  font-size: 1.8rem !important;  /* Puedes ajustar este valor según lo necesites */
+  font-size: 1.8rem !important;
+
+text-align: center;}
+
+
+.image-acopio{
+  max-width: 200px;
+  max-height: 300px;
 }

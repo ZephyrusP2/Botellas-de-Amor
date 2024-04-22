@@ -45,30 +45,27 @@ class Retrieve(generics.RetrieveAPIView):
         return Site.objects.all()
 
 
-class Update(generics.UpdateAPIView):
+class Update(APIView):
     """
     Site update
     """
 
     serializer_class = SiteSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    parser_classes = [MultiPartParser, FormParser]
+    queryset = Site.objects.all()
 
-    http_method_names = ["put"]
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return Site.objects.all()
-
-    def perform_update(self, serializer):
-        """
-        Perform update
-        :param serializer: serializer
-        :return: None
-        """
-        serializer.save()
+    def patch(self, request, pk, format=None):
+        site = Site.objects.get(pk=pk)
+        serializer = SiteSerializer(site, data=request.data, partial=True)
+        if serializer.is_valid():
+            if "image" in request.data and site.image.name != "sites/default.jpg":
+                site.image.delete()
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
 
 
 class Delete(generics.DestroyAPIView):
