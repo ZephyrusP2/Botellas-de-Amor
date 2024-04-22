@@ -4,7 +4,6 @@ from .views import bottle as BottleView
 from .views import challenge as ChallengeView
 from .views import disposition as DispositionView
 from .views import site as SiteView
-from .views import project as ProjectView
 
 urlpatterns = [
     path("site/create", SiteView.Create.as_view(), name="site.create"),
@@ -12,7 +11,8 @@ urlpatterns = [
     path("site/update/<int:pk>", SiteView.Update.as_view(), name="site.update"),
     path("site/delete/<int:pk>", SiteView.Delete.as_view(), name="site.delete"),
     path("site/list", SiteView.List.as_view(), name="site.list"),
-    path("challenge/create", ChallengeView.Create.as_view(), name="challenge.create"),
+    path("challenge/create", ChallengeView.Create.as_view(),
+         name="challenge.create"),
     path(
         "challenge/show/<int:pk>",
         ChallengeView.Retrieve.as_view(),
@@ -30,7 +30,8 @@ urlpatterns = [
     ),
     path("challenge/list", ChallengeView.List.as_view(), name="challenge.list"),
     path("challenge/toggle", ChallengeView.toggle, name="challenge.toggle"),
-    path("disposition/list", DispositionView.List.as_view(), name="disposition.list"),
+    path("disposition/list", DispositionView.List.as_view(),
+         name="disposition.list"),
     path(
         "disposition/create",
         DispositionView.Create.as_view(),
@@ -53,12 +54,9 @@ urlpatterns = [
     ),
     path("bottle/create", BottleView.Create.as_view(), name="bottle.create"),
     path("bottle/retrieve", BottleView.Retrieve.as_view(), name="bottle.show"),
-    path("bottle/update/<int:pk>", BottleView.Update.as_view(), name="bottle.update"),
-    path("bottle/delete/<int:pk>", BottleView.Delete.as_view(), name="bottle.delete"),
+    path("bottle/update/<int:pk>",
+         BottleView.Update.as_view(), name="bottle.update"),
+    path("bottle/delete/<int:pk>",
+         BottleView.Delete.as_view(), name="bottle.delete"),
     path("bottle/list", BottleView.List.as_view(), name="bottle.list"),
-    path("project/create", ProjectView.Create.as_view(), name="project.create"),
-    path("project/show/<int:pk>", ProjectView.Retrieve.as_view(), name="project.show"),
-    path("project/update/<int:pk>", ProjectView.Update.as_view(), name="project.update"),
-    path("project/delete/<int:pk>", ProjectView.Delete.as_view(), name="project.delete"),
-    path("project/list", ProjectView.List.as_view(), name="project.list"),
 ]

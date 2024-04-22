@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "api",
     "corsheaders",
     "disposal",
+    "information",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -106,3 +107,6 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

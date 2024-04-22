@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from disposal.models import Bottle, Challenge, Disposition, Site, Project
+from disposal.models import Bottle, Challenge, Disposition, Site
 
 
 class SiteSerializer(serializers.ModelSerializer):
@@ -64,23 +64,4 @@ class BottleSerializer(serializers.ModelSerializer):
             "experience",
             "level",
             "user",
-        )
-
-class ProjectSerializer(serializers.ModelSerializer):
-    """
-    Project serializer
-    """
-
-    class Meta:
-        model = Project
-        fields = (
-            "id",
-            "name",
-            "image",
-            "location",
-            "description",
-            "goal_tons",
-            "total_tons",
-            "organizations",
-            "status",
         )
