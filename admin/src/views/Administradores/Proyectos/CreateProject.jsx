@@ -10,7 +10,7 @@ const CreateProject = () => {
   const navigate = useNavigate();
   const [project, setProject] = useState({
     name: "",
-    image: "",
+    image: null, // Change image type to null initially
     location: "",
     description: "",
     goal_tons: 0,
@@ -50,6 +50,11 @@ const CreateProject = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setProject({ ...project, image: file });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -58,24 +63,22 @@ const CreateProject = () => {
     }
 
     const token = localStorage.getItem("token");
-    const data = {
-      name: project.name,
-      image: project.image,
-      location: project.location,
-      description: project.description,
-      goal_tons: project.goal_tons.toString(),
-      total_tons: project.total_tons.toString(),
-      organizations: project.organizations,
-      status: project.status,
-    };
-
+    const formData = new FormData();
+    formData.append("name", project.name);
+    formData.append("image", project.image);
+    formData.append("location", project.location);
+    formData.append("description", project.description);
+    formData.append("goal_tons", project.goal_tons.toString());
+    formData.append("total_tons", project.total_tons.toString());
+    formData.append("organizations", project.organizations);
+    formData.append("status", project.status);
 
     try {
-      const response = await projectService.createProject(data, token);
+      const response = await projectService.createProject(formData, token);
       console.log("Project created:", response);
       setProject({
         name: "",
-        image: "",
+        image: null,
         location: "",
         description: "",
         goal_tons: 0,
@@ -103,7 +106,6 @@ const CreateProject = () => {
             Nombre
             <input
               type="text"
-              value={project.name}
               onChange={(e) => setProject({ ...project, name: e.target.value })}
               className="form-control rounded-3"
             />
@@ -114,11 +116,8 @@ const CreateProject = () => {
           <label className="d-flex flex-column form-label w-50">
             Imagen
             <input
-              type="text"
-              value={project.image}
-              onChange={(e) =>
-                setProject({ ...project, image: e.target.value })
-              }
+              type="file" // Change type to "file"
+              onChange={handleImageChange} // Handle file selection
               className="form-control rounded-3"
             />
             {validationErrors.image && (
@@ -129,7 +128,6 @@ const CreateProject = () => {
             Ubicación
             <input
               type="text"
-              value={project.location}
               onChange={(e) =>
                 setProject({ ...project, location: e.target.value })
               }
@@ -143,7 +141,6 @@ const CreateProject = () => {
             Descripción
             <textarea
               type="text"
-              value={project.description}
               onChange={(e) =>
                 setProject({ ...project, description: e.target.value })
               }
@@ -159,7 +156,6 @@ const CreateProject = () => {
             Meta de Toneladas
             <input
               type="number"
-              value={project.goal_tons}
               onChange={(e) =>
                 setProject({ ...project, goal_tons: e.target.value })
               }
@@ -175,7 +171,6 @@ const CreateProject = () => {
             Total de Toneladas Recolectadas
             <input
               type="number"
-              value={project.total_tons}
               onChange={(e) =>
                 setProject({ ...project, total_tons: e.target.value })
               }
@@ -191,7 +186,6 @@ const CreateProject = () => {
             Organización
             <input
               type="text"
-              value={project.organizations}
               onChange={(e) =>
                 setProject({ ...project, organizations: e.target.value })
               }
@@ -207,7 +201,6 @@ const CreateProject = () => {
             Estado
             <select
               className="form-control rounded-3"
-              value={project.status}
               onChange={(e) =>
                 setProject({ ...project, status: e.target.value })
               }
@@ -222,7 +215,7 @@ const CreateProject = () => {
           </label>
           <br />
           <button type="submit" className="btn btn-primary btn-md w-50">
-            crear
+            Crear
           </button>
         </form>
       </div>
