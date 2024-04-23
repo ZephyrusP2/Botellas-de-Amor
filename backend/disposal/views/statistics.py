@@ -86,3 +86,10 @@ def top_5_users(request):
         response.append({'user': user, 'bottles': bottles})
 
     return JsonResponse(response, safe=False)
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def total_kilos_contributed(request):
+    total_kilos = Disposition.objects.filter(user=request.user).aggregate(Sum('kilos'))['total_kilos_contributed'] or 0
+    return JsonResponse({'total_kilos': total_kilos}, safe=False)
