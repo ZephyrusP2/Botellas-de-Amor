@@ -46,7 +46,7 @@ const ShowSite = () => {
             <strong>Horarios</strong>
           </h2>
           <div>
-            {siteData.schedules &&
+            {siteData.schedules && siteData.schedules.length > 0 ? (
               siteData.schedules.map((schedule) => (
                 <div key={schedule.id}>
                   <p className="display-6 small-text">
@@ -54,7 +54,12 @@ const ShowSite = () => {
                     {schedule.closes}
                   </p>
                 </div>
-              ))}
+              ))
+            ) : (
+              <p className="display-6 small-text">
+                No hay horarios disponibles
+              </p>
+            )}
           </div>
         </div>
       </div>
