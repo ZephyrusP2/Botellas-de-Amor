@@ -25,7 +25,13 @@ class SiteUpdateTestCase(APITestCase):
         self.admin_user.save()
         self.token = Token.objects.create(user=self.admin_user)
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
+        image_path = os.path.join(os.path.dirname(__file__), "default.jpg")
+        image = open(image_path, "rb")
+        file_data = SimpleUploadedFile(
+            "test_update.jpg", image.read(), content_type="image/jpeg")
+        image.close()
         self.site = Site.objects.create(
+            image=file_data,
             name="Universidad EAFIT",
             address="Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
         )
@@ -36,19 +42,18 @@ class SiteUpdateTestCase(APITestCase):
             closes="17:00:00",
         )
 
-        image_path = os.path.join(os.path.dirname(__file__), "default.jpg")
-        image = open(image_path, "rb")
-        file_data = SimpleUploadedFile(
-            "default.jpg", image.read(), content_type="image/jpeg")
-
         self.data = {
             "image": file_data,
             "name": "Universidad EAFIT",
             "address": "Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
-            "schedules": [
-                {"id": 1, "day": "Lunes", "opens": "10:00:00", "closes": "18:00:00"},
-            ],
         }
+
+        schedules = [
+            {"id": self.schedule.id, "day": "Lunes",
+                "opens": "10:00:00", "closes": "18:00:00"},
+        ]
+
+        self.data["schedules"] = str(schedules)
 
         return super().setUp()
 
@@ -65,6 +70,7 @@ class SiteUpdateTestCase(APITestCase):
         self.schedule.refresh_from_db()
         self.assertEqual(self.schedule.opens, datetime.time(10, 0))
         self.assertEqual(self.schedule.closes, datetime.time(18, 0))
+        self.site.image.delete()
 
     def test_site_update_unauthorized(self):
         self.client.credentials()
@@ -74,6 +80,7 @@ class SiteUpdateTestCase(APITestCase):
         )
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
+        self.site.image.delete()
 
     def test_site_update_not_found(self):
         response = self.client.put(
@@ -82,6 +89,7 @@ class SiteUpdateTestCase(APITestCase):
         )
         self.assertEqual(response.status_code, 404)
         self.assertIn("detail", response.json())
+        self.site.image.delete()
 
     def test_site_update_invalid_data(self):
         self.data.pop("address")
@@ -93,6 +101,7 @@ class SiteUpdateTestCase(APITestCase):
         self.assertIn("address", response.json())
         self.assertEqual(response.json()["address"], [
                          "This field is required."])
+        self.site.image.delete()
 
     def test_site_update_no_image(self):
         self.data.pop("image")
@@ -105,3 +114,4 @@ class SiteUpdateTestCase(APITestCase):
         self.assertIn("name", response.json())
         self.assertIn("address", response.json())
         self.assertIn("image", response.json())
+        self.site.image.delete()

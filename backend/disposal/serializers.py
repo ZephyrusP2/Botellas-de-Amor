@@ -25,7 +25,7 @@ class SiteSerializer(serializers.ModelSerializer):
     Site serializer
     """
 
-    schedules = ScheduleSerializer(many=True, read_only=True)
+    schedules = serializers.SerializerMethodField()
 
     class Meta:
         model = Site
@@ -36,6 +36,10 @@ class SiteSerializer(serializers.ModelSerializer):
             "address",
             "schedules",
         )
+
+    def get_schedules(self, obj):
+        schedules = Schedule.objects.filter(site=obj)
+        return ScheduleSerializer(schedules, many=True).data
 
 
 class ChallengesSerializer(serializers.ModelSerializer):
