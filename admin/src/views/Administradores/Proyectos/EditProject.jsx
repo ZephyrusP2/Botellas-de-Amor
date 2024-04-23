@@ -13,7 +13,7 @@ const EditProject = () => {
 
   const [projectData, setProjectData] = useState({
     name: "",
-    image: null, // Change image to null initially
+    image: null,
     location: "",
     description: "",
     goal_tons: 0,

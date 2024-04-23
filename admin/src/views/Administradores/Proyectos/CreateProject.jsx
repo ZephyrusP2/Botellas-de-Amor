@@ -10,7 +10,7 @@ const CreateProject = () => {
   const navigate = useNavigate();
   const [project, setProject] = useState({
     name: "",
-    image: null, // Change image type to null initially
+    image: null,
     location: "",
     description: "",
     goal_tons: 0,
@@ -116,8 +116,8 @@ const CreateProject = () => {
           <label className="d-flex flex-column form-label w-50">
             Imagen
             <input
-              type="file" // Change type to "file"
-              onChange={handleImageChange} // Handle file selection
+              type="file"
+              onChange={handleImageChange}
               className="form-control rounded-3"
             />
             {validationErrors.image && (
