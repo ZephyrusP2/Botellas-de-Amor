@@ -27,6 +27,11 @@ import IndexUser from "./views/Administradores/Usuarios/IndexUser";
 import ShowUser from "./views/Administradores/Usuarios/ShowUser";
 
 import CreateRegister from "./views/Operadores/Create";
+import IndexRegister from "./views/Operadores/Index";
+import EditRegister from "./views/Operadores/Edit";
+import ShowRegister from "./views/Operadores/Show";
+
+
 
 export default function App() {
   return (
@@ -122,6 +127,19 @@ function AppContent() {
                   path="/operador/registrar-botellas"
                   element={<CreateRegister />}
                 />
+                <Route
+                  path="/operador/registrar-botellas/historial"
+                  element={<IndexRegister />}
+                />
+                <Route
+                  path="/operador/registrar-botellas/editar/:id"
+                  element={<EditRegister />}
+                />
+                <Route
+                  path="/operador/registrar-botellas/:id"
+                  element={<ShowRegister />}
+                />
+                
               </>
             )}
           </>

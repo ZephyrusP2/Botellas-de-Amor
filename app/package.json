@@ -18,6 +18,7 @@
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.24",
     "axios": "^1.6.7",
+    "d3-scale": "^4.0.2",
     "expo": "^50.0.17",
     "expo-checkbox": "~2.7.0",
     "expo-cli": "^6.3.10",
@@ -29,6 +30,8 @@
     "react-native": "^0.73.6",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
+    "react-native-svg": "^14.1.0",
+    "react-native-svg-charts": "^5.4.0",
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {

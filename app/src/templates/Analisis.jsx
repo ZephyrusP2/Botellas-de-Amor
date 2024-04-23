@@ -3,12 +3,40 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserService from "../services/user";
 import StyledText from "../styles/StyledText";
 import Header2 from "./Header2";
-import { StyleSheet, View, Image, Alert, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Alert,
+  ScrollView,
+  TextInput,
+} from "react-native";
 import StyledButton from "../styles/StyledButton";
 import theme from "../styles/theme";
+import { BarChart, Grid, XAxis, YAxis } from "react-native-svg-charts";
 
 const Analisis = ({ navigation }) => {
   const [userData, setUserData] = useState();
+  const [data, setData] = useState([
+    { month: 1, value: 20 },
+    { month: 2, value: 30 },
+    { month: 3, value: 40 },
+    { month: 4, value: 25 },
+    { month: 1, value: 27 },
+    { month: 2, value: 30 },
+    { month: 3, value: 40 },
+    { month: 4, value: 25 },
+    { month: 1, value: 20 },
+    { month: 2, value: 30 },
+    { month: 3, value: 40 },
+    { month: 4, value: 25 },
+    { month: 1, value: 20 },
+    { month: 2, value: 30 },
+    { month: 3, value: 40 },
+    { month: 4, value: 25 },
+  ]);
+  const [selectedX, setSelectedX] = useState("");
+  const [projection, setProjection] = useState(null);
 
   useEffect(() => {
     retrieveUser();
@@ -30,12 +58,32 @@ const Analisis = ({ navigation }) => {
     navigation.navigate("Analisis");
     Alert.alert(
       "Botellas de amor",
-      `¡Hola ${userData?.name || ""} estas viendo tus estadísticas!`,
+      `¡Hola ${userData?.name || ""} estás viendo tus estadísticas!`
     );
   };
 
   const goToProfile = () => {
     navigation.navigate("Profile");
+  };
+
+  const handleInputChange = (text) => {
+    setSelectedX(text);
+    calculateProjection(text);
+  };
+
+  const calculateProjection = (x) => {
+    const xValue = parseFloat(x);
+    if (!isNaN(xValue)) {
+      const nearestDataPoint = data.reduce((nearest, current) => {
+        return Math.abs(current.month - xValue) <
+          Math.abs(nearest.month - xValue)
+          ? current
+          : nearest;
+      });
+      setProjection(nearestDataPoint.value);
+    } else {
+      setProjection(null);
+    }
   };
 
   return (
@@ -82,12 +130,54 @@ const Analisis = ({ navigation }) => {
         >
           Proyecciones
         </StyledText>
-        <View style={styles.imageContainer}>
-          <Image
-            source={require("../images/proyecciones.png")}
-            style={styles.image}
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Valor de x"
+            onChangeText={handleInputChange}
+            keyboardType="numeric"
           />
         </View>
+        {projection !== null && (
+          <StyledText
+            color="secondary"
+            size="medium"
+            fontWeight="bold"
+            align="center"
+            style={styles.textMargin}
+          >
+            Proyección para x = {selectedX}: {projection}
+          </StyledText>
+        )}
+        <View style={styles.chartContainer}>
+          <View style={{ flexDirection: "row", height: 200 }}>
+            <YAxis
+              data={data.map((item) => item.value)}
+              contentInset={{ top: 20, bottom: 20 }}
+              svg={{ fontSize: 10, fill: theme.colors.text }}
+              numberOfTicks={5}
+              formatLabel={(value) => `${value}`}
+            />
+            <View style={{ flex: 1 }}>
+              <BarChart
+                style={{ flex: 1 }}
+                data={data.map((item) => item.value)}
+                svg={{ fill: theme.colors.primary }}
+                contentInset={{ top: 20, bottom: 20 }}
+              >
+                <Grid />
+              </BarChart>
+              <XAxis
+                style={{ marginHorizontal: -10 }}
+                data={data}
+                formatLabel={(value, index) => data[index].month}
+                contentInset={{ left: 10, right: 10 }}
+                svg={{ fontSize: 10, fill: theme.colors.text }}
+              />
+            </View>
+          </View>
+        </View>
+        
       </ScrollView>
     </>
   );
@@ -145,6 +235,22 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     marginBottom: 10,
+  },
+  inputContainer: {
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  input: {
+    width: 100,
+    height: 40,
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 5,
+    paddingHorizontal: 10,
+  },
+  chartContainer: {
+    height: 300,
+    padding: 20,
   },
 });
 

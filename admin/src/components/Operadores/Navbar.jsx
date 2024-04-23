@@ -25,8 +25,8 @@ const NavbarOperadores = () => {
             Registro
           </Link>
           <Link
-            to="/operador/registrar-botellas/Historial"
-            className={`button-navbar ocultar ${location.pathname === "/operador/registrar-botellas/Historial" ? "active" : ""}`}
+            to="/operador/registrar-botellas/historial"
+            className={`button-navbar ocultar ${location.pathname === "/operador/registrar-botellas/historial" ? "active" : ""}`}
           >
             Historial
           </Link>
