@@ -1,10 +1,11 @@
+import json
 from rest_framework import generics, permissions, status
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from disposal.models import Site, Schedule
-from disposal.serializers import SiteSerializer
+from disposal.serializers import SiteSerializer, ScheduleSerializer
 
 
 class Create(APIView):
@@ -20,7 +21,7 @@ class Create(APIView):
         serializer = SiteSerializer(data=request.data)
         if serializer.is_valid():
             site = serializer.save()
-            save_schedule(self, site, request.data.getlist("schedules"))
+            save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -31,39 +32,41 @@ def save_schedule(self, site, schedules):
     :param site: Site
     :param schedules: List
     """
-    for schedule_str in schedules:
-        schedule_dict = eval(schedule_str)
-        if "id" in schedule_dict:
-            Schedule.objects.filter(id=schedule_dict["id"]).update(
-                day=schedule_dict["day"],
-                opens=schedule_dict["opens"],
-                closes=schedule_dict["closes"],
+    schedule_dict = eval(schedules)
+    for schedule in schedule_dict:
+        if "id" in schedule:
+            Schedule.objects.filter(id=schedule["id"]).update(
+                day=schedule["day"],
+                opens=schedule["opens"],
+                closes=schedule["closes"],
             )
         else:
             Schedule.objects.create(
                 site=site,
-                day=schedule_dict["day"],
-                opens=schedule_dict["opens"],
-                closes=schedule_dict["closes"],
+                day=schedule["day"],
+                opens=schedule["opens"],
+                closes=schedule["closes"],
             )
 
 
-class Retrieve(generics.RetrieveAPIView):
+class Retrieve(APIView):
     """
     Site retrieve
     """
 
     serializer_class = SiteSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    queryset = Site.objects.all()
 
-    http_method_names = ["get"]
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return Site.objects.all()
+    def get(self, request, pk):
+        try:
+            site = Site.objects.get(pk=pk)
+        except Site.DoesNotExist:
+            return Response(
+                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+        serializer = SiteSerializer(site, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class Update(APIView):
@@ -88,7 +91,7 @@ class Update(APIView):
             if "image" in request.data and site.image.name != "sites/default.jpg":
                 site.image.delete()
             serializer.save()
-            save_schedule(self, site, request.data.getlist("schedules"))
+            save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
@@ -104,27 +107,31 @@ class Update(APIView):
         serializer = SiteSerializer(site, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            save_schedule(self, site, request.data.getlist("schedules"))
+            save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Delete(generics.DestroyAPIView):
+class Delete(APIView):
     """
     Site delete
     """
 
     serializer_class = SiteSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    queryset = Site.objects.all()
 
-    http_method_names = ["delete"]
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return Site.objects.all()
+    def delete(self, request, pk):
+        try:
+            site = Site.objects.get(pk=pk)
+        except Site.DoesNotExist:
+            return Response(
+                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
+            )
+        if site.image.name != "sites/default.jpg":
+            site.image.delete()
+        site.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class List(generics.ListAPIView):

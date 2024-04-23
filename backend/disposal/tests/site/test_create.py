@@ -35,16 +35,19 @@ class SiteCreateTestCase(APITestCase):
             "image": file_data,
             "name": "Universidad EAFIT",
             "address": "Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
-            "schedules": [
-                {"day": "Lunes", "opens": "10:00:00", "closes": "17:00:00"},
-                {"day": "Martes", "opens": "10:00:00", "closes": "17:00:00"},
-                {"day": "Miércoles", "opens": "10:00:00", "closes": "17:00:00"},
-                {"day": "Jueves", "opens": "10:00:00", "closes": "17:00:00"},
-                {"day": "Viernes", "opens": "10:00:00", "closes": "17:00:00"},
-                {"day": "Sábado", "opens": "10:00:00", "closes": "17:00:00"},
-                {"day": "Domingo", "opens": "10:00:00", "closes": "17:00:00"},
-            ],
         }
+
+        schedules = [
+            {"day": "Lunes", "opens": "10:00:00", "closes": "17:00:00"},
+            {"day": "Martes", "opens": "10:00:00", "closes": "17:00:00"},
+            {"day": "Miércoles", "opens": "10:00:00", "closes": "17:00:00"},
+            {"day": "Jueves", "opens": "10:00:00", "closes": "17:00:00"},
+            {"day": "Viernes", "opens": "10:00:00", "closes": "17:00:00"},
+            {"day": "Sábado", "opens": "10:00:00", "closes": "17:00:00"},
+            {"day": "Domingo", "opens": "10:00:00", "closes": "17:00:00"},
+        ]
+
+        self.data["schedules"] = str(schedules)
 
         return super().setUp()
 

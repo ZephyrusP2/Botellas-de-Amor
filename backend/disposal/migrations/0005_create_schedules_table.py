@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name="Schedule",
             fields=[
                 ("id", models.AutoField(primary_key=True, serialize=False)),
-                ("days_range", models.CharField(max_length=50)),
+                ("day", models.CharField(max_length=50)),
                 ("opens", models.TimeField()),
                 ("closes", models.TimeField()),
                 (
