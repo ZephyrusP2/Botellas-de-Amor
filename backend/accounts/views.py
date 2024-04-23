@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth import authenticate
 from django.db import IntegrityError
 from django.http import JsonResponse
@@ -8,6 +9,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
+from django.contrib.auth import get_user_model
 
 from backend.permissions import IsAdmin, IsAdminOrSelf
 from disposal.models import Bottle
@@ -51,33 +53,38 @@ class UserList(generics.ListAPIView):
         return User.objects.all()
 
 
-class UserCreate(generics.CreateAPIView):
+class UserCreate(APIView):
     """
     User create
     """
 
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    queryset = User.objects.all()
 
-    def perform_create(self, serializer):
+    def post(self, request):
         """
-        Perform create
-        :param serializer: serializer
-        :return: None
+        Post
+        :param request: request
+        :return: JsonResponse
         """
-        password = serializer.validated_data.get("password", None)
-        instance = serializer.save()
-        if password:
-            instance.set_password(password)
-        instance.save()
-        Bottle.objects.create(user=instance)
-
-    def get_queryset(self):
-        """
-        Get queryset
-        :return: QuerySet
-        """
-        return User.objects.all()
+        data = request.data
+        today = datetime.date.today()
+        birth_date = datetime.datetime.strptime(
+            data["birth_date"], "%Y-%m-%d").date()
+        if birth_date > today:
+            return JsonResponse(
+                {"birth_date": ["Birth date cannot be in the future"]}, status=400
+            )
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            user = serializer.save()
+            user.set_password(data["password"])
+            user.save()
+            token = Token.objects.create(user=user)
+            Bottle.objects.create(user=user)
+            return JsonResponse({"token": token.key, "id": user.id}, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 
 class UserRetrieve(generics.RetrieveAPIView):
@@ -150,6 +157,13 @@ def register(request):
     if request.method == "POST":
         try:
             data = JSONParser().parse(request)
+            today = datetime.date.today()
+            birth_date = datetime.datetime.strptime(
+                data["birth_date"], "%Y-%m-%d").date()
+            if birth_date > today:
+                return JsonResponse(
+                    {"birth_date": ["Birth date cannot be in the future"]}, status=400
+                )
             user = User(
                 name=data["name"],
                 last_name=data["last_name"],
@@ -177,12 +191,20 @@ def login(request):
     """
     if request.method == "POST":
         data = JSONParser().parse(request)
+        User = get_user_model()
+        try:
+            User.objects.get(email=data["email"].lower())
+        except User.DoesNotExist:
+            return JsonResponse(
+                {"error": "Usuario no encontrado"},
+                status=400,
+            )
         user = authenticate(
             request, email=data["email"].lower(), password=data["password"]
         )
         if user is None:
             return JsonResponse(
-                {"error": "could not login. please check username and/or password"},
+                {"error": "Contraseña incorrecta"},
                 status=400,
             )
         else:

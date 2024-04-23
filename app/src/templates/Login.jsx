@@ -16,12 +16,21 @@ import UserService from "../services/user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
-  const [error, setError] = useState("");
+
 
   login = async (email, password) => {
+    if (!email || !password) {
+      setErrorMessage("Llena todos los campos");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+      return;
+    }
     const userData = {
       email: email,
       password: password,
@@ -34,7 +43,6 @@ const Login = ({ navigation }) => {
         AsyncStorage.setItem("email", userData.email);
         const id = response.data.id.toString();
         AsyncStorage.setItem("id", id);
-        setError("");
         navigation.navigate("Content");
       })
       .catch((error) => {
@@ -47,7 +55,7 @@ const Login = ({ navigation }) => {
     navigation.navigate("Register");
   };
 
-  onForgotPassword = () => {};
+  onForgotPassword = () => { };
 
   return (
     <StyledBackground bg="secondary" style={styles.background}>
@@ -99,6 +107,11 @@ const Login = ({ navigation }) => {
               secureTextEntry={true}
             />
 
+            {errorMessage && (
+              <StyledText color="danger" size="medium" align="center">
+                {errorMessage}
+              </StyledText>
+            )}
             <StyledButton onPress={() => login(email, password)}>
               Comenzar
             </StyledButton>
@@ -119,6 +132,7 @@ const Login = ({ navigation }) => {
               <StyledText size="medium" color="primary" align="center">
                 Recuperar contraseña
               </StyledText>
+
             </TouchableOpacity>
           </View>
         </StyledBackground>
@@ -141,7 +155,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     width: "100%",
-    height: "55%",
+    height: "50%",
     justifyContent: "center",
     alignItems: "center",
   },

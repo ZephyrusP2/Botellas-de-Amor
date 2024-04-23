@@ -138,12 +138,13 @@ def toggle(request):
     if status == "checked":
         bottle.experience += challenge.experience
         if bottle.experience >= 100:
-            bottle.experience = 0
+            bottle.experience = bottle.experience - 100
             bottle.level += 1
         bottle.save()
     else:
         bottle.experience -= challenge.experience
         if bottle.experience < 0:
-            bottle.experience = 0
+            bottle.experience = 100 + bottle.experience
+            bottle.level -= 1
         bottle.save()
     return JsonResponse({"level": bottle.level})

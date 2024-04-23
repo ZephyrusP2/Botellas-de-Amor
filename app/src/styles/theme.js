@@ -8,6 +8,7 @@ const theme = {
   colors: {
     textPrimary: "#000000",
     textSecondary: "#000000",
+    danger: "#FF0000",
     primary: "#00C8EA",
     secondary: "#FD595A",
     white: "#fefefe",
