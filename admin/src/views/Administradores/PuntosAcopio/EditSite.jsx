@@ -13,39 +13,50 @@ const EditSite = () => {
   const [siteData, setSiteData] = useState({
     id: "",
     image: "",
-    opens: "",
-    closes: "",
     name: "",
     address: "",
+    schedules: [
+      { day: "Lunes", opens: "", closes: "" },
+      { day: "Martes", opens: "", closes: "" },
+      { day: "Miércoles", opens: "", closes: "" },
+      { day: "Jueves", opens: "", closes: "" },
+      { day: "Viernes", opens: "", closes: "" },
+      { day: "Sábado", opens: "", closes: "" },
+      { day: "Domingo", opens: "", closes: "" }
+    ]
   });
 
   const [validationErrors, setValidationErrors] = useState({});
+  
   const validateSite = (data) => {
     const errors = {};
-    if (!data.opens) {
-      errors.opens = "Se requiere la hora de apertura";
-    }
-    if (!data.closes) {
-      errors.closes = "Se requiere la hora de cierre";
-    }
     if (!data.name) {
       errors.name = "Se requiere el nombre";
     }
     if (!data.address) {
-      errors.address = "Se requiere la direccion"; // Corrected typo in property name
+      errors.address = "Se requiere la dirección";
+    }
+    if (data.schedules.some(schedule => !schedule.opens || !schedule.closes)) {
+      errors.schedule = "Se requiere el horario de apertura y cierre para todos los días";
     }
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
   const handleInputChange = (event) => {
-    setSiteData({
-      ...siteData,
-      [event.target.name]:
-        event.target.type === "file"
-          ? event.target.files[0]
-          : event.target.value,
-    });
+    const { name, value } = event.target;
+    if (name.startsWith("opens") || name.startsWith("closes")) {
+      const index = parseInt(name.split("_")[1]);
+      const dayField = name.split("_")[0];
+      const updatedSchedules = [...siteData.schedules];
+      updatedSchedules[index][dayField] = value;
+      setSiteData({ ...siteData, schedules: updatedSchedules });
+    } else {
+      setSiteData({
+        ...siteData,
+        [name]: event.target.type === "file" ? event.target.files[0] : value,
+      });
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -61,10 +72,9 @@ const EditSite = () => {
       if (siteData.image) {
         formData.append("image", siteData.image);
       }
-      formData.append("opens", siteData.opens);
-      formData.append("closes", siteData.closes);
       formData.append("name", siteData.name);
       formData.append("address", siteData.address);
+      formData.append("schedules", JSON.stringify(siteData.schedules));
 
       await siteService.updateSite(id, formData, token);
       navigate(`/administrar/puntos-acopio`);
@@ -77,7 +87,6 @@ const EditSite = () => {
     const getSite = async () => {
       const token = localStorage.getItem("token");
       const response = await siteService.showSite(id, token);
-      response.data.image = null;
       setSiteData(response.data);
     };
 
@@ -97,48 +106,13 @@ const EditSite = () => {
           <label htmlFor="image" className="d-flex flex-column form-label w-50">
             Imagen
             <input
-              type="file" // Changed type to file
+              type="file"
               name="image"
               id="image"
               accept="image/*"
               onChange={handleInputChange}
               className="form-control rounded-3"
             />
-            {validationErrors.image && (
-              <span className="error-message">{validationErrors.image}</span>
-            )}
-          </label>
-
-          <label htmlFor="opens" className="d-flex flex-column form-label w-50">
-            Hora de apertura
-            <input
-              type="time"
-              name="opens"
-              id="opens"
-              value={siteData.opens}
-              onChange={handleInputChange}
-              className="form-control rounded-3"
-            />
-            {validationErrors.opens && (
-              <span className="error-message">{validationErrors.opens}</span>
-            )}
-          </label>
-          <label
-            htmlFor="closes"
-            className="d-flex flex-column form-label w-50"
-          >
-            Hora de cierre
-            <input
-              type="time"
-              name="closes"
-              id="closes"
-              value={siteData.closes}
-              onChange={handleInputChange}
-              className="form-control rounded-3"
-            />
-            {validationErrors.closes && (
-              <span className="error-message">{validationErrors.closes}</span>
-            )}
           </label>
 
           <label htmlFor="name" className="d-flex flex-column form-label w-50">
@@ -156,11 +130,8 @@ const EditSite = () => {
             )}
           </label>
 
-          <label
-            htmlFor="address"
-            className="d-flex flex-column form-label w-50"
-          >
-            Direccion
+          <label htmlFor="address" className="d-flex flex-column form-label w-50">
+            Dirección
             <input
               type="text"
               name="address"
@@ -173,6 +144,28 @@ const EditSite = () => {
               <span className="error-message">{validationErrors.address}</span>
             )}
           </label>
+
+          <div className="d-flex flex-column form-label w-50 custom-scrollbar">
+            {siteData.schedules.map((schedule, index) => (
+              <div key={index}>
+                <label>{schedule.day}</label>
+                <input
+                  type="time"
+                  name={`opens_${index}`}
+                  value={schedule.opens}
+                  onChange={handleInputChange}
+                  className="form-control rounded-3"
+                />
+                <input
+                  type="time"
+                  name={`closes_${index}`}
+                  value={schedule.closes}
+                  onChange={handleInputChange}
+                  className="form-control rounded-3"
+                />
+              </div>
+            ))}
+          </div>
 
           <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
             Editar punto de acopio

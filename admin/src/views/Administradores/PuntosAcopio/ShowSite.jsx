@@ -34,15 +34,6 @@ const ShowSite = () => {
             className="display-6 small-text image-acopio"
             alt="Imagen de la página"
           />
-
-          <h2 className="blue-text display-5 small-text">
-            <strong>Hora de apertura</strong>
-          </h2>
-          <p className="display-6 small-text">{siteData.opens}</p>
-          <h2 className="blue-text display-6 small-text">
-            <strong>Hora de cierre</strong>
-          </h2>
-          <p className="display-6 small-text">{siteData.closes}</p>
           <h2 className="blue-text display-5 small-text">
             <strong>Nombre</strong>
           </h2>
@@ -51,6 +42,20 @@ const ShowSite = () => {
             <strong>Direccion</strong>
           </h2>
           <p className="display-6 small-text">{siteData.address}</p>
+          <h2 className="blue-text display-5 small-text">
+            <strong>Horarios</strong>
+          </h2>
+          <div>
+            {siteData.schedules &&
+              siteData.schedules.map((schedule) => (
+                <div key={schedule.id}>
+                  <p className="display-6 small-text">
+                    <strong>{schedule.day}:</strong> {schedule.opens} -{" "}
+                    {schedule.closes}
+                  </p>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </>

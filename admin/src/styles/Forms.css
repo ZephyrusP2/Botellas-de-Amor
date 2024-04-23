@@ -73,3 +73,53 @@
   max-width: 200px;
   max-height: 300px;
 }
+
+.form-container {
+  height: 60%; /* Altura máxima del contenedor */
+  overflow-y: auto; /* Activar la barra de desplazamiento vertical cuando sea necesario */
+  width: 100%;
+}
+
+.form-container::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento */
+  right: 10px; /* Desplazar la barra de desplazamiento 10px a la derecha */
+  margin-left: 10px; /* Separar la barra de desplazamiento de lo que está a su izquierda */
+}
+
+.form-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de fondo de la pista de la barra de desplazamiento */
+}
+
+.form-container::-webkit-scrollbar-thumb {
+  background: #888; /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 5px; /* Radio de borde del pulgar de la barra de desplazamiento */
+}
+
+.form-container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color del pulgar de la barra de desplazamiento al pasar el mouse */
+}
+
+.custom-scrollbar {
+  overflow-y: auto; /* Activar la barra de desplazamiento vertical cuando sea necesario */
+  height: 200px;
+  padding-right: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento */
+  right: 10px; /* Desplazar la barra de desplazamiento 10px a la derecha */
+  margin-left: 10px; /* Separar la barra de desplazamiento de lo que está a su izquierda */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de fondo de la pista de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 5px; /* Radio de borde del pulgar de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color del pulgar de la barra de desplazamiento al pasar el mouse */
+}

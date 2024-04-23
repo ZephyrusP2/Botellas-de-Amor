@@ -53,7 +53,7 @@ const CreateChallenge = () => {
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/administrar/retos" />
-        <h1 className="container-fluid text-center">crear reto</h1>
+        <h1 className="container-fluid text-center">Crear reto</h1>
         <form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-center container m-0 p-0"
