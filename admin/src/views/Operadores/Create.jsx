@@ -75,7 +75,6 @@ const CreateRegister = () => {
 
     try {
       const response = await dispositionService.createDisposition(data, token);
-      console.log("site created:", response);
       setSite("");
       setBottles("");
       setWeight("");
