@@ -7,8 +7,12 @@ from rest_framework.decorators import (api_view, authentication_classes,
 from accounts.models import User
 from backend.permissions import IsAdminOrOperator, IsAdminOrOperatorOrSelf
 from disposal.models import Disposition
-from disposal.serializers import DispositionSerializer
 from django.db.models import Sum
+from datetime import date
+from datetime import timedelta
+from sklearn.linear_model import LinearRegression
+from django.utils import timezone
+import numpy as np
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
@@ -93,3 +97,40 @@ def top_5_users(request):
 def total_kilos_contributed(request):
     total_kilos = Disposition.objects.filter(user=request.user).aggregate(Sum('kilos'))['total_kilos_contributed'] or 0
     return JsonResponse({'total_kilos': total_kilos}, safe=False)
+
+def get_age(birth_date):
+    actual_date = date.today()
+    age = actual_date.year - birth_date.year - ((actual_date.month, actual_date.day) < (birth_date.month, birth_date.day))
+    return age
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def average_age(request):
+    birth_dates = User.objects.filetr(birth_date=request.birth_date)
+    user_ages = [get_age(user.birth_date) for user in birth_dates]
+
+    if user_ages:
+        average_age = sum(user_ages) / len(user_ages)
+    else:
+        average_age = None
+
+    return JsonResponse({'average_age': average_age}, safe=False)
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def projected_bottles_contribution(request, days):
+    end_date = timezone.now()
+    start_date = end_date - timedelta(days=days)
+
+    disposals = Disposition.objects.filter(user=request.user, timestamp__range=(start_date, end_date))
+
+    x = np.array([[(disposal.timestamp - start_date).days] for disposal in disposals])
+    y = np.array([disposal.bottles for disposal in disposals])
+
+    model = LinearRegression().fit(x, y)
+    future_days = np.array([[days]])
+    projected_bottles = model.predict(future_days)[0]
+
+    return JsonResponse({'projected_bottles': projected_bottles}, safe=False)
