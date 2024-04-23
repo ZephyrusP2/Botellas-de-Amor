@@ -68,11 +68,9 @@ const CreateUser = () => {
     };
 
     try {
-      console.log(gender, email, password);
       const token = localStorage.getItem("token");
 
       const response = await userService.createUser(userData, token);
-      console.log("User created:", response);
       setName("");
       setLastName("");
       setBirthDate("");

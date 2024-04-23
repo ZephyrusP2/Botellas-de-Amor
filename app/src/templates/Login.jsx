@@ -38,7 +38,7 @@ const Login = ({ navigation }) => {
         navigation.navigate("Content");
       })
       .catch((error) => {
-        console.log("login", error);
+        console.error("login", error);
         setError(error.toString());
       });
   };

@@ -5,7 +5,6 @@ class siteService {
 
   listSite(token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    console.log(this.server);
     return axios.get(`${this.server}/api/disposal/site/list`);
   }
 

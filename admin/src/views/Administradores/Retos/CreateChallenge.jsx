@@ -39,7 +39,6 @@ const CreateChallenge = () => {
 
     try {
       const response = await challengeService.createChallenge(data, token);
-      console.log("Challenge created:", response);
       setChallenge("");
       setExperience("");
       navigate(`/administrar/retos`);
