@@ -80,6 +80,7 @@ class Update(APIView):
     queryset = Site.objects.all()
 
     def patch(self, request, pk, format=None):
+        print(request.data)
         try:
             site = Site.objects.get(pk=pk)
         except Site.DoesNotExist:

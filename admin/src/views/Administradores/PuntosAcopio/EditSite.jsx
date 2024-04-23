@@ -22,8 +22,8 @@ const EditSite = () => {
       { day: "Jueves", opens: "", closes: "" },
       { day: "Viernes", opens: "", closes: "" },
       { day: "Sábado", opens: "", closes: "" },
-      { day: "Domingo", opens: "", closes: "" }
-    ]
+      { day: "Domingo", opens: "", closes: "" },
+    ],
   });
 
   const [validationErrors, setValidationErrors] = useState({});
@@ -37,8 +37,11 @@ const EditSite = () => {
     if (!data.address) {
       errors.address = "Se requiere la dirección";
     }
-    if (data.schedules.some(schedule => !schedule.opens || !schedule.closes)) {
-      errors.schedule = "Se requiere el horario de apertura y cierre para todos los días";
+    if (
+      data.schedules.some((schedule) => !schedule.opens || !schedule.closes)
+    ) {
+      errors.schedule =
+        "Se requiere el horario de apertura y cierre para todos los días";
     }
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
@@ -69,10 +72,13 @@ const EditSite = () => {
 
     // Agregar el nuevo día con horarios vacíos
     const newSchedule = { day: newDay, opens: "", closes: "" };
-    setSiteData({ ...siteData, schedules: [...siteData.schedules, newSchedule] });
+    setSiteData({
+      ...siteData,
+      schedules: [...siteData.schedules, newSchedule],
+    });
     setNewDay(""); // Limpiar el estado del nuevo día después de agregarlo
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -89,7 +95,6 @@ const EditSite = () => {
       formData.append("name", siteData.name);
       formData.append("address", siteData.address);
       formData.append("schedules", JSON.stringify(siteData.schedules));
-
       await siteService.updateSite(id, formData, token);
       navigate(`/administrar/puntos-acopio`);
     } catch (error) {
@@ -101,16 +106,31 @@ const EditSite = () => {
     const getSite = async () => {
       const token = localStorage.getItem("token");
       const response = await siteService.showSite(id, token);
-      setSiteData(response.data);
+      setSiteData((prevState) => ({
+        ...prevState,
+        ...response.data,
+        image: null, // Reset image to null
+      }));
     };
 
     getSite();
   }, [id]);
 
   // Filtrar los días que aún no están registrados
-  const availableDays = siteData.schedules.length < 7
-    ? ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].filter(day => !siteData.schedules.some(schedule => schedule.day === day))
-    : [];
+  const availableDays =
+    siteData.schedules.length < 7
+      ? [
+          "Lunes",
+          "Martes",
+          "Miércoles",
+          "Jueves",
+          "Viernes",
+          "Sábado",
+          "Domingo",
+        ].filter(
+          (day) => !siteData.schedules.some((schedule) => schedule.day === day)
+        )
+      : [];
 
   return (
     <>
@@ -149,7 +169,10 @@ const EditSite = () => {
             )}
           </label>
 
-          <label htmlFor="address" className="d-flex flex-column form-label w-50">
+          <label
+            htmlFor="address"
+            className="d-flex flex-column form-label w-50"
+          >
             Dirección
             <input
               type="text"
@@ -164,7 +187,6 @@ const EditSite = () => {
             )}
           </label>
 
-          
           <div className="d-flex flex-column form-label w-50 custom-scrollbar">
             {siteData.schedules.map((schedule, index) => (
               <div key={index}>
@@ -186,8 +208,11 @@ const EditSite = () => {
               </div>
             ))}
           </div>
-{/* Lista desplegable para seleccionar el nuevo día */}
-<label htmlFor="newDay" className="d-flex flex-column form-label w-50">
+          {/* Lista desplegable para seleccionar el nuevo día */}
+          <label
+            htmlFor="newDay"
+            className="d-flex flex-column form-label w-50"
+          >
             Nuevo Día
             <select
               name="newDay"
@@ -198,12 +223,18 @@ const EditSite = () => {
             >
               <option value="">Seleccione un día</option>
               {availableDays.map((day, index) => (
-                <option key={index} value={day}>{day}</option>
+                <option key={index} value={day}>
+                  {day}
+                </option>
               ))}
             </select>
           </label>
 
-          <button type="button" onClick={addDay} className="btn btn-secondary btn-md mt-3 float-start">
+          <button
+            type="button"
+            onClick={addDay}
+            className="btn btn-secondary btn-md mt-3 float-start"
+          >
             Agregar día
           </button>
 
