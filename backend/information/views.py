@@ -86,6 +86,7 @@ class Delete(generics.DestroyAPIView):
         :param instance: instance
         :return: None
         """
+        instance.image.delete()
         instance.delete()
 
 
