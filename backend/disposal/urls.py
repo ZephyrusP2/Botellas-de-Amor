@@ -4,6 +4,7 @@ from .views import bottle as BottleView
 from .views import challenge as ChallengeView
 from .views import disposition as DispositionView
 from .views import site as SiteView
+from .views import statistics as StatisticsView
 
 urlpatterns = [
     path("site/create", SiteView.Create.as_view(), name="site.create"),
@@ -55,4 +56,49 @@ urlpatterns = [
     path("bottle/update/<int:pk>", BottleView.Update.as_view(), name="bottle.update"),
     path("bottle/delete/<int:pk>", BottleView.Delete.as_view(), name="bottle.delete"),
     path("bottle/list", BottleView.List.as_view(), name="bottle.list"),
+    path(
+        "statistics/total_bottles_contributed", 
+        StatisticsView.total_bottles_contributed, 
+        name="statistics.total_bottles_contributed"
+    ),
+    path(
+        "statistics/plastic_footprint_reduced", 
+        StatisticsView.plastic_footprint_reduced, 
+        name="statistics.plastic_footprint_reduced"
+    ),
+    path(
+        "statistics/total_users", 
+        StatisticsView.users, 
+        name="statistics.total_users"
+    ),
+    path(
+        "statistics/most_contributed_bottles_by_gender", 
+        StatisticsView.most_contributed_bottles_by_gender, 
+        name="statistics.most_contributed_bottles_by_gender"
+    ),
+    path(
+        "statistics/top_5_sites", 
+        StatisticsView.top_5_sites, 
+        name="statistics.top_5_sites"
+    ),
+    path(
+        "statistics/top_5_users", 
+        StatisticsView.top_5_users, 
+        name="statistics.top_5_users"
+    ),
+    path(
+        "statistics/total_kilos_contributed", 
+        StatisticsView.total_kilos_contributed, 
+        name="statistics.total_kilos_contributed"
+    ),
+    path(
+        "statistics/average_age", 
+        StatisticsView.average_age, 
+        name="statistics.average_age"
+    ),
+    path(
+        "statistics/projected_bottles_contribution", 
+        StatisticsView.projected_bottles_contribution, 
+        name="statistics.projected_bottles_contribution"
+    ),
 ]
