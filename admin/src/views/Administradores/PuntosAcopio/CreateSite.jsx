@@ -13,13 +13,13 @@ const CreateSite = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [schedules, setSchedules] = useState([
-    { day: "Lunes", opens: "", closes: "" },
-    { day: "Martes", opens: "", closes: "" },
-    { day: "Miércoles", opens: "", closes: "" },
-    { day: "Jueves", opens: "", closes: "" },
-    { day: "Viernes", opens: "", closes: "" },
-    { day: "Sábado", opens: "", closes: "" },
-    { day: "Domingo", opens: "", closes: "" }
+    { day: "Lunes", opens: "", closes: "", enabled: false },
+    { day: "Martes", opens: "", closes: "", enabled: false },
+    { day: "Miércoles", opens: "", closes: "", enabled: false },
+    { day: "Jueves", opens: "", closes: "", enabled: false },
+    { day: "Viernes", opens: "", closes: "", enabled: false },
+    { day: "Sábado", opens: "", closes: "", enabled: false },
+    { day: "Domingo", opens: "", closes: "", enabled: false }
   ]);
   const { register, formState: { errors }, handleSubmit: validateAndSubmit } = useForm();
   const [imagePreview, setImagePreview] = useState(null);
@@ -31,7 +31,13 @@ const CreateSite = () => {
     formData.append("image", image);
     formData.append("name", data.name);
     formData.append("address", data.address);
-    formData.append("schedules", JSON.stringify(schedules));
+
+    // Filtrar solo los días habilitados con horarios definidos
+    const filteredSchedules = schedules
+      .filter(schedule => schedule.enabled && (schedule.opens !== "" && schedule.closes !== ""))
+      .map(schedule => ({ day: schedule.day, opens: schedule.opens, closes: schedule.closes }));
+
+    formData.append("schedules", JSON.stringify(filteredSchedules));
 
     try {
       const response = await siteService.createSite(formData, token);
@@ -45,6 +51,12 @@ const CreateSite = () => {
     } catch (error) {
       console.error("Error creating site:", error);
     }
+  };
+
+  const toggleDay = (index) => {
+    const updatedSchedules = [...schedules];
+    updatedSchedules[index].enabled = !updatedSchedules[index].enabled;
+    setSchedules(updatedSchedules);
   };
 
   const handleScheduleChange = (index, field, value) => {
@@ -112,26 +124,31 @@ const CreateSite = () => {
           <div className="d-flex flex-column form-label w-50 custom-scrollbar">
             {schedules.map((schedule, index) => (
               <div key={index}>
-                <label>{schedule.day}</label>
-                <input
-                  type="time"
-                  {...register(`opens.${index}`, { required: true })}
-                  value={schedule.opens}
-                  onChange={(e) => handleScheduleChange(index, "opens", e.target.value)}
-                  className="form-control rounded-3"
-                />
-                {errors.opens && errors.opens[index] && (
-                  <span className="error-message">Se requiere el horario de apertura para {schedule.day}</span>
-                )}
-                <input
-                  type="time"
-                  {...register(`closes.${index}`, { required: true })}
-                  value={schedule.closes}
-                  onChange={(e) => handleScheduleChange(index, "closes", e.target.value)}
-                  className="form-control rounded-3"
-                />
-                {errors.closes && errors.closes[index] && (
-                  <span className="error-message">Se requiere el horario de cierre para {schedule.day}</span>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={schedule.enabled}
+                    onChange={() => toggleDay(index)}
+                  />
+                  {schedule.day}
+                </label>
+                {schedule.enabled && (
+                  <>
+                    <input
+                      type="time"
+                      {...register(`opens.${index}`)}
+                      value={schedule.opens}
+                      onChange={(e) => handleScheduleChange(index, "opens", e.target.value)}
+                      className="form-control rounded-3"
+                    />
+                    <input
+                      type="time"
+                      {...register(`closes.${index}`)}
+                      value={schedule.closes}
+                      onChange={(e) => handleScheduleChange(index, "closes", e.target.value)}
+                      className="form-control rounded-3"
+                    />
+                  </>
                 )}
               </div>
             ))}
