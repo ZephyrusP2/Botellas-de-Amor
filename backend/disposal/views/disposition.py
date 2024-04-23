@@ -2,7 +2,7 @@ from rest_framework import generics, permissions
 
 from accounts.models import User
 from backend.permissions import IsAdminOrOperator, IsAdminOrOperatorOrSelf
-from disposal.models import Disposition, Site
+from disposal.models import Disposition, Bottle
 from disposal.serializers import DispositionSerializer
 
 
@@ -35,6 +35,12 @@ class Create(generics.CreateAPIView):
         user.plastic_footprint += int(self.request.data["weight"]) * \
             int(self.request.data["bottles"])
         user.save()
+        bottle = Bottle.objects.get(user=user)
+        bottle.experience += 100
+        if bottle.experience >= 100:
+            bottle.level += 1
+            bottle.experience = bottle.experience - 100
+        bottle.save()
 
 
 class Retrieve(generics.RetrieveAPIView):
