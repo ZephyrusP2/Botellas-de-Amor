@@ -22,23 +22,14 @@ class SiteListTestCase(APITestCase):
         self.token = Token.objects.create(user=self.admin_user)
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         self.site_1 = Site.objects.create(
-            image="path/to/image",
-            opens="10:00:00",
-            closes="17:00:00",
             name="Universidad EAFIT",
             address="Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
         )
         self.site_2 = Site.objects.create(
-            image="path/to/image",
-            opens="10:00:00",
-            closes="17:00:00",
             name="Universidad de Antioquia",
             address="Calle 67 #53-108, Medellín, Antioquia",
         )
         self.site_3 = Site.objects.create(
-            image="path/to/image",
-            opens="10:00:00",
-            closes="17:00:00",
             name="Universidad Nacional",
             address="Cra. 80 #65-223, Medellín, Antioquia",
         )
@@ -52,8 +43,6 @@ class SiteListTestCase(APITestCase):
         self.assertIn("id", response.json()[0])
         self.assertIn("name", response.json()[0])
         self.assertIn("address", response.json()[0])
-        self.assertIn("opens", response.json()[0])
-        self.assertIn("closes", response.json()[0])
         self.assertIn("image", response.json()[0])
 
     def test_site_list_unauthorized(self):
