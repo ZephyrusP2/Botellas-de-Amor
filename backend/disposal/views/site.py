@@ -1,12 +1,12 @@
 import json
 from rest_framework import generics, permissions, status
-from backend.permissions import IsAdmin, IsAdminOrOperator
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from disposal.models import Site, Schedule
 from disposal.serializers import SiteSerializer, ScheduleSerializer
+from backend.permissions import IsAdmin, IsAdminOrOperator
 
 
 class Create(APIView):
@@ -19,7 +19,9 @@ class Create(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, format=None):
-        serializer = SiteSerializer(data=request.data)
+        print(request.data)
+        serializer = SiteSerializer(
+            data=request.data, context={"request": request})
         if serializer.is_valid():
             site = serializer.save()
             save_schedule(self, site, request.data["schedules"])

@@ -5,8 +5,6 @@
     "fields": {
       "name": "Distribuidora Danijava",
       "address": "CR 17 # 9 26",
-      "opens": "18:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -16,8 +14,6 @@
     "fields": {
       "name": "Alcaldía",
       "address": "Calle 21 # 11 30",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -27,8 +23,6 @@
     "fields": {
       "name": "Mercados San Juan",
       "address": "CR 60 # 22A 26",
-      "opens": "06:30",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -38,8 +32,6 @@
     "fields": {
       "name": "Autoservicio Casa Verde",
       "address": "CR 58 # 26A 33",
-      "opens": "07:30",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -49,8 +41,6 @@
     "fields": {
       "name": "Mercados y Carnes O.R. S.A.S.",
       "address": "CL 50 # 55 44",
-      "opens": "07:00",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -60,8 +50,6 @@
     "fields": {
       "name": "Granero La 56",
       "address": "DG 56 # 44 14",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -71,8 +59,6 @@
     "fields": {
       "name": "Niquia Autoservicio",
       "address": "CL 53A # 64 4",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -82,8 +68,6 @@
     "fields": {
       "name": "Familias Unidas",
       "address": "CL 21 # 20 43",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -93,8 +77,6 @@
     "fields": {
       "name": "Cafetero Betulia",
       "address": "CL 24A # 53 33",
-      "opens": "08:00",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -104,8 +86,6 @@
     "fields": {
       "name": "Mercanorte",
       "address": "CR 51 # 25 23 LC 101",
-      "opens": "07:30",
-      "closes": "21:00",
       "status": true
     }
   },
@@ -115,8 +95,6 @@
     "fields": {
       "name": "La Cabañita",
       "address": "DG 55 # 33 114",
-      "opens": "08:00",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -126,8 +104,6 @@
     "fields": {
       "name": "Supermercados La 80 Cabañas",
       "address": "AUTOPISTA N. #34-67",
-      "opens": "11:00",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -137,8 +113,6 @@
     "fields": {
       "name": "Distribuidora Santa Isabel",
       "address": "CL 51 # 46 10",
-      "opens": "06:00",
-      "closes": "17:00",
       "status": true
     }
   },
@@ -148,8 +122,6 @@
     "fields": {
       "name": "C. Comercial Puerta del Norte",
       "address": "CL 51 # 46 82",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -159,8 +131,6 @@
     "fields": {
       "name": "Abarrote Yuli Yes",
       "address": "CL 131 Sur # 49 83",
-      "opens": "08:00",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -170,8 +140,6 @@
     "fields": {
       "name": "Abarrotes Sol de Oriente",
       "address": "CARRERA 49 # 129 SUR 84",
-      "opens": "08:00",
-      "closes": "20:00",
       "status": true
     }
   },
@@ -181,8 +149,6 @@
     "fields": {
       "name": "Merkacaldas El Mas Barato",
       "address": "CR 50 PATIO PRIMAVERA",
-      "opens": "09:00",
-      "closes": "18:00",
       "status": true
     }
   },
@@ -192,8 +158,6 @@
     "fields": {
       "name": "Construccion Alcaldía",
       "address": "CR 46C # 47C 32",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -203,8 +167,6 @@
     "fields": {
       "name": "Granero Mixto",
       "address": "CR 48 # 32D SUR 139",
-      "opens": "09:00",
-      "closes": "17:00",
       "status": true
     }
   },
@@ -214,8 +176,6 @@
     "fields": {
       "name": "Caretabla Cr",
       "address": "CR 25 # 39B SUR 152 A",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -225,8 +185,6 @@
     "fields": {
       "name": "Mercados C-G",
       "address": "Cl. 39B SUR #2",
-      "opens": "09:00",
-      "closes": "17:00",
       "status": true
     }
   },
@@ -236,8 +194,6 @@
     "fields": {
       "name": "C.C. Viva",
       "address": "CLL 27 SUR# 27 7",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   },
@@ -247,8 +203,6 @@
     "fields": {
       "name": "Supermercados Los Ochoas Chingui",
       "address": "CR 46C # 47C 32",
-      "opens": "09:00",
-      "closes": "17:00",
       "status": true
     }
   },
@@ -258,8 +212,6 @@
     "fields": {
       "name": "Crear Unidos Corporación",
       "address": "CR 48 # 32D SUR 139",
-      "opens": "08:00",
-      "closes": "19:00",
       "status": true
     }
   }

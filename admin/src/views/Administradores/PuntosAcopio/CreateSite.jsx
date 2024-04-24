@@ -7,26 +7,25 @@ import "../../../styles/Forms.css";
 import { useForm } from "react-hook-form";
 
 const CreateSite = () => {
-  document.title = "crear reto";
+  document.title = "Crear punto de acopio";
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [schedules, setSchedules] = useState([
-    { day: "Lunes", opens: "", closes: "", enabled: false },
-    { day: "Martes", opens: "", closes: "", enabled: false },
-    { day: "Miércoles", opens: "", closes: "", enabled: false },
-    { day: "Jueves", opens: "", closes: "", enabled: false },
-    { day: "Viernes", opens: "", closes: "", enabled: false },
-    { day: "Sábado", opens: "", closes: "", enabled: false },
-    { day: "Domingo", opens: "", closes: "", enabled: false },
-  ]);
+  const [siteData, setSiteData] = useState({
+    id: "",
+    image: "",
+    name: "",
+    address: "",
+    schedules: [],
+  });
   const {
     register,
     formState: { errors },
     handleSubmit: validateAndSubmit,
   } = useForm();
   const [imagePreview, setImagePreview] = useState(null);
+  const [newDay, setNewDay] = useState(""); // Estado para el nuevo día seleccionado
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
@@ -63,16 +62,51 @@ const CreateSite = () => {
     }
   };
 
-  const toggleDay = (index) => {
-    const updatedSchedules = [...schedules];
-    updatedSchedules[index].enabled = !updatedSchedules[index].enabled;
-    setSchedules(updatedSchedules);
+  const addDay = () => {
+    // Verificar si se ha seleccionado un nuevo día
+    if (!newDay) {
+      alert("Por favor, seleccione un día para agregar.");
+      return;
+    }
+
+    // Agregar el nuevo día con horarios vacíos
+    const newSchedule = { day: newDay, opens: "", closes: "" };
+    setSiteData({
+      ...siteData,
+      schedules: [...siteData.schedules, newSchedule],
+    });
+    setNewDay(""); // Limpiar el estado del nuevo día después de agregarlo
   };
 
-  const handleScheduleChange = (index, field, value) => {
-    const updatedSchedules = [...schedules];
-    updatedSchedules[index][field] = value;
-    setSchedules(updatedSchedules);
+  const availableDays =
+    siteData.schedules.length < 7
+      ? [
+          "Lunes",
+          "Martes",
+          "Miércoles",
+          "Jueves",
+          "Viernes",
+          "Sábado",
+          "Domingo",
+        ].filter(
+          (day) => !siteData.schedules.some((schedule) => schedule.day === day)
+        )
+      : [];
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name.startsWith("opens") || name.startsWith("closes")) {
+      const index = parseInt(name.split("_")[1]);
+      const dayField = name.split("_")[0];
+      const updatedSchedules = [...siteData.schedules];
+      updatedSchedules[index][dayField] = value;
+      setSiteData({ ...siteData, schedules: updatedSchedules });
+    } else {
+      setSiteData({
+        ...siteData,
+        [name]: event.target.type === "file" ? event.target.files[0] : value,
+      });
+    }
   };
 
   return (
@@ -81,106 +115,115 @@ const CreateSite = () => {
 
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/administrar/puntos-acopio" />
-        <h1 className="container-fluid text-center">Crear punto de acopio</h1>
-        <div className="form-container">
-          <form
-            onSubmit={validateAndSubmit(onSubmit)}
-            className="d-flex flex-column align-items-center container m-0 p-0"
-          >
-            <label className="d-flex flex-column form-label w-50">
-              Imagen
-              <input
-                type="file"
-                name="image"
-                id="image"
-                accept="image/*"
-                {...register("image", { required: true })}
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                  setImagePreview(URL.createObjectURL(e.target.files[0]));
-                }}
-                className="form-control rounded-3"
+        <h2 className="container-fluid text-center">Crear punto de acopio</h2>
+        <form
+          onSubmit={validateAndSubmit(onSubmit)}
+          className="d-flex flex-column align-items-center container m-0 p-0"
+        >
+          <label htmlFor="image" className="d-flex flex-column form-label w-50">
+            Imagen
+            <input
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*"
+              {...register("image", { required: true })}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                setImagePreview(URL.createObjectURL(e.target.files[0]));
+              }}
+              className="form-control rounded-3"
+            />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                style={{ maxWidth: "20%" }}
               />
-              {imagePreview && (
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  style={{ maxWidth: "20%" }}
+            )}
+            {errors.image && (
+              <span className="error-message">Se requiere poner la imagen</span>
+            )}
+          </label>
+
+          <label className="d-flex flex-column form-label w-50">
+            Nombre
+            <input
+              type="text"
+              {...register("name", { required: true })}
+              className="form-control rounded-3"
+            />
+            {errors.name && (
+              <span className="error-message">Se requiere el nombre</span>
+            )}
+          </label>
+          <label className="d-flex flex-column form-label w-50">
+            Dirección
+            <input
+              type="text"
+              {...register("address", { required: true })}
+              className="form-control rounded-3"
+            />
+            {errors.address && (
+              <span className="error-message">Se requiere la dirección</span>
+            )}
+          </label>
+
+          <div className="d-flex flex-column form-label w-50 custom-scrollbar">
+            {siteData.schedules.map((schedule, index) => (
+              <div key={index}>
+                <label>{schedule.day}</label>
+                <input
+                  type="time"
+                  name={`opens_${index}`}
+                  value={schedule.opens}
+                  onChange={handleInputChange}
+                  className="form-control rounded-3 m-1"
                 />
-              )}
-              {errors.image && (
-                <span className="error-message">
-                  Se requiere poner la imagen
-                </span>
-              )}
-            </label>
-
-            <label className="d-flex flex-column form-label w-50">
-              Nombre
-              <input
-                type="text"
-                {...register("name", { required: true })}
-                className="form-control rounded-3"
-              />
-              {errors.name && (
-                <span className="error-message">Se requiere el nombre</span>
-              )}
-            </label>
-            <label className="d-flex flex-column form-label w-50">
-              Dirección
-              <input
-                type="text"
-                {...register("address", { required: true })}
-                className="form-control rounded-3"
-              />
-              {errors.address && (
-                <span className="error-message">Se requiere la dirección</span>
-              )}
-            </label>
-
-            <div className="d-flex flex-column form-label w-50 custom-scrollbar">
-              {schedules.map((schedule, index) => (
-                <div key={index}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={schedule.enabled}
-                      onChange={() => toggleDay(index)}
-                    />
-                    {schedule.day}
-                  </label>
-                  {schedule.enabled && (
-                    <>
-                      <input
-                        type="time"
-                        {...register(`opens.${index}`)}
-                        value={schedule.opens}
-                        onChange={(e) =>
-                          handleScheduleChange(index, "opens", e.target.value)
-                        }
-                        className="form-control rounded-3"
-                      />
-                      <input
-                        type="time"
-                        {...register(`closes.${index}`)}
-                        value={schedule.closes}
-                        onChange={(e) =>
-                          handleScheduleChange(index, "closes", e.target.value)
-                        }
-                        className="form-control rounded-3"
-                      />
-                    </>
-                  )}
-                </div>
+                <input
+                  type="time"
+                  name={`closes_${index}`}
+                  value={schedule.closes}
+                  onChange={handleInputChange}
+                  className="form-control rounded-3 m-1"
+                />
+              </div>
+            ))}
+          </div>
+          {/* Lista desplegable para seleccionar el nuevo día */}
+          <label
+            htmlFor="newDay"
+            className="d-flex flex-column form-label w-50"
+          >
+            Nuevo Día
+            <select
+              name="newDay"
+              id="newDay"
+              value={newDay}
+              onChange={(event) => setNewDay(event.target.value)}
+              className="form-control rounded-3"
+            >
+              <option value="">Seleccione un día</option>
+              {availableDays.map((day, index) => (
+                <option key={index} value={day}>
+                  {day}
+                </option>
               ))}
-            </div>
+            </select>
+          </label>
 
-            <br />
-            <button type="submit" className="btn btn-primary btn-md w-50">
-              Crear
-            </button>
-          </form>
-        </div>
+          <button
+            type="button"
+            onClick={addDay}
+            className="btn btn-secondary btn-md mt-3 float-start"
+          >
+            Agregar día
+          </button>
+
+          <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
+            Crear punto de acopio
+          </button>
+        </form>
       </div>
     </>
   );

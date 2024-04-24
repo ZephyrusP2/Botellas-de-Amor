@@ -45,9 +45,8 @@ export default function App() {
 function AppContent() {
   return (
     <div className="principal-container">
-      
       <Routes>
-      <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
         {localStorage.getItem("token") === null ? (
           <>
             <Route path="/" element={<Login />} />

@@ -45,12 +45,10 @@
   max-width: 20em; /* Longitud máxima en "em" */
 }
 
-
 @media (max-width: 1000px) {
   .acopio-text {
     max-width: 9em; /* Longitud máxima en "em" */
   }
-  
 }
 
 @media (max-width: 650px) {

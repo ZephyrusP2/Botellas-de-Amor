@@ -32,8 +32,7 @@ class DispositionDeleteTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.operator_token = Token.objects.create(user=self.operator_user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
 
         self.site = Site.objects.create(
             image="path/to/image",
@@ -58,8 +57,7 @@ class DispositionDeleteTestCase(APITestCase):
     def test_delete_disposition(self):
         response = self.client.delete(self.url)
         self.assertEqual(response.status_code, 204)
-        self.assertFalse(Disposition.objects.filter(
-            id=self.disposition.id).exists())
+        self.assertFalse(Disposition.objects.filter(id=self.disposition.id).exists())
         self.user.refresh_from_db()
         self.assertEqual(self.user.plastic_footprint, 0.0)
 
@@ -67,5 +65,4 @@ class DispositionDeleteTestCase(APITestCase):
         url = reverse("disposition.delete", args=[self.disposition.id + 1])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, 404)
-        self.assertTrue(Disposition.objects.filter(
-            id=self.disposition.id).exists())
+        self.assertTrue(Disposition.objects.filter(id=self.disposition.id).exists())

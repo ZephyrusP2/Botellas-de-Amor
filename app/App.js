@@ -14,6 +14,9 @@ import Analisis from "./src/templates/Analisis";
 import { useState } from "react";
 import { useEffect } from "react";
 import EditProfile from "./src/templates/EditProfile";
+import Proyectos from "./src/templates/Proyectos";
+import Conocenos from "./src/templates/Conocenos";
+import Materiales from "./src/templates/Materiales";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -63,6 +66,9 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="Conocenos" component={Conocenos} />
+        <Stack.Screen name="Proyectos" component={Proyectos} />
+        <Stack.Screen name="Materiales" component={Materiales} />
       </Stack.Navigator>
     </NavigationContainer>
   );
