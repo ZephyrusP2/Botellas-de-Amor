@@ -3,18 +3,18 @@ from django.db import IntegrityError
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, permissions
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import (api_view, authentication_classes,
+                                       permission_classes)
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 
 from backend.permissions import IsAdmin, IsAdminOrSelf
-from disposal.models import Bottle
+from disposal.models import Bottle, Disposition
 
 from .models import User
 from .serializers import UserSerializer, UserUpdateSerializer
-from disposal.models import Disposition
 
 # Create your views here.
 

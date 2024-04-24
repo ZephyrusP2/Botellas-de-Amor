@@ -15,7 +15,8 @@ class Site(models.Model):
 
     id = models.AutoField(primary_key=True)
     image = models.ImageField(
-        _("Image"), upload_to=upload_to, default="sites/default.jpg")
+        _("Image"), upload_to=upload_to, default="sites/default.jpg"
+    )
     opens = models.TimeField()
     closes = models.TimeField()
     name = models.CharField(max_length=50)
