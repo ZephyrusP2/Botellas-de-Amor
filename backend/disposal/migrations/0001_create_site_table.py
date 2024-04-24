@@ -21,10 +21,9 @@ class Migration(migrations.Migration):
                      upload_to=disposal.models.upload_to,
                      verbose_name="Image",
                  )),
-                ("opens", models.TimeField()),
-                ("closes", models.TimeField()),
                 ("name", models.CharField(max_length=50)),
                 ("address", models.CharField(max_length=50)),
+                ("status", models.BooleanField(default=True)),
             ],
             options={
                 "db_table": "sites",

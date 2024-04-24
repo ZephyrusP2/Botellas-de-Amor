@@ -68,11 +68,9 @@ const CreateUser = () => {
     };
 
     try {
-      console.log(gender, email, password);
       const token = localStorage.getItem("token");
 
       const response = await userService.createUser(userData, token);
-      console.log("User created:", response);
       setName("");
       setLastName("");
       setBirthDate("");
@@ -96,7 +94,7 @@ const CreateUser = () => {
       <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/administrar/usuarios" />
-        <h1 className="container-fluid text-center">crear usuario</h1>
+        <h1 className="container-fluid text-center">Crear usuario</h1>
         <form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-center container m-0 p-0"

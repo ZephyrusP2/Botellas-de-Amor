@@ -3,7 +3,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from accounts.models import User
-from disposal.models import Site
+from disposal.models import Site, Schedule
 
 
 class SiteRetrieveTestCase(APITestCase):
@@ -22,11 +22,14 @@ class SiteRetrieveTestCase(APITestCase):
         self.token = Token.objects.create(user=self.admin_user)
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         self.site = Site.objects.create(
-            image="path/to/image",
-            opens="10:00:00",
-            closes="17:00:00",
             name="Universidad EAFIT",
             address="Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
+        )
+        self.schedule = Schedule.objects.create(
+            site=self.site,
+            day="Lunes",
+            opens="10:00:00",
+            closes="17:00:00",
         )
 
         return super().setUp()
@@ -37,9 +40,8 @@ class SiteRetrieveTestCase(APITestCase):
         self.assertIn("id", response.json())
         self.assertIn("name", response.json())
         self.assertIn("address", response.json())
-        self.assertIn("opens", response.json())
-        self.assertIn("closes", response.json())
         self.assertIn("image", response.json())
+        self.assertIn("schedules", response.json())
 
     def test_site_retrieve_unauthorized(self):
         self.client.credentials()

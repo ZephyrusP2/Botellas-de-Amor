@@ -139,7 +139,7 @@ const Register = ({ navigation }) => {
           setError("");
         })
         .catch((error) => {
-          console.log("register", error);
+          console.error("register", error);
           setError(error.toString());
         });
     }

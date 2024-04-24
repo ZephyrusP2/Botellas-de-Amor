@@ -26,19 +26,14 @@ const ShowSite = () => {
       <div className="d-flex flex-column container-fluid p-2">
         <BackButton route="/administrar/puntos-acopio" />
         <div className="d-flex align-items-center flex-column mt-3">
-        <h2 className="blue-text display-5 small-text">
-          <strong>Imagen</strong>
-        </h2>
-        <img src={siteData.image} className="display-6 small-text image-acopio" alt="Imagen de la página" />
-
           <h2 className="blue-text display-5 small-text">
-            <strong>Hora de apertura</strong>
+            <strong>Imagen</strong>
           </h2>
-          <p className="display-6 small-text">{siteData.opens}</p>
-          <h2 className="blue-text display-6 small-text">
-            <strong>Hora de cierre</strong>
-          </h2>
-          <p className="display-6 small-text">{siteData.closes}</p>
+          <img
+            src={siteData.image}
+            className="display-6 small-text image-acopio"
+            alt="Imagen de la página"
+          />
           <h2 className="blue-text display-5 small-text">
             <strong>Nombre</strong>
           </h2>
@@ -47,6 +42,23 @@ const ShowSite = () => {
             <strong>Direccion</strong>
           </h2>
           <p className="display-6 small-text">{siteData.address}</p>
+          <h2 className="blue-text display-5 small-text">
+            <strong>Horarios</strong>
+          </h2>
+          <div>
+            {siteData.schedules && siteData.schedules.length > 0 ? (
+              siteData.schedules.map((schedule) => (
+                <div key={schedule.id}>
+                  <p className="display-6 small-text">
+                    <strong>{schedule.day}:</strong> {schedule.opens} -{" "}
+                    {schedule.closes}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p className="display-6 small-text">No hay horarios disponibles</p>
+            )}
+          </div>
         </div>
       </div>
     </>

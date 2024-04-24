@@ -2,8 +2,7 @@ import React from "react";
 import {
   Route,
   BrowserRouter as Router,
-  Routes,
-  useLocation,
+  Routes
 } from "react-router-dom";
 
 import "./App.css";
@@ -20,10 +19,10 @@ import EditChallenge from "./views/Administradores/Retos/EditChallenge";
 import IndexChallenge from "./views/Administradores/Retos/IndexChallenge";
 import ShowChallenge from "./views/Administradores/Retos/ShowChallenge";
 
-import CreateSite from "./views/Administradores/PuntosAcopio/CreateAcopio";
-import EditSite from "./views/Administradores/PuntosAcopio/EditAcopio";
-import IndexSite from "./views/Administradores/PuntosAcopio/IndexAcopio";
-import ShowSite from "./views/Administradores/PuntosAcopio/ShowAcopio";
+import CreateSite from "./views/Administradores/PuntosAcopio/CreateSite";
+import EditSite from "./views/Administradores/PuntosAcopio/EditSite";
+import IndexSite from "./views/Administradores/PuntosAcopio/IndexSite";
+import ShowSite from "./views/Administradores/PuntosAcopio/ShowSite";
 
 import CreateUser from "./views/Administradores/Usuarios/CreateUser";
 import EditUser from "./views/Administradores/Usuarios/EditUser";

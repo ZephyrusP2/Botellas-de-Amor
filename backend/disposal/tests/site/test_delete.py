@@ -23,8 +23,6 @@ class SiteDeleteTestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
         self.site = Site.objects.create(
             image="path/to/image",
-            opens="10:00:00",
-            closes="17:00:00",
             name="Universidad EAFIT",
             address="Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
         )
@@ -32,12 +30,14 @@ class SiteDeleteTestCase(APITestCase):
         return super().setUp()
 
     def test_site_delete_success(self):
-        response = self.client.delete(reverse("site.delete", args=[self.site.id]))
+        response = self.client.delete(
+            reverse("site.delete", args=[self.site.id]))
         self.assertEqual(response.status_code, 204)
 
     def test_site_delete_unauthorized(self):
         self.client.credentials()
-        response = self.client.delete(reverse("site.delete", args=[self.site.id]))
+        response = self.client.delete(
+            reverse("site.delete", args=[self.site.id]))
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 
