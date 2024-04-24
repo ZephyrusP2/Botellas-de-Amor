@@ -41,14 +41,13 @@ def most_contributed_bottles_by_gender(request):
     women = 0
     men = 0
 
-    disposals = Disposition.objects.filter(user=request.user)
-    #total_bottles = disposals.aggregate(Sum('bottles'))['bottles__sum'] or 0
+    disposals = Disposition.objects.all()
     gender = request.user.gender
 
     if gender:
-        if gender.lower() == 'femenino':  # Convert to lowercase for comparison
+        if gender.lower() == 'femenino':
             women = disposals.aggregate(total_bottles_by_women=Sum('bottles'))['total_bottles_by_women'] or 0
-        elif gender.lower() == 'masculino':  # Convert to lowercase for comparison
+        elif gender.lower() == 'masculino':
             men = disposals.aggregate(total_bottles_by_men=Sum('bottles'))['total_bottles_by_men'] or 0
 
     response = [{"women": women, "men": men}]
@@ -126,19 +125,17 @@ def projected_bottles_contribution(request, days):
     end_date = timezone.now()
     start_date = end_date - timedelta(days=days)
 
-    disposals = Disposition.objects.filter(user=request.user, created_at__range=(start_date, end_date))
+    disposals = Disposition.objects.filter(created_at__range=(start_date, end_date))
 
     if disposals.exists():
-        x = np.array([[(disposal.created_at - start_date).days] for disposal in disposals])  # Reshape to 2D array
-        y = np.array([disposal.bottles for disposal in disposals])  # No need to reshape y
+        x = np.array([[(disposal.created_at - start_date).days] for disposal in disposals])
+        y = np.array([disposal.bottles for disposal in disposals])
 
-        # Reshape x to have shape (n_samples, 1)
         x = x.reshape(-1, 1)
 
         model = LinearRegression().fit(x, y)
         future_days = np.array([[days]])
 
-        # Reshape future_days to have shape (1, 1)
         future_days = future_days.reshape(1, -1)
 
         projected_bottles = model.predict(future_days)[0]
