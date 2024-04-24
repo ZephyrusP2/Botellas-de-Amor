@@ -29,6 +29,9 @@ import EditUser from "./views/Administradores/Usuarios/EditUser";
 import IndexUser from "./views/Administradores/Usuarios/IndexUser";
 import ShowUser from "./views/Administradores/Usuarios/ShowUser";
 
+import CreateDisposal from "./views/Administradores/Disposiciones/CreateDisposal";
+
+
 import CreateRegister from "./views/Operadores/Create";
 
 export default function App() {
@@ -125,6 +128,11 @@ function AppContent() {
                   path="/administrar/usuarios/:id"
                   element={<ShowUser />}
                 />
+                <Route
+                  path="/administrar/disposiciones"
+                  element={<CreateDisposal />}
+                />
+
               </>
             ) : (
               <>

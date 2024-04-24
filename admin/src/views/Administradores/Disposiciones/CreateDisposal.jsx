@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import dispositionService from "../../services/disposition";
-import "../../styles/Forms.css";
+import dispositionService from "../../../services/disposition";
+import "../../../styles/Forms.css";
 
-import siteService from "../../services/site";
+import siteService from "../../../services/site";
 
-import NavbarOperadores from "../../components/Operadores/Navbar";
-import SideBarOperadores from "../../components/Operadores/SideBar";
+import NavbarOperadores from "../../../components/Administradores/Navbar";
+import SideBarOperadores from "../../../components/Administradores/SideBar";
 
 const CreateRegister = () => {
-  document.title = "Crear punto de acopio";
+  document.title = "Crear disposición";
   const navigate = useNavigate();
   const [site, setSite] = useState("");
   const [bottles, setBottles] = useState("");
@@ -22,7 +22,6 @@ const CreateRegister = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Llamar a la API para obtener los puntos de acopio
     async function fetchPuntosAcopio() {
       try {
         const token = localStorage.getItem("token");
