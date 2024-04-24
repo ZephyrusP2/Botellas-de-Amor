@@ -56,7 +56,9 @@ const ShowSite = () => {
                 </div>
               ))
             ) : (
-              <p className="display-6 small-text">No hay horarios disponibles</p>
+              <p className="display-6 small-text">
+                No hay horarios disponibles
+              </p>
             )}
           </div>
         </div>
