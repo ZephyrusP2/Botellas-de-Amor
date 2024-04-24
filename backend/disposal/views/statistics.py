@@ -41,14 +41,14 @@ def most_contributed_bottles_by_gender(request):
     women = 0
     men = 0
 
-    disposals = Disposition.objects.all()
+    dispositions = Disposition.objects.all()
     gender = request.user.gender
 
     if gender:
         if gender.lower() == 'femenino':
-            women = disposals.aggregate(total_bottles_by_women=Sum('bottles'))['total_bottles_by_women'] or 0
+            women = dispositions.aggregate(total_bottles_by_women=Sum('bottles'))['total_bottles_by_women'] or 0
         elif gender.lower() == 'masculino':
-            men = disposals.aggregate(total_bottles_by_men=Sum('bottles'))['total_bottles_by_men'] or 0
+            men = dispositions.aggregate(total_bottles_by_men=Sum('bottles'))['total_bottles_by_men'] or 0
 
     response = [{"women": women, "men": men}]
     return JsonResponse(response, safe=False)
@@ -125,11 +125,11 @@ def projected_bottles_contribution(request, days):
     end_date = timezone.now()
     start_date = end_date - timedelta(days=days)
 
-    disposals = Disposition.objects.filter(created_at__range=(start_date, end_date))
+    dispositions = Disposition.objects.filter(created_at__range=(start_date, end_date))
 
-    if disposals.exists():
-        x = np.array([[(disposal.created_at - start_date).days] for disposal in disposals])
-        y = np.array([disposal.bottles for disposal in disposals])
+    if dispositions.exists():
+        x = np.array([[(disposition.created_at - start_date).days] for disposition in dispositions])
+        y = np.array([disposition.bottles for disposition in dispositions])
 
         x = x.reshape(-1, 1)
 
