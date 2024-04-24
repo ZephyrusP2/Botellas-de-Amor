@@ -64,7 +64,7 @@ class Disposition(models.Model):
         db_table = "dispositions"
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 
 class Bottle(models.Model):
