@@ -15,12 +15,16 @@ from django.utils import timezone
 import numpy as np
 
 @api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
 def total_bottles_contributed(request):
     total_bottles = Disposition.objects.aggregate(total_bottles_contributed=Sum('bottles'))['total_bottles_contributed'] or 0
     return JsonResponse({'total_bottles': total_bottles})
 
 
 @api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
 def plastic_footprint_reduced(request):
     total_users = User.objects.count()
     plastic_footprint = User.objects.aggregate(total_plastic_footprint=Sum('plastic_footprint'))['total_plastic_footprint'] or 0
@@ -94,6 +98,8 @@ def top_5_users(request):
     return JsonResponse(response, safe=False)
 
 @api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+@authentication_classes([TokenAuthentication])
 def total_kilos_contributed(request):
     total_kilos = Disposition.objects.aggregate(total_kilos_contributed=Sum('weight'))['total_kilos_contributed'] or 0
     return JsonResponse({'total_kilos': total_kilos}, safe=False)
