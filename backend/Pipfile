@@ -12,6 +12,7 @@ django-cors-headers = "*"
 python-dotenv = "*"
 tzdata = "*"
 pillow = "*"
+scikit-learn = "*"
 
 [dev-packages]
 
