@@ -1,8 +1,7 @@
 from django.http import JsonResponse
 from rest_framework import generics, permissions
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.decorators import (api_view, authentication_classes, 
-                                       permission_classes)
+from rest_framework.decorators import (api_view, authentication_classes, permission_classes)
 
 from accounts.models import User
 from backend.permissions import IsAdminOrOperator, IsAdminOrOperatorOrSelf
@@ -15,11 +14,10 @@ from django.utils import timezone
 import numpy as np
 
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
-@authentication_classes([TokenAuthentication])
 def total_bottles_contributed(request):
-    total_bottles = Disposition.objects.filter(user=request.user).aggregate(Sum('bottles'))['total_bottles_contributed'] or 0
-    return JsonResponse({'total_bottles': total_bottles}, safe=False)
+    total_bottles = Disposition.objects.aggregate(total_bottles_contributed=Sum('bottles'))['total_bottles_contributed'] or 0
+    return JsonResponse({'total_bottles': total_bottles})
+
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
