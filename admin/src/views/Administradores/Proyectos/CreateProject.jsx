@@ -205,7 +205,7 @@ const CreateProject = () => {
                 setProject({ ...project, status: e.target.value })
               }
             >
-              <option value="">Seleccionar rol</option>
+              <option value="">Seleccionar estado</option>
               <option value="activo">Activo</option>
               <option value="inactivo">Inactivo</option>
             </select>
