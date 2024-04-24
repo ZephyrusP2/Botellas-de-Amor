@@ -3,7 +3,6 @@
     "model": "disposal.Site",
     "pk": 1,
     "fields": {
-      "image": "path/to/image",
       "name": "Distribuidora Danijava",
       "address": "CR 17 # 9 26",
       "opens": "18:00",
@@ -14,7 +13,6 @@
     "model": "disposal.Site",
     "pk": 2,
     "fields": {
-      "image": "path/to/image",
       "name": "Alcaldía",
       "address": "Calle 21 # 11 30",
       "opens": "08:00",
@@ -25,7 +23,6 @@
     "model": "disposal.Site",
     "pk": 3,
     "fields": {
-      "image": "path/to/image",
       "name": "Mercados San Juan",
       "address": "CR 60 # 22A 26",
       "opens": "06:30",
@@ -36,7 +33,6 @@
     "model": "disposal.Site",
     "pk": 4,
     "fields": {
-      "image": "path/to/image",
       "name": "Autoservicio Casa Verde",
       "address": "CR 58 # 26A 33",
       "opens": "07:30",
@@ -47,7 +43,6 @@
     "model": "disposal.Site",
     "pk": 5,
     "fields": {
-      "image": "path/to/image",
       "name": "Mercados y Carnes O.R. S.A.S.",
       "address": "CL 50 # 55 44",
       "opens": "07:00",
@@ -58,7 +53,6 @@
     "model": "disposal.Site",
     "pk": 6,
     "fields": {
-      "image": "path/to/image",
       "name": "Granero La 56",
       "address": "DG 56 # 44 14",
       "opens": "08:00",
@@ -69,7 +63,6 @@
     "model": "disposal.Site",
     "pk": 7,
     "fields": {
-      "image": "path/to/image",
       "name": "Niquia Autoservicio",
       "address": "CL 53A # 64 4",
       "opens": "08:00",
@@ -80,7 +73,6 @@
     "model": "disposal.Site",
     "pk": 8,
     "fields": {
-      "image": "path/to/image",
       "name": "Familias Unidas",
       "address": "CL 21 # 20 43",
       "opens": "08:00",
@@ -91,7 +83,6 @@
     "model": "disposal.Site",
     "pk": 9,
     "fields": {
-      "image": "path/to/image",
       "name": "Cafetero Betulia",
       "address": "CL 24A # 53 33",
       "opens": "08:00",
@@ -102,7 +93,6 @@
     "model": "disposal.Site",
     "pk": 10,
     "fields": {
-      "image": "path/to/image",
       "name": "Mercanorte",
       "address": "CR 51 # 25 23 LC 101",
       "opens": "07:30",
@@ -113,7 +103,6 @@
     "model": "disposal.Site",
     "pk": 11,
     "fields": {
-      "image": "path/to/image",
       "name": "La Cabañita",
       "address": "DG 55 # 33 114",
       "opens": "08:00",
@@ -124,7 +113,6 @@
     "model": "disposal.Site",
     "pk": 12,
     "fields": {
-      "image": "path/to/image",
       "name": "Supermercados La 80 Cabañas",
       "address": "AUTOPISTA N. #34-67",
       "opens": "11:00",
@@ -135,7 +123,6 @@
     "model": "disposal.Site",
     "pk": 13,
     "fields": {
-      "image": "path/to/image",
       "name": "Distribuidora Santa Isabel",
       "address": "CL 51 # 46 10",
       "opens": "06:00",
@@ -146,7 +133,6 @@
     "model": "disposal.Site",
     "pk": 14,
     "fields": {
-      "image": "path/to/image",
       "name": "C. Comercial Puerta del Norte",
       "address": "CL 51 # 46 82",
       "opens": "08:00",
@@ -157,7 +143,6 @@
     "model": "disposal.Site",
     "pk": 15,
     "fields": {
-      "image": "path/to/image",
       "name": "Abarrote Yuli Yes",
       "address": "CL 131 Sur # 49 83",
       "opens": "08:00",
@@ -168,7 +153,6 @@
     "model": "disposal.Site",
     "pk": 16,
     "fields": {
-      "image": "path/to/image",
       "name": "Abarrotes Sol de Oriente",
       "address": "CARRERA 49 # 129 SUR 84",
       "opens": "08:00",
@@ -179,7 +163,6 @@
     "model": "disposal.Site",
     "pk": 17,
     "fields": {
-      "image": "path/to/image",
       "name": "Merkacaldas El Mas Barato",
       "address": "CR 50 PATIO PRIMAVERA",
       "opens": "09:00",
@@ -190,7 +173,6 @@
     "model": "disposal.Site",
     "pk": 18,
     "fields": {
-      "image": "path/to/image",
       "name": "Construccion Alcaldía",
       "address": "CR 46C # 47C 32",
       "opens": "08:00",
@@ -201,7 +183,6 @@
     "model": "disposal.Site",
     "pk": 19,
     "fields": {
-      "image": "path/to/image",
       "name": "Granero Mixto",
       "address": "CR 48 # 32D SUR 139",
       "opens": "09:00",
@@ -212,7 +193,6 @@
     "model": "disposal.Site",
     "pk": 20,
     "fields": {
-      "image": "path/to/image",
       "name": "Caretabla Cr",
       "address": "CR 25 # 39B SUR 152 A",
       "opens": "08:00",
@@ -223,7 +203,6 @@
     "model": "disposal.Site",
     "pk": 21,
     "fields": {
-      "image": "path/to/image",
       "name": "Mercados C-G",
       "address": "Cl. 39B SUR #2",
       "opens": "09:00",
@@ -234,7 +213,6 @@
     "model": "disposal.Site",
     "pk": 22,
     "fields": {
-      "image": "path/to/image",
       "name": "C.C. Viva",
       "address": "CLL 27 SUR# 27 7",
       "opens": "08:00",
@@ -245,7 +223,6 @@
     "model": "disposal.Site",
     "pk": 23,
     "fields": {
-      "image": "path/to/image",
       "name": "Supermercados Los Ochoas Chingui",
       "address": "CR 46C # 47C 32",
       "opens": "09:00",
@@ -256,7 +233,6 @@
     "model": "disposal.Site",
     "pk": 24,
     "fields": {
-      "image": "path/to/image",
       "name": "Crear Unidos Corporación",
       "address": "CR 48 # 32D SUR 139",
       "opens": "08:00",

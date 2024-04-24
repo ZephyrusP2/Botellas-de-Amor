@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
+from django.contrib.auth import get_user_model
 
 from backend.permissions import IsAdmin, IsAdminOrSelf
 from disposal.models import Bottle
@@ -168,6 +169,8 @@ def register(request):
             return JsonResponse({"error": "Email already exists"}, status=400)
 
 
+
+
 @csrf_exempt
 def login(request):
     """
@@ -177,12 +180,20 @@ def login(request):
     """
     if request.method == "POST":
         data = JSONParser().parse(request)
+        User = get_user_model()
+        try:
+            User.objects.get(email=data["email"].lower())
+        except User.DoesNotExist:
+            return JsonResponse(
+                {"error": "Usuario no encontrado"},
+                status=400,
+            )
         user = authenticate(
             request, email=data["email"].lower(), password=data["password"]
         )
         if user is None:
             return JsonResponse(
-                {"error": "could not login. please check username and/or password"},
+                {"error": "Contraseña incorrecta"},
                 status=400,
             )
         else:

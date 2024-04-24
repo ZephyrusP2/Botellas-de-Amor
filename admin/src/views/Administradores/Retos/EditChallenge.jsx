@@ -118,7 +118,7 @@ const EditChallenge = () => {
           </label>
 
           <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
-            Save Changes
+            Editar reto
           </button>
         </form>
       </div>

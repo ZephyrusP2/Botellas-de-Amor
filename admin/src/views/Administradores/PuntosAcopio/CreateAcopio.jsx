@@ -4,16 +4,19 @@ import SideBarAdministradores from "../../../components/Administradores/SideBar"
 import BackButton from "../../../components/BackButton";
 import siteService from "../../../services/site";
 import "../../../styles/Forms.css";
+import { useForm } from 'react-hook-form'
 
 const CreateSite = () => {
   document.title = "crear reto";
   const navigate = useNavigate();
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [opens, setOpens] = useState("");
   const [closes, setCloses] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
+  const { register, formState: { errors }, reset } = useForm();
+  const [imagePreview, setImagePreview] = useState(null);
 
   const validateSite = () => {
     const errors = {};
@@ -30,7 +33,7 @@ const CreateSite = () => {
       errors.name = "Se requiere el nombre";
     }
     if (!address) {
-      errors.address = "Se requiere la direccion";
+      errors.address = "Se requiere la dirección";
     }
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
@@ -38,35 +41,34 @@ const CreateSite = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!validateSite()) {
       return;
     }
-
+  
     const token = localStorage.getItem("token");
-    const data = {
-      image,
-      opens,
-      closes,
-      name,
-      address,
-    };
-
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("opens", opens);
+    formData.append("closes", closes);
+    formData.append("name", name);
+    formData.append("address", address);
+  
     try {
-      const response = await siteService.createSite(data, token);
+      const response = await siteService.createSite(formData, token);
       console.log("site created:", response);
-      setImage("");
+      setImage(null);
       setOpens("");
       setCloses("");
       setAddress("");
       setName("");
-
+  
       navigate(`/administrar/puntos-acopio`);
     } catch (error) {
       console.error("Error creating site:", error);
     }
   };
-
+  
   return (
     <>
       <SideBarAdministradores />
@@ -80,11 +82,18 @@ const CreateSite = () => {
           <label className="d-flex flex-column form-label w-50">
             Imagen
             <input
-              type="text"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*"
+              {...register("image", { required: true })}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                setImagePreview(URL.createObjectURL(e.target.files[0])); // Mostrar vista previa
+              }}
               className="form-control rounded-3"
             />
+            {imagePreview && <img src={imagePreview} alt="Preview" style={{ maxWidth: "20%" }} />} {/* Mostrar vista previa de la imagen */}
             {validationErrors.image && (
               <span className="error-message">{validationErrors.image}</span>
             )}

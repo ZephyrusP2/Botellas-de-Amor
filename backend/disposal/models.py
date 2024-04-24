@@ -1,6 +1,11 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from accounts.models import User
+
+
+def upload_to(instance, filename):
+    return f"sites/{filename}".format(filename)
 
 
 class Site(models.Model):
@@ -9,7 +14,8 @@ class Site(models.Model):
     """
 
     id = models.AutoField(primary_key=True)
-    image = models.CharField(max_length=50)
+    image = models.ImageField(
+        _("Image"), upload_to=upload_to, default="sites/default.jpg")
     opens = models.TimeField()
     closes = models.TimeField()
     name = models.CharField(max_length=50)
