@@ -196,14 +196,14 @@ const EditSite = () => {
                   name={`opens_${index}`}
                   value={schedule.opens}
                   onChange={handleInputChange}
-                  className="form-control rounded-3"
+                  className="form-control rounded-3 m-1"
                 />
                 <input
                   type="time"
                   name={`closes_${index}`}
                   value={schedule.closes}
                   onChange={handleInputChange}
-                  className="form-control rounded-3"
+                  className="form-control rounded-3 m-1"
                 />
               </div>
             ))}
