@@ -7,8 +7,12 @@ import {
 
 import "./App.css";
 import "./styles/SideBar.css";
-import ShowProyectos from "./views/Administradores/Proyectos/Show";
 import Login from "./views/LoginView";
+
+import IndexProject from "./views/Administradores/Proyectos/IndexProject";
+import CreateProject from "./views/Administradores/Proyectos/CreateProject";
+import EditProject from "./views/Administradores/Proyectos/EditProject";
+import ShowProject from "./views/Administradores/Proyectos/ShowProject";
 
 import CreateChallenge from "./views/Administradores/Retos/CreateChallenge";
 import EditChallenge from "./views/Administradores/Retos/EditChallenge";
@@ -50,11 +54,23 @@ function AppContent() {
             {localStorage.getItem("role") === "admin" ? (
               <>
                 {/* RUTAS DE ADMINISTRADORES */}
+                <Route path="/" element={<Login />} />
                 <Route
                   path="/administrar/proyectos"
-                  element={<ShowProyectos />}
+                  element={<IndexProject />}
                 />
-                <Route path="/" element={<Login />} />
+                <Route
+                  path="/administrar/proyectos/crear"
+                  element={<CreateProject />}
+                />
+                <Route
+                  path="/administrar/proyectos/editar/:id"
+                  element={<EditProject />}
+                />
+                <Route
+                  path="/administrar/proyectos/:id"
+                  element={<ShowProject />}
+                />
                 <Route path="/administrar/retos" element={<IndexChallenge />} />
                 <Route
                   path="/administrar/retos/crear"
@@ -83,10 +99,6 @@ function AppContent() {
                 <Route
                   path="/administrar/puntos-acopio/:id"
                   element={<ShowSite />}
-                />
-                <Route
-                  path="/administrar/proyectos"
-                  element={<ShowProyectos />}
                 />
                 <Route path="/administrar/retos" element={<IndexChallenge />} />
                 <Route
