@@ -32,7 +32,10 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg": "^14.1.0",
     "react-native-svg-charts": "^5.4.0",
-    "react-native-web": "~0.19.6"
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-web": "~0.19.6",
+    "react-native-webview": "^13.8.6",
+    "react-native-youtube-iframe": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
