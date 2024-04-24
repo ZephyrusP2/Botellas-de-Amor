@@ -94,9 +94,7 @@ class Update(APIView):
             serializer.save()
             save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format=None):
         try:
