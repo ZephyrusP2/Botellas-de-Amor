@@ -220,7 +220,7 @@ const CreateUser = () => {
             )}
           </label>
           <button type="submit" className="btn btn-primary mt-3 w-50">
-            crear usuario
+            Crear
           </button>
         </form>
       </div>

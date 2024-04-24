@@ -177,7 +177,7 @@ const CreateSite = () => {
 
             <br />
             <button type="submit" className="btn btn-primary btn-md w-50">
-              crear
+              Crear
             </button>
           </form>
         </div>
