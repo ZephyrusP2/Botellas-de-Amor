@@ -14,6 +14,7 @@ tzdata = "*"
 pillow = "*"
 scikit-learn = "*"
 numpy = "*"
+python-dateutil = "*"
 
 [dev-packages]
 

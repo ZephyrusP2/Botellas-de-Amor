@@ -97,7 +97,7 @@ urlpatterns = [
         name="statistics.average_age"
     ),
     path(
-        "statistics/projected_bottles_contribution/<days>", 
+        "statistics/projected_bottles_contribution/<int:months>", 
         StatisticsView.projected_bottles_contribution, 
         name="statistics.projected_bottles_contribution"
     ),

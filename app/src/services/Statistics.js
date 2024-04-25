@@ -45,10 +45,10 @@ class StatisticsService {
     return axios.get(`${this.server}/api/disposal/statistics/average_age`);
   }
 
-  getProjectedBottlesContribution(token, days) {
+  getProjectedBottlesContribution(token, month) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(
-      `${this.server}/api/disposal/statistics/projected_bottles_contribution/${days}`
+      `${this.server}/api/disposal/statistics/projected_bottles_contribution/${month}`
     );
   }
 }
