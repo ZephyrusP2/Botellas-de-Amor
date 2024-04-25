@@ -8,11 +8,10 @@ from accounts.models import User
 from backend.permissions import IsAdminOrOperator, IsAdminOrOperatorOrSelf
 from disposal.models import Disposition
 from django.db.models import Sum
+from django.db.models.functions import TruncMonth
+from dateutil.relativedelta import relativedelta 
 from datetime import date
-from datetime import timedelta
-from sklearn.linear_model import LinearRegression
 from django.utils import timezone
-import numpy as np
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
@@ -126,25 +125,30 @@ def average_age(request):
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 @authentication_classes([TokenAuthentication])
-def projected_bottles_contribution(request, days):
-    days = int(days)
+def projected_bottles_contribution(request, months):
+    months = int(months)
     end_date = timezone.now()
-    start_date = end_date - timedelta(days=days)
+    start_date = end_date - relativedelta(months=months)
 
-    dispositions = Disposition.objects.filter(created_at__range=(start_date, end_date))
+    dispositions = (
+        Disposition.objects
+        .filter(created_at__range=(start_date, end_date))
+        .annotate(created_month=TruncMonth('created_at'))
+        .values('user_id', 'created_month')
+        .annotate(total_bottles=Sum('bottles'))
+    )
 
     if dispositions.exists():
-        x = np.array([[(disposition.created_at - start_date).days] for disposition in dispositions])
-        y = np.array([disposition.bottles for disposition in dispositions])
-
-        x = x.reshape(-1, 1)
-
-        model = LinearRegression().fit(x, y)
-        future_days = np.array([[days]])
-
-        future_days = future_days.reshape(1, -1)
-
-        projected_bottles = model.predict(future_days)[0]
+        current_month = end_date.replace(day=1)
+        projected_month = current_month + relativedelta(months=1)
+        
+        total_bottles_current_month = (
+            dispositions
+            .filter(created_month=TruncMonth('created_at'))
+            .aggregate(bottles_sum=Sum('bottles'))
+        ).get('bottles_sum', 0)
+        
+        projected_bottles = total_bottles_current_month * (projected_month.month / current_month.month)
 
         return JsonResponse({'projected_bottles': projected_bottles}, safe=False)
     else:
