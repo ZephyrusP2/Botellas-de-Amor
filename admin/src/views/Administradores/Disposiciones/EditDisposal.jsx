@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import SideBarOperadores from "../../../components/Operadores/SideBar";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 import BackButton from "../../../components/BackButton";
 import dispositionService from "../../../services/disposition";
 import "../../../styles/Forms.css";
@@ -100,7 +100,7 @@ const EditDisposal = () => {
 
   return (
     <>
-      <SideBarOperadores />
+      <SideBarAdministradores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/administrar/disposiciones" />
         <h2 className="container-fluid text-center">Editar disposición</h2>

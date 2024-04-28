@@ -6,8 +6,8 @@ import "../../../styles/Forms.css";
 import BackButton from "../../../components/BackButton";
 
 import siteService from "../../../services/site";
+import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
-import SideBarOperadores from "../../../components/Administradores/SideBar";
 
 const CreateRegister = () => {
   document.title = "Crear disposición";
@@ -90,7 +90,7 @@ const CreateRegister = () => {
 
   return (
     <>
-      <SideBarOperadores />
+      <SideBarAdministradores />
       <div className="show-container">
         <div className="mx-4 my-4">
           <BackButton route="/administrar/disposiciones" />
