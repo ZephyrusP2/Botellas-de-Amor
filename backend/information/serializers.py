@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from information.models import Project
+from information.models import Project, Fact
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -21,3 +21,13 @@ class ProjectSerializer(serializers.ModelSerializer):
             "organizations",
             "status",
         )
+
+
+class FactSerializer(serializers.ModelSerializer):
+    """
+    Fact serializer
+    """
+
+    class Meta:
+        model = Fact
+        fields = ("id", "message")
