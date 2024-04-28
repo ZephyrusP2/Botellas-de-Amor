@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import "./App.css";
 import "./styles/SideBar.css";
@@ -30,7 +26,9 @@ import IndexUser from "./views/Administradores/Usuarios/IndexUser";
 import ShowUser from "./views/Administradores/Usuarios/ShowUser";
 
 import CreateDisposal from "./views/Administradores/Disposiciones/CreateDisposal";
-
+import IndexDisposal from "./views/Administradores/Disposiciones/IndexDisposal";
+import ShowDisposal from "./views/Administradores/Disposiciones/ShowDisposal";
+import EditDisposal from "./views/Administradores/Disposiciones/EditDisposal";
 
 import CreateRegister from "./views/Operadores/Create";
 import IndexRegister from "./views/Operadores/Index";
@@ -133,9 +131,20 @@ function AppContent() {
                 />
                 <Route
                   path="/administrar/disposiciones"
+                  element={<IndexDisposal />}
+                />
+                <Route
+                  path="/administrar/disposiciones/crear"
                   element={<CreateDisposal />}
                 />
-
+                <Route
+                  path="/administrar/disposiciones/:id"
+                  element={<ShowDisposal />}
+                />
+                <Route
+                  path="/administrar/disposiciones/editar/:id"
+                  element={<EditDisposal />}
+                />
               </>
             ) : (
               <>
