@@ -29,3 +29,18 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Fact(models.Model):
+    """
+    Fact model
+    """
+
+    id = models.AutoField(primary_key=True)
+    message = models.TextField()
+
+    class Meta:
+        db_table = "facts"
+
+    def __str__(self):
+        return self.id
