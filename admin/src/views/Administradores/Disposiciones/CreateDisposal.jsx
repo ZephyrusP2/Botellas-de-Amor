@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import dispositionService from "../../../services/disposition";
 import "../../../styles/Forms.css";
 
+import BackButton from "../../../components/BackButton";
+
 import siteService from "../../../services/site";
 
-import NavbarOperadores from "../../../components/Administradores/Navbar";
 import SideBarOperadores from "../../../components/Administradores/SideBar";
 
 const CreateRegister = () => {
@@ -15,7 +16,6 @@ const CreateRegister = () => {
   const [bottles, setBottles] = useState("");
   const [weight, setWeight] = useState("");
   const [user, setUser] = useState("");
-  const [operator, setOperator] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
 
   const [puntosAcopio, setPuntosAcopio] = useState([]);
@@ -49,9 +49,6 @@ const CreateRegister = () => {
     if (!user) {
       errors.user = "Se requiere el id del usuario";
     }
-    if (!operator) {
-      errors.operator = "Se requiere el id del  operador";
-    }
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -69,7 +66,6 @@ const CreateRegister = () => {
       bottles,
       weight,
       user,
-      operator,
     };
 
     try {
@@ -78,9 +74,8 @@ const CreateRegister = () => {
       setBottles("");
       setWeight("");
       setUser("");
-      setOperator("");
 
-      navigate(`/operador/registrar-botellas`);
+      navigate(`/administrar/disposiciones`);
     } catch (error) {
       if (error.response && error.response.status === 400) {
         const responseData = error.response.data;
@@ -97,7 +92,10 @@ const CreateRegister = () => {
     <>
       <SideBarOperadores />
       <div className="show-container">
-        <NavbarOperadores />
+        <div className="mx-4 my-4">
+          <BackButton route="/administrar/disposiciones" />
+        </div>
+
         <div className="d-flex flex-column align-items-center justify-content-center p-4 container-fluid">
           <form
             onSubmit={handleSubmit}
@@ -141,22 +139,6 @@ const CreateRegister = () => {
                 />
                 {validationErrors.user && (
                   <span className="error-message">{validationErrors.user}</span>
-                )}
-              </label>
-              <label className="container-register d-flex flex-column form-label">
-                Id del operador
-                <input
-                  type="number"
-                  value={operator}
-                  onChange={(e) =>
-                    setOperator(Math.max(0, parseInt(e.target.value)))
-                  }
-                  className="form-control rounded-3"
-                />
-                {validationErrors.operator && (
-                  <span className="error-message">
-                    {validationErrors.operator}
-                  </span>
                 )}
               </label>
 
