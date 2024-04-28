@@ -7,7 +7,7 @@ import "../../styles/Forms.css";
 import siteService from "../../services/site";
 
 const EditRegister = () => {
-  document.title = "Editar reto";
+  document.title = "Editar disposition";
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -103,7 +103,7 @@ const EditRegister = () => {
       <SideBarOperadores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/operador/registrar-botellas/historial" />
-        <h2 className="container-fluid text-center">Editar reto</h2>
+        <h2 className="container-fluid text-center">Editar registro de botella</h2>
         <form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-center container m-0 p-0"
@@ -202,7 +202,7 @@ const EditRegister = () => {
           </label>
 
           <button type="submit" className="btn btn-primary btn-md mt-3 w-50">
-            Editar reto
+            Editar registro
           </button>
         </form>
       </div>
