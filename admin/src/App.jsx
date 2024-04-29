@@ -32,6 +32,7 @@ import EditDisposal from "./views/Administradores/Disposiciones/EditDisposal";
 
 import IndexFact from "./views/Administradores/Facts/IndexFact";
 import CreateFact from "./views/Administradores/Facts/CreateFact";
+import EditFact from "./views/Administradores/Facts/EditFact";
 
 import CreateRegister from "./views/Operadores/Create";
 import IndexRegister from "./views/Operadores/Index";
@@ -155,6 +156,10 @@ function AppContent() {
                 <Route
                   path="/administrar/datos-curiosos/crear"
                   element={<CreateFact />}
+                />
+                <Route
+                  path="/administrar/datos-curiosos/editar/:id"
+                  element={<EditFact />}
                 />
               </>
             ) : (

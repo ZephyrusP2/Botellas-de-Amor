@@ -62,7 +62,7 @@ const NavbarAdministradores = () => {
             to="/administrar/datos-curiosos"
             className={`button-navbar ocultar ${location.pathname === "/administrar/datos-curiosos" ? "active" : ""}`}
           >
-            Facts
+            Datos Curiosos
           </Link>
         </div>
         </div>
@@ -116,7 +116,7 @@ const NavbarAdministradores = () => {
               to="/administrar/datos-curiosos"
               className={`navbar-item-sidebar ${location.pathname === "/administrar/datos-curiosos" ? "active" : ""}`}
             >
-              Facts
+              Datos Curiosos
             </Link>
           </div>
         </div>
