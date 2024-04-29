@@ -17,8 +17,8 @@ const IndexFact = () => {
         <NavbarAdministradores />
         <MyTable
           createPath={"crear"}
-          editPath={"/administrar/facts/editar/"}
-          showPath={"/administrar/facts/"}
+          editPath={"/administrar/datos-curiosos/editar/"}
+          showPath={"/administrar/datos-curiosos/"}
           deleteFunction={async (id) => await factService.deleteFact(id, token)}
           fetchFunction={async () => await factService.listFact(token)}
           leadingAttribute={"message"}
