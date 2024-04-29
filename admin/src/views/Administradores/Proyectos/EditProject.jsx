@@ -4,7 +4,6 @@ import SideBarAdministradores from "../../../components/Administradores/SideBar"
 import BackButton from "../../../components/BackButton";
 import projectService from "../../../services/project";
 import "../../../styles/Forms.css";
-import project from "../../../services/project";
 
 const EditProject = () => {
   document.title = "Editar proyecto";

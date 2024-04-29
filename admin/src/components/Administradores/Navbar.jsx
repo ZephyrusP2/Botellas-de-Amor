@@ -59,10 +59,10 @@ const NavbarAdministradores = () => {
             Disposiciones
           </Link>
           <Link
-            to="/administrar/facts"
-            className={`button-navbar ocultar ${location.pathname === "/administrar/facts" ? "active" : ""}`}
+            to="/administrar/datos-curiosos"
+            className={`button-navbar ocultar ${location.pathname === "/administrar/datos-curiosos" ? "active" : ""}`}
           >
-            Facts
+            Datos Curiosos
           </Link>
         </div>
         </div>
@@ -105,6 +105,18 @@ const NavbarAdministradores = () => {
               className={`navbar-item-sidebar ${location.pathname === "/administrar/retos" ? "active" : ""}`}
             >
               Retos
+            </Link>
+            <Link
+              to="/administrar/disposiciones"
+              className={`navbar-item-sidebar ${location.pathname === "/administrar/disposiciones" ? "active" : ""}`}
+            >
+              Disposiciones
+            </Link>
+            <Link
+              to="/administrar/datos-curiosos"
+              className={`navbar-item-sidebar ${location.pathname === "/administrar/datos-curiosos" ? "active" : ""}`}
+            >
+              Datos Curiosos
             </Link>
           </div>
         </div>
