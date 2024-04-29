@@ -48,9 +48,8 @@ const EditChallenge = () => {
       const response = await challengeService.updateChallenge(
         id,
         challengeData,
-        token,
+        token
       );
-      console.log("Challenge updated successfully:", response.data);
       navigate(`/administrar/retos`);
     } catch (error) {
       console.error("Error updating challenge:", error);

@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "api",
     "corsheaders",
     "disposal",
+    "information",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
