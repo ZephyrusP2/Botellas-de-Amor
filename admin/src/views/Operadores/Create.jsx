@@ -9,7 +9,7 @@ import NavbarOperadores from "../../components/Operadores/Navbar";
 import SideBarOperadores from "../../components/Operadores/SideBar";
 
 const CreateRegister = () => {
-  document.title = "crear reto";
+  document.title = "Crear punto de acopio";
   const navigate = useNavigate();
   const [site, setSite] = useState("");
   const [bottles, setBottles] = useState("");
@@ -26,7 +26,7 @@ const CreateRegister = () => {
     async function fetchPuntosAcopio() {
       try {
         const token = localStorage.getItem("token");
-        const response = await siteService.listSite(token); // Supongo que tienes definido el token
+        const response = await siteService.listSite(token);
         setPuntosAcopio(response.data);
         setLoading(false);
       } catch (error) {
@@ -75,7 +75,6 @@ const CreateRegister = () => {
 
     try {
       const response = await dispositionService.createDisposition(data, token);
-      console.log("site created:", response);
       setSite("");
       setBottles("");
       setWeight("");
@@ -113,7 +112,7 @@ const CreateRegister = () => {
                   onChange={(e) => setSite(parseInt(e.target.value))}
                   className="form-select form-control rounded-3 text-muted"
                   aria-label="Punto de acopio"
-                  value={site || ''}
+                  value={site || ""}
                   disabled={loading}
                   required
                 >
@@ -136,7 +135,9 @@ const CreateRegister = () => {
                 <input
                   type="number"
                   value={user}
-                  onChange={(e) => setUser(Math.max(0, parseInt(e.target.value)))}
+                  onChange={(e) =>
+                    setUser(Math.max(0, parseInt(e.target.value)))
+                  }
                   className="form-control rounded-3"
                 />
                 {validationErrors.user && (
@@ -148,7 +149,9 @@ const CreateRegister = () => {
                 <input
                   type="number"
                   value={operator}
-                  onChange={(e) => setOperator(Math.max(0, parseInt(e.target.value)))}
+                  onChange={(e) =>
+                    setOperator(Math.max(0, parseInt(e.target.value)))
+                  }
                   className="form-control rounded-3"
                 />
                 {validationErrors.operator && (
@@ -163,7 +166,9 @@ const CreateRegister = () => {
                 <input
                   type="number"
                   value={bottles}
-                  onChange={(e) => setBottles(Math.max(1, parseInt(e.target.value)))}
+                  onChange={(e) =>
+                    setBottles(Math.max(1, parseInt(e.target.value)))
+                  }
                   className="form-control rounded-3"
                 />
                 {validationErrors.bottles && (
@@ -177,17 +182,19 @@ const CreateRegister = () => {
                 Peso de las botellas
                 <div className="kg-container">
                   <div className="d-block">
-                  <input
-                    type="number"
-                    value={weight}
-                    onChange={(e) => setWeight(Math.max(1, parseInt(e.target.value)))}
-                    className="form-control rounded-3"
-                  />
-                  {validationErrors.weight && (
-                    <span className="error-message">
-                      {validationErrors.weight}
-                    </span>
-                  )}
+                    <input
+                      type="number"
+                      value={weight}
+                      onChange={(e) =>
+                        setWeight(Math.max(1, parseInt(e.target.value)))
+                      }
+                      className="form-control rounded-3"
+                    />
+                    {validationErrors.weight && (
+                      <span className="error-message">
+                        {validationErrors.weight}
+                      </span>
+                    )}
                   </div>
                   <h6 className="kg">Kg</h6>
                 </div>
@@ -195,7 +202,7 @@ const CreateRegister = () => {
 
               <br />
               <button type="submit" className="btn btn-primary btn-md">
-                crear
+                Crear
               </button>
             </div>
           </form>

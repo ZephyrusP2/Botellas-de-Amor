@@ -7,7 +7,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/login`,
-        userData
+        userData,
       );
       return response;
     } catch (error) {
@@ -20,7 +20,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${this.server}/api/accounts/user/register`,
-        userData
+        userData,
       );
       return response;
     } catch (error) {
@@ -33,7 +33,7 @@ class UserService {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
-        `${this.server}/api/accounts/user/show/${id}`
+        `${this.server}/api/accounts/user/show/${id}`,
       );
       return response;
     } catch (error) {
@@ -46,7 +46,7 @@ class UserService {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.delete(
-        `${this.server}/api/accounts/user/delete/${id}`
+        `${this.server}/api/accounts/user/delete/${id}`,
       );
       return response;
     } catch (error) {
@@ -60,7 +60,7 @@ class UserService {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.put(
         `${this.server}/api/accounts/user/update/${id}`,
-        userData
+        userData,
       );
       return response;
     } catch (error) {
@@ -73,7 +73,7 @@ class UserService {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.get(
-        `${this.server}/api/accounts/user/bottles`
+        `${this.server}/api/accounts/user/bottles`,
       );
       return response;
     } catch (error) {

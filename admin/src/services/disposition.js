@@ -5,7 +5,6 @@ class dispositionService {
 
   listDisposition(token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    console.log(this.server);
     return axios.get(`${this.server}/api/disposal/disposition/list`);
   }
 
@@ -18,7 +17,7 @@ class dispositionService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.put(
       `${this.server}/api/disposal/disposition/update/${id}`,
-      data,
+      data
     );
   }
 

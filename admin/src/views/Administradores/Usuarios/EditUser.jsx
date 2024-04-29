@@ -88,7 +88,6 @@ const EditUser = ({ userId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await UserService.updateUser(id, userData, token);
-      console.log("User updated:", response);
       setName("");
       setLastName("");
       setBirthDate("");
