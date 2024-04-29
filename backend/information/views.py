@@ -5,104 +5,156 @@ from rest_framework.decorators import (api_view, authentication_classes,
                                        permission_classes)
 
 from backend.permissions import IsAdmin
-from .models import Project
-from .serializers import ProjectSerializer
+from .models import Project, Fact
+from .serializers import ProjectSerializer, FactSerializer
 
 
-class Create(generics.CreateAPIView):
-    """
-    Project list and create
-    """
-
-    serializer_class = ProjectSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
-    queryset = Project.objects.all()
-
-
-class Retrieve(generics.RetrieveAPIView):
-    """
-    Project retrieve
-    """
-
-    serializer_class = ProjectSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    http_method_names = ["get"]
-
-    def get_queryset(self):
+class ProjectView:
+    class Create(generics.CreateAPIView):
         """
-        Get queryset
-        :return: QuerySet
+        Project list and create
         """
-        return Project.objects.all()
 
+        serializer_class = ProjectSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdmin]
+        queryset = Project.objects.all()
 
-class Update(generics.UpdateAPIView):
-    """
-    Project update
-    """
-
-    serializer_class = ProjectSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
-
-    http_method_names = ["put"]
-
-    def get_queryset(self):
+    class Retrieve(generics.RetrieveAPIView):
         """
-        Get queryset
-        :return: QuerySet
+        Project retrieve
         """
-        return Project.objects.all()
 
-    def perform_update(self, serializer):
+        serializer_class = ProjectSerializer
+        permission_classes = [permissions.IsAuthenticated]
+
+        http_method_names = ["get"]
+
+        def get_queryset(self):
+            """
+            Get queryset
+            :return: QuerySet
+            """
+            return Project.objects.all()
+
+    class Update(generics.UpdateAPIView):
         """
-        Perform update
-        :param serializer: serializer
-        :return: None
+        Project update
         """
-        serializer.save()
 
+        serializer_class = ProjectSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdmin]
 
-class Delete(generics.DestroyAPIView):
-    """
-    Project delete
-    """
+        http_method_names = ["put"]
 
-    serializer_class = ProjectSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+        def get_queryset(self):
+            """
+            Get queryset
+            :return: QuerySet
+            """
+            return Project.objects.all()
 
-    http_method_names = ["delete"]
+        def perform_update(self, serializer):
+            """
+            Perform update
+            :param serializer: serializer
+            :return: None
+            """
+            serializer.save()
 
-    def get_queryset(self):
+    class Delete(generics.DestroyAPIView):
         """
-        Get queryset
-        :return: QuerySet
+        Project delete
         """
-        return Project.objects.all()
 
-    def perform_destroy(self, instance):
+        serializer_class = ProjectSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdmin]
+
+        http_method_names = ["delete"]
+
+        def get_queryset(self):
+            """
+            Get queryset
+            :return: QuerySet
+            """
+            return Project.objects.all()
+
+        def perform_destroy(self, instance):
+            """
+            Perform destroy
+            :param instance: instance
+            :return: None
+            """
+            instance.image.delete()
+            instance.delete()
+
+    class List(generics.ListAPIView):
         """
-        Perform destroy
-        :param instance: instance
-        :return: None
+        Project list
         """
-        instance.image.delete()
-        instance.delete()
+
+        serializer_class = ProjectSerializer
+        permission_classes = [permissions.IsAuthenticated]
+
+        http_method_names = ["get"]
+
+        def get_queryset(self):
+            """
+            Get queryset
+            :return: QuerySet
+            """
+            return Project.objects.all()
 
 
-class List(generics.ListAPIView):
-    """
-    Project list
-    """
-
-    serializer_class = ProjectSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    http_method_names = ["get"]
-
-    def get_queryset(self):
+class FactView:
+    class List(generics.ListAPIView):
         """
-        Get queryset
-        :return: QuerySet
+        Fact list
         """
-        return Project.objects.all()
+
+        serializer_class = FactSerializer
+        permission_classes = [permissions.IsAuthenticated]
+
+        http_method_names = ["get"]
+
+        def get_queryset(self):
+            """
+            Get queryset
+            :return: QuerySet
+            """
+            return Fact.objects.all()
+
+    class Create(generics.CreateAPIView):
+        """
+        Fact create
+        """
+
+        serializer_class = FactSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdmin]
+        queryset = Fact.objects.all()
+
+    class Retrieve(generics.RetrieveAPIView):
+        """
+        Fact retrieve
+        """
+
+        serializer_class = FactSerializer
+        permission_classes = [permissions.IsAuthenticated]
+        queryset = Fact.objects.all()
+
+    class Update(generics.UpdateAPIView):
+        """
+        Fact update
+        """
+
+        serializer_class = FactSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdmin]
+        queryset = Fact.objects.all()
+
+    class Delete(generics.DestroyAPIView):
+        """
+        Fact delete
+        """
+
+        serializer_class = FactSerializer
+        permission_classes = [permissions.IsAuthenticated, IsAdmin]
+        queryset = Fact.objects.all()
