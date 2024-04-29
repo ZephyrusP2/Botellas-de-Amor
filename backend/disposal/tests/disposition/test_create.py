@@ -32,8 +32,7 @@ class DispositionCreateTestCase(APITestCase):
         self.operator_user.set_password("operatorpassword")
         self.operator_user.save()
         self.operator_token = Token.objects.create(user=self.operator_user)
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + self.operator_token.key)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + self.operator_token.key)
 
         self.site = Site.objects.create(
             image="path/to/image",
@@ -58,8 +57,7 @@ class DispositionCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(Disposition.objects.count(), 1)
         self.user.refresh_from_db()
-        self.assertEqual(self.user.plastic_footprint,
-                         data["bottles"] * data["weight"])
+        self.assertEqual(self.user.plastic_footprint, data["bottles"] * data["weight"])
 
     def test_disposition_create_unauthorized(self):
         self.client.credentials()

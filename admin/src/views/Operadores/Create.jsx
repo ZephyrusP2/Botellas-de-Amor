@@ -9,7 +9,7 @@ import NavbarOperadores from "../../components/Operadores/Navbar";
 import SideBarOperadores from "../../components/Operadores/SideBar";
 
 const CreateRegister = () => {
-  document.title = "crear reto";
+  document.title = "Crear punto de acopio";
   const navigate = useNavigate();
   const [site, setSite] = useState("");
   const [bottles, setBottles] = useState("");
@@ -26,7 +26,7 @@ const CreateRegister = () => {
     async function fetchPuntosAcopio() {
       try {
         const token = localStorage.getItem("token");
-        const response = await siteService.listSite(token); // Supongo que tienes definido el token
+        const response = await siteService.listSite(token);
         setPuntosAcopio(response.data);
         setLoading(false);
       } catch (error) {
@@ -202,7 +202,7 @@ const CreateRegister = () => {
 
               <br />
               <button type="submit" className="btn btn-primary btn-md">
-                crear
+                Crear
               </button>
             </div>
           </form>

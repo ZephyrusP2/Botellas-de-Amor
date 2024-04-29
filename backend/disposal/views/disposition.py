@@ -32,8 +32,9 @@ class Create(generics.CreateAPIView):
         operator = self.request.user
         user = User.objects.get(id=self.request.data["user"])
         serializer.save(operator=operator)
-        user.plastic_footprint += int(self.request.data["weight"]) * \
-            int(self.request.data["bottles"])
+        user.plastic_footprint += int(self.request.data["weight"]) * int(
+            self.request.data["bottles"]
+        )
         user.save()
         bottle = Bottle.objects.get(user=user)
         bottle.experience += 100
@@ -69,8 +70,9 @@ class Update(generics.UpdateAPIView):
         operator = self.request.user
         user = User.objects.get(id=self.request.data["user"])
         user.plastic_footprint -= self.get_object().weight * self.get_object().bottles
-        user.plastic_footprint += int(self.request.data["weight"]) * \
-            int(self.request.data["bottles"])
+        user.plastic_footprint += int(self.request.data["weight"]) * int(
+            self.request.data["bottles"]
+        )
         user.save()
         serializer.save(operator=operator)
 
