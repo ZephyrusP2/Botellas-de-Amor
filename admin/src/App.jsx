@@ -35,6 +35,8 @@ import CreateFact from "./views/Administradores/Facts/CreateFact";
 import EditFact from "./views/Administradores/Facts/EditFact";
 import ShowFact from "./views/Administradores/Facts/ShowFact";
 
+import IndexAnalisis from "./views/Administradores/Analisis/IndexAnalisis";
+
 import CreateRegister from "./views/Operadores/Create";
 import IndexRegister from "./views/Operadores/Index";
 import EditRegister from "./views/Operadores/Edit";
@@ -165,6 +167,10 @@ function AppContent() {
                 <Route
                   path="/administrar/datos-curiosos/:id"
                   element={<ShowFact />}
+                />
+                <Route
+                  path="/analisis"
+                  element={<IndexAnalisis />}
                 />
               </>
             ) : (
