@@ -1,3 +1,4 @@
+from .views import project as ProjectView
 from django.urls import path
 
 from .views import bottle as BottleView
@@ -5,7 +6,9 @@ from .views import challenge as ChallengeView
 from .views import disposition as DispositionView
 from .views import site as SiteView
 from .views import statistics as StatisticsView
-from .views import project as ProjectView
+<< << << < HEAD
+== == == =
+>>>>>> > 6c55da6(Add statistics service and URLs for statistics endpoints)
 
 urlpatterns = [
     path("site/create", SiteView.Create.as_view(), name="site.create"),
