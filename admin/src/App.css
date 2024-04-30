@@ -3,7 +3,7 @@
 }
 
 .bg-myPrimary {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
 }
 
 .app-container-wrapper {
@@ -88,4 +88,17 @@
   width: 91%;
   margin-left: 4%;
   border-radius: 5px; /* Puedes ajustar el valor según tus preferencias */
+}
+
+.blue-border {
+  border: 1px solid #00c8ea !important;
+}
+
+.white-text {
+  color: white !important;
+}
+
+.card-dashboard {
+  max-height: 400px !important;
+  min-height: 200px !important;
 }

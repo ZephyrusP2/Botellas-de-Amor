@@ -51,8 +51,8 @@ const SideBarAdministradores = () => {
             <h1 className="d-none d-xl-inline text">Administrar</h1>
           </a>
           <a
-            href="/administrar/puntos-acopio"
-            className={`text-container d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none ${currentPath.includes("/Analisis/") ? "active" : ""}`}
+            href="/analisis/"
+            className={`text-container d-flex align-items-center pb-3 mb-md-0 me-xl-auto text-white text-decoration-none ${currentPath.includes("/analisis") ? "active" : ""}`}
           >
             <svg
               width="52"
