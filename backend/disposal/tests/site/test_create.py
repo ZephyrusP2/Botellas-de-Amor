@@ -1,11 +1,12 @@
+import os
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
-from django.core.files.uploadedfile import SimpleUploadedFile
-import os
 
 from accounts.models import User
-from disposal.models import Site, Schedule
+from disposal.models import Schedule, Site
 
 
 class SiteCreateTestCase(APITestCase):
@@ -29,7 +30,8 @@ class SiteCreateTestCase(APITestCase):
         image_path = os.path.join(os.path.dirname(__file__), "default.jpg")
         image = open(image_path, "rb")
         file_data = SimpleUploadedFile(
-            "default.jpg", image.read(), content_type="image/jpeg")
+            "default.jpg", image.read(), content_type="image/jpeg"
+        )
 
         self.data = {
             "image": file_data,
@@ -52,8 +54,7 @@ class SiteCreateTestCase(APITestCase):
         return super().setUp()
 
     def test_site_create_success(self):
-        response = self.client.post(
-            self.url, self.data, format="multipart")
+        response = self.client.post(self.url, self.data, format="multipart")
         self.assertEqual(response.status_code, 201)
         self.assertIn("id", response.json())
         self.assertIn("image", response.json())
@@ -69,8 +70,7 @@ class SiteCreateTestCase(APITestCase):
         response = self.client.post(self.url, self.data, format="multipart")
         self.assertEqual(response.status_code, 400)
         self.assertIn("address", response.json())
-        self.assertEqual(response.json()["address"], [
-                         "This field is required."])
+        self.assertEqual(response.json()["address"], ["This field is required."])
 
     def test_site_create_unauthorized(self):
         self.client.credentials()

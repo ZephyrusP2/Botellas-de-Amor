@@ -78,10 +78,11 @@ class UserCreateTestCase(APITestCase):
             "gender": "Masculino",
             "email": "user@gmail.com",
             "password": "userpassword",
-            "role": "user"
+            "role": "user",
         }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
         self.assertIn("birth_date", response.json())
-        self.assertEqual(response.json()["birth_date"], [
-                         "Birth date cannot be in the future"])
+        self.assertEqual(
+            response.json()["birth_date"], ["Birth date cannot be in the future"]
+        )

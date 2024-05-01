@@ -1,13 +1,13 @@
+import datetime
+import os
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from accounts.models import User
-from disposal.models import Site, Schedule
-
-import os
-from django.core.files.uploadedfile import SimpleUploadedFile
-import datetime
+from disposal.models import Schedule, Site
 
 
 class SiteUpdateTestCase(APITestCase):
@@ -28,7 +28,8 @@ class SiteUpdateTestCase(APITestCase):
         image_path = os.path.join(os.path.dirname(__file__), "default.jpg")
         image = open(image_path, "rb")
         file_data = SimpleUploadedFile(
-            "test_update.jpg", image.read(), content_type="image/jpeg")
+            "test_update.jpg", image.read(), content_type="image/jpeg"
+        )
         image.close()
         self.site = Site.objects.create(
             image=file_data,
@@ -49,8 +50,12 @@ class SiteUpdateTestCase(APITestCase):
         }
 
         schedules = [
-            {"id": self.schedule.id, "day": "Lunes",
-                "opens": "10:00:00", "closes": "18:00:00"},
+            {
+                "id": self.schedule.id,
+                "day": "Lunes",
+                "opens": "10:00:00",
+                "closes": "18:00:00",
+            },
         ]
 
         self.data["schedules"] = str(schedules)
@@ -99,8 +104,7 @@ class SiteUpdateTestCase(APITestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.assertIn("address", response.json())
-        self.assertEqual(response.json()["address"], [
-                         "This field is required."])
+        self.assertEqual(response.json()["address"], ["This field is required."])
         self.site.image.delete()
 
     def test_site_update_no_image(self):

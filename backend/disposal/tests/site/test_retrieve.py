@@ -3,7 +3,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 
 from accounts.models import User
-from disposal.models import Site, Schedule
+from disposal.models import Schedule, Site
 
 
 class SiteRetrieveTestCase(APITestCase):

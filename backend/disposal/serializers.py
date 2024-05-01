@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from disposal.models import Bottle, Challenge, Disposition, Site, Schedule
+from disposal.models import Bottle, Challenge, Disposition, Schedule, Site
 
 
 class ScheduleSerializer(serializers.ModelSerializer):

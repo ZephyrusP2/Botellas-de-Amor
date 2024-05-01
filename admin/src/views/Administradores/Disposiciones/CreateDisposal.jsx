@@ -8,7 +8,6 @@ import BackButton from "../../../components/BackButton";
 import siteService from "../../../services/site";
 import SideBarAdministradores from "../../../components/Administradores/SideBar";
 
-
 const CreateRegister = () => {
   document.title = "Crear disposición";
   const navigate = useNavigate();

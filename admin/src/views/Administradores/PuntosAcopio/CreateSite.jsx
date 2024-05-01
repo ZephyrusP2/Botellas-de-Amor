@@ -39,7 +39,7 @@ const CreateSite = () => {
     const filteredSchedules = schedules
       .filter(
         (schedule) =>
-          schedule.enabled && schedule.opens !== "" && schedule.closes !== ""
+          schedule.enabled && schedule.opens !== "" && schedule.closes !== "",
       )
       .map((schedule) => ({
         day: schedule.day,
@@ -89,7 +89,7 @@ const CreateSite = () => {
           "Sábado",
           "Domingo",
         ].filter(
-          (day) => !siteData.schedules.some((schedule) => schedule.day === day)
+          (day) => !siteData.schedules.some((schedule) => schedule.day === day),
         )
       : [];
 

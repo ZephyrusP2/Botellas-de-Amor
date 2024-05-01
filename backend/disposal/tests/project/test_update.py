@@ -5,6 +5,7 @@ from rest_framework.test import APITestCase
 from accounts.models import User
 from disposal.models import Project
 
+
 class ProjectUpdateTestCase(APITestCase):
     def setUp(self):
         self.admin_user = User.objects.create(
@@ -32,7 +33,7 @@ class ProjectUpdateTestCase(APITestCase):
         )
 
         return super().setUp()
-    
+
     def test_project_update_success(self):
         response = self.client.put(
             reverse("project.update", args=[self.project.id]),
@@ -45,7 +46,7 @@ class ProjectUpdateTestCase(APITestCase):
                 "total_tons": "0",
                 "organizations": "Organización de reciclaje",
                 "status": "En proceso",
-            }, 
+            },
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
@@ -71,7 +72,7 @@ class ProjectUpdateTestCase(APITestCase):
                 "total_tons": "0",
                 "organizations": "Organización de reciclaje",
                 "status": "En proceso",
-            }, 
+            },
         )
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
@@ -88,7 +89,7 @@ class ProjectUpdateTestCase(APITestCase):
                 "total_tons": "0",
                 "organizations": "Organización de reciclaje",
                 "status": "En proceso",
-            }, 
+            },
         )
         self.assertEqual(response.status_code, 404)
         self.assertIn("detail", response.json())
@@ -104,7 +105,7 @@ class ProjectUpdateTestCase(APITestCase):
                 "goal_tons": "100",
                 "total_tons": "0",
                 "organizations": "Organización de reciclaje",
-            }, 
+            },
         )
         self.assertEqual(response.status_code, 400)
         self.assertIn("status", response.json())

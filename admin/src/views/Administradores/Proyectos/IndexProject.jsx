@@ -19,7 +19,9 @@ const IndexProject = () => {
           createPath={"crear"}
           editPath={"/administrar/proyectos/editar/"}
           showPath={"/administrar/proyectos/"}
-          deleteFunction={async (id) => await projectService.deleteProject(id, token)}
+          deleteFunction={async (id) =>
+            await projectService.deleteProject(id, token)
+          }
           fetchFunction={async () => await projectService.listProject(token)}
           leadingAttribute={"name"}
         />

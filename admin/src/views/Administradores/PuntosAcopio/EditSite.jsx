@@ -128,7 +128,7 @@ const EditSite = () => {
           "Sábado",
           "Domingo",
         ].filter(
-          (day) => !siteData.schedules.some((schedule) => schedule.day === day)
+          (day) => !siteData.schedules.some((schedule) => schedule.day === day),
         )
       : [];
 

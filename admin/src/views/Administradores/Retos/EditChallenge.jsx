@@ -48,7 +48,7 @@ const EditChallenge = () => {
       const response = await challengeService.updateChallenge(
         id,
         challengeData,
-        token
+        token,
       );
       navigate(`/administrar/retos`);
     } catch (error) {

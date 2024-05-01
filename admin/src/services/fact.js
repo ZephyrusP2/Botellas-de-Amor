@@ -15,10 +15,7 @@ class factService {
 
   updateFact(id, data, token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    return axios.put(
-      `${this.server}/api/information/fact/update/${id}`,
-      data
-    );
+    return axios.put(`${this.server}/api/information/fact/update/${id}`, data);
   }
 
   deleteFact(id, token) {
