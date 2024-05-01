@@ -55,9 +55,9 @@ const ShowDisposal = () => {
 
   const findSiteById = (siteId) => {
     return sites.find((site) => site.id === siteId);
-    };
+  };
 
-    const site = findSiteById(dispositionData.site);
+  const site = findSiteById(dispositionData.site);
 
   return (
     <>
@@ -68,7 +68,9 @@ const ShowDisposal = () => {
           <h2 className="blue-text display-5 small-text">
             <strong>Punto de acopio</strong>
           </h2>
-          <p className="display-6 small-text">{site ? site.name : 'No se encontro el punto de acopio' }</p>
+          <p className="display-6 small-text">
+            {site ? site.name : "No se encontro el punto de acopio"}
+          </p>
           <h2 className="blue-text display-5 small-text">
             <strong>Numero de botellas</strong>
           </h2>
@@ -80,11 +82,17 @@ const ShowDisposal = () => {
           <h2 className="blue-text display-5 small-text">
             <strong>Usuario</strong>
           </h2>
-          <p className="display-6 small-text">{operatorOrUser ? operatorOrUser.name : 'No se encontro el usuario'}</p>
+          <p className="display-6 small-text">
+            {operatorOrUser ? operatorOrUser.name : "No se encontro el usuario"}
+          </p>
           <h2 className="blue-text display-5 small-text">
             <strong>Operador</strong>
           </h2>
-          <p className="display-6 small-text">{operatorOrUser ? operatorOrUser.name : 'No se encontro el operador'}</p>
+          <p className="display-6 small-text">
+            {operatorOrUser
+              ? operatorOrUser.name
+              : "No se encontro el operador"}
+          </p>
         </div>
       </div>
     </>

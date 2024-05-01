@@ -5,8 +5,9 @@ from rest_framework.decorators import (api_view, authentication_classes,
                                        permission_classes)
 
 from backend.permissions import IsAdmin
-from .models import Project, Fact
-from .serializers import ProjectSerializer, FactSerializer
+
+from .models import Fact, Project
+from .serializers import FactSerializer, ProjectSerializer
 
 
 class ProjectView:

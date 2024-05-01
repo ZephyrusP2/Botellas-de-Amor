@@ -5,6 +5,7 @@ from rest_framework.test import APITestCase
 from accounts.models import User
 from disposal.models import Project
 
+
 class ProjectRetrieveTestCase(APITestCase):
     def setUp(self):
         self.admin_user = User.objects.create(
@@ -32,7 +33,7 @@ class ProjectRetrieveTestCase(APITestCase):
         )
 
         return super().setUp()
-    
+
     def test_project_retrieve_success(self):
         response = self.client.get(reverse("project.show", args=[self.project.id]))
         self.assertEqual(response.status_code, 200)

@@ -1,12 +1,13 @@
 import json
+
 from rest_framework import generics, permissions, status
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from disposal.models import Site, Schedule
-from disposal.serializers import SiteSerializer, ScheduleSerializer
 from backend.permissions import IsAdmin, IsAdminOrOperator
+from disposal.models import Schedule, Site
+from disposal.serializers import ScheduleSerializer, SiteSerializer
 
 
 class Create(APIView):
@@ -20,15 +21,12 @@ class Create(APIView):
 
     def post(self, request, format=None):
         print(request.data)
-        serializer = SiteSerializer(
-            data=request.data, context={"request": request})
+        serializer = SiteSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             site = serializer.save()
             save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def save_schedule(self, site, schedules):
@@ -99,9 +97,7 @@ class Update(APIView):
             serializer.save()
             save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format=None):
         try:
@@ -115,9 +111,7 @@ class Update(APIView):
             serializer.save()
             save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class Delete(APIView):

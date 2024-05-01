@@ -5,6 +5,7 @@ from rest_framework.test import APITestCase
 from accounts.models import User
 from disposal.models import Project
 
+
 class ProjectDeleteTestCase(APITestCase):
     def setUp(self):
         self.admin_user = User.objects.create(
@@ -32,18 +33,14 @@ class ProjectDeleteTestCase(APITestCase):
         )
 
         return super().setUp()
-    
+
     def test_project_delete_success(self):
-        response = self.client.delete(
-            reverse("project.delete", args=[self.project.id])
-        )
+        response = self.client.delete(reverse("project.delete", args=[self.project.id]))
         self.assertEqual(response.status_code, 204)
 
     def test_project_delete_unauthorized(self):
         self.client.credentials()
-        response = self.client.delete(
-            reverse("project.delete", args=[self.project.id])
-        )
+        response = self.client.delete(reverse("project.delete", args=[self.project.id]))
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 

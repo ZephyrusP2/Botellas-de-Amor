@@ -61,48 +61,45 @@ urlpatterns = [
          BottleView.Delete.as_view(), name="bottle.delete"),
     path("bottle/list", BottleView.List.as_view(), name="bottle.list"),
     path(
-        "statistics/total_bottles_contributed", 
-        StatisticsView.total_bottles_contributed, 
-        name="statistics.total_bottles_contributed"
+        "statistics/total_bottles_contributed",
+        StatisticsView.total_bottles_contributed,
+        name="statistics.total_bottles_contributed",
     ),
     path(
-        "statistics/plastic_footprint_reduced", 
-        StatisticsView.plastic_footprint_reduced, 
-        name="statistics.plastic_footprint_reduced"
+        "statistics/plastic_footprint_reduced",
+        StatisticsView.plastic_footprint_reduced,
+        name="statistics.plastic_footprint_reduced",
+    ),
+    path("statistics/total_users", StatisticsView.users,
+         name="statistics.total_users"),
+    path(
+        "statistics/most_contributed_bottles_by_gender",
+        StatisticsView.most_contributed_bottles_by_gender,
+        name="statistics.most_contributed_bottles_by_gender",
     ),
     path(
-        "statistics/total_users", 
-        StatisticsView.users, 
-        name="statistics.total_users"
+        "statistics/top_5_sites",
+        StatisticsView.top_5_sites,
+        name="statistics.top_5_sites",
     ),
     path(
-        "statistics/most_contributed_bottles_by_gender", 
-        StatisticsView.most_contributed_bottles_by_gender, 
-        name="statistics.most_contributed_bottles_by_gender"
+        "statistics/top_5_users",
+        StatisticsView.top_5_users,
+        name="statistics.top_5_users",
     ),
     path(
-        "statistics/top_5_sites", 
-        StatisticsView.top_5_sites, 
-        name="statistics.top_5_sites"
+        "statistics/total_kilos_contributed",
+        StatisticsView.total_kilos_contributed,
+        name="statistics.total_kilos_contributed",
     ),
     path(
-        "statistics/top_5_users", 
-        StatisticsView.top_5_users, 
-        name="statistics.top_5_users"
+        "statistics/average_age",
+        StatisticsView.average_age,
+        name="statistics.average_age",
     ),
     path(
-        "statistics/total_kilos_contributed", 
-        StatisticsView.total_kilos_contributed, 
-        name="statistics.total_kilos_contributed"
-    ),
-    path(
-        "statistics/average_age", 
-        StatisticsView.average_age, 
-        name="statistics.average_age"
-    ),
-    path(
-        "statistics/projected_bottles_contribution/<int:months>", 
-        StatisticsView.projected_bottles_contribution, 
-        name="statistics.projected_bottles_contribution"
+        "statistics/projected_bottles_contribution/<int:months>",
+        StatisticsView.projected_bottles_contribution,
+        name="statistics.projected_bottles_contribution",
     ),
 ]

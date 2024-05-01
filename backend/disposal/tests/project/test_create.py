@@ -4,6 +4,7 @@ from rest_framework.test import APITestCase
 
 from accounts.models import User
 
+
 class ProjectCreateTestCase(APITestCase):
     def setUp(self):
         self.admin_user = User.objects.create(
@@ -22,28 +23,32 @@ class ProjectCreateTestCase(APITestCase):
         self.url = reverse("project.create")
 
         return super().setUp()
-    
+
     def test_project_create_success(self):
-        data = {"name": "Proyecto de reciclaje", 
-                "image": "image.png", 
-                "location": "Calle 123", 
-                "description": "Proyecto de reciclaje de botellas de plástico", 
-                "goal_tons": "100", 
-                "total_tons": "0", 
-                "organizations": "Organización de reciclaje", 
-                "status": "En proceso"}
+        data = {
+            "name": "Proyecto de reciclaje",
+            "image": "image.png",
+            "location": "Calle 123",
+            "description": "Proyecto de reciclaje de botellas de plástico",
+            "goal_tons": "100",
+            "total_tons": "0",
+            "organizations": "Organización de reciclaje",
+            "status": "En proceso",
+        }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 201)
         self.assertIn("id", response.json())
 
     def test_project_create_invalid_data(self):
-        data = {"name": "Proyecto de reciclaje", 
-                "image": "image.png", 
-                "location": "Calle 123", 
-                "description": "Proyecto de reciclaje de botellas de plástico", 
-                "goal_tons": "100", 
-                "total_tons": "0", 
-                "organizations": "Organización de reciclaje"}
+        data = {
+            "name": "Proyecto de reciclaje",
+            "image": "image.png",
+            "location": "Calle 123",
+            "description": "Proyecto de reciclaje de botellas de plástico",
+            "goal_tons": "100",
+            "total_tons": "0",
+            "organizations": "Organización de reciclaje",
+        }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
         self.assertIn("status", response.json())
@@ -51,15 +56,16 @@ class ProjectCreateTestCase(APITestCase):
 
     def test_project_create_unauthorized(self):
         self.client.credentials()
-        data = {"name": "Proyecto de reciclaje", 
-                "image": "image.png", 
-                "location": "Calle 123", 
-                "description": "Proyecto de reciclaje de botellas de plástico", 
-                "goal_tons": "100", 
-                "total_tons": "0", 
-                "organizations": "Organización de reciclaje", 
-                "status": "En proceso"}
+        data = {
+            "name": "Proyecto de reciclaje",
+            "image": "image.png",
+            "location": "Calle 123",
+            "description": "Proyecto de reciclaje de botellas de plástico",
+            "goal_tons": "100",
+            "total_tons": "0",
+            "organizations": "Organización de reciclaje",
+            "status": "En proceso",
+        }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
-        

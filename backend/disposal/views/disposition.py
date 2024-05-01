@@ -2,7 +2,7 @@ from rest_framework import generics, permissions
 
 from accounts.models import User
 from backend.permissions import IsAdminOrOperator, IsAdminOrOperatorOrSelf
-from disposal.models import Disposition, Bottle
+from disposal.models import Bottle, Disposition
 from disposal.serializers import DispositionSerializer
 
 
