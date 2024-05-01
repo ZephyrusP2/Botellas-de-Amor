@@ -1,15 +1,13 @@
 import json
 
-import json
-
 from rest_framework import generics, permissions, status
-from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from disposal.models import Site, Schedule
 from disposal.serializers import SiteSerializer, ScheduleSerializer
+from backend.permissions import IsAdmin, IsAdminOrOperator
 
 
 class Create(APIView):
@@ -55,10 +53,6 @@ def save_schedule(self, site, schedules):
                 opens=schedule["opens"],
                 closes=schedule["closes"],
             )
-
-
-class Retrieve(APIView):
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def save_schedule(self, site, schedules):
@@ -178,9 +172,6 @@ class Update(APIView):
             save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class Delete(APIView):
 
 
 class Delete(APIView):
