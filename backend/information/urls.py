@@ -4,7 +4,8 @@ from information.views import FactView, ProjectView
 
 urlpatterns = [
     path("project/create", ProjectView.Create.as_view(), name="project.create"),
-    path("project/show/<int:pk>", ProjectView.Retrieve.as_view(), name="project.show"),
+    path("project/show/<int:pk>",
+         ProjectView.Retrieve.as_view(), name="project.show"),
     path(
         "project/update/<int:pk>", ProjectView.Update.as_view(), name="project.update"
     ),
@@ -17,4 +18,5 @@ urlpatterns = [
     path("fact/update/<int:pk>", FactView.Update.as_view(), name="fact.update"),
     path("fact/delete/<int:pk>", FactView.Delete.as_view(), name="fact.delete"),
     path("fact/list", FactView.List.as_view(), name="fact.list"),
+    path("fact/random", FactView.random, name="fact.random"),
 ]
