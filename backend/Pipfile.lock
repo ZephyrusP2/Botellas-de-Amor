@@ -2,10 +2,14 @@
     "_meta": {
         "hash": {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "sha256": "616f9637cb53a26d45b88bb5ed466a4017ff1be23aea2fdfbc4fc7f191d2f384"
 =======
             "sha256": "15054ebf75757fdc174f81d8bfb045f86aaed65d258225ee25f06f32e1a71751"
 >>>>>>> 796f8ed (Add image field)
+=======
+            "sha256": "616f9637cb53a26d45b88bb5ed466a4017ff1be23aea2fdfbc4fc7f191d2f384"
+>>>>>>> development
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +35,9 @@
         "black": {
             "hashes": [
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> development
                 "sha256:0889f4eb8b3bdf8b189e41a71cf0dbb8141a98346cd1a2695dea5995d416e940",
                 "sha256:0f404b6e77043b23d0321fb7772522b876b6de737ad3cb97d6b156638d68ce81",
                 "sha256:171959bc879637a8cdbc53dc3fddae2a83e151937a28cf605fd175ce61e0e94a",
@@ -53,6 +60,7 @@
                 "sha256:db5154b9e5b478031371d8bc41ff37b33855fa223a6cfba456c9b73fb96f77d4",
                 "sha256:ecbab810604fe02c70b3a08afd39beb599f7cc9afd13e81f5336014133b4fe35",
                 "sha256:ed77e214b785148f57e43ca425b6e0850165144aa727d66ac604e56a70bb7825"
+<<<<<<< HEAD
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
@@ -85,6 +93,12 @@
             "markers": "python_version >= '3.8'",
             "version": "==24.4.0"
 >>>>>>> 796f8ed (Add image field)
+=======
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==24.4.1"
+>>>>>>> development
         },
         "click": {
             "hashes": [
@@ -400,6 +414,14 @@
             "version": "==3.4.0"
 =======
 >>>>>>> 796f8ed (Add image field)
+        },
+        "threadpoolctl": {
+            "hashes": [
+                "sha256:8f4c689a65b23e5ed825c8436a92b818aac005e0f3715f6a1664d7c7ee29d262",
+                "sha256:f11b491a03661d6dd7ef692dd422ab34185d982466c49c8f98c8f716b5c93196"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==3.4.0"
         },
         "tzdata": {
             "hashes": [

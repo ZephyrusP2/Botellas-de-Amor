@@ -44,11 +44,8 @@ const Login = ({ navigation }) => {
         navigation.navigate("Content");
       })
       .catch((error) => {
-        console.log("login", error.response.data);
-        setErrorMessage(error.response.data.error.toString());
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 5000);
+        console.error("login", error);
+        setError(error.toString());
       });
   };
 
@@ -56,6 +53,7 @@ const Login = ({ navigation }) => {
     navigation.navigate("Register");
   };
 
+  onForgotPassword = () => {};
   onForgotPassword = () => {};
 
   return (

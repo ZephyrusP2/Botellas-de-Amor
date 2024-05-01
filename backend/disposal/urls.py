@@ -6,9 +6,6 @@ from .views import challenge as ChallengeView
 from .views import disposition as DispositionView
 from .views import site as SiteView
 from .views import statistics as StatisticsView
-<< << << < HEAD
-== == == =
->>>>>> > 6c55da6(Add statistics service and URLs for statistics endpoints)
 
 urlpatterns = [
     path("site/create", SiteView.Create.as_view(), name="site.create"),
@@ -16,6 +13,8 @@ urlpatterns = [
     path("site/update/<int:pk>", SiteView.Update.as_view(), name="site.update"),
     path("site/delete/<int:pk>", SiteView.Delete.as_view(), name="site.delete"),
     path("site/list", SiteView.List.as_view(), name="site.list"),
+    path("challenge/create", ChallengeView.Create.as_view(),
+         name="challenge.create"),
     path("challenge/create", ChallengeView.Create.as_view(),
          name="challenge.create"),
     path(
@@ -35,6 +34,8 @@ urlpatterns = [
     ),
     path("challenge/list", ChallengeView.List.as_view(), name="challenge.list"),
     path("challenge/toggle", ChallengeView.toggle, name="challenge.toggle"),
+    path("disposition/list", DispositionView.List.as_view(),
+         name="disposition.list"),
     path("disposition/list", DispositionView.List.as_view(),
          name="disposition.list"),
     path(
@@ -59,6 +60,10 @@ urlpatterns = [
     ),
     path("bottle/create", BottleView.Create.as_view(), name="bottle.create"),
     path("bottle/retrieve", BottleView.Retrieve.as_view(), name="bottle.show"),
+    path("bottle/update/<int:pk>",
+         BottleView.Update.as_view(), name="bottle.update"),
+    path("bottle/delete/<int:pk>",
+         BottleView.Delete.as_view(), name="bottle.delete"),
     path("bottle/update/<int:pk>",
          BottleView.Update.as_view(), name="bottle.update"),
     path("bottle/delete/<int:pk>",
