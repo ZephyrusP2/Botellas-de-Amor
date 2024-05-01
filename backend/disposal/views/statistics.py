@@ -93,7 +93,8 @@ def top_5_sites(request):
         else:
             total_bottles[disposition.site] = disposition.bottles
 
-    sorted_sites = sorted(total_bottles.items(), key=lambda x: x[1], reverse=True)
+    sorted_sites = sorted(total_bottles.items(),
+                          key=lambda x: x[1], reverse=True)
     top_5_sites = sorted_sites[:5]
     response = []
     for site, bottles in top_5_sites:
@@ -114,7 +115,8 @@ def top_5_users(request):
         else:
             total_bottles[disposition.user] = disposition.bottles
 
-    sorted_users = sorted(total_bottles.items(), key=lambda x: x[1], reverse=True)
+    sorted_users = sorted(total_bottles.items(),
+                          key=lambda x: x[1], reverse=True)
     top_5_users = sorted_users[:5]
     response = []
     for user, bottles in top_5_users:
@@ -141,7 +143,8 @@ def get_age(birth_date):
     age = (
         actual_date.year
         - birth_date.year
-        - ((actual_date.month, actual_date.day) < (birth_date.month, birth_date.day))
+        - ((actual_date.month, actual_date.day)
+           < (birth_date.month, birth_date.day))
     )
     return age
 
