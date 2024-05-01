@@ -50,16 +50,18 @@ def most_contributed_bottles_by_gender(request):
     women = 0
     men = 0
 
-    dispositions = Disposition.objects.all()
-    gender = request.user.gender
+    users = User.objects.all()
 
-    if gender:
-        if gender.lower() == 'femenino':
-            women = dispositions.aggregate(total_bottles_by_women=Sum('bottles'))[
-                'total_bottles_by_women'] or 0
-        elif gender.lower() == 'masculino':
-            men = dispositions.aggregate(total_bottles_by_men=Sum('bottles'))[
-                'total_bottles_by_men'] or 0
+    for user in users:
+        dispositions = Disposition.objects.filter(user=user)
+        gender = user.gender
+        if gender:
+            if gender.lower() == 'femenino':
+                women += dispositions.aggregate(total_bottles_by_women=Sum('bottles'))[
+                    'total_bottles_by_women'] or 0
+            elif gender.lower() == 'masculino':
+                men += dispositions.aggregate(total_bottles_by_men=Sum('bottles'))[
+                    'total_bottles_by_men'] or 0
 
     response = [{"women": women, "men": men}]
     return JsonResponse(response, safe=False)
