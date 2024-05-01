@@ -14,11 +14,26 @@ const TableItem = ({ leading, onEdit, onDelete, onShow }) => {
     onDelete();
   };
 
+  // Obtener la ruta actual
+  const currentPath = window.location.pathname;
+
+  // Verificar si la ruta coincide
+  const isDesiredPath =
+    currentPath === "/operador/registrar-botellas/historial";
+
   return (
     <div className="acopio-container" onClick={onShow} id="my-container">
-      <h2 id="leading" className="acopio-text" title={leading}>
-        {leading}
-      </h2>
+      {/* Mostrar "Id usuario: {leading}" solo si la ruta coincide */}
+      {isDesiredPath && (
+        <h2 id="leading" className="acopio-text" title={leading}>
+          Id usuario: {leading}
+        </h2>
+      )}
+      {!isDesiredPath && (
+        <h2 id="leading" className="acopio-text" title={leading}>
+          {leading}
+        </h2>
+      )}
       <div className="col-auto">
         <div className="col-auto">
           <svg

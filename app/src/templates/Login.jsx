@@ -54,6 +54,7 @@ const Login = ({ navigation }) => {
   };
 
   onForgotPassword = () => {};
+  onForgotPassword = () => {};
 
   return (
     <StyledBackground bg="secondary" style={styles.background}>

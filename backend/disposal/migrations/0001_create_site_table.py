@@ -16,14 +16,12 @@ class Migration(migrations.Migration):
             name="Site",
             fields=[
                 ("id", models.AutoField(primary_key=True, serialize=False)),
-                (
-                    "image",
-                    models.ImageField(
-                        default="sites/default.jpg",
-                        upload_to=disposal.models.upload_to,
-                        verbose_name="Image",
-                    ),
-                ),
+                ("image",
+                 models.ImageField(
+                     default="sites/default.jpg",
+                     upload_to=disposal.models.upload_to,
+                     verbose_name="Image",
+                 )),
                 ("name", models.CharField(max_length=50)),
                 ("address", models.CharField(max_length=50)),
                 ("status", models.BooleanField(default=True)),

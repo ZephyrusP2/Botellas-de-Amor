@@ -43,7 +43,7 @@ export default function Header2() {
 
 const styles = StyleSheet.create({
   bg: {
-    marginTop: 20,
+    marginTop: 35,
     width: "90%",
     borderRadius: 10,
     alignSelf: "center",
