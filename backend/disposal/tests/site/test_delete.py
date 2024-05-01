@@ -30,14 +30,12 @@ class SiteDeleteTestCase(APITestCase):
         return super().setUp()
 
     def test_site_delete_success(self):
-        response = self.client.delete(
-            reverse("site.delete", args=[self.site.id]))
+        response = self.client.delete(reverse("site.delete", args=[self.site.id]))
         self.assertEqual(response.status_code, 204)
 
     def test_site_delete_unauthorized(self):
         self.client.credentials()
-        response = self.client.delete(
-            reverse("site.delete", args=[self.site.id]))
+        response = self.client.delete(reverse("site.delete", args=[self.site.id]))
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
 

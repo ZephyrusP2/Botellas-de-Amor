@@ -17,7 +17,7 @@ class dispositionService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.put(
       `${this.server}/api/disposal/disposition/update/${id}`,
-      data
+      data,
     );
   }
 

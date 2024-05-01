@@ -38,7 +38,7 @@ const Profile = ({ navigation }) => {
     navigation.navigate("Profile");
     Alert.alert(
       "Botellas de amor",
-      `¡Hola ${userData?.name || ""} estas viendo tu perfil!`
+      `¡Hola ${userData?.name || ""} estas viendo tu perfil!`,
     );
   };
 

@@ -5,6 +5,7 @@ from rest_framework.test import APITestCase
 from accounts.models import User
 from disposal.models import Project
 
+
 class ProjectListTestCase(APITestCase):
     def setUp(self):
         self.admin_user = User.objects.create(
@@ -53,7 +54,7 @@ class ProjectListTestCase(APITestCase):
         )
 
         return super().setUp()
-    
+
     def test_project_list_success(self):
         response = self.client.get(reverse("project.list"))
         self.assertEqual(response.status_code, 200)
@@ -80,5 +81,3 @@ class ProjectListTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 0)
         self.assertEqual(response.json(), [])
-
-    

@@ -9,7 +9,6 @@ import "../../../styles/Show.css";
 const IndexDisposal = () => {
   const token = localStorage.getItem("token");
   document.title = "Disposiciones";
- 
 
   return (
     <>

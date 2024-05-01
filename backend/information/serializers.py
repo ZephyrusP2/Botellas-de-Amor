@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from information.models import Project, Fact
+from information.models import Fact, Project
 
 
 class ProjectSerializer(serializers.ModelSerializer):

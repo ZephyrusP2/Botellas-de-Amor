@@ -18,53 +18,53 @@ const NavbarAdministradores = () => {
     <div className="show-container">
       <div className="navbar-container">
         <div className="col">
-        <div className="buttons-container">
-          <Link
-            to="/administrar/proyectos"
-            className={`button-navbar ocultar ${location.pathname === "/administrar/proyectos" ? "active" : ""}`}
-          >
-            Proyectos
-          </Link>
-          <Link
-            to="/administrar/puntos-acopio"
-            className={`button-navbar ocultar ${location.pathname === "/administrar/puntos-acopio" ? "active" : ""}`}
-          >
-            Puntos de Acopio
-          </Link>
-          <Link
-            to="/administrar/usuarios"
-            className={`button-navbar ocultar ${location.pathname === "/administrar/usuarios" ? "active" : ""}`}
-          >
-            Usuarios
-          </Link>
-          <Link
-            to="/administrar/retos"
-            className={`button-navbar ocultar ${location.pathname === "/administrar/retos" ? "active" : ""}`}
-          >
-            Retos
-          </Link>
-          <div className="burguer">
-            <FontAwesomeIcon
-              onClick={toggleSidebar}
-              icon={faBars}
-              className="burger-icon"
-            />
+          <div className="buttons-container">
+            <Link
+              to="/administrar/proyectos"
+              className={`button-navbar ocultar ${location.pathname === "/administrar/proyectos" ? "active" : ""}`}
+            >
+              Proyectos
+            </Link>
+            <Link
+              to="/administrar/puntos-acopio"
+              className={`button-navbar ocultar ${location.pathname === "/administrar/puntos-acopio" ? "active" : ""}`}
+            >
+              Puntos de Acopio
+            </Link>
+            <Link
+              to="/administrar/usuarios"
+              className={`button-navbar ocultar ${location.pathname === "/administrar/usuarios" ? "active" : ""}`}
+            >
+              Usuarios
+            </Link>
+            <Link
+              to="/administrar/retos"
+              className={`button-navbar ocultar ${location.pathname === "/administrar/retos" ? "active" : ""}`}
+            >
+              Retos
+            </Link>
+            <div className="burguer">
+              <FontAwesomeIcon
+                onClick={toggleSidebar}
+                icon={faBars}
+                className="burger-icon"
+              />
+            </div>
           </div>
-        </div>
-        <div className="buttons-container mt-2">
-          <Link
-            to="/administrar/disposiciones"
-            className={`button-navbar ocultar ${location.pathname === "/administrar/disposiciones" ? "active" : ""}`}
-          >
-            Disposiciones
-          </Link>
-          <Link
-            to="/administrar/datos-curiosos"
-            className={`button-navbar ocultar ${location.pathname === "/administrar/datos-curiosos" ? "active" : ""}`}
-          >
-            Datos Curiosos
-          </Link>
-        </div>
+          <div className="buttons-container mt-2">
+            <Link
+              to="/administrar/disposiciones"
+              className={`button-navbar ocultar ${location.pathname === "/administrar/disposiciones" ? "active" : ""}`}
+            >
+              Disposiciones
+            </Link>
+            <Link
+              to="/administrar/datos-curiosos"
+              className={`button-navbar ocultar ${location.pathname === "/administrar/datos-curiosos" ? "active" : ""}`}
+            >
+              Datos Curiosos
+            </Link>
+          </div>
         </div>
       </div>
       <div className="navbar-bottom-line"></div>
