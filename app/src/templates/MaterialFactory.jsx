@@ -43,7 +43,7 @@ const MaterialFactory = ({image1, image2, element, elementSubtitle, items, forbi
                 </View>
                 <View style={[styles.footer2]}>
                     <View style={[styles.footerImageContainer]}>
-                        <Image source={require('../images/logofullblanco.png')} style={{ height: 80, width: 180 }} />
+                        <Image source={require('../images/logofullblanco.png')} style={{ height: 80, width: 160 }} />
                     </View>
                 </View>
 
