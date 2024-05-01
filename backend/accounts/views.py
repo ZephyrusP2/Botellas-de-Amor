@@ -70,7 +70,8 @@ class UserCreate(APIView):
         """
         data = request.data
         today = datetime.date.today()
-        birth_date = datetime.datetime.strptime(data["birth_date"], "%Y-%m-%d").date()
+        birth_date = datetime.datetime.strptime(
+            data["birth_date"], "%Y-%m-%d").date()
         if birth_date > today:
             return JsonResponse(
                 {"birth_date": ["Birth date cannot be in the future"]}, status=400
@@ -78,6 +79,8 @@ class UserCreate(APIView):
         serializer = UserSerializer(data=data)
         if serializer.is_valid():
             user = serializer.save()
+            user.email = data["email"].lower()
+            user.gender = data["gender"].lower()
             user.set_password(data["password"])
             user.save()
             token = Token.objects.create(user=user)
@@ -169,7 +172,7 @@ def register(request):
                 last_name=data["last_name"],
                 birth_date=data["birth_date"],
                 location=data["location"],
-                gender=data["gender"],
+                gender=data["gender"].lower(),
                 email=data["email"].lower(),
                 password=data["password"],
             )
