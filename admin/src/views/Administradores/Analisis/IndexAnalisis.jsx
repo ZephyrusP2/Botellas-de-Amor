@@ -117,7 +117,7 @@ function IndexAnalisis() {
           <div className="col">
             <div className="card h-100 d-flex flex-column justify-content-between blue-border card-dashboard">
               <div className="card-header text-center bg-myPrimary text-white blue-border">
-                Top 5 puntos de acopio
+                Top 5 usuarios
               </div>
               <div className="card-body p-0">
                 <BarChart
