@@ -1,9 +1,9 @@
 from rest_framework import generics, permissions, status
-from backend.permissions import IsAdmin, IsAdminOrOperator
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from backend.permissions import IsAdmin, IsAdminOrOperator
 from disposal.models import Site
 from disposal.serializers import SiteSerializer
 
@@ -22,9 +22,7 @@ class Create(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class Retrieve(generics.RetrieveAPIView):
@@ -63,9 +61,7 @@ class Update(APIView):
                 site.image.delete()
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class Delete(generics.DestroyAPIView):

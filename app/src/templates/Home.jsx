@@ -13,7 +13,7 @@ export default function Home() {
   const [userData, setUserData] = useState();
   const [challenges, setChallenges] = useState([]);
   const [isChecked, setChecked] = useState(
-    new Array(challenges.length).fill(false)
+    new Array(challenges.length).fill(false),
   );
   const [bottleData, setBottleData] = useState();
   const [userBottles, setUserBottles] = useState();
@@ -146,11 +146,15 @@ export default function Home() {
               display="row"
               style={{ padding: 10, borderRadius: 10, width: "90%" }}
             >
-              <StyledText size="medium" fontWeight="bold" color="tertiary" style={{maxWidth: "90%"}}>
-              { challenge.challenge} {" "} 
-                { challenge.experience}xp
+              <StyledText
+                size="medium"
+                fontWeight="bold"
+                color="tertiary"
+                style={{ maxWidth: "90%" }}
+              >
+                {challenge.challenge} {challenge.experience}xp
               </StyledText>
-              
+
               <View style={styles.section}>
                 <Checkbox
                   style={styles.checkbox}

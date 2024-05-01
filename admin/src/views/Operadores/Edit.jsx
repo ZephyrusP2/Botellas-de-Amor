@@ -16,7 +16,7 @@ const EditRegister = () => {
     bottles: "",
     weight: "",
     user: "",
-    operator: ""
+    operator: "",
   });
 
   const [puntosAcopio, setPuntosAcopio] = useState([]);
@@ -89,7 +89,7 @@ const EditRegister = () => {
       const response = await dispositionService.updateDisposition(
         id,
         dispositionData,
-        token
+        token,
       );
       console.log("Disposition updated successfully:", response.data);
       navigate(`/operador/registrar-botellas`);
@@ -103,14 +103,14 @@ const EditRegister = () => {
       <SideBarOperadores />
       <div className="d-flex flex-column align-items-start p-4 container-fluid">
         <BackButton route="/operador/registrar-botellas/historial" />
-        <h2 className="container-fluid text-center">Editar registro de botella</h2>
+        <h2 className="container-fluid text-center">
+          Editar registro de botella
+        </h2>
         <form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-center container m-0 p-0"
         >
-          <label
-            className="d-flex flex-column form-label w-50"
-          >
+          <label className="d-flex flex-column form-label w-50">
             Punto de acopio
             <select
               onChange={handleInputChange}
@@ -133,9 +133,7 @@ const EditRegister = () => {
             )}
           </label>
 
-          <label
-            className="d-flex flex-column form-label w-50"
-          >
+          <label className="d-flex flex-column form-label w-50">
             Id del usuario
             <input
               type="number"
@@ -150,9 +148,7 @@ const EditRegister = () => {
             )}
           </label>
 
-          <label
-            className="d-flex flex-column form-label w-50"
-          >
+          <label className="d-flex flex-column form-label w-50">
             Id del operador
             <input
               type="number"
@@ -167,9 +163,7 @@ const EditRegister = () => {
             )}
           </label>
 
-          <label
-            className="d-flex flex-column form-label w-50"
-          >
+          <label className="d-flex flex-column form-label w-50">
             Numero de botellas
             <input
               type="number"
@@ -184,9 +178,7 @@ const EditRegister = () => {
             )}
           </label>
 
-          <label
-            className="d-flex flex-column form-label w-50"
-          >
+          <label className="d-flex flex-column form-label w-50">
             Peso de las botellas
             <input
               type="number"

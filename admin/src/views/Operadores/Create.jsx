@@ -113,7 +113,7 @@ const CreateRegister = () => {
                   onChange={(e) => setSite(parseInt(e.target.value))}
                   className="form-select form-control rounded-3 text-muted"
                   aria-label="Punto de acopio"
-                  value={site || ''}
+                  value={site || ""}
                   disabled={loading}
                   required
                 >
@@ -136,7 +136,9 @@ const CreateRegister = () => {
                 <input
                   type="number"
                   value={user}
-                  onChange={(e) => setUser(Math.max(0, parseInt(e.target.value)))}
+                  onChange={(e) =>
+                    setUser(Math.max(0, parseInt(e.target.value)))
+                  }
                   className="form-control rounded-3"
                 />
                 {validationErrors.user && (
@@ -148,7 +150,9 @@ const CreateRegister = () => {
                 <input
                   type="number"
                   value={operator}
-                  onChange={(e) => setOperator(Math.max(0, parseInt(e.target.value)))}
+                  onChange={(e) =>
+                    setOperator(Math.max(0, parseInt(e.target.value)))
+                  }
                   className="form-control rounded-3"
                 />
                 {validationErrors.operator && (
@@ -163,7 +167,9 @@ const CreateRegister = () => {
                 <input
                   type="number"
                   value={bottles}
-                  onChange={(e) => setBottles(Math.max(1, parseInt(e.target.value)))}
+                  onChange={(e) =>
+                    setBottles(Math.max(1, parseInt(e.target.value)))
+                  }
                   className="form-control rounded-3"
                 />
                 {validationErrors.bottles && (
@@ -177,17 +183,19 @@ const CreateRegister = () => {
                 Peso de las botellas
                 <div className="kg-container">
                   <div className="d-block">
-                  <input
-                    type="number"
-                    value={weight}
-                    onChange={(e) => setWeight(Math.max(1, parseInt(e.target.value)))}
-                    className="form-control rounded-3"
-                  />
-                  {validationErrors.weight && (
-                    <span className="error-message">
-                      {validationErrors.weight}
-                    </span>
-                  )}
+                    <input
+                      type="number"
+                      value={weight}
+                      onChange={(e) =>
+                        setWeight(Math.max(1, parseInt(e.target.value)))
+                      }
+                      className="form-control rounded-3"
+                    />
+                    {validationErrors.weight && (
+                      <span className="error-message">
+                        {validationErrors.weight}
+                      </span>
+                    )}
                   </div>
                   <h6 className="kg">Kg</h6>
                 </div>

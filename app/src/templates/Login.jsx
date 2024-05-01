@@ -16,12 +16,10 @@ import UserService from "../services/user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
-
   const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
-
 
   login = async (email, password) => {
     if (!email || !password) {
@@ -49,7 +47,7 @@ const Login = ({ navigation }) => {
         console.log("login", error.response.data);
         setErrorMessage(error.response.data.error.toString());
         setTimeout(() => {
-          setErrorMessage('');
+          setErrorMessage("");
         }, 5000);
       });
   };
@@ -58,7 +56,7 @@ const Login = ({ navigation }) => {
     navigation.navigate("Register");
   };
 
-  onForgotPassword = () => { };
+  onForgotPassword = () => {};
 
   return (
     <StyledBackground bg="secondary" style={styles.background}>
@@ -135,7 +133,6 @@ const Login = ({ navigation }) => {
               <StyledText size="medium" color="primary" align="center">
                 Recuperar contraseña
               </StyledText>
-
             </TouchableOpacity>
           </View>
         </StyledBackground>

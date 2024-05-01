@@ -1,22 +1,22 @@
 import datetime
-from django.contrib.auth import authenticate
+
+from django.contrib.auth import authenticate, get_user_model
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, permissions
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import (api_view, authentication_classes,
+                                       permission_classes)
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
-from django.contrib.auth import get_user_model
 
 from backend.permissions import IsAdmin, IsAdminOrSelf
-from disposal.models import Bottle
+from disposal.models import Bottle, Disposition
 
 from .models import User
 from .serializers import UserSerializer, UserUpdateSerializer
-from disposal.models import Disposition
 
 # Create your views here.
 
@@ -70,8 +70,7 @@ class UserCreate(APIView):
         """
         data = request.data
         today = datetime.date.today()
-        birth_date = datetime.datetime.strptime(
-            data["birth_date"], "%Y-%m-%d").date()
+        birth_date = datetime.datetime.strptime(data["birth_date"], "%Y-%m-%d").date()
         if birth_date > today:
             return JsonResponse(
                 {"birth_date": ["Birth date cannot be in the future"]}, status=400
@@ -159,7 +158,8 @@ def register(request):
             data = JSONParser().parse(request)
             today = datetime.date.today()
             birth_date = datetime.datetime.strptime(
-                data["birth_date"], "%Y-%m-%d").date()
+                data["birth_date"], "%Y-%m-%d"
+            ).date()
             if birth_date > today:
                 return JsonResponse(
                     {"birth_date": ["Birth date cannot be in the future"]}, status=400

@@ -43,22 +43,22 @@
   cursor: pointer;
 }
 
-.container-register-p{
+.container-register-p {
   width: 35%;
-} 
+}
 
-.container-register2{
+.container-register2 {
   width: 50%;
-} 
+}
 
-.container-register3{
+.container-register3 {
   width: 58%;
-} 
+}
 
-.kg-container{
+.kg-container {
   display: flex;
 }
-.kg{
+.kg {
   margin-top: 10px;
   margin-left: 10px;
 }
@@ -66,10 +66,10 @@
 .small-text {
   font-size: 1.8rem !important;
 
-text-align: center;}
+  text-align: center;
+}
 
-
-.image-acopio{
+.image-acopio {
   max-width: 200px;
   max-height: 300px;
 }
