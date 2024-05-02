@@ -37,7 +37,7 @@ const Conocenos = () => {
             <ScrollView>
                 <View style={styles.cardContainer}>
                     <View style={styles.p4}>
-                        <Text style={[styles.subtitle, { color: '#0AB5B8', textAlign: 'center'  }]}>SOY BOTELLAS DE AMOR</Text>
+                        <Text style={[styles.subtitle, { color: '#0AB5B8', textAlign: 'center'  }]}>SOMOS BOTELLAS DE AMOR</Text>
                         <Text style={styles.text}>
                             Botellas de amor busca enamorar a las personas para lograr un planeta libre de basura plástica.
                         </Text>

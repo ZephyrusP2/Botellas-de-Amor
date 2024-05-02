@@ -94,7 +94,7 @@ const CreateRegister = () => {
         <div className="mx-4 my-4">
           <BackButton route="/administrar/disposiciones" />
         </div>
-
+        <h1 className="container-fluid text-center">Registrar Botellas</h1>
         <div className="d-flex flex-column align-items-center justify-content-center p-4 container-fluid">
           <form
             onSubmit={handleSubmit}
