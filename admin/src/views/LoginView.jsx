@@ -36,6 +36,7 @@ const Login = () => {
             ? "/operador/registrar-botellas"
             : "/";
       navigate(path);
+      window.location.reload();
     }
   }, [role, navigate]);
 
