@@ -90,6 +90,7 @@ Se debe crear un archivo `.env` en la carpeta `app` con el siguiente contenido.
 Por ejemplo:
 ```env
 SERVER_IP="12.3.4.5"
+MAPS_TOKEN="aJAKDLNasdfklFDJAKL"
 ```
 
 Para ejecutar la app es necesario ejecutar el siguiente comando.
