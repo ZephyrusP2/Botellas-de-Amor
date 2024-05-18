@@ -55,3 +55,12 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("new_password", "old_password")
+
+
+class ResetPasswordSerializer(serializers.ModelSerializer):
+    new_password = serializers.CharField(
+        write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ("new_password",)

@@ -12,11 +12,11 @@ from rest_framework.decorators import (api_view, authentication_classes,
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 
-from backend.permissions import IsAdmin, IsAdminOrSelf
+from backend.permissions import IsAdmin, IsAdminOrSelf, IsSelf
 from disposal.models import Bottle, Disposition
 
 from .models import User
-from .serializers import UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
+from .serializers import ResetPasswordSerializer, UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
 
 # Create your views here.
 
@@ -137,14 +137,14 @@ class UserChangePassword(APIView):
     """
 
     serializer_class = ChangePasswordSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+    permission_classes = [permissions.IsAuthenticated, IsSelf]
     queryset = User.objects.all()
 
     def get_object(self):
         pk = self.kwargs.get('pk')
         return User.objects.get(id=pk)
 
-    def put(self, request, pk):
+    def post(self, request, pk):
         user = self.get_object()
         data = request.data
         serializer = ChangePasswordSerializer(data=data)
@@ -155,6 +155,30 @@ class UserChangePassword(APIView):
                 return JsonResponse({"id": user.id}, status=200)
             return JsonResponse(
                 {"error": "Old password is incorrect"}, status=400)
+        return JsonResponse(serializer.errors, status=400)
+
+
+class UserResetPassword(APIView):
+    """
+    User reset password
+    """
+
+    serializer_class = ResetPasswordSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    queryset = User.objects.all()
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return User.objects.get(id=pk)
+
+    def post(self, request, pk):
+        user = self.get_object()
+        data = request.data
+        serializer = ResetPasswordSerializer(data=data)
+        if serializer.is_valid():
+            user.set_password(data["new_password"])
+            user.save()
+            return JsonResponse({"id": user.id}, status=200)
         return JsonResponse(serializer.errors, status=400)
 
 

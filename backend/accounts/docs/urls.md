@@ -21,4 +21,5 @@
 ## Additional Endpoints
 
 - **User's Bottles:** `GET /api/user/bottles` - Retrieves information about a user's recycled bottles.
-- **Change Password:** `PUT /api/user/change_password/<user_id>` - Allows users to change their passwords.
+- **Change Password (User):** `POST /api/user/change_password/<user_id>` - Allows users to change their passwords.
+- **Reset Password (Admin):** `POST /api/user/reset_password/<user_id>` - Allows admins to reset a user's password.

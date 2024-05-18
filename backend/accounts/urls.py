@@ -14,5 +14,7 @@ urlpatterns = [
     path("user/bottles", UserView.bottles, name="user.bottles"),
     path("user/change_password/<int:pk>",
          UserView.UserChangePassword.as_view(), name="user.change_password"),
+    path("user/reset_password/<int:pk>",
+         UserView.UserResetPassword.as_view(), name="user.reset_password"),
     path("admin/login", UserView.admin_login, name="admin.login"),
 ]

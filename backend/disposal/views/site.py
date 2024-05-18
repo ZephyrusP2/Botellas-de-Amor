@@ -20,7 +20,7 @@ class Create(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, format=None):
-        print(request.data)
+
         serializer = SiteSerializer(
             data=request.data, context={"request": request})
         if serializer.is_valid():
@@ -120,14 +120,14 @@ class Update(APIView):
     queryset = Site.objects.all()
 
     def patch(self, request, pk, format=None):
-        print(request.data)
+
         try:
             site = Site.objects.get(pk=pk)
         except Site.DoesNotExist:
             return Response(
                 {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
             )
-        print(request.data)
+
         try:
             site = Site.objects.get(pk=pk)
         except Site.DoesNotExist:

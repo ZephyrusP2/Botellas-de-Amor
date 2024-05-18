@@ -15,7 +15,7 @@
 - `password`: The password of the user.
 - `plastic_footprint`: The plastic footprint of the user.
 
-### Example
+### Examples
 
 #### Create (POST)
 
@@ -62,9 +62,7 @@
 - `gender`: The gender of the user.
 - `email`: The email of the user.
 
-### Example
-
-#### Update (PUT)
+### Example (PUT)
 
 ```json
 {
@@ -88,11 +86,25 @@
 
 ### Example
 
-#### Change password (PUT)
+#### Change password (POST)
 
 ```json
 {
   "new_password": "new_password",
   "old_password": "old_password"
+}
+```
+
+## ResetPasswordSerializer
+
+### Fields
+
+- `new_password`: The new password of the user.
+
+### Example (POST)
+
+```json
+{
+  "new_password": "new_password"
 }
 ```

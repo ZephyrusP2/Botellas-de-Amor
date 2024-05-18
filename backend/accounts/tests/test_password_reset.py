@@ -7,7 +7,7 @@ from accounts.models import User
 # Create your tests here.
 
 
-class PasswordChangeTestCase(APITestCase):
+class PasswordResetTestCase(APITestCase):
     def setUp(self):
         self.admin_user = User.objects.create(
             name="admin",
@@ -21,35 +21,44 @@ class PasswordChangeTestCase(APITestCase):
         )
         self.admin_user.set_password("adminpassword")
         self.admin_user.save()
+        self.user = User.objects.create(
+            name="user",
+            last_name="user",
+            birth_date="1990-01-01",
+            location="location",
+            gender="Masculino",
+            email="user@email.com",
+            password="userpassword",
+        )
+        self.user.set_password("userpassword")
+        self.user.save()
         self.token = Token.objects.create(user=self.admin_user)
         self.client.credentials(HTTP_AUTHORIZATION="Token " + self.token.key)
-        self.url = reverse("user.change_password", args=[self.admin_user.id])
+        self.url = reverse("user.reset_password", args=[self.user.id])
 
         return super().setUp()
 
-    def test_password_change_success(self):
+    def test_password_reset_success(self):
         data = {
-            "old_password": "adminpassword",
             "new_password": "newpassword",
         }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
-        self.assertEqual(response.json()["id"], self.admin_user.id)
-        self.admin_user.refresh_from_db()
-        self.assertTrue(self.admin_user.check_password("newpassword"))
+        self.assertEqual(response.json()["id"], self.user.id)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password("newpassword"))
 
-    def test_password_change_invalid_data(self):
+    def test_password_reset_invalid_data(self):
         data = {
-            "old_password": "adminpassword",
+            "old_password": "userpassword",
         }
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, 400)
 
-    def test_password_change_unauthorized(self):
+    def test_password_reset_unauthorized(self):
         self.client.credentials()
         data = {
-            "old_password": "adminpassword",
             "new_password": "newpassword",
         }
         response = self.client.post(self.url, data, format="json")

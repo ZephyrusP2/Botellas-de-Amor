@@ -1,6 +1,15 @@
 from rest_framework import permissions
 
 
+class IsSelf(permissions.BasePermission):
+    """
+    Allows access only to the user itself.
+    """
+
+    def has_permission(self, request, view):
+        return request.user == view.get_object()
+
+
 class IsAdminOrSelf(permissions.BasePermission):
     """
     Allows access only to admin users or the user itself.
