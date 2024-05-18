@@ -16,7 +16,7 @@ from backend.permissions import IsAdmin, IsAdminOrSelf
 from disposal.models import Bottle, Disposition
 
 from .models import User
-from .serializers import UserSerializer, UserUpdateSerializer
+from .serializers import UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
 
 # Create your views here.
 
@@ -129,6 +129,33 @@ class UserUpdate(generics.UpdateAPIView):
         :return: QuerySet
         """
         return User.objects.all()
+
+
+class UserChangePassword(APIView):
+    """
+    User change password
+    """
+
+    serializer_class = ChangePasswordSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOrSelf]
+    queryset = User.objects.all()
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return User.objects.get(id=pk)
+
+    def put(self, request, pk):
+        user = self.get_object()
+        data = request.data
+        serializer = ChangePasswordSerializer(data=data)
+        if serializer.is_valid():
+            if user.check_password(data["old_password"]):
+                user.set_password(data["new_password"])
+                user.save()
+                return JsonResponse({"id": user.id}, status=200)
+            return JsonResponse(
+                {"error": "Old password is incorrect"}, status=400)
+        return JsonResponse(serializer.errors, status=400)
 
 
 class UserDelete(generics.DestroyAPIView):
