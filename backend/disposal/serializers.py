@@ -35,6 +35,8 @@ class SiteSerializer(serializers.ModelSerializer):
             "name",
             "address",
             "schedules",
+            "latitude",
+            "longitude",
         )
 
     def get_schedules(self, obj):
