@@ -1,21 +1,46 @@
 import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
 import { View, Button } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { MAPS_TOKEN } from '@env';
+import MapService from "../services/map";
 
 
 // DEBEMOS PEDIR LA UBICACION DEL USUARIO PARA USARLA ACA
 const origin = { latitude: 6.234339, longitude: -75.576908 }; // Origen fijo (por ejemplo, la ubicación actual del usuario)
-const markers = [
-  { id: 1, title: "Punto de Acopio 1", coordinate: { latitude: 6.234339, longitude: -75.576908 } },
-  { id: 2, title: "Punto de Acopio 2", coordinate: { latitude: 6.314, longitude: -75.577 } },
-  { id: 3, title: "Punto de Acopio 3", coordinate: { latitude: 6.280, longitude: -75.578 } }
-];
 
 export default function Map() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [destination, setDestination] = useState(null);
+  const [markers, setMarkers] = useState([]);
+
+  useEffect(() => {
+    retrieveSites();
+    // console.log(location);
+  }, []);
+
+  const retrieveSites = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const id = await AsyncStorage.getItem("id");
+    MapService.retrieve(token, id)
+      .then((response) => {
+        // Convertir las locations en markers
+        const newMarkers = response.data.map((location, index) => ({
+          id: index + 1,
+          title: location.name,
+          coordinate: {
+            latitude: parseFloat(location.latitude),
+            longitude: parseFloat(location.longitude)
+          }
+        }));
+        setMarkers(newMarkers);
+      })
+      .catch((error) => {
+        console.error("retrieve user error", error);
+      });
+  };
 
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
