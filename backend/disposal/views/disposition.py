@@ -23,7 +23,7 @@ class Create(generics.CreateAPIView):
 
     queryset = Disposition.objects.all()
     serializer_class = DispositionSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdminOrOperator]
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         """
@@ -32,9 +32,7 @@ class Create(generics.CreateAPIView):
         operator = self.request.user
         user = User.objects.get(id=self.request.data["user"])
         serializer.save(operator=operator)
-        user.plastic_footprint += int(self.request.data["weight"]) * int(
-            self.request.data["bottles"]
-        )
+        user.plastic_footprint += int(self.request.data["weight"])
         user.save()
         bottle = Bottle.objects.get(user=user)
         bottle.experience += 100
