@@ -47,9 +47,9 @@ const ShowSite = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column container-fluid p-2">
-      <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between">
           <BackButton route="/administrar/puntos-acopio" />
-          <div >
+          <div>
             <svg
               onClick={handleEditClick}
               className=""

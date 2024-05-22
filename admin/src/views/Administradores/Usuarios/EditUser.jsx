@@ -94,7 +94,11 @@ const EditUser = ({ userId }) => {
       const token = localStorage.getItem("token");
       const response = await UserService.updateUser(id, userData, token);
       if (password) {
-        await UserService.changePasswordUser(id, {new_password: password}, token);
+        await UserService.changePasswordUser(
+          id,
+          { new_password: password },
+          token,
+        );
       }
       setName("");
       setLastName("");

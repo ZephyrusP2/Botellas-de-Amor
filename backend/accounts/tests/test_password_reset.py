@@ -65,4 +65,5 @@ class PasswordResetTestCase(APITestCase):
         self.assertEqual(response.status_code, 401)
         self.assertIn("detail", response.json())
         self.assertEqual(
-            response.json()["detail"], "Authentication credentials were not provided.")
+            response.json()["detail"], "Authentication credentials were not provided."
+        )

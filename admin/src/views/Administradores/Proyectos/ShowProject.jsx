@@ -27,11 +27,11 @@ const ShowProject = () => {
 
   const handleEditClick = (event) => {
     onEdit();
-  }
+  };
 
   const handleDeleteClick = (event) => {
     onDelete(id);
-  }
+  };
 
   useEffect(() => {
     const getProject = async () => {
@@ -47,9 +47,9 @@ const ShowProject = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column container-fluid p-2">
-      <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between">
           <BackButton route="/administrar/proyectos" />
-          <div >
+          <div>
             <svg
               onClick={handleEditClick}
               className=""

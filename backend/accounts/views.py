@@ -16,7 +16,8 @@ from backend.permissions import IsAdmin, IsAdminOrSelf, IsSelf
 from disposal.models import Bottle, Disposition
 
 from .models import User
-from .serializers import ResetPasswordSerializer, UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
+from .serializers import (ChangePasswordSerializer, ResetPasswordSerializer,
+                          UserSerializer, UserUpdateSerializer)
 
 # Create your views here.
 
@@ -70,8 +71,7 @@ class UserCreate(APIView):
         """
         data = request.data
         today = datetime.date.today()
-        birth_date = datetime.datetime.strptime(
-            data["birth_date"], "%Y-%m-%d").date()
+        birth_date = datetime.datetime.strptime(data["birth_date"], "%Y-%m-%d").date()
         if birth_date > today:
             return JsonResponse(
                 {"birth_date": ["Birth date cannot be in the future"]}, status=400
@@ -141,7 +141,7 @@ class UserChangePassword(APIView):
     queryset = User.objects.all()
 
     def get_object(self):
-        pk = self.kwargs.get('pk')
+        pk = self.kwargs.get("pk")
         return User.objects.get(id=pk)
 
     def post(self, request, pk):
@@ -153,8 +153,7 @@ class UserChangePassword(APIView):
                 user.set_password(data["new_password"])
                 user.save()
                 return JsonResponse({"id": user.id}, status=200)
-            return JsonResponse(
-                {"error": "Old password is incorrect"}, status=400)
+            return JsonResponse({"error": "Old password is incorrect"}, status=400)
         return JsonResponse(serializer.errors, status=400)
 
 
@@ -168,7 +167,7 @@ class UserResetPassword(APIView):
     queryset = User.objects.all()
 
     def get_object(self):
-        pk = self.kwargs.get('pk')
+        pk = self.kwargs.get("pk")
         return User.objects.get(id=pk)
 
     def post(self, request, pk):

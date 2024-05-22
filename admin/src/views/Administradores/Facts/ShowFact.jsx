@@ -14,7 +14,7 @@ const ShowFact = () => {
 
   const onEdit = () => {
     navigate(`/administrar/datos-curiosos/editar/${id}`);
-  }
+  };
 
   const onDelete = async (id) => {
     try {
@@ -23,15 +23,15 @@ const ShowFact = () => {
     } catch (error) {
       console.error("Error deleting fact:", error);
     }
-  }
+  };
 
   const handleEditClick = (event) => {
     onEdit();
-  }
+  };
 
   const handleDeleteClick = (event) => {
     onDelete(id);
-  }
+  };
 
   useEffect(() => {
     const getFact = async () => {
@@ -47,9 +47,9 @@ const ShowFact = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column container-fluid p-2">
-      <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between">
           <BackButton route="/administrar/datos-curiosos" />
-          <div >
+          <div>
             <svg
               onClick={handleEditClick}
               className=""

@@ -168,10 +168,7 @@ function AppContent() {
                   path="/administrar/datos-curiosos/:id"
                   element={<ShowFact />}
                 />
-                <Route
-                  path="/analisis"
-                  element={<IndexAnalisis />}
-                />
+                <Route path="/analisis" element={<IndexAnalisis />} />
               </>
             ) : (
               <>

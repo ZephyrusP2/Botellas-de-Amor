@@ -6,14 +6,14 @@ class StatisticsService {
   getTotalBottlesContributed(token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(
-      `${this.server}/api/disposal/statistics/total_bottles_contributed`
+      `${this.server}/api/disposal/statistics/total_bottles_contributed`,
     );
   }
 
   getAverageFootprintReduced(token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(
-      `${this.server}/api/disposal/statistics/plastic_footprint_reduced`
+      `${this.server}/api/disposal/statistics/plastic_footprint_reduced`,
     );
   }
 
@@ -25,7 +25,7 @@ class StatisticsService {
   getMostContributedBottlesByGender(token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(
-      `${this.server}/api/disposal/statistics/most_contributed_bottles_by_gender`
+      `${this.server}/api/disposal/statistics/most_contributed_bottles_by_gender`,
     );
   }
 
@@ -42,7 +42,7 @@ class StatisticsService {
   getTotalKilosContributed(token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(
-      `${this.server}/api/disposal/statistics/total_kilos_contributed`
+      `${this.server}/api/disposal/statistics/total_kilos_contributed`,
     );
   }
 

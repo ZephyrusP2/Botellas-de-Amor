@@ -14,7 +14,7 @@ const ShowUser = () => {
 
   const onEdit = () => {
     navigate(`/administrar/usuarios/editar/${id}`);
-  }
+  };
 
   const onDelete = async (id) => {
     try {
@@ -23,15 +23,15 @@ const ShowUser = () => {
     } catch (error) {
       console.error("Error deleting user:", error);
     }
-  }
+  };
 
   const handleEditClick = (event) => {
     onEdit();
-  }
+  };
 
   const handleDeleteClick = (event) => {
     onDelete(id);
-  }
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -47,10 +47,9 @@ const ShowUser = () => {
     <>
       <SideBarAdministradores />
       <div className="d-flex flex-column container-fluid p-2">
-
         <div className="d-flex flex-row justify-content-between">
           <BackButton route="/administrar/usuarios" />
-          <div >
+          <div>
             <svg
               onClick={handleEditClick}
               className=""

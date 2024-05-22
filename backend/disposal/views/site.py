@@ -5,9 +5,9 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from disposal.models import Site, Schedule
-from disposal.serializers import SiteSerializer, ScheduleSerializer
 from backend.permissions import IsAdmin, IsAdminOrOperator
+from disposal.models import Schedule, Site
+from disposal.serializers import ScheduleSerializer, SiteSerializer
 
 
 class Create(APIView):
@@ -21,8 +21,7 @@ class Create(APIView):
 
     def post(self, request, format=None):
 
-        serializer = SiteSerializer(
-            data=request.data, context={"request": request})
+        serializer = SiteSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             site = serializer.save()
             save_schedule(self, site, request.data["schedules"])
@@ -96,6 +95,7 @@ class Retrieve(APIView):
             )
         serializer = SiteSerializer(site, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
     queryset = Site.objects.all()
 
     def get(self, request, pk):
@@ -194,6 +194,7 @@ class Delete(APIView):
             site.image.delete()
         site.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
     queryset = Site.objects.all()
 
     def delete(self, request, pk):

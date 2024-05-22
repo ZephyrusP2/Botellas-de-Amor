@@ -26,7 +26,6 @@ const ShowChallenge = () => {
     }
   };
 
-
   const handleEditClick = (event) => {
     onEdit();
   };

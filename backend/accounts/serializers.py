@@ -48,8 +48,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
-    new_password = serializers.CharField(
-        write_only=True, required=True)
+    new_password = serializers.CharField(write_only=True, required=True)
     old_password = serializers.CharField(write_only=True, required=True)
 
     class Meta:
@@ -58,8 +57,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
 
 class ResetPasswordSerializer(serializers.ModelSerializer):
-    new_password = serializers.CharField(
-        write_only=True, required=True)
+    new_password = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = User

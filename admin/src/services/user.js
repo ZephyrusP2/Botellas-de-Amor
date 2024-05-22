@@ -30,7 +30,10 @@ class UserService {
 
   changePasswordUser(id, data, token) {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
-    return axios.post(`${this.server}/api/accounts/user/reset_password/${id}`, data);
+    return axios.post(
+      `${this.server}/api/accounts/user/reset_password/${id}`,
+      data,
+    );
   }
 }
 
