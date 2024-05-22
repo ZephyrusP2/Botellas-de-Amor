@@ -17,6 +17,8 @@ const EditUser = ({ userId }) => {
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
 
   const fetchUserData = async () => {
@@ -65,6 +67,9 @@ const EditUser = ({ userId }) => {
     if (!role) {
       errors.role = "Se requiere seleccionar el rol";
     }
+    if (password !== confirmPassword) {
+      errors.confirmPassword = "Las contraseñas no coinciden";
+    }
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -88,6 +93,9 @@ const EditUser = ({ userId }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await UserService.updateUser(id, userData, token);
+      if (password) {
+        await UserService.changePasswordUser(id, {new_password: password}, token);
+      }
       setName("");
       setLastName("");
       setBirthDate("");
@@ -95,6 +103,8 @@ const EditUser = ({ userId }) => {
       setGender("");
       setEmail("");
       setRole("");
+      setPassword("");
+      setConfirmPassword("");
       navigate("/administrar/usuarios");
     } catch (error) {
       console.error("Error updating user:", error);
@@ -220,6 +230,36 @@ const EditUser = ({ userId }) => {
             </select>
             {validationErrors.role && (
               <span className="error-message">{validationErrors.role}</span>
+            )}
+          </label>
+
+          {/* Password */}
+          <label className="d-flex flex-column form-label w-50">
+            Contraseña
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.password && (
+              <span className="error-message">{validationErrors.password}</span>
+            )}
+          </label>
+
+          {/* Confirm Password */}
+          <label className="d-flex flex-column form-label w-50">
+            Confirmar Contraseña
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="form-control rounded-3"
+            />
+            {validationErrors.confirmPassword && (
+              <span className="error-message">
+                {validationErrors.confirmPassword}
+              </span>
             )}
           </label>
 

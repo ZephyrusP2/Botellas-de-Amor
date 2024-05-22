@@ -27,6 +27,11 @@ class UserService {
     axios.defaults.headers.common["Authorization"] = "Token " + token;
     return axios.get(`${this.server}/api/accounts/user/show/${id}`);
   }
+
+  changePasswordUser(id, data, token) {
+    axios.defaults.headers.common["Authorization"] = "Token " + token;
+    return axios.post(`${this.server}/api/accounts/user/reset_password/${id}`, data);
+  }
 }
 
 export default new UserService();
