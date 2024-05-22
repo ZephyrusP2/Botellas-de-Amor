@@ -141,7 +141,7 @@ class List(generics.ListAPIView):
     """
 
     serializer_class = SiteSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdminOrOperator]
+    permission_classes = [permissions.IsAuthenticated]
 
     http_method_names = ["get"]
 
