@@ -159,3 +159,15 @@ class FactView:
         serializer_class = FactSerializer
         permission_classes = [permissions.IsAuthenticated, IsAdmin]
         queryset = Fact.objects.all()
+
+    @api_view(["GET"])
+    @authentication_classes([TokenAuthentication])
+    @permission_classes([permissions.IsAuthenticated])
+    def random(request):
+        """
+        Fact random
+        :param request: request
+        :return: JsonResponse
+        """
+        fact = Fact.objects.order_by("?").first()
+        return JsonResponse(FactSerializer(fact).data)

@@ -99,3 +99,12 @@ The `FactSerializer` class is responsible for serializing and deserializing `Fac
   "message": "Reciclamos 200 toneladas de plástico al mes."
 }
 ```
+
+#### Random
+
+```json
+{
+  "id": 1,
+  "message": "Reciclamos 100 toneladas de plástico al mes."
+}
+```
