@@ -20,6 +20,8 @@ class Site(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     status = models.BooleanField(default=True)
+    latitude = models.CharField(max_length=50, default="0")
+    longitude = models.CharField(max_length=50, default="0")
 
     class Meta:
         db_table = "sites"

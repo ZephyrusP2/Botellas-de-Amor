@@ -37,6 +37,8 @@ class SiteCreateTestCase(APITestCase):
             "image": file_data,
             "name": "Universidad EAFIT",
             "address": "Carrera 49, Cl. 7 Sur #50, Medellín, Antioquia",
+            "latitude": "6.200000",
+            "longitude": "-75.583330",
         }
 
         schedules = [
@@ -60,6 +62,8 @@ class SiteCreateTestCase(APITestCase):
         self.assertIn("image", response.json())
         self.assertIn("name", response.json())
         self.assertIn("address", response.json())
+        self.assertIn("latitude", response.json())
+        self.assertIn("longitude", response.json())
         site = Site.objects.get(name="Universidad EAFIT")
         schedules_count = Schedule.objects.filter(site=site).count()
         self.assertEqual(schedules_count, 7)
@@ -70,7 +74,8 @@ class SiteCreateTestCase(APITestCase):
         response = self.client.post(self.url, self.data, format="multipart")
         self.assertEqual(response.status_code, 400)
         self.assertIn("address", response.json())
-        self.assertEqual(response.json()["address"], ["This field is required."])
+        self.assertEqual(response.json()["address"], [
+                         "This field is required."])
 
     def test_site_create_unauthorized(self):
         self.client.credentials()

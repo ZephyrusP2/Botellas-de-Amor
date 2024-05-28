@@ -21,37 +21,13 @@ class Create(APIView):
 
     def post(self, request, format=None):
 
-        serializer = SiteSerializer(data=request.data, context={"request": request})
+        serializer = SiteSerializer(
+            data=request.data, context={"request": request})
         if serializer.is_valid():
-            site = serializer.save()
-            save_schedule(self, site, request.data["schedules"])
             site = serializer.save()
             save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def save_schedule(self, site, schedules):
-    """
-    Save schedule
-    :param site: Site
-    :param schedules: List
-    """
-    schedule_dict = eval(schedules)
-    for schedule in schedule_dict:
-        if "id" in schedule:
-            Schedule.objects.filter(id=schedule["id"]).update(
-                day=schedule["day"],
-                opens=schedule["opens"],
-                closes=schedule["closes"],
-            )
-        else:
-            Schedule.objects.create(
-                site=site,
-                day=schedule["day"],
-                opens=schedule["opens"],
-                closes=schedule["closes"],
-            )
 
 
 def save_schedule(self, site, schedules):
@@ -96,18 +72,6 @@ class Retrieve(APIView):
         serializer = SiteSerializer(site, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    queryset = Site.objects.all()
-
-    def get(self, request, pk):
-        try:
-            site = Site.objects.get(pk=pk)
-        except Site.DoesNotExist:
-            return Response(
-                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
-            )
-        serializer = SiteSerializer(site, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 class Update(APIView):
     """
@@ -120,14 +84,6 @@ class Update(APIView):
     queryset = Site.objects.all()
 
     def patch(self, request, pk, format=None):
-
-        try:
-            site = Site.objects.get(pk=pk)
-        except Site.DoesNotExist:
-            return Response(
-                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
-            )
-
         try:
             site = Site.objects.get(pk=pk)
         except Site.DoesNotExist:
@@ -140,23 +96,7 @@ class Update(APIView):
                 site.image.delete()
             serializer.save()
             save_schedule(self, site, request.data["schedules"])
-            save_schedule(self, site, request.data["schedules"])
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, pk, format=None):
-        try:
-            site = Site.objects.get(pk=pk)
-        except Site.DoesNotExist:
-            return Response(
-                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
-            )
-        serializer = SiteSerializer(site, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            save_schedule(self, site, request.data["schedules"])
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk, format=None):
@@ -195,20 +135,6 @@ class Delete(APIView):
         site.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    queryset = Site.objects.all()
-
-    def delete(self, request, pk):
-        try:
-            site = Site.objects.get(pk=pk)
-        except Site.DoesNotExist:
-            return Response(
-                {"detail": "Site Not found."}, status=status.HTTP_404_NOT_FOUND
-            )
-        if site.image.name != "sites/default.jpg":
-            site.image.delete()
-        site.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 class List(generics.ListAPIView):
     """
@@ -216,7 +142,7 @@ class List(generics.ListAPIView):
     """
 
     serializer_class = SiteSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdminOrOperator]
+    permission_classes = [permissions.IsAuthenticated]
 
     http_method_names = ["get"]
 
