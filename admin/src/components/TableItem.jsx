@@ -19,7 +19,8 @@ const TableItem = ({ leading, onEdit, onDelete, onShow }) => {
 
   // Verificar si la ruta coincide
   const isDesiredPath =
-    currentPath === "/operador/registrar-botellas/historial" || currentPath === "/administrar/disposiciones";
+    currentPath === "/operador/registrar-botellas/historial" ||
+    currentPath === "/administrar/disposiciones";
 
   return (
     <div className="acopio-container" onClick={onShow} id="my-container">

@@ -5,9 +5,9 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from disposal.models import Site, Schedule
-from disposal.serializers import SiteSerializer, ScheduleSerializer
 from backend.permissions import IsAdmin, IsAdminOrOperator
+from disposal.models import Schedule, Site
+from disposal.serializers import ScheduleSerializer, SiteSerializer
 
 
 class Create(APIView):
@@ -20,6 +20,7 @@ class Create(APIView):
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, format=None):
+
         serializer = SiteSerializer(
             data=request.data, context={"request": request})
         if serializer.is_valid():

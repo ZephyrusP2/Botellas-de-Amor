@@ -34,6 +34,10 @@ const Profile = ({ navigation }) => {
     navigation.navigate("Analisis");
   };
 
+  const goToRegisterBottle = () => {
+    navigation.navigate("RegisterBottle");
+  };
+
   const goToProfile = () => {
     navigation.navigate("Profile");
     Alert.alert(
@@ -70,10 +74,10 @@ const Profile = ({ navigation }) => {
           </StyledButton>
           <StyledButton
             title="Análisis"
-            onPress={goToAnalisis}
+            onPress={goToRegisterBottle}
             style={styles.notSelectedPageButton}
           >
-            Análisis
+            Botella
           </StyledButton>
         </View>
         <View style={styles.imageContainer}>

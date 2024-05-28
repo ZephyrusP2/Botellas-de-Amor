@@ -17,6 +17,7 @@ import EditProfile from "./src/templates/EditProfile";
 import Proyectos from "./src/templates/Proyectos";
 import Conocenos from "./src/templates/Conocenos";
 import Materiales from "./src/templates/Materiales";
+import RegisterBottle from "./src/templates/RegisterBottle";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -69,6 +70,7 @@ export default function App() {
         <Stack.Screen name="Conocenos" component={Conocenos} />
         <Stack.Screen name="Proyectos" component={Proyectos} />
         <Stack.Screen name="Materiales" component={Materiales} />
+        <Stack.Screen name="RegisterBottle" component={RegisterBottle} />
       </Stack.Navigator>
     </NavigationContainer>
   );

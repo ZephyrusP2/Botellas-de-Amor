@@ -12,11 +12,12 @@ from rest_framework.decorators import (api_view, authentication_classes,
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 
-from backend.permissions import IsAdmin, IsAdminOrSelf
+from backend.permissions import IsAdmin, IsAdminOrSelf, IsSelf
 from disposal.models import Bottle, Disposition
 
 from .models import User
-from .serializers import UserSerializer, UserUpdateSerializer
+from .serializers import (ChangePasswordSerializer, ResetPasswordSerializer,
+                          UserSerializer, UserUpdateSerializer)
 
 # Create your views here.
 
@@ -70,8 +71,7 @@ class UserCreate(APIView):
         """
         data = request.data
         today = datetime.date.today()
-        birth_date = datetime.datetime.strptime(
-            data["birth_date"], "%Y-%m-%d").date()
+        birth_date = datetime.datetime.strptime(data["birth_date"], "%Y-%m-%d").date()
         if birth_date > today:
             return JsonResponse(
                 {"birth_date": ["Birth date cannot be in the future"]}, status=400
@@ -129,6 +129,56 @@ class UserUpdate(generics.UpdateAPIView):
         :return: QuerySet
         """
         return User.objects.all()
+
+
+class UserChangePassword(APIView):
+    """
+    User change password
+    """
+
+    serializer_class = ChangePasswordSerializer
+    permission_classes = [permissions.IsAuthenticated, IsSelf]
+    queryset = User.objects.all()
+
+    def get_object(self):
+        pk = self.kwargs.get("pk")
+        return User.objects.get(id=pk)
+
+    def post(self, request, pk):
+        user = self.get_object()
+        data = request.data
+        serializer = ChangePasswordSerializer(data=data)
+        if serializer.is_valid():
+            if user.check_password(data["old_password"]):
+                user.set_password(data["new_password"])
+                user.save()
+                return JsonResponse({"id": user.id}, status=200)
+            return JsonResponse({"error": "Old password is incorrect"}, status=400)
+        return JsonResponse(serializer.errors, status=400)
+
+
+class UserResetPassword(APIView):
+    """
+    User reset password
+    """
+
+    serializer_class = ResetPasswordSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdmin]
+    queryset = User.objects.all()
+
+    def get_object(self):
+        pk = self.kwargs.get("pk")
+        return User.objects.get(id=pk)
+
+    def post(self, request, pk):
+        user = self.get_object()
+        data = request.data
+        serializer = ResetPasswordSerializer(data=data)
+        if serializer.is_valid():
+            user.set_password(data["new_password"])
+            user.save()
+            return JsonResponse({"id": user.id}, status=200)
+        return JsonResponse(serializer.errors, status=400)
 
 
 class UserDelete(generics.DestroyAPIView):

@@ -45,3 +45,20 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             "email",
         )
         read_only_fields = ("id",)
+
+
+class ChangePasswordSerializer(serializers.ModelSerializer):
+    new_password = serializers.CharField(write_only=True, required=True)
+    old_password = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ("new_password", "old_password")
+
+
+class ResetPasswordSerializer(serializers.ModelSerializer):
+    new_password = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ("new_password",)
