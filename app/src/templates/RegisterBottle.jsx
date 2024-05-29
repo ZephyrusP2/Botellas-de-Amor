@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
 import StyledText from "../styles/StyledText";
 import Header2 from "./Header2";
 import { StyleSheet, View, Alert, ScrollView } from "react-native";
 import StyledButton from "../styles/StyledButton";
 import StyledInput from "../styles/StyledInput";
 import theme from "../styles/theme";
+import UserService from "../services/user";
+import DispositionService from "../services/disposition";
+import SiteService from "../services/site";
 
 const RegisterBottle = ({ navigation }) => {
   const [bottleData, setBottleData] = useState({
@@ -14,8 +16,19 @@ const RegisterBottle = ({ navigation }) => {
     bottle_weight: "",
     collection_point: "",
   });
+  const [puntosAcopio, setPuntosAcopio] = useState([]);
 
   useEffect(() => {
+    async function fetchPuntosAcopio() {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await SiteService.listSite(token);
+        setPuntosAcopio(response.data);
+      } catch (error) {
+        console.error("Error fetching puntos de acopio:", error);
+      }
+    }
+    fetchPuntosAcopio();
     retrieveUser();
   }, []);
 
@@ -46,20 +59,13 @@ const RegisterBottle = ({ navigation }) => {
     try {
       const id = await AsyncStorage.getItem("id");
       const token = await AsyncStorage.getItem("token");
-      const response = await axios.post(
-        'api/disposal/disposition/create',
-        {
-          id: id,
-          site: bottleData.collection_point,
-          bottles: bottleData.bottle_count,
-          weight: bottleData.bottle_weight,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      data = {
+        user: id,
+        bottles: bottleData.bottle_count,
+        weight: bottleData.bottle_weight,
+        site: bottleData.collection_point,
+      };
+      const response = await DispositionService.create(token, data);
       setBottleData(response.data);
       Alert.alert(
         "Botellas de amor",
@@ -116,7 +122,7 @@ const RegisterBottle = ({ navigation }) => {
             fontWeight="normal"
             style={styles.labelText}
           >
-            Peso de la Botella (kg)
+            Peso de las Botellas (kg)
           </StyledText>
           <StyledInput
             placeholder="Peso de la Botella"
