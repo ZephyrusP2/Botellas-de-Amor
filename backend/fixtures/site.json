@@ -1,0 +1,90 @@
+[
+  {
+    "model": "disposal.Site",
+    "pk": 1,
+    "fields": {
+      "name": "Distribuidora Danijava",
+      "address": "CR 17 # 9 26",
+      "status": true,
+      "latitude": "6.436499246276004",
+      "longitude": "-75.33345076125411"
+    }
+  },
+  {
+    "model": "disposal.Site",
+    "pk": 3,
+    "fields": {
+      "name": "Mercados San Juan",
+      "address": "CR 60 # 22A 26",
+      "status": true,
+      "latitude": "6.3125918332090505",
+      "longitude": "-75.57009327474867"
+    }
+  },
+  {
+    "model": "disposal.Site",
+    "pk": 4,
+    "fields": {
+      "name": "Autoservicio Casa Verde",
+      "address": "CR 58 # 26A 33",
+      "status": true,
+      "latitude": "6.316155849371149",
+      "longitude": "-75.56372324776123"
+    }
+  },
+  {
+    "model": "disposal.Site",
+    "pk": 5,
+    "fields": {
+      "name": "Mercados y Carnes O.R. S.A.S.",
+      "address": "CR 50 # 55 44",
+      "status": true,
+      "latitude": "6.33909945845552",
+      "longitude": "-75.55900073426733"
+    }
+  },
+  {
+    "model": "disposal.Site",
+    "pk": 6,
+    "fields": {
+      "name": "Granero La 56",
+      "address": "DG 56 # 44 14",
+      "status": true,
+      "latitude": "6.245308710547991",
+      "longitude": "-75.54398953242"
+    }
+  },
+  {
+    "model": "disposal.Site",
+    "pk": 7,
+    "fields": {
+      "name": "Niquia Autoservicio",
+      "address": "CL 53A # 64 4",
+      "status": true,
+      "latitude": "6.342655604547012",
+      "longitude": "-75.57136374360002"
+    }
+  },
+  {
+    "model": "disposal.Site",
+    "pk": 8,
+    "fields": {
+      "name": "Familias Unidas",
+      "address": "CL 21 # 20 43",
+      "status": true,
+      "latitude": "6.214838541031018",
+      "longitude": "-75.56897651892643"
+    }
+  },
+  {
+    "model": "disposal.Site",
+    "pk": 9,
+    "fields": {
+      "name": "Cafetero Betulia",
+      "address": "CL 24A # 53 33",
+      "status": true,
+      "latitude": "6.314140541265865",
+      "longitude": "-75.55996780358406"
+    }
+  }
+]

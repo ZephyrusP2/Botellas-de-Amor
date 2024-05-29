@@ -1,0 +1,125 @@
+.my-logo {
+  height: 200px !important;
+}
+
+.custom-card-border {
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 80px !important;
+}
+
+.btn-primary {
+  background-color: #00c8ea !important;
+  border-color: #00c8ea !important;
+}
+
+.btn-primary:hover {
+  background-color: #80d4f5 !important;
+  border-color: #80d4f5 !important;
+}
+
+.form-label {
+  color: #00c8ea !important;
+}
+
+.blue-text {
+  color: #00c8ea !important;
+}
+
+.form-control {
+  border: 1px solid #00c8ea !important;
+  border-radius: 80px !important;
+}
+
+.form-control:focus-within {
+  border: 1px solid #00c8ea !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 200, 234, 0.25) !important;
+}
+
+.custom-min-width {
+  min-width: 350px !important;
+}
+
+.hover-cursor {
+  cursor: pointer;
+}
+
+.container-register-p {
+  width: 35%;
+}
+
+.container-register2 {
+  width: 50%;
+}
+
+.container-register3 {
+  width: 58%;
+}
+
+.kg-container {
+  display: flex;
+}
+.kg {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.small-text {
+  font-size: 1.8rem !important;
+
+  text-align: center;
+}
+
+.image-acopio {
+  max-width: 200px;
+  max-height: 300px;
+}
+
+.form-container {
+  height: 60%; /* Altura máxima del contenedor */
+  overflow-y: auto; /* Activar la barra de desplazamiento vertical cuando sea necesario */
+  width: 100%;
+}
+
+.form-container::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento */
+  right: 10px; /* Desplazar la barra de desplazamiento 10px a la derecha */
+  margin-left: 10px; /* Separar la barra de desplazamiento de lo que está a su izquierda */
+}
+
+.form-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de fondo de la pista de la barra de desplazamiento */
+}
+
+.form-container::-webkit-scrollbar-thumb {
+  background: #888; /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 5px; /* Radio de borde del pulgar de la barra de desplazamiento */
+}
+
+.form-container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color del pulgar de la barra de desplazamiento al pasar el mouse */
+}
+
+.custom-scrollbar {
+  overflow-y: auto; /* Activar la barra de desplazamiento vertical cuando sea necesario */
+  height: 200px;
+  padding-right: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento */
+  right: 10px; /* Desplazar la barra de desplazamiento 10px a la derecha */
+  margin-left: 10px; /* Separar la barra de desplazamiento de lo que está a su izquierda */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de fondo de la pista de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 5px; /* Radio de borde del pulgar de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color del pulgar de la barra de desplazamiento al pasar el mouse */
+}

@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
   colorSecondary: {
     color: theme.colors.textSecondary,
   },
+  colorDanger: {
+    color: theme.colors.danger,
+  },
+  colorTertiary: {
+    color: "white",
+  },
   bold: {
     fontWeight: theme.fontWeights.bold,
   },
@@ -46,6 +52,8 @@ export default function StyledText({
     align === "center" && styles.TextAlignCenter,
     color === "primary" && styles.colorPrimary,
     color === "secondary" && styles.colorSecondary,
+    color === "tertiary" && styles.colorTertiary,
+    color === "danger" && styles.colorDanger,
     size === "small" && styles.textSizeSmall,
     size === "medium" && styles.textSizeMedium,
     size === "large" && styles.textSizeLarge,

@@ -10,6 +10,11 @@ black = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 python-dotenv = "*"
+tzdata = "*"
+pillow = "*"
+scikit-learn = "*"
+numpy = "*"
+python-dateutil = "*"
 
 [dev-packages]
 

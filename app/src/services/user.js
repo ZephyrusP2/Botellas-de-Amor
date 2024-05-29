@@ -28,6 +28,59 @@ class UserService {
       throw error;
     }
   };
+
+  retrieve = async (token, id) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.get(
+        `${this.server}/api/accounts/user/show/${id}`,
+      );
+      return response;
+    } catch (error) {
+      console.error("retrieve error", error);
+      throw error;
+    }
+  };
+
+  delete = async (token, id) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.delete(
+        `${this.server}/api/accounts/user/delete/${id}`,
+      );
+      return response;
+    } catch (error) {
+      console.error("delete error", error);
+      throw error;
+    }
+  };
+
+  update = async (token, id, userData) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.put(
+        `${this.server}/api/accounts/user/update/${id}`,
+        userData,
+      );
+      return response;
+    } catch (error) {
+      console.error("update error", error);
+      throw error;
+    }
+  };
+
+  bottles = async (token, id) => {
+    try {
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      const response = await axios.get(
+        `${this.server}/api/accounts/user/bottles`,
+      );
+      return response;
+    } catch (error) {
+      console.error("bottles error", error);
+      throw error;
+    }
+  };
 }
 
 export default new UserService();

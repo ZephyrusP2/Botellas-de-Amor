@@ -1,0 +1,13 @@
+body,
+html {
+  background-color: #ffffff !important;
+}
+
+.hover-cursor {
+  cursor: pointer;
+}
+
+.my-button {
+  background-color: #00c8ea !important;
+  color: white !important;
+}

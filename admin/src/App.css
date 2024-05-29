@@ -3,7 +3,7 @@
 }
 
 .bg-myPrimary {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
 }
 
 .app-container-wrapper {
@@ -16,4 +16,89 @@
 
 .error-message {
   color: red;
+}
+
+.container {
+  flex: 1;
+}
+
+.principal-container {
+  width: 100%;
+  display: flex;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+}
+
+.login-container {
+  flex: 1;
+}
+
+.show-container {
+  flex: 1;
+  height: 100%;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 60px 40px 15px 40px; /* top, right, bottom, left */
+  font-size: 25px !important;
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center; /* Cambiado a centrar los botones */
+  gap: 20px; /* Espacio entre los botones */
+  /* margin-left: 20%; */
+}
+
+.button-navbar {
+  background-color: #fefaf9;
+  border-radius: 5px;
+  border-color: #fefaf9;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1); /* Sombras */
+  color: black;
+  text-decoration: none;
+  padding: 0 15px 0 15px; /* top, right, bottom, left */
+}
+
+.navbar-bottom-line {
+  width: 95%;
+  margin-left: 3%;
+  height: 3px; /* Grosor de la línea */
+  background-color: #00c8ea; /* Color de la línea */
+  transform: translateY(-50%);
+}
+
+.button-navbar.active {
+  background-color: #00c8ea; /* Cambia el color de fondo a azul */
+  color: white; /* Cambia el color del texto a blanco */
+}
+
+.navbar-item-sidebar.active {
+  background-color: #ffffff; /* Cambia el color de fondo a azul */
+  color: #00c8ea;
+  width: 91%;
+  margin-left: 4%;
+  border-radius: 5px; /* Puedes ajustar el valor según tus preferencias */
+}
+
+.blue-border {
+  border: 1px solid #00c8ea !important;
+}
+
+.white-text {
+  color: white !important;
+}
+
+.card-dashboard {
+  max-height: 400px !important;
+  min-height: 200px !important;
 }
