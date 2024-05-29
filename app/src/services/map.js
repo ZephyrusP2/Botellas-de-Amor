@@ -6,9 +6,7 @@ class MapService {
   retrieve = async (token) => {
     try {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
-      const response = await axios.get(
-        `${this.server}/api/disposal/site/list`,
-      );
+      const response = await axios.get(`${this.server}/api/disposal/site/list`);
       return response;
     } catch (error) {
       console.error("retrieve error", error);

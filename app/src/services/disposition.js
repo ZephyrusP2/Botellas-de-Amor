@@ -8,7 +8,7 @@ class DispositionService {
       axios.defaults.headers.common["Authorization"] = `Token ${token}`;
       const response = await axios.post(
         `${this.server}/api/disposal/disposition/create`,
-        data
+        data,
       );
       return response;
     } catch (error) {

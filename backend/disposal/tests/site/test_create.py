@@ -74,8 +74,7 @@ class SiteCreateTestCase(APITestCase):
         response = self.client.post(self.url, self.data, format="multipart")
         self.assertEqual(response.status_code, 400)
         self.assertIn("address", response.json())
-        self.assertEqual(response.json()["address"], [
-                         "This field is required."])
+        self.assertEqual(response.json()["address"], ["This field is required."])
 
     def test_site_create_unauthorized(self):
         self.client.credentials()

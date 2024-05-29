@@ -47,7 +47,7 @@ const RegisterBottle = ({ navigation }) => {
     navigation.navigate("RegisterBottle");
     Alert.alert(
       "Botellas de amor",
-      `¡Hola ${bottleData?.name || ""} estás registrando tu botella!`
+      `¡Hola ${bottleData?.name || ""} estás registrando tu botella!`,
     );
   };
 
@@ -69,7 +69,7 @@ const RegisterBottle = ({ navigation }) => {
       setBottleData(response.data);
       Alert.alert(
         "Botellas de amor",
-        `¡Hola ${bottleData?.name || ""} se actualizó la información correctamente!`
+        `¡Hola ${bottleData?.name || ""} se actualizó la información correctamente!`,
       );
     } catch (error) {
       console.error("update profile error", error);

@@ -118,7 +118,7 @@ export default function Home() {
       const randomFact = await getRandomFact();
       Alert.alert(
         "Botellas de amor",
-        `¡Hola ${userData?.name || ""} sabías que: ${randomFact} !`
+        `¡Hola ${userData?.name || ""} sabías que: ${randomFact} !`,
       );
     } catch (error) {
       console.error("Error fetching random fact", error);

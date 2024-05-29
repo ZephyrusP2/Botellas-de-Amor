@@ -21,8 +21,7 @@ class Create(APIView):
 
     def post(self, request, format=None):
 
-        serializer = SiteSerializer(
-            data=request.data, context={"request": request})
+        serializer = SiteSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             site = serializer.save()
             save_schedule(self, site, request.data["schedules"])

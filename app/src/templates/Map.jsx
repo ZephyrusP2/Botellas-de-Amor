@@ -4,9 +4,8 @@ import { useEffect } from "react";
 import { View, Button } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
-import { MAPS_TOKEN } from '@env';
+import { MAPS_TOKEN } from "@env";
 import MapService from "../services/map";
-
 
 // DEBEMOS PEDIR LA UBICACION DEL USUARIO PARA USARLA ACA
 const origin = { latitude: 6.234339, longitude: -75.576908 }; // Origen fijo (por ejemplo, la ubicación actual del usuario)
@@ -32,8 +31,8 @@ export default function Map() {
           title: location.name,
           coordinate: {
             latitude: parseFloat(location.latitude),
-            longitude: parseFloat(location.longitude)
-          }
+            longitude: parseFloat(location.longitude),
+          },
         }));
         setMarkers(newMarkers);
       })
@@ -49,12 +48,12 @@ export default function Map() {
   const handleNavigationStart = () => {
     if (selectedMarker) {
       setDestination(selectedMarker.coordinate);
-      console.log(destination)
+      console.log(destination);
     }
   };
 
   const renderMarkers = () => {
-    return markers.map(marker => (
+    return markers.map((marker) => (
       <Marker
         key={marker.id}
         coordinate={marker.coordinate}
@@ -87,14 +86,18 @@ export default function Map() {
           latitude: 6.234339,
           longitude: -75.576908,
           latitudeDelta: 0.4,
-          longitudeDelta: 0.4
+          longitudeDelta: 0.4,
         }}
       >
         {renderMarkers()}
         {destination && <Marker coordinate={destination} />}
         {renderDirections()}
       </MapView>
-      <Button title="Ir" onPress={handleNavigationStart} disabled={!selectedMarker} />
+      <Button
+        title="Ir"
+        onPress={handleNavigationStart}
+        disabled={!selectedMarker}
+      />
     </View>
   );
 }

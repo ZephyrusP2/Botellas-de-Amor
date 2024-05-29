@@ -16,10 +16,9 @@ const CreateSite = () => {
   const inputRef = useRef();
   const latRef = useRef(null);
   const lngRef = useRef(null);
-  const [placeName, setPlaceName] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
-
+  const [placeName, setPlaceName] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   const [siteData, setSiteData] = useState({
     id: "",
@@ -50,49 +49,57 @@ const CreateSite = () => {
     formData.append("status", data.status === "Activo");
 
     const filteredSchedules = siteData.schedules
-        .filter(schedule => schedule.enabled && schedule.opens !== "" && schedule.closes !== "")
-        .map(schedule => ({
-            day: schedule.day,
-            opens: schedule.opens,
-            closes: schedule.closes,
-        }));
+      .filter(
+        (schedule) =>
+          schedule.enabled && schedule.opens !== "" && schedule.closes !== "",
+      )
+      .map((schedule) => ({
+        day: schedule.day,
+        opens: schedule.opens,
+        closes: schedule.closes,
+      }));
 
     formData.append("schedules", JSON.stringify(filteredSchedules));
 
     try {
-        console.log("Enviando datos:", {
-            image,
-            name: data.name,
-            address: placeName,
-            latitude: latitude.toString(),
-            longitude: longitude.toString(),
-            status: data.status,
-            schedules: filteredSchedules,
-        });
+      console.log("Enviando datos:", {
+        image,
+        name: data.name,
+        address: placeName,
+        latitude: latitude.toString(),
+        longitude: longitude.toString(),
+        status: data.status,
+        schedules: filteredSchedules,
+      });
 
-        await siteService.createSite(formData, token);
+      await siteService.createSite(formData, token);
 
-        setSiteData({
-            id: "",
-            image: "",
-            name: "",
-            address: "",
-            latitude: "",
-            longitude: "",
-            status: "Activo",
-            schedules: [],
-        });
-        setImage(null);
-        setImagePreview(null);
-        setNewDay("");
+      setSiteData({
+        id: "",
+        image: "",
+        name: "",
+        address: "",
+        latitude: "",
+        longitude: "",
+        status: "Activo",
+        schedules: [],
+      });
+      setImage(null);
+      setImagePreview(null);
+      setNewDay("");
 
-        navigate(`/administrar/puntos-acopio`);
+      navigate(`/administrar/puntos-acopio`);
     } catch (error) {
-        console.error("Error creating site:", error.response?.data || error.message);
-        alert("Error creating site: " + (error.response?.data.message || error.message));
+      console.error(
+        "Error creating site:",
+        error.response?.data || error.message,
+      );
+      alert(
+        "Error creating site: " +
+          (error.response?.data.message || error.message),
+      );
     }
-};
-
+  };
 
   const addDay = () => {
     if (!newDay) {
@@ -111,16 +118,16 @@ const CreateSite = () => {
   const availableDays =
     siteData.schedules.length < 7
       ? [
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado",
-        "Domingo",
-      ].filter(
-        (day) => !siteData.schedules.some((schedule) => schedule.day === day),
-      )
+          "Lunes",
+          "Martes",
+          "Miércoles",
+          "Jueves",
+          "Viernes",
+          "Sábado",
+          "Domingo",
+        ].filter(
+          (day) => !siteData.schedules.some((schedule) => schedule.day === day),
+        )
       : [];
 
   const handleInputChange = (event) => {
@@ -141,47 +148,46 @@ const CreateSite = () => {
 
   useEffect(() => {
     const options = {
-        fields: ["address_components", "geometry", "icon", "name"],
-        types: ["establishment"]
+      fields: ["address_components", "geometry", "icon", "name"],
+      types: ["establishment"],
     };
 
     autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        options
+      inputRef.current,
+      options,
     );
 
     autoCompleteRef.current.addListener("place_changed", () => {
-        const place = autoCompleteRef.current.getPlace();
-        if (place.geometry && place.geometry.location) {
-            const lat = place.geometry.location.lat();
-            const lng = place.geometry.location.lng();
-            setPlaceName(place.name);
-            setLatitude(lat);
-            setLongitude(lng);
+      const place = autoCompleteRef.current.getPlace();
+      if (place.geometry && place.geometry.location) {
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
+        setPlaceName(place.name);
+        setLatitude(lat);
+        setLongitude(lng);
 
-            // Actualizar el estado siteData con los nuevos valores
-            setSiteData({
-                ...siteData,
-                address: place.formatted_address,
-                latitude: lat,
-                longitude: lng
-            });
+        // Actualizar el estado siteData con los nuevos valores
+        setSiteData({
+          ...siteData,
+          address: place.formatted_address,
+          latitude: lat,
+          longitude: lng,
+        });
 
-            console.log("Nombre del lugar:", place.name);
-            console.log("Latitud:", lat);
-            console.log("Longitud:", lng);
-        }
+        console.log("Nombre del lugar:", place.name);
+        console.log("Latitud:", lat);
+        console.log("Longitud:", lng);
+      }
     });
-}, []);
-useEffect(() => {
-  setSiteData(prevData => ({
+  }, []);
+  useEffect(() => {
+    setSiteData((prevData) => ({
       ...prevData,
       address: placeName,
       latitude: latitude.toString(),
-      longitude: longitude.toString()
-  }));
-}, [placeName, latitude, longitude]);
-
+      longitude: longitude.toString(),
+    }));
+  }, [placeName, latitude, longitude]);
 
   return (
     <>
@@ -235,7 +241,7 @@ useEffect(() => {
           <label className="d-flex flex-column form-label w-50">
             Dirección
             <input
-            ref={inputRef}
+              ref={inputRef}
               onChange={handleInputChange}
               className="form-control rounded-3"
             />
@@ -277,15 +283,17 @@ useEffect(() => {
               onChange={handleInputChange}
               className="form-control rounded-3"
             >
-              <option value="">Seleccione un estado</option> {/* Opción por defecto */}
+              <option value="">Seleccione un estado</option>{" "}
+              {/* Opción por defecto */}
               <option value="Activo">Activo</option>
               <option value="No Activo">No Activo</option>
             </select>
             {errors.status && (
-              <span className="error-message">Se requiere seleccionar el estado</span>
+              <span className="error-message">
+                Se requiere seleccionar el estado
+              </span>
             )}
           </label>
-
 
           <div className="d-flex flex-column form-label w-50 custom-scrollbar">
             {siteData.schedules.map((schedule, index) => (
