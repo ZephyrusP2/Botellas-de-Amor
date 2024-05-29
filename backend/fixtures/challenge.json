@@ -3,7 +3,7 @@
     "model": "disposal.challenge",
     "pk": 1,
     "fields": {
-      "challenge": "Meter 3 papelitos a la botella",
+      "challenge": "Meter 3 empaques de mecato a la botella",
       "experience": 20
     }
   },
@@ -19,7 +19,7 @@
     "model": "disposal.challenge",
     "pk": 3,
     "fields": {
-      "challenge": "Meter 5 papelitos a la botella",
+      "challenge": "Meter 5 empaques de mecato a la botella",
       "experience": 30
     }
   },
@@ -35,7 +35,7 @@
     "model": "disposal.challenge",
     "pk": 5,
     "fields": {
-      "challenge": "Meter 10 papelitos a la botella",
+      "challenge": "Meter 10 empaques de mecato a la botella",
       "experience": 50
     }
   },

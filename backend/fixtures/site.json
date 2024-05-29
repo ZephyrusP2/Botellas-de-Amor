@@ -5,16 +5,9 @@
     "fields": {
       "name": "Distribuidora Danijava",
       "address": "CR 17 # 9 26",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 2,
-    "fields": {
-      "name": "Alcaldía",
-      "address": "Calle 21 # 11 30",
-      "status": true
+      "status": true,
+      "latitude": "6.436499246276004",
+      "longitude": "-75.33345076125411"
     }
   },
   {
@@ -23,7 +16,9 @@
     "fields": {
       "name": "Mercados San Juan",
       "address": "CR 60 # 22A 26",
-      "status": true
+      "status": true,
+      "latitude": "6.3125918332090505",
+      "longitude": "-75.57009327474867"
     }
   },
   {
@@ -32,7 +27,9 @@
     "fields": {
       "name": "Autoservicio Casa Verde",
       "address": "CR 58 # 26A 33",
-      "status": true
+      "status": true,
+      "latitude": "6.316155849371149",
+      "longitude": "-75.56372324776123"
     }
   },
   {
@@ -40,8 +37,10 @@
     "pk": 5,
     "fields": {
       "name": "Mercados y Carnes O.R. S.A.S.",
-      "address": "CL 50 # 55 44",
-      "status": true
+      "address": "CR 50 # 55 44",
+      "status": true,
+      "latitude": "6.33909945845552",
+      "longitude": "-75.55900073426733"
     }
   },
   {
@@ -50,7 +49,9 @@
     "fields": {
       "name": "Granero La 56",
       "address": "DG 56 # 44 14",
-      "status": true
+      "status": true,
+      "latitude": "6.245308710547991",
+      "longitude": "-75.54398953242"
     }
   },
   {
@@ -59,7 +60,9 @@
     "fields": {
       "name": "Niquia Autoservicio",
       "address": "CL 53A # 64 4",
-      "status": true
+      "status": true,
+      "latitude": "6.342655604547012",
+      "longitude": "-75.57136374360002"
     }
   },
   {
@@ -68,7 +71,9 @@
     "fields": {
       "name": "Familias Unidas",
       "address": "CL 21 # 20 43",
-      "status": true
+      "status": true,
+      "latitude": "6.214838541031018",
+      "longitude": "-75.56897651892643"
     }
   },
   {
@@ -77,142 +82,9 @@
     "fields": {
       "name": "Cafetero Betulia",
       "address": "CL 24A # 53 33",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 10,
-    "fields": {
-      "name": "Mercanorte",
-      "address": "CR 51 # 25 23 LC 101",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 11,
-    "fields": {
-      "name": "La Cabañita",
-      "address": "DG 55 # 33 114",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 12,
-    "fields": {
-      "name": "Supermercados La 80 Cabañas",
-      "address": "AUTOPISTA N. #34-67",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 13,
-    "fields": {
-      "name": "Distribuidora Santa Isabel",
-      "address": "CL 51 # 46 10",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 14,
-    "fields": {
-      "name": "C. Comercial Puerta del Norte",
-      "address": "CL 51 # 46 82",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 15,
-    "fields": {
-      "name": "Abarrote Yuli Yes",
-      "address": "CL 131 Sur # 49 83",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 16,
-    "fields": {
-      "name": "Abarrotes Sol de Oriente",
-      "address": "CARRERA 49 # 129 SUR 84",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 17,
-    "fields": {
-      "name": "Merkacaldas El Mas Barato",
-      "address": "CR 50 PATIO PRIMAVERA",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 18,
-    "fields": {
-      "name": "Construccion Alcaldía",
-      "address": "CR 46C # 47C 32",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 19,
-    "fields": {
-      "name": "Granero Mixto",
-      "address": "CR 48 # 32D SUR 139",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 20,
-    "fields": {
-      "name": "Caretabla Cr",
-      "address": "CR 25 # 39B SUR 152 A",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 21,
-    "fields": {
-      "name": "Mercados C-G",
-      "address": "Cl. 39B SUR #2",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 22,
-    "fields": {
-      "name": "C.C. Viva",
-      "address": "CLL 27 SUR# 27 7",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 23,
-    "fields": {
-      "name": "Supermercados Los Ochoas Chingui",
-      "address": "CR 46C # 47C 32",
-      "status": true
-    }
-  },
-  {
-    "model": "disposal.Site",
-    "pk": 24,
-    "fields": {
-      "name": "Crear Unidos Corporación",
-      "address": "CR 48 # 32D SUR 139",
-      "status": true
+      "status": true,
+      "latitude": "6.314140541265865",
+      "longitude": "-75.55996780358406"
     }
   }
 ]
