@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Alert, Image, StyleSheet, ScrollView, View, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  ScrollView,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import Header from "./Header";
 import StyledBackground from "../styles/StyledBackgroud";
 import StyledText from "../styles/StyledText";
@@ -8,8 +15,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Checkbox from "expo-checkbox";
 import ChallengeService from "../services/challenge";
 import BottleService from "../services/bottle";
+import { useIsFocused } from "@react-navigation/native"; // Import useIsFocused
 
-// Importa las imágenes de las botellas
+// Import bottle images
 import bottle1 from "../images/bottle.png";
 import bottle2 from "../images/bottle1.png";
 import bottle3 from "../images/bottle2.png";
@@ -18,24 +26,31 @@ import bottle5 from "../images/bottle4.png";
 import bottle6 from "../images/bottle5.png";
 
 const getRandomFact = async () => {
-  const response = await fetch('api/information/fact/random');
+  const response = await fetch("api/information/fact/random");
   const data = await response.json();
   return data.fact;
 };
 
 export default function Home() {
+  const isFocused = useIsFocused(); // Use useIsFocused
   const [userData, setUserData] = useState();
   const [challenges, setChallenges] = useState([]);
   const [isChecked, setChecked] = useState([]);
   const [bottleData, setBottleData] = useState();
   const [userBottles, setUserBottles] = useState();
 
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     retrieveUser();
     listChallenges();
     retrieveBottle();
     retrieveUserBottles();
   }, []);
+
+  useEffect(() => {
+    if (isFocused) {
+      fetchData();
+    }
+  }, [isFocused, fetchData]);
 
   const retrieveUser = async () => {
     try {
@@ -86,7 +101,7 @@ export default function Home() {
       console.error("retrieveBottle error", error);
     }
   };
-  
+
   const retrieveUserBottles = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
@@ -103,14 +118,13 @@ export default function Home() {
       const randomFact = await getRandomFact();
       Alert.alert(
         "Botellas de amor",
-        `¡Hola ${userData?.name || ""} sabías que: ${randomFact} !`,
+        `¡Hola ${userData?.name || ""} sabías que: ${randomFact} !`
       );
     } catch (error) {
       console.error("Error fetching random fact", error);
     }
   };
 
-  // Determina la imagen de la botella según el nivel
   const getBottleImage = () => {
     const level = bottleData?.level || 0;
     if (level === 1) {
@@ -125,7 +139,7 @@ export default function Home() {
       return bottle5;
     } else if (level >= 10 && level <= 99) {
       return bottle6;
-    } 
+    }
   };
 
   return (
@@ -166,7 +180,6 @@ export default function Home() {
           </StyledBackground>
         </StyledBackground>
       </StyledBackground>
-      {/* retos */}
       <StyledText
         fontWeight="bold"
         size="large"
