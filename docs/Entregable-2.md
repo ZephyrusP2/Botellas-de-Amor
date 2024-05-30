@@ -1,0 +1,5 @@
+- **[Cambios en Arquitectura](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Cambios-en-Arquitectura#entregable-2)**
+- **[Esquema Plan De negocio](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Esquema-plan-de-negocio)**
+- **[Reporte De Errores](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Reporte-de-errores)**
+- **[Evidencia Ceremonias](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Reuniones)**
+- **[Insumo De Prueba De Usabilidad](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Insumo-De-Prueba-De-Usabilidad)**

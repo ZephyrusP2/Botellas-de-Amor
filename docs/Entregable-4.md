@@ -1,0 +1,8 @@
+- **[Cambios en Arquitectura](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Cambios-en-Arquitectura#entregable-4)**
+- **[Reporte De Errores](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Reporte-de-errores#entregable-4)**
+- **[Evidencia Ceremonias](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Reuniones)**
+- **[Esquema Plan De negocio](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Esquema-plan-de-negocio)**
+- **[Análisis de resultados - prueba usabilidad](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/An%C3%A1lisis-de-resultados)**
+- **[Manual de usuario](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Manual-de-usuario)**
+- **[Sustentación](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Sustentaci%C3%B3n)**
+- **[Informe final de pruebas funcionales](https://github.com/ZephyrusP2/Botellas-de-Amor/wiki/Informe-final-de-pruebas-funcionales)**
