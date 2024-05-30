@@ -1,0 +1,3 @@
+## Grabacion Review Sprint 2
+
+[Link video](https://eafit-my.sharepoint.com/:v:/g/personal/marangog3_eafit_edu_co/EZJUNHIDtChIu7cyruM4cvwBAgugAyW2VZQfbzCqYItOtw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=POTP5c)
